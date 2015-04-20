@@ -7,13 +7,21 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4F55B5541AE46E4900679048 /* SJCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4F55B5531AE46E4900679048 /* SJCollectionViewCell.xib */; };
+		4F55B5571AE470BF00679048 /* SJCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F55B5551AE470BF00679048 /* SJCollectionReusableView.swift */; };
+		4F55B5581AE470BF00679048 /* SJCollectionReusableView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4F55B5561AE470BF00679048 /* SJCollectionReusableView.xib */; };
+		4F55B55A1AE4710000679048 /* SJButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F55B5591AE4710000679048 /* SJButton.swift */; };
+		4F55B55D1AE480F400679048 /* SJLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F55B55C1AE480F400679048 /* SJLayout.swift */; };
 		4F8D38A31AE440DE00F42E23 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F8D38A21AE440DE00F42E23 /* AppDelegate.swift */; };
 		4F8D38A61AE440DE00F42E23 /* Silky_Socks.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 4F8D38A41AE440DE00F42E23 /* Silky_Socks.xcdatamodeld */; };
-		4F8D38A81AE440DE00F42E23 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F8D38A71AE440DE00F42E23 /* ViewController.swift */; };
 		4F8D38AB1AE440DE00F42E23 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4F8D38A91AE440DE00F42E23 /* Main.storyboard */; };
 		4F8D38AD1AE440DE00F42E23 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4F8D38AC1AE440DE00F42E23 /* Images.xcassets */; };
 		4F8D38B01AE440DE00F42E23 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4F8D38AE1AE440DE00F42E23 /* LaunchScreen.xib */; };
 		4F8D38BC1AE440DE00F42E23 /* Silky_SocksTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F8D38BB1AE440DE00F42E23 /* Silky_SocksTests.swift */; };
+		4F8D38C61AE441F700F42E23 /* SJCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F8D38C51AE441F700F42E23 /* SJCollectionViewCell.swift */; };
+		4F8D38CA1AE4451000F42E23 /* SJCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F8D38C91AE4451000F42E23 /* SJCollectionViewController.swift */; };
+		4F8D38CC1AE4457800F42E23 /* TemplateModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F8D38CB1AE4457800F42E23 /* TemplateModel.swift */; };
+		4F8D38D31AE4582200F42E23 /* SJCollectionViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F8D38D21AE4582200F42E23 /* SJCollectionViewDataSource.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -27,17 +35,25 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		4F55B5531AE46E4900679048 /* SJCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SJCollectionViewCell.xib; sourceTree = "<group>"; };
+		4F55B5551AE470BF00679048 /* SJCollectionReusableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SJCollectionReusableView.swift; sourceTree = "<group>"; };
+		4F55B5561AE470BF00679048 /* SJCollectionReusableView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SJCollectionReusableView.xib; sourceTree = "<group>"; };
+		4F55B5591AE4710000679048 /* SJButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SJButton.swift; sourceTree = "<group>"; };
+		4F55B55C1AE480F400679048 /* SJLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SJLayout.swift; sourceTree = "<group>"; };
 		4F8D389D1AE440DE00F42E23 /* Silky Socks.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Silky Socks.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		4F8D38A11AE440DE00F42E23 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4F8D38A21AE440DE00F42E23 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4F8D38A51AE440DE00F42E23 /* Silky_Socks.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Silky_Socks.xcdatamodel; sourceTree = "<group>"; };
-		4F8D38A71AE440DE00F42E23 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		4F8D38AA1AE440DE00F42E23 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		4F8D38AC1AE440DE00F42E23 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		4F8D38AF1AE440DE00F42E23 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		4F8D38B51AE440DE00F42E23 /* Silky SocksTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Silky SocksTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		4F8D38BA1AE440DE00F42E23 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4F8D38BB1AE440DE00F42E23 /* Silky_SocksTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Silky_SocksTests.swift; sourceTree = "<group>"; };
+		4F8D38C51AE441F700F42E23 /* SJCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SJCollectionViewCell.swift; sourceTree = "<group>"; };
+		4F8D38C91AE4451000F42E23 /* SJCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SJCollectionViewController.swift; sourceTree = "<group>"; };
+		4F8D38CB1AE4457800F42E23 /* TemplateModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TemplateModel.swift; sourceTree = "<group>"; };
+		4F8D38D21AE4582200F42E23 /* SJCollectionViewDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SJCollectionViewDataSource.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +74,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4F55B55B1AE480D900679048 /* Layout */ = {
+			isa = PBXGroup;
+			children = (
+				4F55B55C1AE480F400679048 /* SJLayout.swift */,
+			);
+			name = Layout;
+			sourceTree = "<group>";
+		};
 		4F8D38941AE440DE00F42E23 = {
 			isa = PBXGroup;
 			children = (
@@ -79,12 +103,10 @@
 		4F8D389F1AE440DE00F42E23 /* Silky Socks */ = {
 			isa = PBXGroup;
 			children = (
-				4F8D38A21AE440DE00F42E23 /* AppDelegate.swift */,
-				4F8D38A71AE440DE00F42E23 /* ViewController.swift */,
-				4F8D38A91AE440DE00F42E23 /* Main.storyboard */,
-				4F8D38AC1AE440DE00F42E23 /* Images.xcassets */,
-				4F8D38AE1AE440DE00F42E23 /* LaunchScreen.xib */,
-				4F8D38A41AE440DE00F42E23 /* Silky_Socks.xcdatamodeld */,
+				4F8D38D01AE4461C00F42E23 /* Model */,
+				4F8D38CF1AE4461700F42E23 /* View */,
+				4F55B55B1AE480D900679048 /* Layout */,
+				4F8D38D11AE4462D00F42E23 /* Controller */,
 				4F8D38A01AE440DE00F42E23 /* Supporting Files */,
 			);
 			path = "Silky Socks";
@@ -93,7 +115,12 @@
 		4F8D38A01AE440DE00F42E23 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				4F8D38A21AE440DE00F42E23 /* AppDelegate.swift */,
+				4F8D38A91AE440DE00F42E23 /* Main.storyboard */,
 				4F8D38A11AE440DE00F42E23 /* Info.plist */,
+				4F8D38AC1AE440DE00F42E23 /* Images.xcassets */,
+				4F8D38AE1AE440DE00F42E23 /* LaunchScreen.xib */,
+				4F8D38A41AE440DE00F42E23 /* Silky_Socks.xcdatamodeld */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -113,6 +140,35 @@
 				4F8D38BA1AE440DE00F42E23 /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		4F8D38CF1AE4461700F42E23 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				4F55B5591AE4710000679048 /* SJButton.swift */,
+				4F55B5551AE470BF00679048 /* SJCollectionReusableView.swift */,
+				4F55B5561AE470BF00679048 /* SJCollectionReusableView.xib */,
+				4F8D38C51AE441F700F42E23 /* SJCollectionViewCell.swift */,
+				4F55B5531AE46E4900679048 /* SJCollectionViewCell.xib */,
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
+		4F8D38D01AE4461C00F42E23 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				4F8D38D21AE4582200F42E23 /* SJCollectionViewDataSource.swift */,
+				4F8D38CB1AE4457800F42E23 /* TemplateModel.swift */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		4F8D38D11AE4462D00F42E23 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				4F8D38C91AE4451000F42E23 /* SJCollectionViewController.swift */,
+			);
+			name = Controller;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -164,6 +220,7 @@
 				TargetAttributes = {
 					4F8D389C1AE440DE00F42E23 = {
 						CreatedOnToolsVersion = 6.3;
+						DevelopmentTeam = 4459D7FB5Q;
 					};
 					4F8D38B41AE440DE00F42E23 = {
 						CreatedOnToolsVersion = 6.3;
@@ -196,8 +253,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				4F8D38AB1AE440DE00F42E23 /* Main.storyboard in Resources */,
+				4F55B5541AE46E4900679048 /* SJCollectionViewCell.xib in Resources */,
 				4F8D38B01AE440DE00F42E23 /* LaunchScreen.xib in Resources */,
 				4F8D38AD1AE440DE00F42E23 /* Images.xcassets in Resources */,
+				4F55B5581AE470BF00679048 /* SJCollectionReusableView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -215,8 +274,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4F8D38A81AE440DE00F42E23 /* ViewController.swift in Sources */,
+				4F8D38D31AE4582200F42E23 /* SJCollectionViewDataSource.swift in Sources */,
+				4F55B55D1AE480F400679048 /* SJLayout.swift in Sources */,
+				4F8D38CC1AE4457800F42E23 /* TemplateModel.swift in Sources */,
+				4F55B55A1AE4710000679048 /* SJButton.swift in Sources */,
+				4F55B5571AE470BF00679048 /* SJCollectionReusableView.swift in Sources */,
+				4F8D38C61AE441F700F42E23 /* SJCollectionViewCell.swift in Sources */,
 				4F8D38A61AE440DE00F42E23 /* Silky_Socks.xcdatamodeld in Sources */,
+				4F8D38CA1AE4451000F42E23 /* SJCollectionViewController.swift in Sources */,
 				4F8D38A31AE440DE00F42E23 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -346,9 +411,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = "Silky Socks/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
 		};
@@ -356,9 +424,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = "Silky Socks/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
 		};
@@ -415,6 +486,7 @@
 				4F8D38C11AE440DE00F42E23 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		4F8D38C21AE440DE00F42E23 /* Build configuration list for PBXNativeTarget "Silky SocksTests" */ = {
 			isa = XCConfigurationList;
@@ -423,6 +495,7 @@
 				4F8D38C41AE440DE00F42E23 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 
