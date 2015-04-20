@@ -8,8 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		4F55B5541AE46E4900679048 /* SJCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4F55B5531AE46E4900679048 /* SJCollectionViewCell.xib */; };
-		4F55B5571AE470BF00679048 /* SJCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F55B5551AE470BF00679048 /* SJCollectionReusableView.swift */; };
-		4F55B5581AE470BF00679048 /* SJCollectionReusableView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4F55B5561AE470BF00679048 /* SJCollectionReusableView.xib */; };
 		4F55B55A1AE4710000679048 /* SJButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F55B5591AE4710000679048 /* SJButton.swift */; };
 		4F55B55D1AE480F400679048 /* SJLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F55B55C1AE480F400679048 /* SJLayout.swift */; };
 		4F8D38A31AE440DE00F42E23 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F8D38A21AE440DE00F42E23 /* AppDelegate.swift */; };
@@ -22,6 +20,9 @@
 		4F8D38CA1AE4451000F42E23 /* SJCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F8D38C91AE4451000F42E23 /* SJCollectionViewController.swift */; };
 		4F8D38CC1AE4457800F42E23 /* TemplateModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F8D38CB1AE4457800F42E23 /* TemplateModel.swift */; };
 		4F8D38D31AE4582200F42E23 /* SJCollectionViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F8D38D21AE4582200F42E23 /* SJCollectionViewDataSource.swift */; };
+		4FB6C9C11AE4AF70001A6E50 /* SJBottomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FB6C9C01AE4AF70001A6E50 /* SJBottomView.swift */; };
+		4FB6C9C31AE4AF7A001A6E50 /* SJBottomView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4FB6C9C21AE4AF7A001A6E50 /* SJBottomView.xib */; };
+		4FB6C9C51AE4B394001A6E50 /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FB6C9C41AE4B394001A6E50 /* Utilities.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,8 +37,6 @@
 
 /* Begin PBXFileReference section */
 		4F55B5531AE46E4900679048 /* SJCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SJCollectionViewCell.xib; sourceTree = "<group>"; };
-		4F55B5551AE470BF00679048 /* SJCollectionReusableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SJCollectionReusableView.swift; sourceTree = "<group>"; };
-		4F55B5561AE470BF00679048 /* SJCollectionReusableView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SJCollectionReusableView.xib; sourceTree = "<group>"; };
 		4F55B5591AE4710000679048 /* SJButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SJButton.swift; sourceTree = "<group>"; };
 		4F55B55C1AE480F400679048 /* SJLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SJLayout.swift; sourceTree = "<group>"; };
 		4F8D389D1AE440DE00F42E23 /* Silky Socks.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Silky Socks.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -54,6 +53,9 @@
 		4F8D38C91AE4451000F42E23 /* SJCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SJCollectionViewController.swift; sourceTree = "<group>"; };
 		4F8D38CB1AE4457800F42E23 /* TemplateModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TemplateModel.swift; sourceTree = "<group>"; };
 		4F8D38D21AE4582200F42E23 /* SJCollectionViewDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SJCollectionViewDataSource.swift; sourceTree = "<group>"; };
+		4FB6C9C01AE4AF70001A6E50 /* SJBottomView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SJBottomView.swift; sourceTree = "<group>"; };
+		4FB6C9C21AE4AF7A001A6E50 /* SJBottomView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SJBottomView.xib; sourceTree = "<group>"; };
+		4FB6C9C41AE4B394001A6E50 /* Utilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -146,8 +148,8 @@
 			isa = PBXGroup;
 			children = (
 				4F55B5591AE4710000679048 /* SJButton.swift */,
-				4F55B5551AE470BF00679048 /* SJCollectionReusableView.swift */,
-				4F55B5561AE470BF00679048 /* SJCollectionReusableView.xib */,
+				4FB6C9C01AE4AF70001A6E50 /* SJBottomView.swift */,
+				4FB6C9C21AE4AF7A001A6E50 /* SJBottomView.xib */,
 				4F8D38C51AE441F700F42E23 /* SJCollectionViewCell.swift */,
 				4F55B5531AE46E4900679048 /* SJCollectionViewCell.xib */,
 			);
@@ -157,6 +159,7 @@
 		4F8D38D01AE4461C00F42E23 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				4FB6C9C41AE4B394001A6E50 /* Utilities.swift */,
 				4F8D38D21AE4582200F42E23 /* SJCollectionViewDataSource.swift */,
 				4F8D38CB1AE4457800F42E23 /* TemplateModel.swift */,
 			);
@@ -252,11 +255,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4FB6C9C31AE4AF7A001A6E50 /* SJBottomView.xib in Resources */,
 				4F8D38AB1AE440DE00F42E23 /* Main.storyboard in Resources */,
 				4F55B5541AE46E4900679048 /* SJCollectionViewCell.xib in Resources */,
 				4F8D38B01AE440DE00F42E23 /* LaunchScreen.xib in Resources */,
 				4F8D38AD1AE440DE00F42E23 /* Images.xcassets in Resources */,
-				4F55B5581AE470BF00679048 /* SJCollectionReusableView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -278,10 +281,11 @@
 				4F55B55D1AE480F400679048 /* SJLayout.swift in Sources */,
 				4F8D38CC1AE4457800F42E23 /* TemplateModel.swift in Sources */,
 				4F55B55A1AE4710000679048 /* SJButton.swift in Sources */,
-				4F55B5571AE470BF00679048 /* SJCollectionReusableView.swift in Sources */,
 				4F8D38C61AE441F700F42E23 /* SJCollectionViewCell.swift in Sources */,
 				4F8D38A61AE440DE00F42E23 /* Silky_Socks.xcdatamodeld in Sources */,
 				4F8D38CA1AE4451000F42E23 /* SJCollectionViewController.swift in Sources */,
+				4FB6C9C11AE4AF70001A6E50 /* SJBottomView.swift in Sources */,
+				4FB6C9C51AE4B394001A6E50 /* Utilities.swift in Sources */,
 				4F8D38A31AE440DE00F42E23 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -11,20 +11,31 @@ import UIKit
 let reuseIdentifier = "Cell"
 let suppReuse = "HeaderView"
 
-class SJCollectionViewController: UICollectionViewController {
+class SJCollectionViewController: UIViewController {
 
     private var dataSource = SJCollectionViewDataSource()
+    
+    @IBOutlet weak var collectionView: UICollectionView!
+    @IBOutlet weak var ss_utilitiesView: UIView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         // Register Nibs
         collectionView!.registerNib(UINib(nibName: "SJCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: reuseIdentifier)
-        collectionView!.registerNib(UINib(nibName: "SJCollectionReusableView", bundle: nil), forSupplementaryViewOfKind: "Custom", withReuseIdentifier: suppReuse)
         
+        // Data Source
+        collectionView!.dataSource = self
+        collectionView!.delegate = self
+        
+        //collectionView!.backgroundColor = UIColor.yellowColor()
         collectionView!.backgroundColor = UIColor.whiteColor()
         
-        collectionView!.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 200, right: 0)
+        collectionView!.pagingEnabled = true
+        
+        var bottomView = NSBundle.mainBundle().loadNibNamed("SJBottomView", owner: nil, options: nil).first as! SJBottomView
+        ss_utilitiesView.addSubview(bottomView)
+        ss_utilitiesView.pinSubviewToView(subView: bottomView)
     }
 
     override func didReceiveMemoryWarning() {
@@ -36,18 +47,18 @@ class SJCollectionViewController: UICollectionViewController {
 
 // MARK: UICollectionViewDataSource
 
-extension SJCollectionViewController: UICollectionViewDataSource {
+extension SJCollectionViewController: UICollectionViewDataSource, UICollectionViewDelegate {
 
-    override func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
+    func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
         return dataSource.numberOfSections()
     }
 
 
-    override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return dataSource.numberOfItemsInSection(section)
      }
 
-  override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
+    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier(reuseIdentifier, forIndexPath: indexPath) as! SJCollectionViewCell
         
@@ -56,22 +67,6 @@ extension SJCollectionViewController: UICollectionViewDataSource {
         
         return cell
     }
-    
-    override func collectionView(collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, atIndexPath indexPath: NSIndexPath) -> UICollectionReusableView {
         
-        
-        switch kind {
-            
-        case "Custom":
-            
-            let footerview = collectionView.dequeueReusableSupplementaryViewOfKind(kind, withReuseIdentifier: suppReuse, forIndexPath: indexPath) as! SJCollectionReusableView
-            return footerview
-            
-        default:
-            assert(false, "Unexpected Element Kind")
-            
-        }
-    }
-    
 }
 

@@ -96,10 +96,13 @@ class SJLayout: UICollectionViewLayout {
         return true
     }
     
-    override func targetContentOffsetForProposedContentOffset(proposedContentOffset: CGPoint, withScrollingVelocity velocity: CGPoint) -> CGPoint {
-        
-        var page = ceil(proposedContentOffset.x / CGRectGetWidth(collectionView!.frame));
-        return CGPointMake(page * CGRectGetWidth(collectionView!.frame), 0);
-        
-    }
+//    override func targetContentOffsetForProposedContentOffset(proposedContentOffset: CGPoint, withScrollingVelocity velocity: CGPoint) -> CGPoint {
+//        
+//        var page = ceil(proposedContentOffset.x / CGRectGetWidth(collectionView!.bounds));
+//        
+//        println(page)
+//        
+//        return CGPointMake(page * CGRectGetWidth(collectionView!.frame), 0);
+//        
+//    }
 }
