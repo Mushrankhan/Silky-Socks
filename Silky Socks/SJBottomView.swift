@@ -8,8 +8,16 @@
 
 import UIKit
 
+protocol SJBottomViewDelegate: NSObjectProtocol {
+    
+    func sj_bottomView(view: SJBottomView, didPressRightButton button:SJButton)
+}
+
 class SJBottomView: UIView {
 
+    // the delegate object
+    weak var delegate: SJBottomViewDelegate?
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         self.autoresizingMask = .FlexibleWidth | .FlexibleHeight
@@ -21,7 +29,7 @@ class SJBottomView: UIView {
 extension SJBottomView {
     
     @IBAction func didPressNextButton(sender: SJButton) {
-        
+        delegate?.sj_bottomView(self, didPressRightButton: sender)
     }
 
 }

@@ -13,7 +13,7 @@ class SJCollectionView: UICollectionView {
     private let reuseIdentifier = "Cell"
     
     // The Data Source Object
-    //weak var dataSource: SJCollectionViewDataSource?
+    //var dataSource: SJCollectionViewDataSource
     
     required init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -27,12 +27,13 @@ class SJCollectionView: UICollectionView {
 
     private func initialSetUp() {
         setTranslatesAutoresizingMaskIntoConstraints(false)
-        
         backgroundColor = UIColor.whiteColor()
         keyboardDismissMode = .Interactive
         alwaysBounceVertical = true
         bounces = true
         
+        // Register the cell nib
         registerNib(UINib(nibName: "SJCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: reuseIdentifier)
+
     }
 }

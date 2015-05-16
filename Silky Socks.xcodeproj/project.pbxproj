@@ -158,12 +158,12 @@
 		4F8D38CF1AE4461700F42E23 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				1FCF508E1B070F4C005D8578 /* SJCollectionView.swift */,
 				4F55B5591AE4710000679048 /* SJButton.swift */,
 				4FB6C9C01AE4AF70001A6E50 /* SJBottomView.swift */,
 				4FB6C9C21AE4AF7A001A6E50 /* SJBottomView.xib */,
 				4F8D38C51AE441F700F42E23 /* SJCollectionViewCell.swift */,
 				4F55B5531AE46E4900679048 /* SJCollectionViewCell.xib */,
+				1FCF508E1B070F4C005D8578 /* SJCollectionView.swift */,
 			);
 			name = View;
 			sourceTree = "<group>";

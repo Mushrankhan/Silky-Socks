@@ -19,7 +19,6 @@ class SJCollectionViewController: UIViewController {
     // Collection view
     @IBOutlet weak var collectionView: SJCollectionView!
 
-    
     // Bottom utilities view
     @IBOutlet weak var ss_utilitiesView: UIView!
     
@@ -42,6 +41,7 @@ class SJCollectionViewController: UIViewController {
         var bottomView = NSBundle.mainBundle().loadNibNamed("SJBottomView", owner: nil, options: nil).first as! SJBottomView
         ss_utilitiesView.addSubview(bottomView)
         ss_utilitiesView.pinSubviewToView(subView: bottomView)
+        bottomView.delegate = self
     }
 
     override func didReceiveMemoryWarning() {
@@ -76,5 +76,13 @@ extension SJCollectionViewController: SJCollectionViewDataSource, UICollectionVi
     func collectionView(collectionView: UICollectionView, heightForImageAtIndexPath indexPath: NSIndexPath, withWidth width: CGFloat) -> CGFloat {
         return 100
     }
+}
+
+extension SJCollectionViewController: SJBottomViewDelegate {
+    
+    func sj_bottomView(view: SJBottomView, didPressRightButton button: SJButton) {
+        print("Right")
+    }
+    
 }
 
