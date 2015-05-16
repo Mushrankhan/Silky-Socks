@@ -26,11 +26,12 @@ class SJCollectionView: UICollectionView {
     }
 
     private func initialSetUp() {
+        // Basic
         setTranslatesAutoresizingMaskIntoConstraints(false)
         backgroundColor = UIColor.whiteColor()
         keyboardDismissMode = .Interactive
-        alwaysBounceVertical = true
         bounces = true
+        indicatorStyle = .Black
         
         // Register the cell nib
         registerNib(UINib(nibName: "SJCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: reuseIdentifier)

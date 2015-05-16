@@ -11,6 +11,7 @@ import UIKit
 protocol SJBottomViewDelegate: NSObjectProtocol {
     
     func sj_bottomView(view: SJBottomView, didPressRightButton button:SJButton)
+    func sj_bottomView(view: SJBottomView, didPressLeftButton button:SJButton)
 }
 
 class SJBottomView: UIView {
@@ -31,5 +32,8 @@ extension SJBottomView {
     @IBAction func didPressNextButton(sender: SJButton) {
         delegate?.sj_bottomView(self, didPressRightButton: sender)
     }
-
+    
+    @IBAction func didPressPreviousButton(sender: SJButton) {
+        delegate?.sj_bottomView(self, didPressLeftButton: sender)
+    }
 }

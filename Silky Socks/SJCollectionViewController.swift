@@ -25,8 +25,12 @@ class SJCollectionViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // Register Nibs
-        //collectionView!.registerNib(UINib(nibName: "SJCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: reuseIdentifier)
+        // Setting the Top Silcy Socks Logo
+        let nav_barHeight = CGRectGetHeight(navigationController!.navigationBar.bounds)
+        let img_view = UIImageView(image: UIImage(named: "topbar_logo"))
+        img_view.frame = CGRectMake(0, 0, 150, nav_barHeight - 10)
+        img_view.contentMode = .ScaleAspectFit
+        navigationItem.titleView = img_view
         
         // Data Source
         collectionView!.dataSource = self
@@ -82,7 +86,11 @@ extension SJCollectionViewController: SJBottomViewDelegate {
     
     func sj_bottomView(view: SJBottomView, didPressRightButton button: SJButton) {
         print("Right")
+        //collectionView.setContentOffset(CGPoint(x: 100, y: 0), animated: true)
     }
     
+    func sj_bottomView(view: SJBottomView, didPressLeftButton button: SJButton) {
+        print("Left")
+    }
 }
 
