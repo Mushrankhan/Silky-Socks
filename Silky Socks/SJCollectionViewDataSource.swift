@@ -10,5 +10,5 @@ import UIKit
 
 protocol SJCollectionViewDataSource: UICollectionViewDataSource {
     
-    func collectionView(collectionView: UICollectionView, heightForImageAtIndexPath indexPath: NSIndexPath, withWidth width: CGFloat) -> CGFloat
+    //func collectionView(collectionView: UICollectionView, heightForImageAtIndexPath indexPath: NSIndexPath, withWidth width: CGFloat) -> CGFloat
 }

@@ -42,6 +42,7 @@ class SJCollectionViewController: UIViewController {
         // Enable paging
         collectionView!.pagingEnabled = true
         
+        // the bottom utilities view
         var bottomView = NSBundle.mainBundle().loadNibNamed("SJBottomView", owner: nil, options: nil).first as! SJBottomView
         ss_utilitiesView.addSubview(bottomView)
         ss_utilitiesView.pinSubviewToView(subView: bottomView)
@@ -77,9 +78,21 @@ extension SJCollectionViewController: SJCollectionViewDataSource, UICollectionVi
         return cell
     }
     
-    func collectionView(collectionView: UICollectionView, heightForImageAtIndexPath indexPath: NSIndexPath, withWidth width: CGFloat) -> CGFloat {
-        return 100
+//    func collectionView(collectionView: UICollectionView, heightForImageAtIndexPath indexPath: NSIndexPath, withWidth width: CGFloat) -> CGFloat {
+//        return 100
+//    }
+    
+    func collectionView(collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, atIndexPath indexPath: NSIndexPath) -> UICollectionReusableView {
+        if kind == restartElementkind {
+            let view = collectionView.dequeueReusableSupplementaryViewOfKind(kind, withReuseIdentifier: restartIdentifier , forIndexPath: indexPath) as! RestartViewCollectionReusableView
+            return view
+        } else if kind == shareElementKind {
+            let view = collectionView.dequeueReusableSupplementaryViewOfKind(kind, withReuseIdentifier: shareIdentifier , forIndexPath: indexPath) as! ShareViewCollectionReusableView
+            return view
+        }
+        return collectionView.dequeueReusableSupplementaryViewOfKind(kind, withReuseIdentifier: "", forIndexPath: indexPath) as! UICollectionReusableView
     }
+    
 }
 
 extension SJCollectionViewController: SJBottomViewDelegate {

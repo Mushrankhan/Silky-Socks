@@ -9,8 +9,6 @@
 import UIKit
 
 class SJCollectionView: UICollectionView {
-
-    private let reuseIdentifier = "Cell"
     
     // The Data Source Object
     //var dataSource: SJCollectionViewDataSource
@@ -32,9 +30,16 @@ class SJCollectionView: UICollectionView {
         keyboardDismissMode = .Interactive
         bounces = true
         indicatorStyle = .Black
-        
+
         // Register the cell nib
         registerNib(UINib(nibName: "SJCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: reuseIdentifier)
-
+        
+        // Register Supplementary View
+        registerNib(UINib(nibName: "SJCollectionRestartReusableView", bundle: nil), forSupplementaryViewOfKind: restartElementkind, withReuseIdentifier: restartIdentifier)
+        registerNib(UINib(nibName: "SJCollectionShareReusableView", bundle: nil), forSupplementaryViewOfKind: shareElementKind, withReuseIdentifier: shareIdentifier)
+        
+        // Register the decoration view
+        let layout = collectionViewLayout as! SJLayout
+        layout.registerNib(UINib(nibName: "SJCollectionDecorationSilkySocksLogoReusableView", bundle: nil), forDecorationViewOfKind: logoElementKind)
     }
 }

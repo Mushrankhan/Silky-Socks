@@ -6,8 +6,9 @@
 //  Copyright (c) 2015 Full Stak. All rights reserved.
 //
 
-import Foundation
 import UIKit
+
+public let reuseIdentifier = "Cell"
 
 class SJCollectionViewCell: UICollectionViewCell {
 
@@ -25,8 +26,7 @@ class SJCollectionViewCell: UICollectionViewCell {
         super.awakeFromNib()
         autoresizingMask = UIViewAutoresizing.FlexibleHeight | .FlexibleWidth
         setTranslatesAutoresizingMaskIntoConstraints(false)
-        
-        backgroundColor = UIColor.yellowColor()
+        //backgroundColor = UIColor.yellowColor()
     }
     
     override func applyLayoutAttributes(layoutAttributes: UICollectionViewLayoutAttributes!) {

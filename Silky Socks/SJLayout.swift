@@ -57,14 +57,12 @@ class SJLayout: UICollectionViewLayout {
         if cache.isEmpty {
             
             // Loop through the items
-            for item in 0..<collectionView!.numberOfItemsInSection(0) {
+            for item in 0..<numberOfItems {
                 
                 // Cell
                 let indexPath = NSIndexPath(forItem: item, inSection: 0)
                 let attributes = UICollectionViewLayoutAttributes(forCellWithIndexPath: indexPath)
                 let x = CGFloat(item) * width
-                
-                // For mid - height/2 - 64
                 
                 let frame = CGRect(x: x, y: 0, width: width, height: height - 20)
                 let insets = UIEdgeInsets(top: 20, left: 10, bottom: 50, right: 10)
@@ -75,6 +73,36 @@ class SJLayout: UICollectionViewLayout {
         }
     }
     
+    /* The Supplementary View */
+    override func layoutAttributesForSupplementaryViewOfKind(elementKind: String, atIndexPath indexPath: NSIndexPath) -> UICollectionViewLayoutAttributes! {
+        if elementKind == restartElementkind {
+            let attributes = UICollectionViewLayoutAttributes(forSupplementaryViewOfKind: elementKind, withIndexPath: indexPath)
+            var frame = CGRectMake(10, 0, 80, 24)
+            frame.origin.x += collectionView!.contentOffset.x
+            attributes.frame = frame
+            attributes.zIndex = 99
+            return attributes
+        } else if elementKind == shareElementKind {
+            let attributes = UICollectionViewLayoutAttributes(forSupplementaryViewOfKind: elementKind, withIndexPath: indexPath)
+            var frame = CGRectMake(width - 100, 0, 80, 24)
+            frame.origin.x += collectionView!.contentOffset.x
+            attributes.frame = frame
+            attributes.zIndex = 99
+            return attributes
+        }
+        return UICollectionViewLayoutAttributes(forSupplementaryViewOfKind: elementKind, withIndexPath: indexPath)
+    }
+    
+    /* The Decoration View */
+    override func layoutAttributesForDecorationViewOfKind(elementKind: String, atIndexPath indexPath: NSIndexPath) -> UICollectionViewLayoutAttributes! {
+        let attributes = UICollectionViewLayoutAttributes(forDecorationViewOfKind: elementKind, withIndexPath: indexPath)
+        var frame = CGRectMake(10, height - 140, 80, 80)
+        frame.origin.x += collectionView!.contentOffset.x
+        attributes.frame = frame
+        attributes.zIndex = 99
+        return attributes
+    }
+    
     /* The layout attributes for element in rect */
     override func layoutAttributesForElementsInRect(rect: CGRect) -> [AnyObject]? {
         var layoutAttributes: [UICollectionViewLayoutAttributes] = []
@@ -83,7 +111,19 @@ class SJLayout: UICollectionViewLayout {
                 layoutAttributes.append(attributes)
             }
         }
+        
+        let restartAttr = layoutAttributesForSupplementaryViewOfKind(restartElementkind, atIndexPath: NSIndexPath(forItem: 0, inSection: 0))
+        let shareAttr = layoutAttributesForSupplementaryViewOfKind(shareElementKind, atIndexPath: NSIndexPath(forItem: 0, inSection: 0))
+        let decoration = layoutAttributesForDecorationViewOfKind(logoElementKind, atIndexPath: NSIndexPath(forItem: 0, inSection: 0))
+        layoutAttributes.append(restartAttr)
+        layoutAttributes.append(shareAttr)
+        layoutAttributes.append(decoration)
+        
         return layoutAttributes
     }
     
+    /* Invalidate the layout for bounds change. Very Essential */
+    override func shouldInvalidateLayoutForBoundsChange(newBounds: CGRect) -> Bool {
+        return true
+    }
 }

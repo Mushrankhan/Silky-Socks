@@ -8,6 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		1FCF508F1B070F4C005D8578 /* SJCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FCF508E1B070F4C005D8578 /* SJCollectionView.swift */; };
+		1FCF50951B07EBAB005D8578 /* SJCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FCF50941B07EBAB005D8578 /* SJCollectionReusableView.swift */; };
+		1FCF50991B07ECA3005D8578 /* SJCollectionRestartReusableView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1FCF50981B07ECA3005D8578 /* SJCollectionRestartReusableView.xib */; };
+		1FCF509B1B07ED8A005D8578 /* SJCollectionShareReusableView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1FCF509A1B07ED8A005D8578 /* SJCollectionShareReusableView.xib */; };
+		1FCF509D1B07F0C7005D8578 /* SJCollectionDecorationSilkySocksLogoReusableView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1FCF509C1B07F0C7005D8578 /* SJCollectionDecorationSilkySocksLogoReusableView.xib */; };
 		4F55B5541AE46E4900679048 /* SJCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4F55B5531AE46E4900679048 /* SJCollectionViewCell.xib */; };
 		4F55B55A1AE4710000679048 /* SJButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F55B5591AE4710000679048 /* SJButton.swift */; };
 		4F55B55D1AE480F400679048 /* SJLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F55B55C1AE480F400679048 /* SJLayout.swift */; };
@@ -38,6 +42,10 @@
 
 /* Begin PBXFileReference section */
 		1FCF508E1B070F4C005D8578 /* SJCollectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SJCollectionView.swift; sourceTree = "<group>"; };
+		1FCF50941B07EBAB005D8578 /* SJCollectionReusableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SJCollectionReusableView.swift; sourceTree = "<group>"; };
+		1FCF50981B07ECA3005D8578 /* SJCollectionRestartReusableView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SJCollectionRestartReusableView.xib; sourceTree = "<group>"; };
+		1FCF509A1B07ED8A005D8578 /* SJCollectionShareReusableView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SJCollectionShareReusableView.xib; sourceTree = "<group>"; };
+		1FCF509C1B07F0C7005D8578 /* SJCollectionDecorationSilkySocksLogoReusableView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SJCollectionDecorationSilkySocksLogoReusableView.xib; sourceTree = "<group>"; };
 		4F55B5531AE46E4900679048 /* SJCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SJCollectionViewCell.xib; sourceTree = "<group>"; };
 		4F55B5591AE4710000679048 /* SJButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SJButton.swift; sourceTree = "<group>"; };
 		4F55B55C1AE480F400679048 /* SJLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SJLayout.swift; sourceTree = "<group>"; };
@@ -86,6 +94,26 @@
 			name = "Data Source";
 			sourceTree = "<group>";
 		};
+		1FCF509E1B07FF06005D8578 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				4F8D38C51AE441F700F42E23 /* SJCollectionViewCell.swift */,
+				4F55B5531AE46E4900679048 /* SJCollectionViewCell.xib */,
+			);
+			name = Cell;
+			sourceTree = "<group>";
+		};
+		1FCF509F1B07FF0B005D8578 /* Supplementary Views */ = {
+			isa = PBXGroup;
+			children = (
+				1FCF50941B07EBAB005D8578 /* SJCollectionReusableView.swift */,
+				1FCF509C1B07F0C7005D8578 /* SJCollectionDecorationSilkySocksLogoReusableView.xib */,
+				1FCF509A1B07ED8A005D8578 /* SJCollectionShareReusableView.xib */,
+				1FCF50981B07ECA3005D8578 /* SJCollectionRestartReusableView.xib */,
+			);
+			name = "Supplementary Views";
+			sourceTree = "<group>";
+		};
 		4F55B55B1AE480D900679048 /* Layout */ = {
 			isa = PBXGroup;
 			children = (
@@ -130,10 +158,10 @@
 			children = (
 				4F8D38A21AE440DE00F42E23 /* AppDelegate.swift */,
 				4F8D38A91AE440DE00F42E23 /* Main.storyboard */,
-				4F8D38A11AE440DE00F42E23 /* Info.plist */,
 				4F8D38AC1AE440DE00F42E23 /* Images.xcassets */,
 				4F8D38AE1AE440DE00F42E23 /* LaunchScreen.xib */,
 				4F8D38A41AE440DE00F42E23 /* Silky_Socks.xcdatamodeld */,
+				4F8D38A11AE440DE00F42E23 /* Info.plist */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -161,8 +189,8 @@
 				4F55B5591AE4710000679048 /* SJButton.swift */,
 				4FB6C9C01AE4AF70001A6E50 /* SJBottomView.swift */,
 				4FB6C9C21AE4AF7A001A6E50 /* SJBottomView.xib */,
-				4F8D38C51AE441F700F42E23 /* SJCollectionViewCell.swift */,
-				4F55B5531AE46E4900679048 /* SJCollectionViewCell.xib */,
+				1FCF509E1B07FF06005D8578 /* Cell */,
+				1FCF509F1B07FF0B005D8578 /* Supplementary Views */,
 				1FCF508E1B070F4C005D8578 /* SJCollectionView.swift */,
 			);
 			name = View;
@@ -267,7 +295,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				4FB6C9C31AE4AF7A001A6E50 /* SJBottomView.xib in Resources */,
+				1FCF509B1B07ED8A005D8578 /* SJCollectionShareReusableView.xib in Resources */,
 				4F8D38AB1AE440DE00F42E23 /* Main.storyboard in Resources */,
+				1FCF50991B07ECA3005D8578 /* SJCollectionRestartReusableView.xib in Resources */,
+				1FCF509D1B07F0C7005D8578 /* SJCollectionDecorationSilkySocksLogoReusableView.xib in Resources */,
 				4F55B5541AE46E4900679048 /* SJCollectionViewCell.xib in Resources */,
 				4F8D38B01AE440DE00F42E23 /* LaunchScreen.xib in Resources */,
 				4F8D38AD1AE440DE00F42E23 /* Images.xcassets in Resources */,
@@ -297,6 +328,7 @@
 				4F8D38A61AE440DE00F42E23 /* Silky_Socks.xcdatamodeld in Sources */,
 				4F8D38CA1AE4451000F42E23 /* SJCollectionViewController.swift in Sources */,
 				4FB6C9C11AE4AF70001A6E50 /* SJBottomView.swift in Sources */,
+				1FCF50951B07EBAB005D8578 /* SJCollectionReusableView.swift in Sources */,
 				4FB6C9C51AE4B394001A6E50 /* Utilities.swift in Sources */,
 				4F8D38A31AE440DE00F42E23 /* AppDelegate.swift in Sources */,
 			);
