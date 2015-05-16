@@ -8,12 +8,12 @@
 
 import UIKit
 
-let reuseIdentifier = "Cell"
-let suppReuse = "HeaderView"
-
 class SJCollectionViewController: UIViewController {
 
     private var dataSource = SJCollectionViewDataSource()
+    
+    private let reuseIdentifier = "Cell"
+    private let suppReuse = "HeaderView"
     
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var ss_utilitiesView: UIView!

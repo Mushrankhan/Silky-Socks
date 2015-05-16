@@ -12,13 +12,13 @@ import UIKit
 extension UIView {
     
     func pinSubviewToView(#subView: UIView) {
+        
         addAttributeToView(NSLayoutAttribute.Top, subview: subView)
         addAttributeToView(NSLayoutAttribute.Left, subview: subView)
         addAttributeToView(NSLayoutAttribute.Bottom, subview: subView)
         addAttributeToView(NSLayoutAttribute.Right, subview: subView)
         
         self.setNeedsUpdateConstraints()
-        
     }
     
     private func addAttributeToView(attribute: NSLayoutAttribute, subview: UIView) {

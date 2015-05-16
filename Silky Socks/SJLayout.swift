@@ -8,16 +8,14 @@
 
 import UIKit
 
-
 class SJLayout: UICollectionViewLayout {
    
-    // Cache
+    // Cache to store the attributes
     private var cache = [UICollectionViewLayoutAttributes]()
-    //private var suppcache = [UICollectionViewLayoutAttributes]()
     
     // Number of items
     var numberOfItems:Int {
-        get{
+        get {
             return collectionView!.numberOfItemsInSection(0)
         }
     }
@@ -25,84 +23,65 @@ class SJLayout: UICollectionViewLayout {
     // Content Size
     private var contentWidth: CGFloat = 0
     private var contentHeight :CGFloat {
-        get{
+        get {
             let inset = collectionView!.contentInset
-            return CGRectGetWidth(collectionView!.bounds) - inset.top - inset.bottom
+            return width - inset.top - inset.bottom
         }
     }
     
+    // Width of the collection view
+    private var width: CGFloat {
+        get {
+            return CGRectGetWidth(collectionView!.bounds)
+        }
+    }
     
+    // Height of the collection view
+    private var height: CGFloat {
+        get {
+           return CGRectGetHeight(collectionView!.bounds)/2
+        }
+    }
+    
+    /* The content size of the collection view */
     override func collectionViewContentSize() -> CGSize {
         return CGSize(width: contentWidth, height: contentHeight)
     }
     
+    /* Preparing Layout */
     override func prepareLayout() {
         
+        // Set the content width
         contentWidth = CGRectGetWidth(UIScreen.mainScreen().bounds) * CGFloat(numberOfItems)
         
         if cache.isEmpty {
             
-            let width = CGRectGetWidth(collectionView!.bounds)
-            let height = CGRectGetHeight(collectionView!.bounds)/2
-            
+            // Loop through the items
             for item in 0..<collectionView!.numberOfItemsInSection(0) {
                 
                 // Cell
                 let indexPath = NSIndexPath(forItem: item, inSection: 0)
-                let attr = UICollectionViewLayoutAttributes(forCellWithIndexPath: indexPath)
-                
+                let attributes = UICollectionViewLayoutAttributes(forCellWithIndexPath: indexPath)
                 let x = CGFloat(item) * width
-                let frame = CGRect(x: x, y: height/2 - 64, width: width, height: height)
-                attr.frame = frame
-                cache.append(attr)
-             
-                //if indexPath.item == 0 {
-                    
-                    // Supp View
-                    let suppAttr = UICollectionViewLayoutAttributes(forSupplementaryViewOfKind: "Custom", withIndexPath: indexPath)
-                    
-                    let f = CGRect(x: x, y: CGRectGetHeight(collectionView!.bounds) - 200, width: CGRectGetWidth(collectionView!.bounds), height: 200)
-                    suppAttr.frame = f
-                    cache.append(suppAttr)
-                    
-                //}
                 
+                // For mid - height/2 - 64
+                
+                let frame = CGRect(x: x, y: 0, width: width, height: height/2)
+                attributes.frame = frame
+                cache.append(attributes)
             }
-            
         }
-        
-        
     }
     
+    /* The layout attributes for element in rect */
     override func layoutAttributesForElementsInRect(rect: CGRect) -> [AnyObject]? {
-        
         var layoutAttributes: [UICollectionViewLayoutAttributes] = []
-        
-        for attr in cache {
-            if CGRectIntersectsRect(attr.frame, rect){
-                layoutAttributes.append(attr)
+        for attributes in cache {
+            if CGRectIntersectsRect(attributes.frame, rect){
+                layoutAttributes.append(attributes)
             }
         }
-        
-        //suppcache[0].frame.origin.x = rect.origin.x
-    
-        //layoutAttributes.append(suppcache[0])
-        
         return layoutAttributes
     }
-
     
-    override func shouldInvalidateLayoutForBoundsChange(newBounds: CGRect) -> Bool {
-        return true
-    }
-    
-//    override func targetContentOffsetForProposedContentOffset(proposedContentOffset: CGPoint, withScrollingVelocity velocity: CGPoint) -> CGPoint {
-//        
-//        var page = ceil(proposedContentOffset.x / CGRectGetWidth(collectionView!.bounds));
-//        
-//        println(page)
-//        
-//        return CGPointMake(page * CGRectGetWidth(collectionView!.frame), 0);
-//        
-//    }
 }

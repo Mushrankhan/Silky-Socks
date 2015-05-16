@@ -6,12 +6,11 @@
 //  Copyright (c) 2015 Full Stak. All rights reserved.
 //
 
-import Foundation
 import UIKit
 
 class SJCollectionViewDataSource {
     
-    var templatesArray: [Template] = []
+    var templatesArray: [Template]!
     
     init() {
         templatesArray = loadImagesFromDisk()

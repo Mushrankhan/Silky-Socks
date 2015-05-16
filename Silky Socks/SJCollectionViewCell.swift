@@ -21,12 +21,12 @@ class SJCollectionViewCell: UICollectionViewCell {
         }
     }
     
-    
     override func awakeFromNib() {
         super.awakeFromNib()
+        autoresizingMask = UIViewAutoresizing.FlexibleHeight | .FlexibleWidth
+        setTranslatesAutoresizingMaskIntoConstraints(false)
         
-        self.autoresizingMask = UIViewAutoresizing.FlexibleHeight | .FlexibleWidth
-        self.setTranslatesAutoresizingMaskIntoConstraints(false)
+        backgroundColor = UIColor.yellowColor()
     }
     
     override func applyLayoutAttributes(layoutAttributes: UICollectionViewLayoutAttributes!) {

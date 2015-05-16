@@ -9,9 +9,9 @@
 import Foundation
 import UIKit
 
-
 struct Template {
     
+    // The Image template
     var image: UIImage
     
     init(image: UIImage) {
