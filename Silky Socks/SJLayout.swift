@@ -67,9 +67,9 @@ class SJLayout: UICollectionViewLayout {
                 // For mid - height/2 - 64
                 
                 let frame = CGRect(x: x, y: 0, width: width, height: height - 20)
-                //let insets = UIEdgeInsets(top: 0, left: 0, bottom: 50, right: 0)
-                //let newFrame = UIEdgeInsetsInsetRect(frame, insets)
-                attributes.frame = frame
+                let insets = UIEdgeInsets(top: 20, left: 10, bottom: 50, right: 10)
+                let newFrame = UIEdgeInsetsInsetRect(frame, insets)
+                attributes.frame = newFrame
                 cache.append(attributes)
             }
         }
