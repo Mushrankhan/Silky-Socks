@@ -53,6 +53,9 @@
                             <real key="value" value="25"/>
                         </userDefinedRuntimeAttribute>
                     </userDefinedRuntimeAttributes>
+                    <connections>
+                        <action selector="didPressNextButton:" destination="8Pq-nS-4KT" eventType="touchUpInside" id="hr7-GQ-lwT"/>
+                    </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4Zj-jk-3sv" customClass="SJButton" customModule="Silky_Socks" customModuleProvider="target">
                     <rect key="frame" x="124" y="12" width="47" height="49"/>

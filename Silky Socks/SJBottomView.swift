@@ -8,24 +8,20 @@
 
 import UIKit
 
-@IBDesignable
 class SJBottomView: UIView {
 
-    
     override func awakeFromNib() {
         super.awakeFromNib()
-        
         self.autoresizingMask = .FlexibleWidth | .FlexibleHeight
-        
         self.setTranslatesAutoresizingMaskIntoConstraints(false)
     }
+}
+
+// Navigation Button
+extension SJBottomView {
     
-    /*
-    // Only override drawRect: if you perform custom drawing.
-    // An empty implementation adversely affects performance during animation.
-    override func drawRect(rect: CGRect) {
-        // Drawing code
+    @IBAction func didPressNextButton(sender: SJButton) {
+        
     }
-    */
 
 }

@@ -9,7 +9,7 @@
 import UIKit
 
 class SJLayout: UICollectionViewLayout {
-   
+    
     // Cache to store the attributes
     private var cache = [UICollectionViewLayoutAttributes]()
     
@@ -39,7 +39,7 @@ class SJLayout: UICollectionViewLayout {
     // Height of the collection view
     private var height: CGFloat {
         get {
-           return CGRectGetHeight(collectionView!.bounds)/2
+           return CGRectGetHeight(collectionView!.bounds)
         }
     }
     

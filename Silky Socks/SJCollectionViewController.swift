@@ -10,19 +10,24 @@ import UIKit
 
 class SJCollectionViewController: UIViewController {
 
-    private var dataSource = SJCollectionViewDataSource()
+    // the array containing templates
+    private var templateArray = Template.allTemplates()
     
+    // Cell Reuse identifier
     private let reuseIdentifier = "Cell"
-    private let suppReuse = "HeaderView"
     
-    @IBOutlet weak var collectionView: UICollectionView!
+    // Collection view
+    @IBOutlet weak var collectionView: SJCollectionView!
+
+    
+    // Bottom utilities view
     @IBOutlet weak var ss_utilitiesView: UIView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         // Register Nibs
-        collectionView!.registerNib(UINib(nibName: "SJCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: reuseIdentifier)
+        //collectionView!.registerNib(UINib(nibName: "SJCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: reuseIdentifier)
         
         // Data Source
         collectionView!.dataSource = self
@@ -31,6 +36,7 @@ class SJCollectionViewController: UIViewController {
         //collectionView!.backgroundColor = UIColor.yellowColor()
         collectionView!.backgroundColor = UIColor.whiteColor()
         
+        // Enable paging
         collectionView!.pagingEnabled = true
         
         var bottomView = NSBundle.mainBundle().loadNibNamed("SJBottomView", owner: nil, options: nil).first as! SJBottomView
@@ -41,21 +47,19 @@ class SJCollectionViewController: UIViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
-
 }
 
 
 // MARK: UICollectionViewDataSource
 
-extension SJCollectionViewController: UICollectionViewDataSource, UICollectionViewDelegate {
+extension SJCollectionViewController: SJCollectionViewDataSource, UICollectionViewDelegate {
 
     func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
-        return dataSource.numberOfSections()
+        return 1
     }
 
-
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return dataSource.numberOfItemsInSection(section)
+        return templateArray.count
      }
 
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
@@ -63,10 +67,14 @@ extension SJCollectionViewController: UICollectionViewDataSource, UICollectionVi
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier(reuseIdentifier, forIndexPath: indexPath) as! SJCollectionViewCell
         
         // Configure the cell
-        cell.image = dataSource.imageForRowAtIndexPath(indexPath)
+        let template = templateArray[indexPath.row]
+        cell.image = template.image
         
         return cell
     }
-        
+    
+    func collectionView(collectionView: UICollectionView, heightForImageAtIndexPath indexPath: NSIndexPath, withWidth width: CGFloat) -> CGFloat {
+        return 100
+    }
 }
 
