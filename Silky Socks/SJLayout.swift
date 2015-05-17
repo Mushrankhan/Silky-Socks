@@ -107,7 +107,7 @@ class SJLayout: UICollectionViewLayout {
         else if elementKind == addToCartElementKind {
             let attributes = UICollectionViewLayoutAttributes(forSupplementaryViewOfKind: elementKind, withIndexPath: indexPath)
             let widthOfCart: CGFloat = 100
-            var frame = CGRectMake(width - widthOfCart, CGRectGetMaxY(collectionView!.bounds) - heightOfUtilView - 16, widthOfCart, 24)
+            var frame = CGRectMake(width - widthOfCart - 8, CGRectGetMaxY(collectionView!.bounds) - heightOfUtilView - 16, widthOfCart, 24)
             frame.origin.x += collectionView!.contentOffset.x
             attributes.frame = frame
             attributes.zIndex = 99
