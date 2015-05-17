@@ -76,6 +76,8 @@ extension SJCollectionViewController: SJCollectionViewDataSource, SJCollectionVi
             return collView.dequeueReusableRestartView(indexPath: indexPath)
         } else if kind == shareElementKind {
             return collView.dequeueReusableShareView(indexPath: indexPath)
+        } else if kind == addToCartElementKind {
+            return collView.dequeueReusableAddToCartView(indexPath: indexPath)
         } else {
             return collView.dequeueReusableBottomUtilitiesView(indexPath: indexPath)
         }

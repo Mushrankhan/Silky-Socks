@@ -82,6 +82,8 @@ class SJLayout: UICollectionViewLayout {
     
     /* The Supplementary View */
     override func layoutAttributesForSupplementaryViewOfKind(elementKind: String, atIndexPath indexPath: NSIndexPath) -> UICollectionViewLayoutAttributes! {
+        
+        // Restart button
         if elementKind == restartElementkind {
             let attributes = UICollectionViewLayoutAttributes(forSupplementaryViewOfKind: elementKind, withIndexPath: indexPath)
             var frame = CGRectMake(10, 0, 80, 24)
@@ -89,14 +91,30 @@ class SJLayout: UICollectionViewLayout {
             attributes.frame = frame
             attributes.zIndex = 99
             return attributes
-        } else if elementKind == shareElementKind {
+        }
+            
+        // Share Button
+        else if elementKind == shareElementKind {
             let attributes = UICollectionViewLayoutAttributes(forSupplementaryViewOfKind: elementKind, withIndexPath: indexPath)
             var frame = CGRectMake(width - 100, 0, 80, 24)
             frame.origin.x += collectionView!.contentOffset.x
             attributes.frame = frame
             attributes.zIndex = 99
             return attributes
-        } else {
+        }
+        
+        // Add To cart
+        else if elementKind == addToCartElementKind {
+            let attributes = UICollectionViewLayoutAttributes(forSupplementaryViewOfKind: elementKind, withIndexPath: indexPath)
+            let widthOfCart: CGFloat = 100
+            var frame = CGRectMake(width - widthOfCart, CGRectGetMaxY(collectionView!.bounds) - heightOfUtilView - 16, widthOfCart, 24)
+            frame.origin.x += collectionView!.contentOffset.x
+            attributes.frame = frame
+            attributes.zIndex = 99
+            return attributes
+        }
+        // Bottom Utilities View
+        else {
             let attributes = UICollectionViewLayoutAttributes(forSupplementaryViewOfKind: elementKind, withIndexPath: indexPath)
             var frame = CGRectMake(0, CGRectGetMaxY(collectionView!.bounds) - heightOfUtilView, width, heightOfUtilView)
             frame.origin.x += collectionView!.contentOffset.x
@@ -126,14 +144,21 @@ class SJLayout: UICollectionViewLayout {
             }
         }
         
-        let restartAttr = layoutAttributesForSupplementaryViewOfKind(restartElementkind, atIndexPath: NSIndexPath(forItem: 0, inSection: 0))
-        let shareAttr = layoutAttributesForSupplementaryViewOfKind(shareElementKind, atIndexPath: NSIndexPath(forItem: 0, inSection: 0))
-        let utilAttr = layoutAttributesForSupplementaryViewOfKind(utilitiesElementkind, atIndexPath: NSIndexPath(forItem: 0, inSection: 0))
-        let decoration = layoutAttributesForDecorationViewOfKind(logoElementKind, atIndexPath: NSIndexPath(forItem: 0, inSection: 0))
-        layoutAttributes.append(restartAttr)
-        layoutAttributes.append(shareAttr)
-        layoutAttributes.append(utilAttr)
-        layoutAttributes.append(decoration)
+        // Index Path
+        let indexPath = NSIndexPath(forItem: 0, inSection: 0)
+        
+        // Different element kinds
+        let elementKinds = [restartElementkind, shareElementKind, utilitiesElementkind, addToCartElementKind]
+        
+        // Loop through and add the supplementary views
+        for kind in elementKinds {
+            let attributes = layoutAttributesForSupplementaryViewOfKind(kind, atIndexPath: indexPath)
+            layoutAttributes.append(attributes)
+        }
+        
+        // Add the decoration view
+        let logoAttr = layoutAttributesForDecorationViewOfKind(logoElementKind, atIndexPath: indexPath)
+        layoutAttributes.append(logoAttr)
         
         return layoutAttributes
     }

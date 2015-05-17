@@ -11,11 +11,13 @@ import UIKit
 // Element Kind
 public let restartElementkind = "Restart"
 public let shareElementKind = "Share"
+public let addToCartElementKind = "AddToCart"
 public let logoElementKind = "Logo"
 
 // Reuse identifier - Supplementary views
 public let restartIdentifier = "RestartReusableView"
 public let shareIdentifier = "ShareReusableView"
+public let addToCartIdentifier = "AddToCartReusableView"
 
 /* The Restart reusable view */
 class RestartViewCollectionReusableView: UICollectionReusableView {
@@ -44,6 +46,22 @@ class ShareViewCollectionReusableView: UICollectionReusableView {
     override func applyLayoutAttributes(layoutAttributes: UICollectionViewLayoutAttributes!) {
         if layoutAttributes.representedElementCategory == .SupplementaryView {
             if layoutAttributes.representedElementKind == shareElementKind {
+                frame = layoutAttributes.frame
+            }
+        }
+    }
+}
+
+class CartViewCollectionReusableView: UICollectionReusableView {
+    
+    
+    @IBAction func didPressAddToCartButton(sender: UIButton) {
+        println("Add To Cart Button Pressed")
+    }
+    
+    override func applyLayoutAttributes(layoutAttributes: UICollectionViewLayoutAttributes!) {
+        if layoutAttributes.representedElementCategory == .SupplementaryView {
+            if layoutAttributes.representedElementKind == addToCartElementKind {
                 frame = layoutAttributes.frame
             }
         }
