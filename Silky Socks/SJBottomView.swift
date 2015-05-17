@@ -32,6 +32,9 @@ class SJBottomView: UICollectionReusableView {
     @IBOutlet weak var colorWheelButton: UIButton!
     @IBOutlet weak var simleyButton: UIButton!
     
+    // for Draw Rect
+    @IBOutlet weak var nextButton: UIButton!
+    
     // the Delegate object
     weak var delegate: SJBottomViewDelegate?
     
@@ -60,6 +63,33 @@ class SJBottomView: UICollectionReusableView {
         distance -= colorWheelButton.frame.width
         gridCameraButtonLeadingConstraint.constant = distance/2
         gridCameraButtonTrailingConstraint.constant = distance/2
+    }
+    
+    /* Custom Drawing */
+    override func drawRect(rect: CGRect) {
+        
+        // Context
+        let context = UIGraphicsGetCurrentContext()
+        
+        // Width and height
+        let width = CGRectGetWidth(rect)
+        let height = CGRectGetHeight(rect)
+        
+        // The y coordinate to draw the light gray view
+        let y: CGFloat = 8 + CGRectGetHeight(nextButton.frame) / 2
+        let grayRect = CGRect(x: CGFloat(0), y: y, width: width, height: height - y)
+        
+        // The height of the dark gray view is 8 points
+        let heightOfDarkView: CGFloat = 8
+        let darkGrayRect = CGRect(x: 0, y: y - heightOfDarkView, width: width, height: heightOfDarkView)
+        
+        // The Gray box
+        CGContextSetRGBFillColor(context, 229.0/255, 229.0/255, 229.0/255, 1)
+        CGContextFillRect(context, grayRect)
+        
+        // The dark grey box
+        CGContextSetFillColorWithColor(context, UIColor.getColor(red: 216, green: 216, blue: 216, alpha: 1.0).CGColor)
+        CGContextFillRect(context, darkGrayRect)
     }
 }
 

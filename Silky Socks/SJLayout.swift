@@ -46,7 +46,7 @@ class SJLayout: UICollectionViewLayout {
     // The Height of the bottom utilities area
     private var heightOfUtilView: CGFloat {
         get {
-            return 125
+            return 150
         }
     }
     
@@ -109,7 +109,8 @@ class SJLayout: UICollectionViewLayout {
     /* The Decoration View */
     override func layoutAttributesForDecorationViewOfKind(elementKind: String, atIndexPath indexPath: NSIndexPath) -> UICollectionViewLayoutAttributes! {
         let attributes = UICollectionViewLayoutAttributes(forDecorationViewOfKind: elementKind, withIndexPath: indexPath)
-        var frame = CGRectMake(10, CGRectGetMaxY(collectionView!.bounds) - heightOfUtilView - 80, 80, 80)
+        let widthOfLogo: CGFloat = 80 // is equal to the height of the logo
+        var frame = CGRectMake(10, CGRectGetMaxY(collectionView!.bounds) - heightOfUtilView - widthOfLogo + 32, widthOfLogo, widthOfLogo) // 32 is half the height of the next and previous buttons. Have to do this because the height of the bottom view is bigger than it actually appears. So have to add half the width of the next button to make the decoration silky socks logo near the bottom view that appears on the screen
         frame.origin.x += collectionView!.contentOffset.x
         attributes.frame = frame
         attributes.zIndex = 99

@@ -262,10 +262,11 @@
 				TargetAttributes = {
 					4F8D389C1AE440DE00F42E23 = {
 						CreatedOnToolsVersion = 6.3;
-						DevelopmentTeam = 4459D7FB5Q;
+						DevelopmentTeam = RK8DK924Z5;
 					};
 					4F8D38B41AE440DE00F42E23 = {
 						CreatedOnToolsVersion = 6.3;
+						DevelopmentTeam = RK8DK924Z5;
 						TestTargetID = 4F8D389C1AE440DE00F42E23;
 					};
 				};
@@ -459,8 +460,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iOS Development: Saurabh Jain (4RMTDD3346)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iOS Development: Saurabh Jain (4RMTDD3346)";
 				INFOPLIST_FILE = "Silky Socks/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -472,8 +473,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iOS Development: Saurabh Jain (4RMTDD3346)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iOS Development: Saurabh Jain (4RMTDD3346)";
 				INFOPLIST_FILE = "Silky Socks/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -485,6 +486,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
@@ -496,6 +499,7 @@
 				INFOPLIST_FILE = "Silky SocksTests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Silky Socks.app/Silky Socks";
 			};
 			name = Debug;
@@ -504,6 +508,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
@@ -511,6 +517,7 @@
 				INFOPLIST_FILE = "Silky SocksTests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Silky Socks.app/Silky Socks";
 			};
 			name = Release;

@@ -25,3 +25,11 @@ extension UIView {
     }
     
 }
+
+extension UIColor {
+    
+    class func getColor(#red: Int, green: Int, blue: Int, alpha: CGFloat) -> UIColor {
+        let divisor: CGFloat = 255
+        return UIColor(red: CGFloat(red)/divisor, green: CGFloat(green)/divisor, blue: CGFloat(blue)/divisor, alpha: alpha)
+    }
+}

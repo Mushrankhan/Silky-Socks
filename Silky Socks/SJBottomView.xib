@@ -11,12 +11,12 @@
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8d5-gt-Pbl">
-                    <rect key="frame" x="121" y="8" width="50" height="50"/>
+                    <rect key="frame" x="107" y="8" width="64" height="64"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="50" id="EZL-HL-dSu"/>
-                        <constraint firstAttribute="width" constant="50" id="JyL-Ds-bPM"/>
+                        <constraint firstAttribute="height" constant="64" id="EZL-HL-dSu"/>
+                        <constraint firstAttribute="width" constant="64" id="JyL-Ds-bPM"/>
                     </constraints>
-                    <state key="normal" image="previous">
+                    <state key="normal" image="leftarrow">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                     <connections>
@@ -25,7 +25,7 @@
                 </button>
                 <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iKa-KL-wmf">
                     <rect key="frame" x="164" y="142" width="50" height="50"/>
-                    <state key="normal" image="color wheel">
+                    <state key="normal" image="colorwheel">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                     <connections>
@@ -51,12 +51,12 @@
                     </connections>
                 </button>
                 <button opaque="NO" tag="5" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oVx-8L-zta">
-                    <rect key="frame" x="320" y="142" width="50" height="50"/>
+                    <rect key="frame" x="304" y="142" width="50" height="50"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="50" id="E1a-eJ-ebd"/>
                         <constraint firstAttribute="width" constant="50" id="Iq8-FN-aKM"/>
                     </constraints>
-                    <state key="normal" image="smiley">
+                    <state key="normal" image="sticker">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                     <connections>
@@ -64,12 +64,12 @@
                     </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VfP-l1-Fla">
-                    <rect key="frame" x="207" y="8" width="50" height="50"/>
+                    <rect key="frame" x="207" y="8" width="64" height="64"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="50" id="7Cb-16-lj5"/>
-                        <constraint firstAttribute="width" constant="50" id="8MU-UZ-r96"/>
+                        <constraint firstAttribute="height" constant="64" id="7Cb-16-lj5"/>
+                        <constraint firstAttribute="width" constant="64" id="8MU-UZ-r96"/>
                     </constraints>
-                    <state key="normal" image="next">
+                    <state key="normal" image="rightarrow">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                     <connections>
@@ -84,7 +84,7 @@
                     </constraints>
                 </view>
                 <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tSr-vL-GXy">
-                    <rect key="frame" x="8" y="142" width="50" height="50"/>
+                    <rect key="frame" x="24" y="142" width="50" height="50"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="50" id="leg-2d-wSb"/>
                         <constraint firstAttribute="height" constant="50" id="rXB-Cz-6Ye"/>
@@ -97,10 +97,9 @@
                     </connections>
                 </button>
             </subviews>
-            <color key="backgroundColor" red="0.89803921568627454" green="0.89803921568627454" blue="0.89803921568627454" alpha="1" colorSpace="calibratedRGB"/>
             <constraints>
                 <constraint firstItem="iKa-KL-wmf" firstAttribute="width" secondItem="oVx-8L-zta" secondAttribute="width" id="1xa-FK-MRf"/>
-                <constraint firstItem="tSr-vL-GXy" firstAttribute="leading" secondItem="yIO-0v-rYv" secondAttribute="leading" constant="8" id="AlM-2Z-EjQ"/>
+                <constraint firstItem="tSr-vL-GXy" firstAttribute="leading" secondItem="yIO-0v-rYv" secondAttribute="leading" constant="24" id="AlM-2Z-EjQ"/>
                 <constraint firstItem="iKa-KL-wmf" firstAttribute="height" secondItem="oVx-8L-zta" secondAttribute="height" id="CMw-ZV-62b"/>
                 <constraint firstItem="oVx-8L-zta" firstAttribute="leading" secondItem="34c-YV-84y" secondAttribute="trailing" priority="999" constant="28" id="CNu-Rr-bPt"/>
                 <constraint firstItem="Jlf-7b-1zi" firstAttribute="leading" secondItem="8d5-gt-Pbl" secondAttribute="trailing" constant="8" id="En6-NC-4Uz"/>
@@ -117,7 +116,7 @@
                 <constraint firstItem="VfP-l1-Fla" firstAttribute="leading" secondItem="Jlf-7b-1zi" secondAttribute="trailing" constant="8" id="YJv-F7-w61"/>
                 <constraint firstItem="6h1-2a-XKM" firstAttribute="leading" secondItem="tSr-vL-GXy" secondAttribute="trailing" priority="999" constant="28" id="Zar-cr-MN3"/>
                 <constraint firstItem="iKa-KL-wmf" firstAttribute="centerY" secondItem="6h1-2a-XKM" secondAttribute="centerY" id="b0r-w1-oCz"/>
-                <constraint firstAttribute="trailing" secondItem="oVx-8L-zta" secondAttribute="trailing" constant="8" id="hrq-SC-FeU"/>
+                <constraint firstAttribute="trailing" secondItem="oVx-8L-zta" secondAttribute="trailing" constant="24" id="hrq-SC-FeU"/>
                 <constraint firstItem="iKa-KL-wmf" firstAttribute="width" secondItem="tSr-vL-GXy" secondAttribute="width" id="iDf-0S-P2K"/>
                 <constraint firstAttribute="bottom" secondItem="oVx-8L-zta" secondAttribute="bottom" constant="8" id="ijh-D7-g9J"/>
                 <constraint firstItem="iKa-KL-wmf" firstAttribute="height" secondItem="34c-YV-84y" secondAttribute="height" id="ljh-jF-fBP"/>
@@ -133,6 +132,7 @@
                 <outlet property="colorWheelButton" destination="iKa-KL-wmf" id="GRd-da-7ib"/>
                 <outlet property="gridCameraButtonLeadingConstraint" destination="Y6v-hv-j73" id="l9a-cW-W0p"/>
                 <outlet property="gridCameraButtonTrailingConstraint" destination="CNu-Rr-bPt" id="FRn-pH-sfV"/>
+                <outlet property="nextButton" destination="VfP-l1-Fla" id="GNy-Y0-xj6"/>
                 <outlet property="simleyButton" destination="oVx-8L-zta" id="B6J-GE-bUw"/>
                 <outlet property="textButtonLeadingConstraint" destination="Zar-cr-MN3" id="e5F-Zt-MNh"/>
                 <outlet property="textButtonTrailingConstraint" destination="vSM-xu-rqv" id="OFe-2x-oJs"/>
@@ -141,12 +141,12 @@
         </collectionReusableView>
     </objects>
     <resources>
-        <image name="camera" width="47" height="49"/>
-        <image name="color wheel" width="47" height="49"/>
-        <image name="gridcam" width="47" height="49"/>
-        <image name="next" width="59" height="59"/>
-        <image name="previous" width="59" height="59"/>
-        <image name="smiley" width="47" height="49"/>
-        <image name="text" width="47" height="49"/>
+        <image name="camera" width="55" height="55"/>
+        <image name="colorwheel" width="55" height="55"/>
+        <image name="gridcam" width="55" height="55"/>
+        <image name="leftarrow" width="68" height="67"/>
+        <image name="rightarrow" width="68" height="67"/>
+        <image name="sticker" width="55" height="55"/>
+        <image name="text" width="56" height="55"/>
     </resources>
 </document>
