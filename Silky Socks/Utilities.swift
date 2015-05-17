@@ -13,9 +13,9 @@ extension UIView {
     func pinSubviewToView(#subView: UIView) {
         
         addAttributeToView(NSLayoutAttribute.Top, subview: subView)
-        addAttributeToView(NSLayoutAttribute.Left, subview: subView)
+        addAttributeToView(NSLayoutAttribute.Leading, subview: subView)
         addAttributeToView(NSLayoutAttribute.Bottom, subview: subView)
-        addAttributeToView(NSLayoutAttribute.Right, subview: subView)
+        addAttributeToView(NSLayoutAttribute.Trailing, subview: subView)
         
         self.setNeedsUpdateConstraints()
     }
