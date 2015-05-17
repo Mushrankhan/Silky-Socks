@@ -6,97 +6,105 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <view contentMode="scaleToFill" id="8Pq-nS-4KT" customClass="SJBottomView" customModule="Silky_Socks" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="375" height="125"/>
+        <collectionReusableView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="UtilitiesReuseIdentifier" id="yIO-0v-rYv" customClass="SJBottomView" customModule="Silky_Socks" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="378" height="200"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
-                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CDB-zF-TYV" customClass="SJButton" customModule="Silky_Socks" customModuleProvider="target">
-                    <rect key="frame" x="87" y="67" width="47" height="49"/>
-                    <state key="normal" image="text">
-                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                    </state>
-                    <userDefinedRuntimeAttributes>
-                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                            <real key="value" value="25"/>
-                        </userDefinedRuntimeAttribute>
-                    </userDefinedRuntimeAttributes>
-                </button>
-                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="y2V-Up-sWy" customClass="SJButton" customModule="Silky_Socks" customModuleProvider="target">
-                    <rect key="frame" x="164" y="67" width="47" height="49"/>
-                    <state key="normal" image="color wheel">
-                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                    </state>
-                    <userDefinedRuntimeAttributes>
-                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                            <real key="value" value="25"/>
-                        </userDefinedRuntimeAttribute>
-                    </userDefinedRuntimeAttributes>
-                </button>
-                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ps5-1D-mhS" customClass="SJButton" customModule="Silky_Socks" customModuleProvider="target">
-                    <rect key="frame" x="242" y="67" width="47" height="49"/>
-                    <state key="normal" image="gridcam">
-                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                    </state>
-                    <userDefinedRuntimeAttributes>
-                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                            <real key="value" value="25"/>
-                        </userDefinedRuntimeAttribute>
-                    </userDefinedRuntimeAttributes>
-                </button>
-                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Jkm-p8-0x5" customClass="SJButton" customModule="Silky_Socks" customModuleProvider="target">
-                    <rect key="frame" x="204" y="12" width="47" height="49"/>
-                    <state key="normal" image="next">
-                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                    </state>
-                    <userDefinedRuntimeAttributes>
-                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                            <real key="value" value="25"/>
-                        </userDefinedRuntimeAttribute>
-                    </userDefinedRuntimeAttributes>
-                    <connections>
-                        <action selector="didPressNextButton:" destination="8Pq-nS-4KT" eventType="touchUpInside" id="hr7-GQ-lwT"/>
-                    </connections>
-                </button>
-                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4Zj-jk-3sv" customClass="SJButton" customModule="Silky_Socks" customModuleProvider="target">
-                    <rect key="frame" x="124" y="12" width="47" height="49"/>
+                <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8d5-gt-Pbl">
+                    <rect key="frame" x="119" y="8" width="50" height="50"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="50" id="EZL-HL-dSu"/>
+                        <constraint firstAttribute="width" constant="50" id="JyL-Ds-bPM"/>
+                    </constraints>
                     <state key="normal" image="previous">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
-                    <userDefinedRuntimeAttributes>
-                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                            <real key="value" value="25"/>
-                        </userDefinedRuntimeAttribute>
-                    </userDefinedRuntimeAttributes>
-                    <connections>
-                        <action selector="didPressPreviousButton:" destination="8Pq-nS-4KT" eventType="touchUpInside" id="sm7-JD-ZsN"/>
-                    </connections>
                 </button>
-                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Uoa-wS-kdW" customClass="SJButton" customModule="Silky_Socks" customModuleProvider="target">
-                    <rect key="frame" x="9" y="68" width="47" height="49"/>
-                    <state key="normal" image="camera">
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iKa-KL-wmf">
+                    <rect key="frame" x="164" y="142" width="50" height="50"/>
+                    <state key="normal" image="color wheel">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
-                    <userDefinedRuntimeAttributes>
-                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                            <real key="value" value="25"/>
-                        </userDefinedRuntimeAttribute>
-                    </userDefinedRuntimeAttributes>
                 </button>
-                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WdT-Ce-6fK" customClass="SJButton" customModule="Silky_Socks" customModuleProvider="target">
-                    <rect key="frame" x="319" y="67" width="47" height="49"/>
+                <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="34c-YV-84y">
+                    <rect key="frame" x="242" y="142" width="50" height="50"/>
+                    <state key="normal" image="gridcam">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6h1-2a-XKM">
+                    <rect key="frame" x="86" y="142" width="50" height="50"/>
+                    <state key="normal" image="text">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oVx-8L-zta">
+                    <rect key="frame" x="320" y="142" width="50" height="50"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="50" id="E1a-eJ-ebd"/>
+                        <constraint firstAttribute="width" constant="50" id="Iq8-FN-aKM"/>
+                    </constraints>
                     <state key="normal" image="smiley">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
-                    <userDefinedRuntimeAttributes>
-                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                            <real key="value" value="25"/>
-                        </userDefinedRuntimeAttribute>
-                    </userDefinedRuntimeAttributes>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VfP-l1-Fla">
+                    <rect key="frame" x="205" y="8" width="50" height="50"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="50" id="7Cb-16-lj5"/>
+                        <constraint firstAttribute="width" constant="50" id="8MU-UZ-r96"/>
+                    </constraints>
+                    <state key="normal" image="next">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                </button>
+                <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Jlf-7b-1zi">
+                    <rect key="frame" x="177" y="8" width="20" height="20"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="20" id="Fgj-0Z-7Vz"/>
+                        <constraint firstAttribute="height" constant="20" id="hVv-iR-Kos"/>
+                    </constraints>
+                </view>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tSr-vL-GXy">
+                    <rect key="frame" x="8" y="142" width="50" height="50"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="50" id="leg-2d-wSb"/>
+                        <constraint firstAttribute="height" constant="50" id="rXB-Cz-6Ye"/>
+                    </constraints>
+                    <state key="normal" image="camera">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
                 </button>
             </subviews>
-            <color key="backgroundColor" red="0.92156862750000001" green="0.92156862750000001" blue="0.92156862750000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-        </view>
+            <color key="backgroundColor" red="0.89803921568627454" green="0.89803921568627454" blue="0.89803921568627454" alpha="1" colorSpace="calibratedRGB"/>
+            <constraints>
+                <constraint firstItem="iKa-KL-wmf" firstAttribute="width" secondItem="oVx-8L-zta" secondAttribute="width" id="1xa-FK-MRf"/>
+                <constraint firstItem="tSr-vL-GXy" firstAttribute="leading" secondItem="yIO-0v-rYv" secondAttribute="leading" constant="8" id="AlM-2Z-EjQ"/>
+                <constraint firstItem="iKa-KL-wmf" firstAttribute="height" secondItem="oVx-8L-zta" secondAttribute="height" id="CMw-ZV-62b"/>
+                <constraint firstItem="Jlf-7b-1zi" firstAttribute="leading" secondItem="8d5-gt-Pbl" secondAttribute="trailing" constant="8" id="En6-NC-4Uz"/>
+                <constraint firstItem="iKa-KL-wmf" firstAttribute="width" secondItem="34c-YV-84y" secondAttribute="width" id="EoJ-31-Cck"/>
+                <constraint firstAttribute="centerX" secondItem="Jlf-7b-1zi" secondAttribute="centerX" id="IIy-sS-w0u"/>
+                <constraint firstItem="VfP-l1-Fla" firstAttribute="top" secondItem="yIO-0v-rYv" secondAttribute="top" constant="8" id="LRR-5u-xP6"/>
+                <constraint firstAttribute="centerX" secondItem="iKa-KL-wmf" secondAttribute="centerX" id="OPB-sr-sIm"/>
+                <constraint firstItem="iKa-KL-wmf" firstAttribute="centerY" secondItem="34c-YV-84y" secondAttribute="centerY" id="QVo-QP-XtV"/>
+                <constraint firstItem="8d5-gt-Pbl" firstAttribute="top" secondItem="yIO-0v-rYv" secondAttribute="top" constant="8" id="Ss6-1N-RNN"/>
+                <constraint firstItem="Jlf-7b-1zi" firstAttribute="top" secondItem="yIO-0v-rYv" secondAttribute="top" constant="8" id="WIw-Pr-a49"/>
+                <constraint firstItem="iKa-KL-wmf" firstAttribute="height" secondItem="6h1-2a-XKM" secondAttribute="height" id="WO7-Fe-rU6"/>
+                <constraint firstAttribute="bottom" secondItem="iKa-KL-wmf" secondAttribute="bottom" constant="8" id="XxH-p1-o3i"/>
+                <constraint firstItem="VfP-l1-Fla" firstAttribute="leading" secondItem="Jlf-7b-1zi" secondAttribute="trailing" constant="8" id="YJv-F7-w61"/>
+                <constraint firstItem="iKa-KL-wmf" firstAttribute="centerY" secondItem="6h1-2a-XKM" secondAttribute="centerY" id="b0r-w1-oCz"/>
+                <constraint firstAttribute="trailing" secondItem="oVx-8L-zta" secondAttribute="trailing" constant="8" id="hrq-SC-FeU"/>
+                <constraint firstItem="iKa-KL-wmf" firstAttribute="width" secondItem="tSr-vL-GXy" secondAttribute="width" id="iDf-0S-P2K"/>
+                <constraint firstAttribute="bottom" secondItem="oVx-8L-zta" secondAttribute="bottom" constant="8" id="ijh-D7-g9J"/>
+                <constraint firstItem="iKa-KL-wmf" firstAttribute="height" secondItem="34c-YV-84y" secondAttribute="height" id="ljh-jF-fBP"/>
+                <constraint firstItem="iKa-KL-wmf" firstAttribute="centerY" secondItem="tSr-vL-GXy" secondAttribute="centerY" id="lxe-Fm-k0N"/>
+                <constraint firstItem="iKa-KL-wmf" firstAttribute="width" secondItem="6h1-2a-XKM" secondAttribute="width" id="pPF-my-rDF"/>
+                <constraint firstItem="iKa-KL-wmf" firstAttribute="height" secondItem="tSr-vL-GXy" secondAttribute="height" id="qch-aW-RhC"/>
+                <constraint firstAttribute="bottom" secondItem="tSr-vL-GXy" secondAttribute="bottom" constant="8" id="sYR-2e-vkB"/>
+                <constraint firstItem="iKa-KL-wmf" firstAttribute="centerY" secondItem="oVx-8L-zta" secondAttribute="centerY" id="t4i-Zn-jXY"/>
+            </constraints>
+            <point key="canvasLocation" x="551.5" y="756"/>
+        </collectionReusableView>
     </objects>
     <resources>
         <image name="camera" width="47" height="49"/>

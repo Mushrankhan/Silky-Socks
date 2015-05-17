@@ -35,32 +35,22 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="RVL-bH-eUZ" customClass="SJCollectionView" customModule="Silky_Socks" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="475"/>
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                                 <collectionViewLayout key="collectionViewLayout" id="5so-Ur-MVd" customClass="SJLayout" customModule="Silky_Socks" customModuleProvider="target"/>
                                 <cells/>
                             </collectionView>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="v2Q-II-XfK">
-                                <rect key="frame" x="0.0" y="475" width="600" height="125"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="125" id="cPg-7m-Xa0"/>
-                                </constraints>
-                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="RVL-bH-eUZ" firstAttribute="leading" secondItem="eei-Yu-xjK" secondAttribute="leading" id="0kC-36-NfS"/>
-                            <constraint firstItem="v2Q-II-XfK" firstAttribute="top" secondItem="RVL-bH-eUZ" secondAttribute="bottom" id="6m9-cH-YxR"/>
-                            <constraint firstAttribute="trailing" secondItem="RVL-bH-eUZ" secondAttribute="trailing" id="ANL-lk-NaQ"/>
-                            <constraint firstItem="RVL-bH-eUZ" firstAttribute="top" secondItem="eei-Yu-xjK" secondAttribute="top" id="AXS-ny-yRv"/>
-                            <constraint firstAttribute="trailing" secondItem="v2Q-II-XfK" secondAttribute="trailing" id="E0b-lR-50W"/>
-                            <constraint firstItem="v2Q-II-XfK" firstAttribute="leading" secondItem="eei-Yu-xjK" secondAttribute="leading" id="FXG-CO-E3i"/>
-                            <constraint firstItem="cMb-BE-7oG" firstAttribute="top" secondItem="v2Q-II-XfK" secondAttribute="bottom" id="xbv-QI-hdZ"/>
+                            <constraint firstItem="cMb-BE-7oG" firstAttribute="top" secondItem="RVL-bH-eUZ" secondAttribute="bottom" id="1rK-s3-VNQ"/>
+                            <constraint firstAttribute="trailing" secondItem="RVL-bH-eUZ" secondAttribute="trailing" id="G3D-i1-nzL"/>
+                            <constraint firstItem="RVL-bH-eUZ" firstAttribute="leading" secondItem="eei-Yu-xjK" secondAttribute="leading" id="LAL-3x-05u"/>
+                            <constraint firstItem="RVL-bH-eUZ" firstAttribute="top" secondItem="eei-Yu-xjK" secondAttribute="top" id="gWm-n3-b8q"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="J3k-8D-PTx"/>
                     <connections>
                         <outlet property="collectionView" destination="RVL-bH-eUZ" id="wcd-zl-CLo"/>
-                        <outlet property="ss_utilitiesView" destination="v2Q-II-XfK" id="sqw-8S-aBI"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1gr-Q0-zOU" userLabel="First Responder" sceneMemberID="firstResponder"/>

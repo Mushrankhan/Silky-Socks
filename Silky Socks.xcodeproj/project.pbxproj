@@ -12,6 +12,7 @@
 		1FCF50991B07ECA3005D8578 /* SJCollectionRestartReusableView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1FCF50981B07ECA3005D8578 /* SJCollectionRestartReusableView.xib */; };
 		1FCF509B1B07ED8A005D8578 /* SJCollectionShareReusableView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1FCF509A1B07ED8A005D8578 /* SJCollectionShareReusableView.xib */; };
 		1FCF509D1B07F0C7005D8578 /* SJCollectionDecorationSilkySocksLogoReusableView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1FCF509C1B07F0C7005D8578 /* SJCollectionDecorationSilkySocksLogoReusableView.xib */; };
+		1FCF50A11B083D70005D8578 /* SJCollectionViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FCF50A01B083D70005D8578 /* SJCollectionViewDelegate.swift */; };
 		4F55B5541AE46E4900679048 /* SJCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4F55B5531AE46E4900679048 /* SJCollectionViewCell.xib */; };
 		4F55B55A1AE4710000679048 /* SJButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F55B5591AE4710000679048 /* SJButton.swift */; };
 		4F55B55D1AE480F400679048 /* SJLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F55B55C1AE480F400679048 /* SJLayout.swift */; };
@@ -46,6 +47,7 @@
 		1FCF50981B07ECA3005D8578 /* SJCollectionRestartReusableView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SJCollectionRestartReusableView.xib; sourceTree = "<group>"; };
 		1FCF509A1B07ED8A005D8578 /* SJCollectionShareReusableView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SJCollectionShareReusableView.xib; sourceTree = "<group>"; };
 		1FCF509C1B07F0C7005D8578 /* SJCollectionDecorationSilkySocksLogoReusableView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SJCollectionDecorationSilkySocksLogoReusableView.xib; sourceTree = "<group>"; };
+		1FCF50A01B083D70005D8578 /* SJCollectionViewDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SJCollectionViewDelegate.swift; sourceTree = "<group>"; };
 		4F55B5531AE46E4900679048 /* SJCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SJCollectionViewCell.xib; sourceTree = "<group>"; };
 		4F55B5591AE4710000679048 /* SJButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SJButton.swift; sourceTree = "<group>"; };
 		4F55B55C1AE480F400679048 /* SJLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SJLayout.swift; sourceTree = "<group>"; };
@@ -86,12 +88,13 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		1FCF508D1B070EA6005D8578 /* Data Source */ = {
+		1FCF508D1B070EA6005D8578 /* Data Source & Delegate */ = {
 			isa = PBXGroup;
 			children = (
 				4F8D38D21AE4582200F42E23 /* SJCollectionViewDataSource.swift */,
+				1FCF50A01B083D70005D8578 /* SJCollectionViewDelegate.swift */,
 			);
-			name = "Data Source";
+			name = "Data Source & Delegate";
 			sourceTree = "<group>";
 		};
 		1FCF509E1B07FF06005D8578 /* Cell */ = {
@@ -107,9 +110,9 @@
 			isa = PBXGroup;
 			children = (
 				1FCF50941B07EBAB005D8578 /* SJCollectionReusableView.swift */,
-				1FCF509C1B07F0C7005D8578 /* SJCollectionDecorationSilkySocksLogoReusableView.xib */,
-				1FCF509A1B07ED8A005D8578 /* SJCollectionShareReusableView.xib */,
 				1FCF50981B07ECA3005D8578 /* SJCollectionRestartReusableView.xib */,
+				1FCF509A1B07ED8A005D8578 /* SJCollectionShareReusableView.xib */,
+				1FCF509C1B07F0C7005D8578 /* SJCollectionDecorationSilkySocksLogoReusableView.xib */,
 			);
 			name = "Supplementary Views";
 			sourceTree = "<group>";
@@ -144,7 +147,7 @@
 			isa = PBXGroup;
 			children = (
 				4F8D38D01AE4461C00F42E23 /* Model */,
-				1FCF508D1B070EA6005D8578 /* Data Source */,
+				1FCF508D1B070EA6005D8578 /* Data Source & Delegate */,
 				4F8D38CF1AE4461700F42E23 /* View */,
 				4F55B55B1AE480D900679048 /* Layout */,
 				4F8D38D11AE4462D00F42E23 /* Controller */,
@@ -326,6 +329,7 @@
 				4F55B55A1AE4710000679048 /* SJButton.swift in Sources */,
 				4F8D38C61AE441F700F42E23 /* SJCollectionViewCell.swift in Sources */,
 				4F8D38A61AE440DE00F42E23 /* Silky_Socks.xcdatamodeld in Sources */,
+				1FCF50A11B083D70005D8578 /* SJCollectionViewDelegate.swift in Sources */,
 				4F8D38CA1AE4451000F42E23 /* SJCollectionViewController.swift in Sources */,
 				4FB6C9C11AE4AF70001A6E50 /* SJBottomView.swift in Sources */,
 				1FCF50951B07EBAB005D8578 /* SJCollectionReusableView.swift in Sources */,

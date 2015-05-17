@@ -32,14 +32,20 @@ class SJLayout: UICollectionViewLayout {
     // Width of the collection view
     private var width: CGFloat {
         get {
-            return CGRectGetWidth(collectionView!.bounds)
+            return CGRectGetWidth(UIScreen.mainScreen().bounds)
         }
     }
     
     // Height of the collection view
     private var height: CGFloat {
         get {
-           return CGRectGetHeight(collectionView!.bounds)
+           return CGRectGetHeight(UIScreen.mainScreen().bounds)
+        }
+    }
+    
+    private var heightOfUtilView: CGFloat {
+        get {
+            return 125
         }
     }
     
@@ -64,7 +70,7 @@ class SJLayout: UICollectionViewLayout {
                 let attributes = UICollectionViewLayoutAttributes(forCellWithIndexPath: indexPath)
                 let x = CGFloat(item) * width
                 
-                let frame = CGRect(x: x, y: 0, width: width, height: height - 20)
+                let frame = CGRect(x: x, y: 0, width: width, height: CGRectGetMaxY(collectionView!.bounds) - heightOfUtilView)
                 let insets = UIEdgeInsets(top: 20, left: 10, bottom: 50, right: 10)
                 let newFrame = UIEdgeInsetsInsetRect(frame, insets)
                 attributes.frame = newFrame
@@ -89,14 +95,20 @@ class SJLayout: UICollectionViewLayout {
             attributes.frame = frame
             attributes.zIndex = 99
             return attributes
+        } else {
+            let attributes = UICollectionViewLayoutAttributes(forSupplementaryViewOfKind: elementKind, withIndexPath: indexPath)
+            var frame = CGRectMake(0, CGRectGetMaxY(collectionView!.bounds) - heightOfUtilView, width, heightOfUtilView)
+            frame.origin.x += collectionView!.contentOffset.x
+            attributes.frame = frame
+            attributes.zIndex = 99
+            return attributes
         }
-        return UICollectionViewLayoutAttributes(forSupplementaryViewOfKind: elementKind, withIndexPath: indexPath)
     }
     
     /* The Decoration View */
     override func layoutAttributesForDecorationViewOfKind(elementKind: String, atIndexPath indexPath: NSIndexPath) -> UICollectionViewLayoutAttributes! {
         let attributes = UICollectionViewLayoutAttributes(forDecorationViewOfKind: elementKind, withIndexPath: indexPath)
-        var frame = CGRectMake(10, height - 140, 80, 80)
+        var frame = CGRectMake(10, CGRectGetMaxY(collectionView!.bounds) - heightOfUtilView - 80, 80, 80)
         frame.origin.x += collectionView!.contentOffset.x
         attributes.frame = frame
         attributes.zIndex = 99
@@ -114,9 +126,11 @@ class SJLayout: UICollectionViewLayout {
         
         let restartAttr = layoutAttributesForSupplementaryViewOfKind(restartElementkind, atIndexPath: NSIndexPath(forItem: 0, inSection: 0))
         let shareAttr = layoutAttributesForSupplementaryViewOfKind(shareElementKind, atIndexPath: NSIndexPath(forItem: 0, inSection: 0))
+        let utilAttr = layoutAttributesForSupplementaryViewOfKind(utilitiesElementkind, atIndexPath: NSIndexPath(forItem: 0, inSection: 0))
         let decoration = layoutAttributesForDecorationViewOfKind(logoElementKind, atIndexPath: NSIndexPath(forItem: 0, inSection: 0))
         layoutAttributes.append(restartAttr)
         layoutAttributes.append(shareAttr)
+        layoutAttributes.append(utilAttr)
         layoutAttributes.append(decoration)
         
         return layoutAttributes

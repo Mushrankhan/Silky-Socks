@@ -18,9 +18,6 @@ class SJCollectionViewController: UIViewController {
     
     // Collection view
     @IBOutlet weak var collectionView: SJCollectionView!
-
-    // Bottom utilities view
-    @IBOutlet weak var ss_utilitiesView: UIView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -41,12 +38,6 @@ class SJCollectionViewController: UIViewController {
         
         // Enable paging
         collectionView!.pagingEnabled = true
-        
-        // the bottom utilities view
-        var bottomView = NSBundle.mainBundle().loadNibNamed("SJBottomView", owner: nil, options: nil).first as! SJBottomView
-        ss_utilitiesView.addSubview(bottomView)
-        ss_utilitiesView.pinSubviewToView(subView: bottomView)
-        bottomView.delegate = self
     }
 
     override func didReceiveMemoryWarning() {
@@ -57,7 +48,7 @@ class SJCollectionViewController: UIViewController {
 
 // MARK: UICollectionViewDataSource
 
-extension SJCollectionViewController: SJCollectionViewDataSource, UICollectionViewDelegate {
+extension SJCollectionViewController: SJCollectionViewDataSource, SJCollectionViewDelegate {
 
     func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
         return 1
@@ -78,32 +69,17 @@ extension SJCollectionViewController: SJCollectionViewDataSource, UICollectionVi
         return cell
     }
     
-//    func collectionView(collectionView: UICollectionView, heightForImageAtIndexPath indexPath: NSIndexPath, withWidth width: CGFloat) -> CGFloat {
-//        return 100
-//    }
-    
     func collectionView(collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, atIndexPath indexPath: NSIndexPath) -> UICollectionReusableView {
+        
+        let collView = collectionView as! SJCollectionView
+        
         if kind == restartElementkind {
-            let view = collectionView.dequeueReusableSupplementaryViewOfKind(kind, withReuseIdentifier: restartIdentifier , forIndexPath: indexPath) as! RestartViewCollectionReusableView
-            return view
+            return collView.dequeueReusableRestartView(indexPath: indexPath)
         } else if kind == shareElementKind {
-            let view = collectionView.dequeueReusableSupplementaryViewOfKind(kind, withReuseIdentifier: shareIdentifier , forIndexPath: indexPath) as! ShareViewCollectionReusableView
-            return view
+            return collView.dequeueReusableShareView(indexPath: indexPath)
+        } else {
+            return collView.dequeueReusableBottomUtilitiesView(indexPath: indexPath)
         }
-        return collectionView.dequeueReusableSupplementaryViewOfKind(kind, withReuseIdentifier: "", forIndexPath: indexPath) as! UICollectionReusableView
     }
     
 }
-
-extension SJCollectionViewController: SJBottomViewDelegate {
-    
-    func sj_bottomView(view: SJBottomView, didPressRightButton button: SJButton) {
-        print("Right")
-        //collectionView.setContentOffset(CGPoint(x: 100, y: 0), animated: true)
-    }
-    
-    func sj_bottomView(view: SJBottomView, didPressLeftButton button: SJButton) {
-        print("Left")
-    }
-}
-

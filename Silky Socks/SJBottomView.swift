@@ -10,30 +10,33 @@ import UIKit
 
 protocol SJBottomViewDelegate: NSObjectProtocol {
     
-    func sj_bottomView(view: SJBottomView, didPressRightButton button:SJButton)
-    func sj_bottomView(view: SJBottomView, didPressLeftButton button:SJButton)
+    func sj_bottomView(view: SJBottomView, didPressRightButton button:UIButton)
+    func sj_bottomView(view: SJBottomView, didPressLeftButton button:UIButton)
 }
 
-class SJBottomView: UIView {
+public let utilitiesReuseIdentifier = "UtilitiesReuseIdentifier"
+public let utilitiesElementkind = "Utilities"
+
+class SJBottomView: UICollectionReusableView {
 
     // the delegate object
     weak var delegate: SJBottomViewDelegate?
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        self.autoresizingMask = .FlexibleWidth | .FlexibleHeight
-        self.setTranslatesAutoresizingMaskIntoConstraints(false)
+        autoresizingMask = .FlexibleWidth | .FlexibleHeight
+        setTranslatesAutoresizingMaskIntoConstraints(false)
     }
 }
 
 // Navigation Button
 extension SJBottomView {
     
-    @IBAction func didPressNextButton(sender: SJButton) {
+    @IBAction func didPressNextButton(sender: UIButton) {
         delegate?.sj_bottomView(self, didPressRightButton: sender)
     }
     
-    @IBAction func didPressPreviousButton(sender: SJButton) {
+    @IBAction func didPressPreviousButton(sender: UIButton) {
         delegate?.sj_bottomView(self, didPressLeftButton: sender)
     }
 }
