@@ -29,20 +29,21 @@ class SJLayout: UICollectionViewLayout {
         }
     }
     
-    // Width of the collection view
+    // Width of the screen
     private var width: CGFloat {
         get {
             return CGRectGetWidth(UIScreen.mainScreen().bounds)
         }
     }
     
-    // Height of the collection view
+    // Height of the screen
     private var height: CGFloat {
         get {
            return CGRectGetHeight(UIScreen.mainScreen().bounds)
         }
     }
     
+    // The Height of the bottom utilities area
     private var heightOfUtilView: CGFloat {
         get {
             return 125
@@ -58,7 +59,7 @@ class SJLayout: UICollectionViewLayout {
     override func prepareLayout() {
         
         // Set the content width
-        contentWidth = CGRectGetWidth(UIScreen.mainScreen().bounds) * CGFloat(numberOfItems)
+        contentWidth = width * CGFloat(numberOfItems)
         
         if cache.isEmpty {
             

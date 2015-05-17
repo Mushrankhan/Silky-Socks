@@ -8,9 +8,16 @@
 
 import UIKit
 
-
 class SJCollectionView: UICollectionView {
     
+    // the width of the screen bounds
+    private var width: CGFloat {
+        get {
+           return CGRectGetWidth(UIScreen.mainScreen().bounds)
+        }
+    }
+    
+    // Initialization
     required init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         initialSetUp()
@@ -20,7 +27,7 @@ class SJCollectionView: UICollectionView {
         super.init(frame: frame, collectionViewLayout: layout)
         initialSetUp()
     }
-
+    
     private func initialSetUp() {
         // Basic
         setTranslatesAutoresizingMaskIntoConstraints(false)
@@ -52,7 +59,7 @@ extension SJCollectionView {
     func dequeueReusableBottomUtilitiesView(#indexPath: NSIndexPath) -> SJBottomView {
         
         let view = super.dequeueReusableSupplementaryViewOfKind(utilitiesElementkind, withReuseIdentifier: utilitiesReuseIdentifier, forIndexPath: indexPath) as! SJBottomView
-        view.delegate = self
+        view.delegate = self // important
         return view
     }
 
@@ -74,12 +81,16 @@ extension SJCollectionView {
 /* The bottom utilites view delegate */
 extension SJCollectionView: SJBottomViewDelegate {
     
+    // Navigate Right
     func sj_bottomView(view: SJBottomView, didPressRightButton button: UIButton) {
-        println("Right Button Pressed")
+        let xOffset = min(contentSize.width - width, contentOffset.x + width)
+        setContentOffset(CGPoint(x: xOffset, y: contentOffset.y), animated: true)
     }
     
+    // Navigate Left
     func sj_bottomView(view: SJBottomView, didPressLeftButton button: UIButton) {
-        println("Left Button Pressed")
+        let xOffset = max(0, contentOffset.x - width)
+        setContentOffset(CGPoint(x: xOffset, y: contentOffset.y), animated: true)
     }
 }
 
