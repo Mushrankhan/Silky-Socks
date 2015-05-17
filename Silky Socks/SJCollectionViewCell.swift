@@ -13,11 +13,13 @@ public let reuseIdentifier = "Cell"
 class SJCollectionViewCell: UICollectionViewCell {
 
     @IBOutlet weak var ss_imgView: UIImageView!
+    @IBOutlet weak var nameLabel: UILabel!
     
-    var image:UIImage? {
+    var template:Template? {
         didSet {
-            if let img = image {
-                ss_imgView?.image = img
+            if let template = template {
+                ss_imgView?.image = template.image
+                nameLabel.text = template.caption
             }
         }
     }
@@ -29,6 +31,7 @@ class SJCollectionViewCell: UICollectionViewCell {
         //backgroundColor = UIColor.yellowColor()
     }
     
+    // Apply Layout Attributes
     override func applyLayoutAttributes(layoutAttributes: UICollectionViewLayoutAttributes!) {
         
         if let attr = layoutAttributes {

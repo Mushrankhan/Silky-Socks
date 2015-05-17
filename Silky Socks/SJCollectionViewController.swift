@@ -63,8 +63,7 @@ extension SJCollectionViewController: SJCollectionViewDataSource, SJCollectionVi
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier(reuseIdentifier, forIndexPath: indexPath) as! SJCollectionViewCell
         
         // Configure the cell
-        let template = templateArray[indexPath.row]
-        cell.image = template.image
+        cell.template = templateArray[indexPath.row]
         
         return cell
     }
