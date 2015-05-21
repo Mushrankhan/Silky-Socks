@@ -21,6 +21,12 @@ class SJCollectionViewCell: UICollectionViewCell {
 
     // The pan gesture recognizer
     private var panGestureRecognizer: UIPanGestureRecognizer!
+    
+    // The pinch gesture recognizer
+    private var pinchGestureRecognizer: UIPinchGestureRecognizer!
+    
+    // Used in pinch calculations
+    private var lastScale: CGFloat = 0
 
     // Template object
     var template:Template? {
@@ -43,6 +49,42 @@ class SJCollectionViewCell: UICollectionViewCell {
         panGestureRecognizer = UIPanGestureRecognizer(target: self, action: "handlePan:")
         panGestureRecognizer.delaysTouchesBegan = true
         addGestureRecognizer(panGestureRecognizer)
+        
+        // Pinch
+        pinchGestureRecognizer = UIPinchGestureRecognizer(target: self, action: "handlePinch:")
+        pinchGestureRecognizer.delaysTouchesBegan = true
+        addGestureRecognizer(pinchGestureRecognizer)
+    }
+    
+    // Add the label as a subview of boundingRectView
+    // Is a view around the image because the image is smaller than the image view
+    private var boundingRectView: UIView?
+    
+    // Aspect Fit
+    private func addClipRect() {
+        
+        if let view = boundingRectView {
+            view.removeFromSuperview()
+            boundingRectView = nil
+        }
+        
+        let aspectRatio = template!.image.size
+        var boundingSize = ss_imgView.frame.size
+        
+        let mW = boundingSize.width / aspectRatio.width;
+        let mH = boundingSize.height / aspectRatio.height;
+        if mH < mW {
+            boundingSize.width = boundingSize.height / aspectRatio.height * aspectRatio.width
+        } else if mW < mH {
+            boundingSize.height = boundingSize.width / aspectRatio.width * aspectRatio.height
+        }
+        
+        let x = (ss_imgView.frame.width - boundingSize.width)/2
+        let y = (ss_imgView.frame.height - boundingSize.height)/2 + 20
+        let frame = CGRectMake(x, y, boundingSize.width, boundingSize.height)
+        boundingRectView = UIView(frame: frame)
+        boundingRectView!.clipsToBounds = true
+        addSubview(boundingRectView!)
     }
     
     // Apply Layout Attributes
@@ -55,19 +97,20 @@ class SJCollectionViewCell: UICollectionViewCell {
     // Create the text label
     func createLabel(text: String, font: UIFont) {
         
+        // Create and add the bounding rect
+        addClipRect()
+        
         let midX = CGRectGetMidX(bounds)
         let midY = CGRectGetMidY(bounds)
         
-        // SJLabel comes with a pinch and pan gesture support
-        sj_label = SJLabel(frame: .zeroRect)
+        sj_label = SJLabel()
         sj_label!.text = text
         sj_label!.font = font
-        // Adjust size based on text and font
         sj_label!.sizeToFit()
-        // Call this after setting the size
         sj_label!.center = CGPoint(x: midX, y: midY)
+        
         // Add subview
-        addSubview(sj_label!)
+        boundingRectView?.addSubview(sj_label!)
     }
     
 }
@@ -85,22 +128,41 @@ extension SJCollectionViewCell {
         }
     }
     
-//
-//    @objc private func handlePin(recognizer: UIPinchGestureRecognizer) {
-//        if recognizer.numberOfTouches() != 2 {
-//            return
-//        }
-//        
-////        var fontSize = font.pointSize
-////        fontSize = ((recognizer.velocity > 0) ? 1 : -1) * 1 + fontSize;
-////        
-////        if (fontSize < 13) { fontSize = 13 }
-////        if (fontSize > 42) { fontSize = 42 }
-////        
-////        font = UIFont(name: font.fontName, size: fontSize)
-//        
-//        let scale = recognizer.scale
-//        transform = CGAffineTransformMakeScale(scale/2, scale/2)
-//    }
-    
+    // Handle Pinch
+    @objc private func handlePinch(recognizer: UIPinchGestureRecognizer) {
+        
+        // Base Case
+        if recognizer.numberOfTouches() != 2 {
+            return
+        }
+        
+        // Switching on the states
+        switch recognizer.state {
+            
+            case .Began:
+                    lastScale = recognizer.scale
+                
+            case .Changed:
+                if let sj_label = sj_label {
+                    
+                    // Increasing font size
+                    var fontSize = sj_label.font.pointSize
+                    fontSize = ((recognizer.velocity > 0) ? 1 : -1) * 1 + fontSize;
+                    
+                    if (fontSize < 13) { fontSize = 13 }
+                    if (fontSize > 80) { fontSize = 80 }
+
+                    sj_label.font = UIFont(name: sj_label.font.fontName, size: fontSize)
+                    
+                    // Setting a new size for the frame and forcing it to re draw to get crisp text
+                    let str: NSString = sj_label.text!
+                    let size = str.boundingRectWithSize(CGSize(width: 400, height: CGFloat.max), options: NSStringDrawingOptions.UsesFontLeading | NSStringDrawingOptions.UsesLineFragmentOrigin, attributes: [NSFontAttributeName: sj_label.font], context: nil).size
+                    sj_label.frame.size = size
+                    
+                }
+                
+            default:
+                break
+        }
+    }
 }

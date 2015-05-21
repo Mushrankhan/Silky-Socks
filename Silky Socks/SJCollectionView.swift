@@ -177,14 +177,24 @@ extension SJCollectionView: UITextFieldDelegate {
     // When Done button is pressed
     func textFieldShouldReturn(textField: UITextField) -> Bool {
         
-        if textField.canResignFirstResponder() {
+        if count(textField.text) > 0 {
+            if textField.canResignFirstResponder() {
+                textField.resignFirstResponder()
+                // Remove from superview
+                textField.removeFromSuperview()
+                // Create The label
+                createTextLabel(textField.text, afont: textField.font)
+                return true
+            }
+        } else {
             textField.resignFirstResponder()
-            // Remove from superview
             textField.removeFromSuperview()
-            // Create The label
-            createTextLabel(textField.text, afont: textField.font)
+            if let sj_bottomView = sj_bottomView {
+                sj_bottomView.userInteractionEnabled = true
+            }
             return true
         }
+        
         return false
     }
     
