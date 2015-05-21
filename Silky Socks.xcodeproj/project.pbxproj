@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		1F39440B1B094EA4008E73E0 /* SJCollectionAddToCartReusableView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1F39440A1B094EA4008E73E0 /* SJCollectionAddToCartReusableView.xib */; };
+		1F88389C1B0D731200E3BBB6 /* SJTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F88389B1B0D731200E3BBB6 /* SJTextField.swift */; };
+		1F88389E1B0D875D00E3BBB6 /* SJLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F88389D1B0D875D00E3BBB6 /* SJLabel.swift */; };
 		1FCF508F1B070F4C005D8578 /* SJCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FCF508E1B070F4C005D8578 /* SJCollectionView.swift */; };
 		1FCF50951B07EBAB005D8578 /* SJCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FCF50941B07EBAB005D8578 /* SJCollectionReusableView.swift */; };
 		1FCF50991B07ECA3005D8578 /* SJCollectionRestartReusableView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1FCF50981B07ECA3005D8578 /* SJCollectionRestartReusableView.xib */; };
@@ -43,6 +45,8 @@
 
 /* Begin PBXFileReference section */
 		1F39440A1B094EA4008E73E0 /* SJCollectionAddToCartReusableView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SJCollectionAddToCartReusableView.xib; sourceTree = "<group>"; };
+		1F88389B1B0D731200E3BBB6 /* SJTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SJTextField.swift; sourceTree = "<group>"; };
+		1F88389D1B0D875D00E3BBB6 /* SJLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SJLabel.swift; sourceTree = "<group>"; };
 		1FCF508E1B070F4C005D8578 /* SJCollectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SJCollectionView.swift; sourceTree = "<group>"; };
 		1FCF50941B07EBAB005D8578 /* SJCollectionReusableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SJCollectionReusableView.swift; sourceTree = "<group>"; };
 		1FCF50981B07ECA3005D8578 /* SJCollectionRestartReusableView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SJCollectionRestartReusableView.xib; sourceTree = "<group>"; };
@@ -102,6 +106,7 @@
 			children = (
 				4F8D38C51AE441F700F42E23 /* SJCollectionViewCell.swift */,
 				4F55B5531AE46E4900679048 /* SJCollectionViewCell.xib */,
+				1F88389D1B0D875D00E3BBB6 /* SJLabel.swift */,
 			);
 			name = Cell;
 			sourceTree = "<group>";
@@ -194,6 +199,7 @@
 				4FB6C9C21AE4AF7A001A6E50 /* SJBottomView.xib */,
 				1FCF509E1B07FF06005D8578 /* Cell */,
 				1FCF509F1B07FF0B005D8578 /* Supplementary Views */,
+				1F88389B1B0D731200E3BBB6 /* SJTextField.swift */,
 				1FCF508E1B070F4C005D8578 /* SJCollectionView.swift */,
 			);
 			name = View;
@@ -327,6 +333,8 @@
 				4F8D38D31AE4582200F42E23 /* SJCollectionViewDataSource.swift in Sources */,
 				4F55B55D1AE480F400679048 /* SJLayout.swift in Sources */,
 				1FCF508F1B070F4C005D8578 /* SJCollectionView.swift in Sources */,
+				1F88389E1B0D875D00E3BBB6 /* SJLabel.swift in Sources */,
+				1F88389C1B0D731200E3BBB6 /* SJTextField.swift in Sources */,
 				4F8D38CC1AE4457800F42E23 /* TemplateModel.swift in Sources */,
 				4F8D38C61AE441F700F42E23 /* SJCollectionViewCell.swift in Sources */,
 				4F8D38A61AE440DE00F42E23 /* Silky_Socks.xcdatamodeld in Sources */,
@@ -470,7 +478,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "b45a4b4e-845f-4597-8729-3d32ca853ec9";
+				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
@@ -485,7 +493,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "b45a4b4e-845f-4597-8729-3d32ca853ec9";
+				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;

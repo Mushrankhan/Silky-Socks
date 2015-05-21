@@ -12,6 +12,8 @@ protocol SJBottomViewDelegate: NSObjectProtocol {
     
     func sj_bottomView(view: SJBottomView, didPressRightButton button:UIButton)
     func sj_bottomView(view: SJBottomView, didPressLeftButton button:UIButton)
+    func sj_bottomView(view: SJBottomView, didPressTextButton button:UIButton)
+
 }
 
 public let utilitiesReuseIdentifier = "UtilitiesReuseIdentifier"
@@ -118,7 +120,7 @@ extension SJBottomView {
             case 1:
                 println("Camera")
             case 2:
-                println("Text")
+                delegate?.sj_bottomView(self, didPressTextButton: sender)
             case 3:
                 println("Color")
             case 4:

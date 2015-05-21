@@ -19,11 +19,18 @@ public let restartIdentifier = "RestartReusableView"
 public let shareIdentifier = "ShareReusableView"
 public let addToCartIdentifier = "AddToCartReusableView"
 
+protocol RestartViewCollectionReusableViewDelegate: NSObjectProtocol {
+    func restartReusableView(view: RestartViewCollectionReusableView, didPressRestartButton sender: UIButton)
+}
+
 /* The Restart reusable view */
 class RestartViewCollectionReusableView: UICollectionReusableView {
     
+    // Delegate
+    weak var delegate: RestartViewCollectionReusableViewDelegate?
+    
     @IBAction func restartButtonPressed(sender: UIButton) {
-        println("Restart Button Pressed")
+        delegate?.restartReusableView(self, didPressRestartButton: sender)
     }
     
     override func applyLayoutAttributes(layoutAttributes: UICollectionViewLayoutAttributes!) {
@@ -36,11 +43,18 @@ class RestartViewCollectionReusableView: UICollectionReusableView {
     
 }
 
+protocol ShareViewCollectionReusableViewDelegate: NSObjectProtocol {
+    func shareReusableView(view: ShareViewCollectionReusableView, didPressShareButton sender: UIButton)
+}
+
 /* The Share reusable view */
 class ShareViewCollectionReusableView: UICollectionReusableView {
     
+    // Delegate
+    weak var delegate: ShareViewCollectionReusableViewDelegate?
+    
     @IBAction func shareButtonPressed(sender: UIButton) {
-        println("Share Button Pressed")
+        delegate?.shareReusableView(self, didPressShareButton: sender)
     }
     
     override func applyLayoutAttributes(layoutAttributes: UICollectionViewLayoutAttributes!) {
@@ -52,11 +66,17 @@ class ShareViewCollectionReusableView: UICollectionReusableView {
     }
 }
 
+protocol CartViewCollectionReusableViewDelegate: NSObjectProtocol {
+    func cartReusableView(view: CartViewCollectionReusableView, didPressAddToCartButton sender: UIButton)
+}
+
 class CartViewCollectionReusableView: UICollectionReusableView {
     
+    // Delegate
+    weak var delegate: CartViewCollectionReusableViewDelegate?
     
     @IBAction func didPressAddToCartButton(sender: UIButton) {
-        println("Add To Cart Button Pressed")
+        delegate?.cartReusableView(self, didPressAddToCartButton: sender)
     }
     
     override func applyLayoutAttributes(layoutAttributes: UICollectionViewLayoutAttributes!) {
