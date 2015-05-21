@@ -2,12 +2,13 @@
 //  SJCollectionViewCell.swift
 //  Silky Socks
 //
-//  Created by Kevin Koeller on 4/19/15.
+//  Created by Saurabh Jain on 4/19/15.
 //  Copyright (c) 2015 Full Stak. All rights reserved.
 //
 
 import UIKit
 
+// Cell reuse identifier
 public let reuseIdentifier = "Cell"
 
 class SJCollectionViewCell: UICollectionViewCell {
@@ -28,6 +29,10 @@ class SJCollectionViewCell: UICollectionViewCell {
     // Used in pinch calculations
     private var lastScale: CGFloat = 0
 
+    // Used in pan calculations
+    private var firstX: CGFloat = 0
+    private var firstY: CGFloat = 0
+    
     // Template object
     var template:Template? {
         didSet {
@@ -79,6 +84,7 @@ class SJCollectionViewCell: UICollectionViewCell {
             boundingSize.height = boundingSize.width / aspectRatio.width * aspectRatio.height
         }
         
+        // Create the bounding rect
         let x = (ss_imgView.frame.width - boundingSize.width)/2
         let y = (ss_imgView.frame.height - boundingSize.height)/2 + 20
         let frame = CGRectMake(x, y, boundingSize.width, boundingSize.height)
@@ -100,14 +106,12 @@ class SJCollectionViewCell: UICollectionViewCell {
         // Create and add the bounding rect
         addClipRect()
         
-        let midX = CGRectGetMidX(bounds)
-        let midY = CGRectGetMidY(bounds)
-        
-        sj_label = SJLabel()
+        // Create the text label
+        sj_label = SJLabel(frame: .zeroRect)
         sj_label!.text = text
         sj_label!.font = font
         sj_label!.sizeToFit()
-        sj_label!.center = CGPoint(x: midX, y: midY)
+        sj_label!.frame.origin = CGPoint(x: 0, y: 0)
         
         // Add subview
         boundingRectView?.addSubview(sj_label!)
@@ -120,11 +124,17 @@ extension SJCollectionViewCell {
     
     // Handle Pan Gesture
     @objc private func handlePan(recognizer: UIPanGestureRecognizer) {
-        let location = recognizer.locationInView(self)
+        
         if let sj_label = sj_label {
-            if CGRectContainsPoint(sj_label.frame, location) {
-                sj_label.center = location
+            var translatedpoint = recognizer.translationInView(self)
+            
+            if recognizer.state == .Began {
+                firstX = sj_label.center.x
+                firstY = sj_label.center.y
             }
+            
+            translatedpoint = CGPointMake(firstX + translatedpoint.x, firstY + translatedpoint.y);
+            sj_label.center = translatedpoint
         }
     }
     
@@ -149,8 +159,13 @@ extension SJCollectionViewCell {
                     var fontSize = sj_label.font.pointSize
                     fontSize = ((recognizer.velocity > 0) ? 1 : -1) * 1 + fontSize;
                     
-                    if (fontSize < 13) { fontSize = 13 }
-                    if (fontSize > 80) { fontSize = 80 }
+                    if (fontSize < 13) {
+                        fontSize = 13
+                    }
+                    
+                    if (fontSize > 100) {
+                        fontSize = 100
+                    }
 
                     sj_label.font = UIFont(name: sj_label.font.fontName, size: fontSize)
                     

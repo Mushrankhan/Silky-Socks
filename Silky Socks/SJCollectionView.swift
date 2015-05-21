@@ -168,6 +168,8 @@ extension SJCollectionView: SJBottomViewDelegate {
         if let sj_bottomView = sj_bottomView {
             sj_bottomView.userInteractionEnabled = false
         }
+        
+        // Now add colors and font
     }
 }
 
