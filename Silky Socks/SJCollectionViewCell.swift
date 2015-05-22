@@ -85,9 +85,9 @@ class SJCollectionViewCell: UICollectionViewCell {
         }
         
         // Create the bounding rect
-        let x = (ss_imgView.frame.width - boundingSize.width)/2
+        let x = (ss_imgView.frame.width - boundingSize.width)/2 + 5
         let y = (ss_imgView.frame.height - boundingSize.height)/2 + 20
-        let frame = CGRectMake(x, y, boundingSize.width, boundingSize.height)
+        let frame = CGRectMake(x, y, boundingSize.width - 10, boundingSize.height - 5)
         boundingRectView = UIView(frame: frame)
         boundingRectView!.clipsToBounds = true
         addSubview(boundingRectView!)
