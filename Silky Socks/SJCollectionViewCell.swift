@@ -8,7 +8,7 @@
 
 import UIKit
 
-// Cell reuse identifier
+// Cell Reuse identifier
 public let reuseIdentifier = "Cell"
 
 class SJCollectionViewCell: UICollectionViewCell {
@@ -26,8 +26,8 @@ class SJCollectionViewCell: UICollectionViewCell {
     // The pinch gesture recognizer
     private var pinchGestureRecognizer: UIPinchGestureRecognizer!
     
-    // Used in pinch calculations
-    private var lastScale: CGFloat = 0
+    // The rotation gesture
+    private var rotateGestureRecognizer: UIRotationGestureRecognizer!
 
     // Used in pan calculations
     private var firstX: CGFloat = 0
@@ -43,6 +43,12 @@ class SJCollectionViewCell: UICollectionViewCell {
         }
     }
     
+    // Set containing the gesture - rotate and pinch
+    private var activeRecognizers = NSMutableSet()
+    
+    // initial transform
+    private var referenceTransform: CGAffineTransform?
+    
     // Initialization
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -56,9 +62,16 @@ class SJCollectionViewCell: UICollectionViewCell {
         addGestureRecognizer(panGestureRecognizer)
         
         // Pinch
-        pinchGestureRecognizer = UIPinchGestureRecognizer(target: self, action: "handlePinch:")
+        pinchGestureRecognizer = UIPinchGestureRecognizer(target: self, action: "handleGesture:")
         pinchGestureRecognizer.delaysTouchesBegan = true
         addGestureRecognizer(pinchGestureRecognizer)
+        
+        // Rotate
+        rotateGestureRecognizer = UIRotationGestureRecognizer(target: self, action: "handleGesture:")
+        rotateGestureRecognizer.delaysTouchesBegan = true
+        rotateGestureRecognizer.delegate = self
+        addGestureRecognizer(rotateGestureRecognizer)
+        
     }
     
     // Add the label as a subview of boundingRectView
@@ -120,7 +133,7 @@ class SJCollectionViewCell: UICollectionViewCell {
 }
 
 // MARK: Gesture Support
-extension SJCollectionViewCell {
+extension SJCollectionViewCell: UIGestureRecognizerDelegate {
     
     // Handle Pan Gesture
     @objc private func handlePan(recognizer: UIPanGestureRecognizer) {
@@ -138,46 +151,82 @@ extension SJCollectionViewCell {
         }
     }
     
-    // Handle Pinch
-    @objc private func handlePinch(recognizer: UIPinchGestureRecognizer) {
+    // Handle Rotate and Pinch Gesture
+    @objc private func handleGesture(recognizer: UIGestureRecognizer) {
         
-        // Base Case
-        if recognizer.numberOfTouches() != 2 {
-            return
-        }
-        
-        // Switching on the states
         switch recognizer.state {
             
-            case .Began:
-                    lastScale = recognizer.scale
-                
-            case .Changed:
-                if let sj_label = sj_label {
-                    
-                    // Increasing font size
-                    var fontSize = sj_label.font.pointSize
-                    fontSize = ((recognizer.velocity > 0) ? 1 : -1) * 1 + fontSize;
-                    
-                    if (fontSize < 13) {
-                        fontSize = 13
-                    }
-                    
-                    if (fontSize > 100) {
-                        fontSize = 100
-                    }
-
-                    sj_label.font = UIFont(name: sj_label.font.fontName, size: fontSize)
-                    
-                    // Setting a new size for the frame and forcing it to re draw to get crisp text
-                    let str: NSString = sj_label.text!
-                    let size = str.boundingRectWithSize(CGSize(width: 400, height: CGFloat.max), options: NSStringDrawingOptions.UsesFontLeading | NSStringDrawingOptions.UsesLineFragmentOrigin, attributes: [NSFontAttributeName: sj_label.font], context: nil).size
-                    sj_label.frame.size = size
-                    
-                }
-                
-            default:
-                break
+        case .Began:
+            if activeRecognizers.count == 0 {
+                referenceTransform = sj_label?.transform
+            }
+            activeRecognizers.addObject(recognizer)
+            
+        case .Ended:
+            referenceTransform = applyRecognizer(recognizer, toTransform: referenceTransform!)
+            activeRecognizers.removeObject(recognizer)
+            
+        case .Changed:
+            var transform = referenceTransform
+            for gesture in activeRecognizers {
+                transform = applyRecognizer(gesture as! UIGestureRecognizer, toTransform: transform!)
+            }
+            sj_label?.transform = transform!
+            
+        default:
+            break
         }
+        
     }
+    
+    // Helper Function
+    final private func applyRecognizer(recognizer: UIGestureRecognizer, toTransform transform:CGAffineTransform) -> CGAffineTransform {
+        
+        if recognizer.respondsToSelector("rotation") {
+            return CGAffineTransformRotate(transform, (recognizer as! UIRotationGestureRecognizer).rotation)
+        } else if recognizer.respondsToSelector("scale") {
+            let scale = (recognizer as! UIPinchGestureRecognizer).scale
+            return CGAffineTransformScale(transform, scale, scale)
+        }
+        
+        return transform
+        
+    }
+    
+    // Important - Handle Pinch and rotate simultaneously
+    func gestureRecognizer(gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWithGestureRecognizer otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+        return true
+    }
+    
+     //Handle Pinch
+//    @objc private func handlePinch(recognizer: UIPinchGestureRecognizer) {
+//    
+//        // Base Case
+//        if recognizer.numberOfTouches() != 2 {
+//            return
+//        }
+//
+//        if recognizer.state == .Changed {
+//            
+//            if let sj_label = sj_label {
+//                
+//                // Increasing font size
+//                var fontSize = sj_label.font.pointSize
+//                fontSize = ((recognizer.velocity > 0) ? 1 : -1) * 1 + fontSize
+//                
+//                // Bounds
+//                if (fontSize < 13) { fontSize = 13 }
+//                if (fontSize > 100) { fontSize = 100 }
+//                
+//                // Change the font
+//                sj_label.font = UIFont(name: sj_label.font.fontName, size: fontSize)
+//                
+//                // Setting a new size for the frame and forcing it to re draw to get crisp text
+//                let str: NSString = sj_label.text!
+//                let size = str.boundingRectWithSize(CGSize(width: 400, height: CGFloat.max), options: NSStringDrawingOptions.UsesFontLeading | NSStringDrawingOptions.UsesLineFragmentOrigin, attributes: [NSFontAttributeName: sj_label.font], context: nil).size
+//                sj_label.frame.size = size
+//            }
+//
+//        }
+//    }
 }
