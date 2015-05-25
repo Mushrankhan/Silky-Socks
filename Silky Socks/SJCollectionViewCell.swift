@@ -123,7 +123,6 @@ class SJCollectionViewCell: UICollectionViewCell {
         sj_label = SJLabel(frame: .zeroRect)
         sj_label!.text = text
         sj_label!.font = font
-//        sj_label!.sizeToFit()
         sj_label!.frame = boundingRectView!.frame
         sj_label!.numberOfLines = 1
         sj_label!.adjustsFontSizeToFitWidth = true
