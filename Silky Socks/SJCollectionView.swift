@@ -21,7 +21,7 @@ class SJCollectionView: UICollectionView {
     }
     
     // The bottom view
-    private var sj_bottomView: SJBottomView?
+    private(set) var sj_bottomView: SJBottomView?
     
     // Initialization
     required init(coder aDecoder: NSCoder) {
@@ -160,22 +160,7 @@ extension SJCollectionView: SJBottomViewDelegate {
     }
     
     // Text button clicked
-    func sj_bottomView(view: SJBottomView, didPressTextButton button:UIButton) {
-//        let midY = CGRectGetMidY(bounds)
-//        let height: CGFloat = 60
-//
-//        // Create an instance of Text Field
-//        let textField = SJTextField(frame: CGRect(x: contentOffset.x, y: midY, width: width, height: 60))
-//        textField.delegate = self
-//        textField.becomeFirstResponder()
-//        addSubview(textField)
-//        
-//        if let sj_bottomView = sj_bottomView {
-//            sj_bottomView.userInteractionEnabled = false
-//        }
-        
-        // Now add colors and font
-        
+    func sj_bottomView(view: SJBottomView, didPressTextButton button:UIButton) {        
         myDelegate?.collectionView(self, bottomView: view, didPressTextButton: button)
     }
     
@@ -197,45 +182,6 @@ extension SJCollectionView: SJBottomViewDelegate {
     // Smiley button
     func sj_bottomView(view: SJBottomView, didPressSmileyButton button:UIButton) {
         myDelegate?.collectionView(self, bottomView: view, didPressSmileyButton: button)
-    }
-}
-
-// MARK: TEXT BUTTON
-extension SJCollectionView: UITextFieldDelegate {
-    
-    // When Done button is pressed
-    func textFieldShouldReturn(textField: UITextField) -> Bool {
-        
-        if count(textField.text) > 0 {
-            if textField.canResignFirstResponder() {
-                textField.resignFirstResponder()
-                // Remove from superview
-                textField.removeFromSuperview()
-                // Create The label
-                createTextLabel(textField.text, afont: textField.font)
-                return true
-            }
-        } else {
-            textField.resignFirstResponder()
-            textField.removeFromSuperview()
-            if let sj_bottomView = sj_bottomView {
-                sj_bottomView.userInteractionEnabled = true
-            }
-            return true
-        }
-        
-        return false
-    }
-    
-    // Create Text Label
-    private func createTextLabel(text: String, afont: UIFont) {
-        
-        let font = UIFont(name: afont.fontName, size: afont.pointSize)
-        // Should return only one cell, because one cell covers the entire area
-        let cells = visibleCells() as! [SJCollectionViewCell]
-        if cells.count == 1 {
-            cells.first!.createLabel(text, font: font!)
-        }
     }
 }
 

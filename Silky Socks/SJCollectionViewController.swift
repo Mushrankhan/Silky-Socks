@@ -87,7 +87,22 @@ extension SJCollectionViewController: SJCollectionViewDataSource {
 extension SJCollectionViewController: SJCollectionViewDelegate {
     
     func collectionView(collectionView: UICollectionView, bottomView: UIView , didPressTextButton button:UIButton) {
-        print("Text")
+        
+        let collectionView = collectionView as! SJCollectionView
+        let width = CGRectGetWidth(UIScreen.mainScreen().bounds)
+        let midY = CGRectGetMidY(collectionView.bounds)
+        let height: CGFloat = 60
+        
+        // Create an instance of Text Field
+        let textField = SJTextField(frame: CGRect(x: collectionView.contentOffset.x, y: midY, width: width, height: 60))
+        textField.delegate = self
+        textField.becomeFirstResponder()
+        collectionView.addSubview(textField)
+        
+        if let sj_bottomView = collectionView.sj_bottomView {
+            sj_bottomView.userInteractionEnabled = false
+        }
+        
     }
     
     func collectionView(collectionView: UICollectionView, bottomView: UIView, didPressCameraButton button: UIButton) {
@@ -107,6 +122,45 @@ extension SJCollectionViewController: SJCollectionViewDelegate {
     }
 }
 
+// MARK: Text Field Delegate
+// For Text Button Support
+extension SJCollectionViewController: UITextFieldDelegate {
+    
+    // When Done button is pressed
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+        
+        if count(textField.text) > 0 {
+            if textField.canResignFirstResponder() {
+                textField.resignFirstResponder()
+                // Remove from superview
+                textField.removeFromSuperview()
+                // Create The label
+                createTextLabel(textField.text, afont: textField.font)
+                return true
+            }
+        } else {
+            textField.resignFirstResponder()
+            textField.removeFromSuperview()
+            if let sj_bottomView = collectionView.sj_bottomView {
+                sj_bottomView.userInteractionEnabled = true
+            }
+            return true
+        }
+        
+        return false
+    }
+    
+    // Create Text Label
+    private func createTextLabel(text: String, afont: UIFont) {
+        
+        let font = UIFont(name: afont.fontName, size: afont.pointSize)
+        // Should return only one cell, because one cell covers the entire area
+        let cells = collectionView.visibleCells() as! [SJCollectionViewCell]
+        if cells.count == 1 {
+            cells.first!.createLabel(text, font: font!)
+        }
+    }
+}
 
 
 
