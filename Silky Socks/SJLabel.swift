@@ -25,9 +25,19 @@ class SJLabel: UILabel {
         initialSetUp()
     }
     
+    init(frame: CGRect, text: String, font: UIFont) {
+        super.init(frame: frame)
+        self.text = text
+        self.font = font
+        initialSetUp()
+    }
+    
     private func initialSetUp() {
         numberOfLines = 0
         userInteractionEnabled = true
         backgroundColor = UIColor.clearColor()
+        contentMode = .Redraw
+        textAlignment = .Center
+        adjustsFontSizeToFitWidth = true
     }
 }

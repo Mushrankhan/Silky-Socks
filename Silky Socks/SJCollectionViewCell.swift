@@ -120,13 +120,8 @@ class SJCollectionViewCell: UICollectionViewCell {
         addClipRect()
         
         // Create the text label
-        sj_label = SJLabel(frame: .zeroRect)
-        sj_label!.text = text
-        sj_label!.font = font
+        sj_label = SJLabel(frame: .zeroRect, text: text, font: font)
         sj_label!.frame = boundingRectView!.frame
-        sj_label!.numberOfLines = 1
-        sj_label!.adjustsFontSizeToFitWidth = true
-        sj_label!.textAlignment = NSTextAlignment.Center;
         sj_label!.frame.origin = CGPoint(x: 0, y: 0)
         
         // Add subview

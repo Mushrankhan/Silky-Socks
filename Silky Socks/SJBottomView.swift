@@ -10,15 +10,24 @@ import UIKit
 
 protocol SJBottomViewDelegate: NSObjectProtocol {
     
+    // Navigation
     func sj_bottomView(view: SJBottomView, didPressRightButton button:UIButton)
     func sj_bottomView(view: SJBottomView, didPressLeftButton button:UIButton)
+    
+    // Customization Support
+    func sj_bottomView(view: SJBottomView, didPressCameraButton button:UIButton)
     func sj_bottomView(view: SJBottomView, didPressTextButton button:UIButton)
-
+    func sj_bottomView(view: SJBottomView, didPressColorWheelButton button:UIButton)
+    func sj_bottomView(view: SJBottomView, didPressGridButton button:UIButton)
+    func sj_bottomView(view: SJBottomView, didPressSmileyButton button:UIButton)
 }
 
+// Bottom View Reuse Identifier
 public let utilitiesReuseIdentifier = "UtilitiesReuseIdentifier"
 public let utilitiesElementkind = "Utilities"
 
+// The bottom utilities view which provides support
+// for customization is a subclass of a UICollectionReusableView
 class SJBottomView: UICollectionReusableView {
     
     // Grid Camera (4th button) constraints
@@ -95,7 +104,7 @@ class SJBottomView: UICollectionReusableView {
     }
 }
 
-// Navigation Buttons - Previous and Forward
+// Navigation Buttons
 extension SJBottomView {
     
     // Next
@@ -118,15 +127,15 @@ extension SJBottomView {
         // Done to prevent multiple IBActions
         switch sender.tag {
             case 1:
-                println("Camera")
+                delegate?.sj_bottomView(self, didPressCameraButton: sender)
             case 2:
                 delegate?.sj_bottomView(self, didPressTextButton: sender)
             case 3:
-                println("Color")
+                delegate?.sj_bottomView(self, didPressColorWheelButton: sender)
             case 4:
-                println("Grid")
+                delegate?.sj_bottomView(self, didPressGridButton: sender)
             case 5:
-                println("Smiley")
+                delegate?.sj_bottomView(self, didPressSmileyButton: sender)
             default:
                 break
         }

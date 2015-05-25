@@ -23,7 +23,7 @@ class SJTextField: UITextField {
     private func initialSetUp() {
         backgroundColor = UIColor.clearColor()
         textAlignment = .Center
-        font = UIFont(name: "Helvetica Neue", size: 42.0)
+        font = UIFont(name: "Helvetica Neue", size: 56.0)
         textColor = UIColor.blackColor()
         returnKeyType = .Done
         tintColor = UIColor.blackColor()

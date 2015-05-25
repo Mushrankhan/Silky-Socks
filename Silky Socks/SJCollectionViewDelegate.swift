@@ -10,5 +10,10 @@ import UIKit
 
 protocol SJCollectionViewDelegate: UICollectionViewDelegate {
     
-    //func collectionView(collectionView: UICollectionView, didPress
+    func collectionView(collectionView: UICollectionView, bottomView: UIView , didPressCameraButton button:UIButton)
+    func collectionView(collectionView: UICollectionView, bottomView: UIView , didPressTextButton button:UIButton)
+    func collectionView(collectionView: UICollectionView, bottomView: UIView , didPressColorWheelButton button:UIButton)
+    func collectionView(collectionView: UICollectionView, bottomView: UIView , didPressGridButton button:UIButton)
+    func collectionView(collectionView: UICollectionView, bottomView: UIView , didPressSmileyButton button:UIButton)
+
 }

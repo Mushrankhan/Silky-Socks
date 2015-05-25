@@ -31,7 +31,7 @@ class SJCollectionViewController: UIViewController {
         
         // Data Source
         collectionView!.dataSource = self
-        collectionView!.delegate = self
+        collectionView!.myDelegate = self
         
         //collectionView!.backgroundColor = UIColor.yellowColor()
         collectionView!.backgroundColor = UIColor.whiteColor()
@@ -46,9 +46,8 @@ class SJCollectionViewController: UIViewController {
 }
 
 
-// MARK: UICollectionViewDataSource
-
-extension SJCollectionViewController: SJCollectionViewDataSource, SJCollectionViewDelegate {
+// MARK: Collection View Data Source
+extension SJCollectionViewController: SJCollectionViewDataSource {
 
     func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
         return 1
@@ -82,5 +81,35 @@ extension SJCollectionViewController: SJCollectionViewDataSource, SJCollectionVi
             return collView.dequeueReusableBottomUtilitiesView(indexPath: indexPath)
         }
     }
-    
 }
+
+// MARK: Collection View Delegate
+extension SJCollectionViewController: SJCollectionViewDelegate {
+    
+    func collectionView(collectionView: UICollectionView, bottomView: UIView , didPressTextButton button:UIButton) {
+        print("Text")
+    }
+    
+    func collectionView(collectionView: UICollectionView, bottomView: UIView, didPressCameraButton button: UIButton) {
+        print("Camera")
+    }
+    
+    func collectionView(collectionView: UICollectionView, bottomView: UIView , didPressColorWheelButton button:UIButton){
+        print("Color")
+    }
+    
+    func collectionView(collectionView: UICollectionView, bottomView: UIView , didPressGridButton button:UIButton) {
+        print("Grid")
+    }
+    
+    func collectionView(collectionView: UICollectionView, bottomView: UIView , didPressSmileyButton button:UIButton) {
+        print("Smiley")
+    }
+}
+
+
+
+
+
+
+

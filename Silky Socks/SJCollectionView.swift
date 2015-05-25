@@ -10,6 +10,9 @@ import UIKit
 
 class SJCollectionView: UICollectionView {
     
+    // Custom delegate
+    var myDelegate: SJCollectionViewDelegate?
+    
     // the width of the screen bounds
     private var width: CGFloat {
         get {
@@ -139,6 +142,9 @@ extension SJCollectionView: CartViewCollectionReusableViewDelegate {
 }
 
 // MARK: Bottom Utilities Delegate
+/*  The delegate messages from the bottom view is
+    delegated to the SJCollectionViewController by
+    a custom UICollectionViewDelegate   */
 extension SJCollectionView: SJBottomViewDelegate {
     
     // Navigate Right
@@ -155,21 +161,42 @@ extension SJCollectionView: SJBottomViewDelegate {
     
     // Text button clicked
     func sj_bottomView(view: SJBottomView, didPressTextButton button:UIButton) {
-        let width = CGRectGetWidth(UIScreen.mainScreen().bounds)
-        let midY = CGRectGetMidY(bounds)
-        let height: CGFloat = 60
-
-        // Create an instance of Text Field
-        let textField = SJTextField(frame: CGRect(x: contentOffset.x, y: midY, width: width, height: 60))
-        textField.delegate = self
-        textField.becomeFirstResponder()
-        addSubview(textField)
-        
-        if let sj_bottomView = sj_bottomView {
-            sj_bottomView.userInteractionEnabled = false
-        }
+//        let midY = CGRectGetMidY(bounds)
+//        let height: CGFloat = 60
+//
+//        // Create an instance of Text Field
+//        let textField = SJTextField(frame: CGRect(x: contentOffset.x, y: midY, width: width, height: 60))
+//        textField.delegate = self
+//        textField.becomeFirstResponder()
+//        addSubview(textField)
+//        
+//        if let sj_bottomView = sj_bottomView {
+//            sj_bottomView.userInteractionEnabled = false
+//        }
         
         // Now add colors and font
+        
+        myDelegate?.collectionView(self, bottomView: view, didPressTextButton: button)
+    }
+    
+    // Camera Button
+    func sj_bottomView(view: SJBottomView, didPressCameraButton button:UIButton) {
+        myDelegate?.collectionView(self, bottomView: view, didPressCameraButton: button)
+    }
+    
+    // Color Wheel
+    func sj_bottomView(view: SJBottomView, didPressColorWheelButton button:UIButton) {
+        myDelegate?.collectionView(self, bottomView: view, didPressColorWheelButton: button)
+    }
+    
+    // Grid Button
+    func sj_bottomView(view: SJBottomView, didPressGridButton button:UIButton) {
+        myDelegate?.collectionView(self, bottomView: view, didPressGridButton: button)
+    }
+    
+    // Smiley button
+    func sj_bottomView(view: SJBottomView, didPressSmileyButton button:UIButton) {
+        myDelegate?.collectionView(self, bottomView: view, didPressSmileyButton: button)
     }
 }
 
@@ -203,7 +230,7 @@ extension SJCollectionView: UITextFieldDelegate {
     // Create Text Label
     private func createTextLabel(text: String, afont: UIFont) {
         
-        let font = UIFont(name: afont.fontName, size: 44)
+        let font = UIFont(name: afont.fontName, size: afont.pointSize)
         // Should return only one cell, because one cell covers the entire area
         let cells = visibleCells() as! [SJCollectionViewCell]
         if cells.count == 1 {
