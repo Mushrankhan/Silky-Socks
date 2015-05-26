@@ -2,7 +2,7 @@
 //  SJCollectionViewController.swift
 //  Silky Socks
 //
-//  Created by Kevin Koeller on 4/19/15.
+//  Created by Saurabh Jain on 4/19/15.
 //  Copyright (c) 2015 Full Stak. All rights reserved.
 //
 
@@ -33,25 +33,19 @@ class SJCollectionViewController: UIViewController {
         collectionView!.dataSource = self
         collectionView!.myDelegate = self
         
-        //collectionView!.backgroundColor = UIColor.yellowColor()
         collectionView!.backgroundColor = UIColor.whiteColor()
-        
-        // Enable paging
         collectionView!.pagingEnabled = true
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
+        templateArray = []
     }
 }
 
 
 // MARK: Collection View Data Source
 extension SJCollectionViewController: SJCollectionViewDataSource {
-
-    func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
-        return 1
-    }
 
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return templateArray.count
@@ -60,10 +54,7 @@ extension SJCollectionViewController: SJCollectionViewDataSource {
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier(reuseIdentifier, forIndexPath: indexPath) as! SJCollectionViewCell
-        
-        // Configure the cell
         cell.template = templateArray[indexPath.row]
-        
         return cell
     }
     
@@ -71,14 +62,15 @@ extension SJCollectionViewController: SJCollectionViewDataSource {
         
         let collView = collectionView as! SJCollectionView
         
-        if kind == restartElementkind {
-            return collView.dequeueReusableRestartView(indexPath: indexPath)
-        } else if kind == shareElementKind {
-            return collView.dequeueReusableShareView(indexPath: indexPath)
-        } else if kind == addToCartElementKind {
-            return collView.dequeueReusableAddToCartView(indexPath: indexPath)
-        } else {
-            return collView.dequeueReusableBottomUtilitiesView(indexPath: indexPath)
+        switch kind {
+            case restartElementkind:
+                return collView.dequeueReusableRestartView(indexPath: indexPath)
+            case shareElementKind:
+                return collView.dequeueReusableShareView(indexPath: indexPath)
+            case addToCartElementKind:
+                return collView.dequeueReusableAddToCartView(indexPath: indexPath)
+            default:
+                return collView.dequeueReusableBottomUtilitiesView(indexPath: indexPath)
         }
     }
 }
@@ -94,19 +86,45 @@ extension SJCollectionViewController: SJCollectionViewDelegate {
         let height: CGFloat = 60
         
         // Create an instance of Text Field
-        let textField = SJTextField(frame: CGRect(x: collectionView.contentOffset.x, y: midY, width: width, height: 60))
+        let frame = CGRect(x: collectionView.contentOffset.x, y: midY, width: width, height: height)
+        let textField = SJTextField(frame: frame)
         textField.delegate = self
         textField.becomeFirstResponder()
         collectionView.addSubview(textField)
         
-        if let sj_bottomView = collectionView.sj_bottomView {
-            sj_bottomView.userInteractionEnabled = false
-        }
+//        if let sj_bottomView = collectionView.sj_bottomView {
+//            sj_bottomView.userInteractionEnabled = false
+//        }
         
     }
     
     func collectionView(collectionView: UICollectionView, bottomView: UIView, didPressCameraButton button: UIButton) {
-        print("Camera")
+        
+        let picker = createImagePicker()
+        let sheet = UIAlertController(title: "Import Photo", message: nil, preferredStyle: .ActionSheet)
+        
+        // Take photo
+        sheet.addAction(UIAlertAction(title: "Take Photo", style: .Default) { action in
+            if UIImagePickerController.isSourceTypeAvailable(.Camera) {
+                picker.sourceType = .Camera
+            }
+            self.presentViewController(picker, animated: true, completion: nil)
+        })
+        
+        // Choose Photo
+        sheet.addAction(UIAlertAction(title: "Choose Photo", style: .Default) { action in
+            if UIImagePickerController.isSourceTypeAvailable(.PhotoLibrary) {
+                picker.sourceType = .PhotoLibrary
+            }
+            self.presentViewController(picker, animated: true, completion: nil)
+        })
+        
+        // Cancel
+        sheet.addAction(UIAlertAction(title: "Cancel", style: .Cancel) { action in
+            self.dismissViewControllerAnimated(true, completion: nil)
+        })
+        
+        presentViewController(sheet, animated: true, completion: nil)
     }
     
     func collectionView(collectionView: UICollectionView, bottomView: UIView , didPressColorWheelButton button:UIButton){
@@ -122,8 +140,7 @@ extension SJCollectionViewController: SJCollectionViewDelegate {
     }
 }
 
-// MARK: Text Field Delegate
-// For Text Button Support
+// MARK: Text Button
 extension SJCollectionViewController: UITextFieldDelegate {
     
     // When Done button is pressed
@@ -135,35 +152,49 @@ extension SJCollectionViewController: UITextFieldDelegate {
                 // Remove from superview
                 textField.removeFromSuperview()
                 // Create The label
-                createTextLabel(textField.text, afont: textField.font)
+                collectionView.sj_createTextLabel(textField.text, afont: textField.font)
                 return true
             }
-        } else {
-            textField.resignFirstResponder()
-            textField.removeFromSuperview()
-            if let sj_bottomView = collectionView.sj_bottomView {
-                sj_bottomView.userInteractionEnabled = true
-            }
-            return true
         }
         
-        return false
-    }
-    
-    // Create Text Label
-    private func createTextLabel(text: String, afont: UIFont) {
-        
-        let font = UIFont(name: afont.fontName, size: afont.pointSize)
-        // Should return only one cell, because one cell covers the entire area
-        let cells = collectionView.visibleCells() as! [SJCollectionViewCell]
-        if cells.count == 1 {
-            cells.first!.createLabel(text, font: font!)
+        textField.resignFirstResponder()
+        textField.removeFromSuperview()
+        if let sj_bottomView = collectionView.sj_bottomView {
+            sj_bottomView.userInteractionEnabled = true
         }
+        return true
     }
 }
 
-
-
-
-
-
+// MARK: Camera Button
+extension SJCollectionViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    
+    private func createImagePicker() -> UIImagePickerController {
+        
+        let picker = UIImagePickerController()
+        picker.delegate = self
+        picker.allowsEditing = true
+        picker.mediaTypes = ["public.image"]
+        picker.sourceType = .PhotoLibrary
+        return picker
+    }
+    
+    func imagePickerControllerDidCancel(picker: UIImagePickerController) {
+        dismissViewControllerAnimated(true, completion: nil)
+    }
+    
+    func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [NSObject : AnyObject]) {
+        
+        var image: UIImage!
+        if let editedImage = info[UIImagePickerControllerEditedImage] as? UIImage {
+            image = editedImage
+        } else {
+            image = info[UIImagePickerControllerOriginalImage] as! UIImage
+        }
+        
+        dismissViewControllerAnimated(true, completion: nil)
+        
+        // Pass the image object to the collection view
+        collectionView.sj_createImage(image)
+    }
+}

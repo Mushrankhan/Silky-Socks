@@ -33,7 +33,7 @@ class SJLabel: UILabel {
     }
     
     private func initialSetUp() {
-        numberOfLines = 0
+        numberOfLines = 1
         userInteractionEnabled = true
         backgroundColor = UIColor.clearColor()
         contentMode = .Redraw

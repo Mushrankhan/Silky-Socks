@@ -114,6 +114,8 @@
 		1FCF509F1B07FF0B005D8578 /* Supplementary Views */ = {
 			isa = PBXGroup;
 			children = (
+				4FB6C9C01AE4AF70001A6E50 /* SJBottomView.swift */,
+				4FB6C9C21AE4AF7A001A6E50 /* SJBottomView.xib */,
 				1FCF50941B07EBAB005D8578 /* SJCollectionReusableView.swift */,
 				1FCF50981B07ECA3005D8578 /* SJCollectionRestartReusableView.xib */,
 				1FCF509A1B07ED8A005D8578 /* SJCollectionShareReusableView.xib */,
@@ -195,12 +197,10 @@
 		4F8D38CF1AE4461700F42E23 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				4FB6C9C01AE4AF70001A6E50 /* SJBottomView.swift */,
-				4FB6C9C21AE4AF7A001A6E50 /* SJBottomView.xib */,
 				1FCF509E1B07FF06005D8578 /* Cell */,
 				1FCF509F1B07FF0B005D8578 /* Supplementary Views */,
-				1F88389B1B0D731200E3BBB6 /* SJTextField.swift */,
 				1FCF508E1B070F4C005D8578 /* SJCollectionView.swift */,
+				1F88389B1B0D731200E3BBB6 /* SJTextField.swift */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -472,8 +472,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iOS Development: Saurabh Jain (4RMTDD3346)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iOS Development: Saurabh Jain (4RMTDD3346)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Saurabh Jain (4RMTDD3346)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Saurabh Jain (4RMTDD3346)";
 				INFOPLIST_FILE = "Silky Socks/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -487,8 +487,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iOS Development: Saurabh Jain (4RMTDD3346)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iOS Development: Saurabh Jain (4RMTDD3346)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Saurabh Jain (4RMTDD3346)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Saurabh Jain (4RMTDD3346)";
 				INFOPLIST_FILE = "Silky Socks/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

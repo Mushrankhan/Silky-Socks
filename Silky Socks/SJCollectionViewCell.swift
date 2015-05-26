@@ -17,9 +17,12 @@ class SJCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var ss_imgView: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
     
-    // The Label
-    var sj_label: SJLabel?
-
+    // Array containing all the views added to the template
+    var sj_subViews = [UIView]()
+    
+    // Last selected view
+    private var lastSelectedView: UIView?
+    
     // The pan gesture recognizer
     private var panGestureRecognizer: UIPanGestureRecognizer!
     
@@ -50,6 +53,7 @@ class SJCollectionViewCell: UICollectionViewCell {
     private var referenceTransform: CGAffineTransform?
     
     // Initialization
+    // Called when instantiated from nib
     override func awakeFromNib() {
         super.awakeFromNib()
         autoresizingMask = UIViewAutoresizing.FlexibleHeight | .FlexibleWidth
@@ -74,6 +78,13 @@ class SJCollectionViewCell: UICollectionViewCell {
         
     }
     
+    // Apply Layout Attributes
+    override func applyLayoutAttributes(layoutAttributes: UICollectionViewLayoutAttributes!) {
+        if let attr = layoutAttributes {
+            self.frame = attr.frame
+        }
+    }
+    
     // Add the label as a subview of boundingRectView
     // Is a view around the image because the image is smaller than the image view
     private var boundingRectView: UIView?
@@ -82,20 +93,14 @@ class SJCollectionViewCell: UICollectionViewCell {
     private func addClipRect() {
         
         if let view = boundingRectView {
-            view.removeFromSuperview()
-            boundingRectView = nil
+            return
         }
         
         let aspectRatio = template!.image.size
         var boundingSize = ss_imgView.frame.size
         
-        let mW = boundingSize.width / aspectRatio.width;
-        let mH = boundingSize.height / aspectRatio.height;
-        if mH < mW {
-            boundingSize.width = boundingSize.height / aspectRatio.height * aspectRatio.width
-        } else if mW < mH {
-            boundingSize.height = boundingSize.width / aspectRatio.width * aspectRatio.height
-        }
+        // Get the bounds for aspect fit
+        boundingSize = UIImage.getBoundingSizeForAspectFit(aspectRatio, imageViewSize: boundingSize)
         
         // Create the bounding rect
         let x = (ss_imgView.frame.width - boundingSize.width)/2 + 5
@@ -106,13 +111,6 @@ class SJCollectionViewCell: UICollectionViewCell {
         addSubview(boundingRectView!)
     }
     
-    // Apply Layout Attributes
-    override func applyLayoutAttributes(layoutAttributes: UICollectionViewLayoutAttributes!) {
-        if let attr = layoutAttributes {
-            self.frame = attr.frame
-        }
-    }
-    
     // Create the text label
     func createLabel(text: String, font: UIFont) {
         
@@ -120,14 +118,30 @@ class SJCollectionViewCell: UICollectionViewCell {
         addClipRect()
         
         // Create the text label
-        sj_label = SJLabel(frame: .zeroRect, text: text, font: font)
-        sj_label!.frame = boundingRectView!.frame
-        sj_label!.frame.origin = CGPoint(x: 0, y: 0)
+        let sj_label = SJLabel(frame: .zeroRect, text: text, font: font)
+        sj_label.frame.size.width = CGRectGetWidth(boundingRectView!.frame)
+        sj_label.frame.origin = CGPointZero
+        sj_label.sizeToFit()
+        sj_subViews.append(sj_label)
         
         // Add subview
-        boundingRectView?.addSubview(sj_label!)
+        boundingRectView?.addSubview(sj_label)
     }
     
+    // Create Image
+    func createImage(image: UIImage) {
+        
+        // Create and add the bounding rect
+        addClipRect()
+        
+        let sj_imgView = UIImageView(frame: bounds)
+        sj_imgView.contentMode = .ScaleAspectFill
+        sj_imgView.image = image
+        sj_subViews.append(sj_imgView)
+        
+        // Add subview
+        boundingRectView?.addSubview(sj_imgView)
+    }
 }
 
 // MARK: Gesture Support
@@ -136,16 +150,30 @@ extension SJCollectionViewCell: UIGestureRecognizerDelegate {
     // Handle Pan Gesture
     @objc private func handlePan(recognizer: UIPanGestureRecognizer) {
         
-        if let sj_label = sj_label {
-            var translatedpoint = recognizer.translationInView(self)
+        if let boundingRectView = boundingRectView {
             
-            if recognizer.state == .Began {
-                firstX = sj_label.center.x
-                firstY = sj_label.center.y
+            var location = recognizer.locationInView(boundingRectView)
+            var translatedpoint = recognizer.translationInView(boundingRectView)
+            
+            loop: for view in sj_subViews {
+                if CGRectContainsPoint(view.frame, location) {
+                    switch recognizer.state {
+                        case .Began:
+                            if recognizer.state == .Began {
+                                firstX = view.center.x
+                                firstY = view.center.y
+                            }
+                        case .Changed:
+                            translatedpoint = CGPointMake(firstX + translatedpoint.x, firstY + translatedpoint.y)
+                            view.center = translatedpoint
+                            break loop
+                        case .Ended:
+                            lastSelectedView = view
+                        default:
+                            break
+                    }
+                }
             }
-            
-            translatedpoint = CGPointMake(firstX + translatedpoint.x, firstY + translatedpoint.y);
-            sj_label.center = translatedpoint
         }
     }
     
@@ -154,25 +182,25 @@ extension SJCollectionViewCell: UIGestureRecognizerDelegate {
         
         switch recognizer.state {
             
-        case .Began:
-            if activeRecognizers.count == 0 {
-                referenceTransform = sj_label?.transform
-            }
-            activeRecognizers.addObject(recognizer)
-            
-        case .Ended:
-            referenceTransform = applyRecognizer(recognizer, toTransform: referenceTransform!)
-            activeRecognizers.removeObject(recognizer)
-            
-        case .Changed:
-            var transform = referenceTransform
-            for gesture in activeRecognizers {
-                transform = applyRecognizer(gesture as! UIGestureRecognizer, toTransform: transform!)
-            }
-            sj_label?.transform = transform!
-            
-        default:
-            break
+            case .Began:
+                if activeRecognizers.count == 0 {
+                    referenceTransform = lastSelectedView?.transform
+                }
+                activeRecognizers.addObject(recognizer)
+                
+            case .Ended:
+                referenceTransform = applyRecognizer(recognizer, toTransform: referenceTransform!)
+                activeRecognizers.removeObject(recognizer)
+                
+            case .Changed:
+                var transform = referenceTransform
+                for gesture in activeRecognizers {
+                    transform = applyRecognizer(gesture as! UIGestureRecognizer, toTransform: transform!)
+                }
+                lastSelectedView?.transform = transform!
+                
+            default:
+                break
         }
         
     }

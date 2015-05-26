@@ -106,23 +106,30 @@ extension SJCollectionView: RestartViewCollectionReusableViewDelegate {
         }
         
         // Check if the text field exists
-        for subView in subviews as! [UIView] {
-            if subView.isKindOfClass(SJTextField.self) {
-                if subView.canResignFirstResponder() {
-                    subView.resignFirstResponder()
+        loop: for subView in subviews as! [UIView] {
+                if subView.isKindOfClass(SJTextField.self) {
+                    if subView.canResignFirstResponder() {
+                        subView.resignFirstResponder()
+                    }
+                    subView.removeFromSuperview()
+                    break loop
                 }
-                subView.removeFromSuperview()
-                return
             }
-        }
         
-        // If the Label exists
         let cell = visibleCells() as! [SJCollectionViewCell]
         if cell.count == 1 {
-            if let sj_label = cell.first!.sj_label {
-                sj_label.removeFromSuperview()
-                cell.first!.sj_label = nil
+//            if let sj_label = cell.first!.sj_label {
+//                sj_label.removeFromSuperview()
+//                cell.first!.sj_label = nil
+//            }
+//            if let sj_imgView = cell.first!.sj_imgView {
+//                sj_imgView.removeFromSuperview()
+//                cell.first!.sj_imgView = nil
+//            }
+            for view in cell.first!.sj_subViews {
+                view.removeFromSuperview()
             }
+            cell.first!.sj_subViews.removeAll(keepCapacity: true)
         }
     }
 }
@@ -185,12 +192,39 @@ extension SJCollectionView: SJBottomViewDelegate {
     }
 }
 
+// MARK: Messages from the VC
+extension SJCollectionView {
+    
+    func sj_createTextLabel(text: String, afont: UIFont) {
+        
+        let font = UIFont(name: afont.fontName, size: afont.pointSize)
+        // Should return only one cell, because one cell covers the entire area
+        let cells = visibleCells() as! [SJCollectionViewCell]
+        if cells.count == 1 {
+            cells.first!.createLabel(text, font: font!)
+        }
+    }
+    
+    func sj_createImage(image: UIImage) {
+        
+//        if let sj_bottomView = sj_bottomView {
+//            sj_bottomView.userInteractionEnabled = false
+//        }
+        
+        // Should return only one cell, because one cell covers the entire area
+        let cells = visibleCells() as! [SJCollectionViewCell]
+        if cells.count == 1 {
+            cells.first!.createImage(image)
+        }
+    }
+}
+
 // MARK: Gesture Handling
 extension SJCollectionView: UIGestureRecognizerDelegate {
     
     func gestureRecognizer(gestureRecognizer: UIGestureRecognizer, shouldReceiveTouch touch: UITouch) -> Bool {
+        
         if gestureRecognizer == panGestureRecognizer {
-            
             for subview in subviews as! [UIView] {
                 if subview.isKindOfClass(SJTextField.self) {
                     return false
@@ -202,9 +236,7 @@ extension SJCollectionView: UIGestureRecognizerDelegate {
             
             if let index = index {
                 let cell = cellForItemAtIndexPath(index) as! SJCollectionViewCell
-                
-                // If the label exists then return false
-                if let sj_label = cell.sj_label {
+                if cell.sj_subViews.count > 0 {
                     return false
                 }
             }

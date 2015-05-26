@@ -33,3 +33,19 @@ extension UIColor {
         return UIColor(red: CGFloat(red)/divisor, green: CGFloat(green)/divisor, blue: CGFloat(blue)/divisor, alpha: alpha)
     }
 }
+
+extension UIImage {
+    
+    class func getBoundingSizeForAspectFit(aspectRatio: CGSize, var imageViewSize boundingSize: CGSize) -> CGSize {
+        
+        let mW = boundingSize.width / aspectRatio.width;
+        let mH = boundingSize.height / aspectRatio.height;
+        if mH < mW {
+            boundingSize.width = boundingSize.height / aspectRatio.height * aspectRatio.width
+        } else if mW < mH {
+            boundingSize.height = boundingSize.width / aspectRatio.width * aspectRatio.height
+        }
+        
+        return boundingSize
+    }
+}
