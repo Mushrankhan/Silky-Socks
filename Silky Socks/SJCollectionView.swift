@@ -144,7 +144,16 @@ extension SJCollectionView: ShareViewCollectionReusableViewDelegate {
 // MARK: Add To Cart
 extension SJCollectionView: CartViewCollectionReusableViewDelegate {
     func cartReusableView(view: CartViewCollectionReusableView, didPressAddToCartButton sender: UIButton) {
-        
+        let cells = visibleCells() as! [SJCollectionViewCell]
+        if cells.count == 1 {
+            let cell = cells.first!
+            UIGraphicsBeginImageContextWithOptions(cell.frame.size, cell.opaque, 0)
+            cell.layer.renderInContext(UIGraphicsGetCurrentContext())
+            let image = UIGraphicsGetImageFromCurrentImageContext()
+            UIGraphicsEndImageContext()
+            
+            // Do Something with the snapshot
+        }
     }
 }
 

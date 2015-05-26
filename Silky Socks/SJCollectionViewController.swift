@@ -92,10 +92,6 @@ extension SJCollectionViewController: SJCollectionViewDelegate {
         textField.becomeFirstResponder()
         collectionView.addSubview(textField)
         
-//        if let sj_bottomView = collectionView.sj_bottomView {
-//            sj_bottomView.userInteractionEnabled = false
-//        }
-        
     }
     
     func collectionView(collectionView: UICollectionView, bottomView: UIView, didPressCameraButton button: UIButton) {
