@@ -10,11 +10,6 @@ import UIKit
 
 class SJLabel: UILabel {
     
-    init() {
-        super.init(frame: .zeroRect)
-        initialSetUp()
-    }
-    
     override init(frame: CGRect) {
         super.init(frame: frame)
         initialSetUp()
@@ -34,7 +29,6 @@ class SJLabel: UILabel {
     
     private func initialSetUp() {
         numberOfLines = 1
-        userInteractionEnabled = true
         backgroundColor = UIColor.clearColor()
         contentMode = .Redraw
         textAlignment = .Center

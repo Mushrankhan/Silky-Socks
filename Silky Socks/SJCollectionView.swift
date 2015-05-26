@@ -116,20 +116,14 @@ extension SJCollectionView: RestartViewCollectionReusableViewDelegate {
                 }
             }
         
-        let cell = visibleCells() as! [SJCollectionViewCell]
-        if cell.count == 1 {
-//            if let sj_label = cell.first!.sj_label {
-//                sj_label.removeFromSuperview()
-//                cell.first!.sj_label = nil
-//            }
-//            if let sj_imgView = cell.first!.sj_imgView {
-//                sj_imgView.removeFromSuperview()
-//                cell.first!.sj_imgView = nil
-//            }
-            for view in cell.first!.sj_subViews {
+        // Should return only one cell
+        let cells = visibleCells() as! [SJCollectionViewCell]
+        if cells.count == 1 {
+            let cell = cells.first!
+            for view in cell.sj_subViews {
                 view.removeFromSuperview()
             }
-            cell.first!.sj_subViews.removeAll(keepCapacity: true)
+            cell.sj_subViews.removeAll(keepCapacity: true)
         }
     }
 }
@@ -202,6 +196,7 @@ extension SJCollectionView: SJBottomViewDelegate {
 }
 
 // MARK: Messages from the VC
+// Delegate to the cell to create the appropriate views
 extension SJCollectionView {
     
     func sj_createTextLabel(text: String, afont: UIFont) {
@@ -215,10 +210,6 @@ extension SJCollectionView {
     }
     
     func sj_createImage(image: UIImage) {
-        
-//        if let sj_bottomView = sj_bottomView {
-//            sj_bottomView.userInteractionEnabled = false
-//        }
         
         // Should return only one cell, because one cell covers the entire area
         let cells = visibleCells() as! [SJCollectionViewCell]
@@ -234,6 +225,7 @@ extension SJCollectionView: UIGestureRecognizerDelegate {
     func gestureRecognizer(gestureRecognizer: UIGestureRecognizer, shouldReceiveTouch touch: UITouch) -> Bool {
         
         if gestureRecognizer == panGestureRecognizer {
+            // False - If entering Text
             for subview in subviews as! [UIView] {
                 if subview.isKindOfClass(SJTextField.self) {
                     return false
@@ -243,6 +235,7 @@ extension SJCollectionView: UIGestureRecognizerDelegate {
             let location = touch.locationInView(self)
             let index = indexPathForItemAtPoint(location)
             
+            // If the views added to the cell are more than zero
             if let index = index {
                 let cell = cellForItemAtIndexPath(index) as! SJCollectionViewCell
                 if cell.sj_subViews.count > 0 {
@@ -250,10 +243,10 @@ extension SJCollectionView: UIGestureRecognizerDelegate {
                 }
             }
         }
-        
         return true
     }
     
+    // Essential
     func gestureRecognizer(gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWithGestureRecognizer otherGestureRecognizer: UIGestureRecognizer) -> Bool {
         return true
     }

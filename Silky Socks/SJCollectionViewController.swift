@@ -11,13 +11,16 @@ import UIKit
 class SJCollectionViewController: UIViewController {
 
     // the array containing templates
-    private var templateArray = Template.allTemplates()
+    lazy private var templateArray = Template.allTemplates()
     
     // Cell Reuse identifier
     private let reuseIdentifier = "Cell"
     
     // Collection view
     @IBOutlet weak var collectionView: SJCollectionView!
+    
+    // Image Picker Controller
+    private var picker: UIImagePickerController!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,11 +38,19 @@ class SJCollectionViewController: UIViewController {
         
         collectionView!.backgroundColor = UIColor.whiteColor()
         collectionView!.pagingEnabled = true
+        
+        // Create the image picker controller
+        picker = UIImagePickerController()
+        picker.delegate = self
+        picker.allowsEditing = true
+        picker.mediaTypes = ["public.image"]
+        picker.sourceType = .PhotoLibrary
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         templateArray = []
+        picker = nil
     }
 }
 
@@ -90,29 +101,31 @@ extension SJCollectionViewController: SJCollectionViewDelegate {
         let textField = SJTextField(frame: frame)
         textField.delegate = self
         textField.becomeFirstResponder()
+        
+        // Add Text Field to collection view
         collectionView.addSubview(textField)
         
     }
     
     func collectionView(collectionView: UICollectionView, bottomView: UIView, didPressCameraButton button: UIButton) {
         
-        let picker = createImagePicker()
+        // Create On Demand
         let sheet = UIAlertController(title: "Import Photo", message: nil, preferredStyle: .ActionSheet)
         
         // Take photo
         sheet.addAction(UIAlertAction(title: "Take Photo", style: .Default) { action in
             if UIImagePickerController.isSourceTypeAvailable(.Camera) {
-                picker.sourceType = .Camera
+                self.picker.sourceType = .Camera
             }
-            self.presentViewController(picker, animated: true, completion: nil)
+            self.presentViewController(self.picker, animated: true, completion: nil)
         })
         
         // Choose Photo
         sheet.addAction(UIAlertAction(title: "Choose Photo", style: .Default) { action in
             if UIImagePickerController.isSourceTypeAvailable(.PhotoLibrary) {
-                picker.sourceType = .PhotoLibrary
+                self.picker.sourceType = .PhotoLibrary
             }
-            self.presentViewController(picker, animated: true, completion: nil)
+            self.presentViewController(self.picker, animated: true, completion: nil)
         })
         
         // Cancel
@@ -145,7 +158,6 @@ extension SJCollectionViewController: UITextFieldDelegate {
         if count(textField.text) > 0 {
             if textField.canResignFirstResponder() {
                 textField.resignFirstResponder()
-                // Remove from superview
                 textField.removeFromSuperview()
                 // Create The label
                 collectionView.sj_createTextLabel(textField.text, afont: textField.font)
@@ -164,16 +176,6 @@ extension SJCollectionViewController: UITextFieldDelegate {
 
 // MARK: Camera Button
 extension SJCollectionViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
-    
-    private func createImagePicker() -> UIImagePickerController {
-        
-        let picker = UIImagePickerController()
-        picker.delegate = self
-        picker.allowsEditing = true
-        picker.mediaTypes = ["public.image"]
-        picker.sourceType = .PhotoLibrary
-        return picker
-    }
     
     func imagePickerControllerDidCancel(picker: UIImagePickerController) {
         dismissViewControllerAnimated(true, completion: nil)
