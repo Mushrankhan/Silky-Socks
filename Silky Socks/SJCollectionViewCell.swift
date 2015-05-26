@@ -131,10 +131,10 @@ class SJCollectionViewCell: UICollectionViewCell {
         addClipRect()
         
         // Create the text label
-        let sj_label = SJLabel(frame: .zeroRect, text: text, font: font)
-        sj_label.frame.size.width = CGRectGetWidth(boundingRectView!.frame)
+        let sj_label = SJLabel(frame: .zeroRect, text: text, font: font, maskImage:template!.image)
+        sj_label.frame = boundingRectView!.frame
         sj_label.frame.origin = CGPointZero
-        sj_label.sizeToFit()
+
         sj_subViews.append(sj_label)
         
         // Add subview
@@ -179,12 +179,14 @@ extension SJCollectionViewCell: UIGestureRecognizerDelegate {
                         case .Changed:
                             translatedpoint = CGPointMake(firstX + translatedpoint.x, firstY + translatedpoint.y)
                             view.center = translatedpoint
+                            view.setNeedsDisplay()
                             break loop
                         case .Ended:
                             lastSelectedView = view
                         default:
                             break
                     }
+                    
                 }
             }
         }
