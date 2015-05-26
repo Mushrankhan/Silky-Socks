@@ -78,6 +78,16 @@ class SJCollectionViewCell: UICollectionViewCell {
         
     }
     
+    // Prepare for reuse
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        for view in sj_subViews {
+            view.removeFromSuperview()
+        }
+        sj_subViews.removeAll(keepCapacity: true)
+        boundingRectView?.removeFromSuperview()
+    }
+    
     // Apply Layout Attributes
     override func applyLayoutAttributes(layoutAttributes: UICollectionViewLayoutAttributes!) {
         if let attr = layoutAttributes {
@@ -93,6 +103,9 @@ class SJCollectionViewCell: UICollectionViewCell {
     private func addClipRect() {
         
         if let view = boundingRectView {
+            if view.superview == nil {
+                addSubview(view)
+            }
             return
         }
         

@@ -92,6 +92,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1FC258A91B14901500EAEF20 /* Bottom View */ = {
+			isa = PBXGroup;
+			children = (
+				4FB6C9C01AE4AF70001A6E50 /* SJBottomView.swift */,
+				4FB6C9C21AE4AF7A001A6E50 /* SJBottomView.xib */,
+			);
+			name = "Bottom View";
+			sourceTree = "<group>";
+		};
 		1FCF508D1B070EA6005D8578 /* Data Source & Delegate */ = {
 			isa = PBXGroup;
 			children = (
@@ -114,8 +123,7 @@
 		1FCF509F1B07FF0B005D8578 /* Supplementary Views */ = {
 			isa = PBXGroup;
 			children = (
-				4FB6C9C01AE4AF70001A6E50 /* SJBottomView.swift */,
-				4FB6C9C21AE4AF7A001A6E50 /* SJBottomView.xib */,
+				1FC258A91B14901500EAEF20 /* Bottom View */,
 				1FCF50941B07EBAB005D8578 /* SJCollectionReusableView.swift */,
 				1FCF50981B07ECA3005D8578 /* SJCollectionRestartReusableView.xib */,
 				1FCF509A1B07ED8A005D8578 /* SJCollectionShareReusableView.xib */,
