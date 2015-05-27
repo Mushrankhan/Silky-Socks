@@ -10,10 +10,15 @@ import UIKit
 
 protocol SJCollectionViewDelegate: UICollectionViewDelegate {
     
+    // The Bottom Customization Button
     func collectionView(collectionView: UICollectionView, bottomView: UIView , didPressCameraButton button:UIButton)
     func collectionView(collectionView: UICollectionView, bottomView: UIView , didPressTextButton button:UIButton)
     func collectionView(collectionView: UICollectionView, bottomView: UIView , didPressColorWheelButton button:UIButton)
     func collectionView(collectionView: UICollectionView, bottomView: UIView , didPressGridButton button:UIButton)
     func collectionView(collectionView: UICollectionView, bottomView: UIView , didPressSmileyButton button:UIButton)
 
+    // Add To Cart
+    func collectionView(collectionView: UICollectionView, didPressAddToCartButton button:UIButton, withSnapShotImage snapshot: UIImage, andTemplate template: Template)
+    // Restart
+    func collectionView(collectionView: UICollectionView, didPressRestartButton button:UIButton)
 }

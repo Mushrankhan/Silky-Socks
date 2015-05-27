@@ -11,7 +11,7 @@ import UIKit
 class UserCart: BUYCart {
    
     // User Cart
-    private var cart = [Template]()
+//    private var cart = [Template]()
     
     // Singleton support
     class func sharedCart() -> UserCart {
@@ -22,7 +22,7 @@ class UserCart: BUYCart {
     }
     
     // Add Product
-    func addProduct(template: Template) {
+    func addProduct(template: Template, snapshot: UIImage) {
         
     }
     

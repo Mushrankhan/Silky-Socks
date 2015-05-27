@@ -99,32 +99,7 @@ extension SJCollectionView {
 // MARK: Restart
 extension SJCollectionView: RestartViewCollectionReusableViewDelegate {
     func restartReusableView(view: RestartViewCollectionReusableView, didPressRestartButton sender: UIButton) {
-        
-        // Re enable user interaction
-        if let sj_bottomView = sj_bottomView {
-            sj_bottomView.userInteractionEnabled = true
-        }
-        
-        // Check if the text field exists
-        loop: for subView in subviews as! [UIView] {
-                if subView.isKindOfClass(SJTextField.self) {
-                    if subView.canResignFirstResponder() {
-                        subView.resignFirstResponder()
-                    }
-                    subView.removeFromSuperview()
-                    break loop
-                }
-            }
-        
-        // Should return only one cell
-        let cells = visibleCells() as! [SJCollectionViewCell]
-        if cells.count == 1 {
-            let cell = cells.first!
-            for view in cell.sj_subViews {
-                view.removeFromSuperview()
-            }
-            cell.sj_subViews.removeAll(keepCapacity: true)
-        }
+        myDelegate?.collectionView(self, didPressRestartButton: sender)
     }
 }
 
@@ -147,6 +122,7 @@ extension SJCollectionView: CartViewCollectionReusableViewDelegate {
             UIGraphicsEndImageContext()
             
             // Do Something with the snapshot
+            myDelegate?.collectionView(self, didPressAddToCartButton: sender, withSnapShotImage: image, andTemplate: cell.template!)
         }
     }
 }

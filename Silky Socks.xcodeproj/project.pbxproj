@@ -30,7 +30,6 @@
 		4F8D38C61AE441F700F42E23 /* SJCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F8D38C51AE441F700F42E23 /* SJCollectionViewCell.swift */; };
 		4F8D38CA1AE4451000F42E23 /* SJCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F8D38C91AE4451000F42E23 /* SJCollectionViewController.swift */; };
 		4F8D38CC1AE4457800F42E23 /* TemplateModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F8D38CB1AE4457800F42E23 /* TemplateModel.swift */; };
-		4F8D38D31AE4582200F42E23 /* SJCollectionViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F8D38D21AE4582200F42E23 /* SJCollectionViewDataSource.swift */; };
 		4FB6C9C11AE4AF70001A6E50 /* SJBottomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FB6C9C01AE4AF70001A6E50 /* SJBottomView.swift */; };
 		4FB6C9C31AE4AF7A001A6E50 /* SJBottomView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4FB6C9C21AE4AF7A001A6E50 /* SJBottomView.xib */; };
 		4FB6C9C51AE4B394001A6E50 /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FB6C9C41AE4B394001A6E50 /* Utilities.swift */; };
@@ -88,7 +87,6 @@
 		4F8D38C51AE441F700F42E23 /* SJCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SJCollectionViewCell.swift; sourceTree = "<group>"; };
 		4F8D38C91AE4451000F42E23 /* SJCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SJCollectionViewController.swift; sourceTree = "<group>"; };
 		4F8D38CB1AE4457800F42E23 /* TemplateModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TemplateModel.swift; sourceTree = "<group>"; };
-		4F8D38D21AE4582200F42E23 /* SJCollectionViewDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SJCollectionViewDataSource.swift; sourceTree = "<group>"; };
 		4FB6C9C01AE4AF70001A6E50 /* SJBottomView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SJBottomView.swift; sourceTree = "<group>"; };
 		4FB6C9C21AE4AF7A001A6E50 /* SJBottomView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SJBottomView.xib; sourceTree = "<group>"; };
 		4FB6C9C41AE4B394001A6E50 /* Utilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
@@ -133,7 +131,6 @@
 		1FCF508D1B070EA6005D8578 /* Data Source & Delegate */ = {
 			isa = PBXGroup;
 			children = (
-				4F8D38D21AE4582200F42E23 /* SJCollectionViewDataSource.swift */,
 				1FCF50A01B083D70005D8578 /* SJCollectionViewDelegate.swift */,
 			);
 			name = "Data Source & Delegate";
@@ -371,7 +368,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4F8D38D31AE4582200F42E23 /* SJCollectionViewDataSource.swift in Sources */,
 				4F55B55D1AE480F400679048 /* SJLayout.swift in Sources */,
 				1FCF508F1B070F4C005D8578 /* SJCollectionView.swift in Sources */,
 				1F88389E1B0D875D00E3BBB6 /* SJLabel.swift in Sources */,
