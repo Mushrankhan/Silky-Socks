@@ -8,7 +8,7 @@
 
 import UIKit
 
-class UserCart: NSObject {
+class UserCart: BUYCart {
    
     // User Cart
     private var cart = [Template]()
