@@ -38,20 +38,20 @@ class SJLabel: UILabel {
         adjustsFontSizeToFitWidth = true
     }
     
-    override func drawRect(rect: CGRect) {
-        let context : CGContextRef = UIGraphicsGetCurrentContext()
-        let flipVertical = CGAffineTransformMake(1, 0, 0, -1, 0, rect.size.height)
-        CGContextConcatCTM(context, flipVertical)
-        
-        let maskRect = CGRect(x: -self.frame.origin.x, y: self.frame.origin.y, width: rect.size.width, height: rect.size.height);
-        
-        CGContextClipToMask(context, maskRect, self.maskImage!.CGImage)
-        
-//        CGContextSetRGBFillColor(context, 1, 0, 0, 0.5)
-//        CGContextFillRect(context, rect);
-
-        CGContextConcatCTM(context, flipVertical)
-        super.drawRect(rect)
-    }
+//    override func drawRect(rect: CGRect) {
+//        let context : CGContextRef = UIGraphicsGetCurrentContext()
+//        let flipVertical = CGAffineTransformMake(1, 0, 0, -1, 0, rect.size.height)
+//        CGContextConcatCTM(context, flipVertical)
+//        
+//        let maskRect = CGRect(x: -self.frame.origin.x, y: self.frame.origin.y, width: rect.size.width, height: rect.size.height);
+//        
+//        CGContextClipToMask(context, maskRect, self.maskImage!.CGImage)
+//        
+////        CGContextSetRGBFillColor(context, 1, 0, 0, 0.5)
+////        CGContextFillRect(context, rect);
+//
+//        CGContextConcatCTM(context, flipVertical)
+//        super.drawRect(rect)
+//    }
 
 }
