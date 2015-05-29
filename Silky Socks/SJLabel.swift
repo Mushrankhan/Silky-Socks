@@ -9,9 +9,7 @@
 import UIKit
 
 class SJLabel: UILabel {
-    
-    var maskImage: UIImage?
-    
+        
     override init(frame: CGRect) {
         super.init(frame: frame)
         initialSetUp()
@@ -22,11 +20,10 @@ class SJLabel: UILabel {
         initialSetUp()
     }
     
-    init(frame: CGRect, text: String, font: UIFont, maskImage: UIImage) {
+    init(frame: CGRect, text: String, font: UIFont) {
         super.init(frame: frame)
         self.text = text
         self.font = font
-        self.maskImage = maskImage
         initialSetUp()
     }
     
@@ -37,21 +34,29 @@ class SJLabel: UILabel {
         textAlignment = .Center
         adjustsFontSizeToFitWidth = true
     }
-    
-//    override func drawRect(rect: CGRect) {
-//        let context : CGContextRef = UIGraphicsGetCurrentContext()
-//        let flipVertical = CGAffineTransformMake(1, 0, 0, -1, 0, rect.size.height)
-//        CGContextConcatCTM(context, flipVertical)
-//        
-//        let maskRect = CGRect(x: -self.frame.origin.x, y: self.frame.origin.y, width: rect.size.width, height: rect.size.height);
-//        
-//        CGContextClipToMask(context, maskRect, self.maskImage!.CGImage)
-//        
-////        CGContextSetRGBFillColor(context, 1, 0, 0, 0.5)
-////        CGContextFillRect(context, rect);
-//
-//        CGContextConcatCTM(context, flipVertical)
-//        super.drawRect(rect)
-//    }
-
 }
+
+
+//class BoundingView: UIView {
+//    
+//    var maskImage: UIImage?
+//    
+//    override func drawRect(rect: CGRect) {
+//        
+//        let context = UIGraphicsGetCurrentContext()
+//        CGContextTranslateCTM(context, 0, rect.size.height)
+//        CGContextScaleCTM(context, 1, -1)
+//        
+//        CGContextSetRGBFillColor(context, 0, 0, 1, 0.5)
+//        CGContextFillRect(context, rect)
+//        
+//        let image = maskImage!.colorizeWith(UIColor.yellowColor())
+//        CGContextDrawImage(context, rect, image.CGImage)
+//        CGContextClipToMask(context, rect, image.CGImage)
+//        
+//        CGContextSetRGBFillColor(context, 0, 1, 0, 0.5)
+//        CGContextFillRect(context, CGRectMake(0, 0, 100, 100))
+//    }
+//    
+//}
+//

@@ -99,28 +99,26 @@ class SJCollectionViewCell: UICollectionViewCell {
     // Is a view around the image because the image is smaller than the image view
     private var boundingRectView: UIView?
     
+    // Masking that is applied to the boundingRectView
+    private var maskImageView: UIImageView?
+    
     // Aspect Fit
     private func addClipRect() {
         
         if let view = boundingRectView {
-            if view.superview == nil {
-                addSubview(view)
-            }
-            return
+            view.removeFromSuperview()
+            boundingRectView = nil
         }
         
-        let aspectRatio = template!.image.size
-        var boundingSize = ss_imgView.frame.size
+        // Alloc the bounding View
+        boundingRectView = UIView(frame: ss_imgView.frame)
         
-        // Get the bounds for aspect fit
-        boundingSize = UIImage.getBoundingSizeForAspectFit(aspectRatio, imageViewSize: boundingSize)
+        // Apply the mask
+        maskImageView = UIImageView(frame: boundingRectView!.bounds)
+        maskImageView?.contentMode = .ScaleAspectFit
+        maskImageView?.image = template!.image
+        boundingRectView!.maskView = maskImageView
         
-        // Create the bounding rect
-        let x = (ss_imgView.frame.width - boundingSize.width)/2 + 5
-        let y = (ss_imgView.frame.height - boundingSize.height)/2 + 20
-        let frame = CGRectMake(x, y, boundingSize.width - 10, boundingSize.height - 5)
-        boundingRectView = UIView(frame: frame)
-        boundingRectView!.clipsToBounds = true
         addSubview(boundingRectView!)
     }
     
@@ -128,14 +126,23 @@ class SJCollectionViewCell: UICollectionViewCell {
     func createLabel(text: String, font: UIFont) {
         
         // Create and add the bounding rect
-        addClipRect()
+        if boundingRectView == nil {
+            addClipRect()
+        }
         
         // Create the text label
-        let sj_label = SJLabel(frame: .zeroRect, text: text, font: font, maskImage:template!.image)
+        let sj_label = SJLabel(frame: .zeroRect, text: text, font: font)
         sj_label.frame = boundingRectView!.frame
         sj_label.frame.origin = CGPointZero
-
-        sj_subViews.append(sj_label)
+        
+        // Add the label to the array of sub views
+        sj_subViews.insert(sj_label, atIndex: 0)
+        
+        // Make sure that the last selected view
+        // has a value
+        if lastSelectedView == nil {
+            lastSelectedView = sj_label
+        }
         
         // Add subview
         boundingRectView?.addSubview(sj_label)
@@ -145,12 +152,23 @@ class SJCollectionViewCell: UICollectionViewCell {
     func createImage(image: UIImage) {
         
         // Create and add the bounding rect
-        addClipRect()
+        if boundingRectView == nil {
+            addClipRect()
+        }
         
+        // Create the image
         let sj_imgView = UIImageView(frame: bounds)
         sj_imgView.contentMode = .ScaleAspectFill
         sj_imgView.image = image
-        sj_subViews.append(sj_imgView)
+        
+        // Add it to the array of subviews
+        sj_subViews.insert(sj_imgView, atIndex: 0)
+        
+        // Make sure that the last selected view
+        // has a value
+        if lastSelectedView == nil {
+            lastSelectedView = sj_imgView
+        }
         
         // Add subview
         boundingRectView?.addSubview(sj_imgView)
@@ -163,12 +181,17 @@ extension SJCollectionViewCell: UIGestureRecognizerDelegate {
     // Handle Pan Gesture
     @objc private func handlePan(recognizer: UIPanGestureRecognizer) {
         
+        // Make sure that the bounding view exists
+        // which it always will
         if let boundingRectView = boundingRectView {
             
+            // Find the location
             var location = recognizer.locationInView(boundingRectView)
             var translatedpoint = recognizer.translationInView(boundingRectView)
             
+            // Loop through the sub views array
             loop: for view in sj_subViews {
+                // If one subview contains the point
                 if CGRectContainsPoint(view.frame, location) {
                     switch recognizer.state {
                         case .Began:
@@ -179,7 +202,9 @@ extension SJCollectionViewCell: UIGestureRecognizerDelegate {
                         case .Changed:
                             translatedpoint = CGPointMake(firstX + translatedpoint.x, firstY + translatedpoint.y)
                             view.center = translatedpoint
-                            view.setNeedsDisplay()
+                            // Break the loop after changing one view
+                            // Done in order to prevent multiple views 
+                            // from moving simultaneously
                             break loop
                         case .Ended:
                             lastSelectedView = view

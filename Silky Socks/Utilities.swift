@@ -48,4 +48,30 @@ extension UIImage {
         
         return boundingSize
     }
+    
+    func colorizeWith(color: UIColor) -> UIImage {
+        
+        UIGraphicsBeginImageContext(size)
+        let context = UIGraphicsGetCurrentContext()
+        color.setFill()
+        CGContextTranslateCTM(context, 0, size.height)
+        CGContextScaleCTM(context, 1, -1)
+        
+        // set the blend mode to color burn, and the original image
+        CGContextSetBlendMode(context, kCGBlendModeNormal);
+        let rect = CGRectMake(0, 0, size.width, size.height);
+        CGContextDrawImage(context, rect, CGImage);
+        
+        // set a mask that matches the shape of the image, then draw (color burn) a colored rectangle
+        CGContextClipToMask(context, rect, CGImage);
+        CGContextAddRect(context, rect);
+        CGContextDrawPath(context,kCGPathFill);
+        
+        // generate a new UIImage from the graphics context we drew onto
+        let coloredImage = UIGraphicsGetImageFromCurrentImageContext();
+        UIGraphicsEndImageContext();
+        
+        //return the color-burned image
+        return coloredImage;
+    }
 }
