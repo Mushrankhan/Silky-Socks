@@ -67,6 +67,13 @@ class SJCollectionView: UICollectionView {
         let layout = collectionViewLayout as! SJLayout
         layout.registerNib(UINib(nibName: "SJCollectionDecorationSilkySocksLogoReusableView", bundle: nil), forDecorationViewOfKind: logoElementKind)
     }
+    
+    // Using it to dismiss the color palette
+    override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
+        let touch = touches.first as! UITouch
+        myDelegate?.collectionView(self, touchesBegan: touch)
+        super.touchesBegan(touches, withEvent: event)
+    }
 }
 
 // MARK: Dequeuing the various supplementary views

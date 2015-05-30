@@ -220,15 +220,16 @@ extension SJCollectionViewController: SJCollectionViewDelegate {
     }
     
     func collectionView(collectionView: UICollectionView, bottomView: UIView , didPressGridButton button:UIButton) {                colorCollectionVC.collectionView!.hidden = true
-        self.collectionView.panGestureRecognizer.enabled = false
+        //self.collectionView.panGestureRecognizer.enabled = false
 
         print("Grid")
     }
     
     func collectionView(collectionView: UICollectionView, bottomView: UIView , didPressSmileyButton button:UIButton) {
+        //showingText = true
         colorCollectionVC.collectionView!.hidden = true
-        self.collectionView.panGestureRecognizer.enabled = false
-
+        //self.collectionView.panGestureRecognizer.enabled = false
+        
         print("Smiley")
     }
     
@@ -292,7 +293,13 @@ extension SJCollectionViewController: SJCollectionViewDelegate {
         })
         
         presentViewController(alert, animated: true, completion: nil)
-    }    
+    }
+    
+    func collectionView(collectionView: UICollectionView, touchesBegan touch: UITouch) {
+        if !colorCollectionVC.collectionView!.hidden  {
+            colorCollectionVC.collectionView!.hidden = true
+        }
+    }
 }
 
 // MARK: Text Button
