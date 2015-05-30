@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1F232D2F1B196CB200ECD753 /* SJColorCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F232D2E1B196CB200ECD753 /* SJColorCollectionViewController.swift */; };
 		1F39440B1B094EA4008E73E0 /* SJCollectionAddToCartReusableView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1F39440A1B094EA4008E73E0 /* SJCollectionAddToCartReusableView.xib */; };
 		1F54AD1C1B16023A007E9E48 /* Buy.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F54AD1B1B16023A007E9E48 /* Buy.framework */; };
 		1F54AD1D1B16023A007E9E48 /* Buy.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 1F54AD1B1B16023A007E9E48 /* Buy.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -60,6 +61,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		1F232D2E1B196CB200ECD753 /* SJColorCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SJColorCollectionViewController.swift; sourceTree = "<group>"; };
 		1F39440A1B094EA4008E73E0 /* SJCollectionAddToCartReusableView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SJCollectionAddToCartReusableView.xib; sourceTree = "<group>"; };
 		1F54AD1B1B16023A007E9E48 /* Buy.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Buy.framework; sourceTree = "<group>"; };
 		1F54AD201B1602D6007E9E48 /* BridgingHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BridgingHeader.h; sourceTree = "<group>"; };
@@ -255,6 +257,7 @@
 			isa = PBXGroup;
 			children = (
 				4F8D38C91AE4451000F42E23 /* SJCollectionViewController.swift */,
+				1F232D2E1B196CB200ECD753 /* SJColorCollectionViewController.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -374,6 +377,7 @@
 				1F88389C1B0D731200E3BBB6 /* SJTextField.swift in Sources */,
 				4F8D38CC1AE4457800F42E23 /* TemplateModel.swift in Sources */,
 				4F8D38C61AE441F700F42E23 /* SJCollectionViewCell.swift in Sources */,
+				1F232D2F1B196CB200ECD753 /* SJColorCollectionViewController.swift in Sources */,
 				4F8D38A61AE440DE00F42E23 /* Silky_Socks.xcdatamodeld in Sources */,
 				1FCF50A11B083D70005D8578 /* SJCollectionViewDelegate.swift in Sources */,
 				4F8D38CA1AE4451000F42E23 /* SJCollectionViewController.swift in Sources */,

@@ -32,6 +32,37 @@ extension UIColor {
         let divisor: CGFloat = 255
         return UIColor(red: CGFloat(red)/divisor, green: CGFloat(green)/divisor, blue: CGFloat(blue)/divisor, alpha: alpha)
     }
+    
+    class func getColorPalette() -> [UIColor] {
+        
+        var array = [UIColor]()
+        
+        for var i = 0; i < 6; ++i {
+            array.append(UIColor.getColor(red: i*51, green: i*51, blue: i*51, alpha: 1))
+        }
+        
+        for var i = 0; i < 7; ++i {
+            array.append(UIColor.getColor(red: 255, green: i*34, blue: 0, alpha: 1))
+        }
+        
+        for var i = 7; i >= 0; --i {
+            array.append(UIColor.getColor(red: 34*i, green: 255, blue: 0, alpha: 1))
+        }
+        
+        for var i = 1; i < 8; ++i {
+            array.append(UIColor.getColor(red: 0, green: 255, blue: i*34, alpha: 1))
+        }
+        
+        for var i = 7; i >= 0; --i {
+            array.append(UIColor.getColor(red: 0, green: i*34, blue: 255, alpha: 1))
+        }
+        
+        for var i = 1; i < 7; ++i {
+            array.append(UIColor.getColor(red: i*34, green: 0, blue: 255, alpha: 1))
+        }
+        
+        return array
+    }
 }
 
 extension UIImage {

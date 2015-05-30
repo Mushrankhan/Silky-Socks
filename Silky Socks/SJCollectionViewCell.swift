@@ -86,6 +86,7 @@ class SJCollectionViewCell: UICollectionViewCell {
         }
         sj_subViews.removeAll(keepCapacity: true)
         boundingRectView?.removeFromSuperview()
+        boundingRectView = nil
     }
     
     // Apply Layout Attributes
@@ -97,7 +98,7 @@ class SJCollectionViewCell: UICollectionViewCell {
     
     // Add the label as a subview of boundingRectView
     // Is a view around the image because the image is smaller than the image view
-    private var boundingRectView: UIView?
+    private(set) var boundingRectView: UIView?
     
     // Masking that is applied to the boundingRectView
     private var maskImageView: UIImageView?
@@ -123,7 +124,7 @@ class SJCollectionViewCell: UICollectionViewCell {
     }
     
     // Create the text label
-    func createLabel(text: String, font: UIFont) {
+    func createLabel(text: String, font: UIFont, color: UIColor) {
         
         // Create and add the bounding rect
         if boundingRectView == nil {
@@ -132,17 +133,18 @@ class SJCollectionViewCell: UICollectionViewCell {
         
         // Create the text label
         let sj_label = SJLabel(frame: .zeroRect, text: text, font: font)
-        sj_label.frame = boundingRectView!.frame
-        sj_label.frame.origin = CGPointZero
+        //sj_label.frame = boundingRectView!.frame
+        sj_label.frame.size.width = CGRectGetWidth(boundingRectView!.frame)
+        sj_label.textColor = color
+        sj_label.sizeToFit()
+        sj_label.center = CGPoint(x: boundingRectView!.center.x, y: boundingRectView!.center.y)
         
         // Add the label to the array of sub views
         sj_subViews.insert(sj_label, atIndex: 0)
-        
+
         // Make sure that the last selected view
         // has a value
-        if lastSelectedView == nil {
-            lastSelectedView = sj_label
-        }
+        lastSelectedView = sj_label
         
         // Add subview
         boundingRectView?.addSubview(sj_label)
@@ -166,12 +168,18 @@ class SJCollectionViewCell: UICollectionViewCell {
         
         // Make sure that the last selected view
         // has a value
-        if lastSelectedView == nil {
-            lastSelectedView = sj_imgView
-        }
+        lastSelectedView = sj_imgView
         
         // Add subview
         boundingRectView?.addSubview(sj_imgView)
+    }
+    
+    func addColor(color: UIColor) {
+        if boundingRectView == nil {
+            addClipRect()
+        }
+        
+        boundingRectView!.backgroundColor = color
     }
 }
 
@@ -191,6 +199,7 @@ extension SJCollectionViewCell: UIGestureRecognizerDelegate {
             
             // Loop through the sub views array
             loop: for view in sj_subViews {
+                
                 // If one subview contains the point
                 if CGRectContainsPoint(view.frame, location) {
                     switch recognizer.state {
@@ -200,8 +209,7 @@ extension SJCollectionViewCell: UIGestureRecognizerDelegate {
                                 firstY = view.center.y
                             }
                         case .Changed:
-                            translatedpoint = CGPointMake(firstX + translatedpoint.x, firstY + translatedpoint.y)
-                            view.center = translatedpoint
+                            view.center = CGPointMake(firstX + translatedpoint.x, firstY + translatedpoint.y)
                             // Break the loop after changing one view
                             // Done in order to prevent multiple views 
                             // from moving simultaneously
@@ -211,7 +219,6 @@ extension SJCollectionViewCell: UIGestureRecognizerDelegate {
                         default:
                             break
                     }
-                    
                 }
             }
         }

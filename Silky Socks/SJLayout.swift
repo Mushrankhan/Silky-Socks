@@ -148,7 +148,8 @@ class SJLayout: UICollectionViewLayout {
         let indexPath = NSIndexPath(forItem: 0, inSection: 0)
         
         // Different element kinds
-        let elementKinds = [restartElementkind, shareElementKind, utilitiesElementkind, addToCartElementKind]
+        // Add addToCartElementKind in the array to get the supplementary view
+        let elementKinds = [restartElementkind, shareElementKind, utilitiesElementkind]
         
         // Loop through and add the supplementary views
         for kind in elementKinds {

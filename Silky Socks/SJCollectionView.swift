@@ -175,13 +175,13 @@ extension SJCollectionView: SJBottomViewDelegate {
 // Delegate to the cell to create the appropriate views
 extension SJCollectionView {
     
-    func sj_createTextLabel(text: String, afont: UIFont) {
+    func sj_createTextLabel(text: String, afont: UIFont, acolor: UIColor) {
         
         let font = UIFont(name: afont.fontName, size: afont.pointSize)
         // Should return only one cell, because one cell covers the entire area
         let cells = visibleCells() as! [SJCollectionViewCell]
         if cells.count == 1 {
-            cells.first!.createLabel(text, font: font!)
+            cells.first!.createLabel(text, font: font!, color: acolor)
         }
     }
     
