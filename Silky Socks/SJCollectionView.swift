@@ -23,6 +23,17 @@ class SJCollectionView: UICollectionView {
     // The bottom view
     private(set) var sj_bottomView: SJBottomView?
     
+    // The Count
+    var cell_subViewsCount: Int {
+        get {
+            let cells = visibleCells() as! [SJCollectionViewCell]
+            if cells.count == 1 {
+                return cells.first!.sj_subViews.count
+            }
+            return 0
+        }
+    }
+    
     // Initialization
     required init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -56,7 +67,6 @@ class SJCollectionView: UICollectionView {
         let layout = collectionViewLayout as! SJLayout
         layout.registerNib(UINib(nibName: "SJCollectionDecorationSilkySocksLogoReusableView", bundle: nil), forDecorationViewOfKind: logoElementKind)
     }
-    
 }
 
 // MARK: Dequeuing the various supplementary views
@@ -135,14 +145,18 @@ extension SJCollectionView: SJBottomViewDelegate {
     
     // Navigate Right
     func sj_bottomView(view: SJBottomView, didPressRightButton button: UIButton) {
-        let xOffset = min(contentSize.width - width, contentOffset.x + width)
-        setContentOffset(CGPoint(x: xOffset, y: contentOffset.y), animated: true)
+        if cell_subViewsCount == 0 {
+            let xOffset = min(contentSize.width - width, contentOffset.x + width)
+            setContentOffset(CGPoint(x: xOffset, y: contentOffset.y), animated: true)
+        }
     }
     
     // Navigate Left
     func sj_bottomView(view: SJBottomView, didPressLeftButton button: UIButton) {
-        let xOffset = max(0, contentOffset.x - width)
-        setContentOffset(CGPoint(x: xOffset, y: contentOffset.y), animated: true)
+        if cell_subViewsCount == 0 {
+            let xOffset = max(0, contentOffset.x - width)
+            setContentOffset(CGPoint(x: xOffset, y: contentOffset.y), animated: true)
+        }
     }
     
     // Text button clicked
@@ -197,30 +211,6 @@ extension SJCollectionView {
 
 // MARK: Gesture Handling
 extension SJCollectionView: UIGestureRecognizerDelegate {
-    
-    func gestureRecognizer(gestureRecognizer: UIGestureRecognizer, shouldReceiveTouch touch: UITouch) -> Bool {
-        
-        if gestureRecognizer == panGestureRecognizer {
-            // False - If entering Text
-            for subview in subviews as! [UIView] {
-                if subview.isKindOfClass(SJTextField.self) {
-                    return false
-                }
-            }
-            
-            let location = touch.locationInView(self)
-            let index = indexPathForItemAtPoint(location)
-            
-            // If the views added to the cell are more than zero
-            if let index = index {
-                let cell = cellForItemAtIndexPath(index) as! SJCollectionViewCell
-                if cell.sj_subViews.count > 0 {
-                    return false
-                }
-            }
-        }
-        return true
-    }
     
     // Essential
     func gestureRecognizer(gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWithGestureRecognizer otherGestureRecognizer: UIGestureRecognizer) -> Bool {

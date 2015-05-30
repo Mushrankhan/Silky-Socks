@@ -59,7 +59,6 @@ class SJCollectionViewController: UIViewController {
         // Track changes in the keyboard
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "handleKeyBoard:", name: UIKeyboardDidShowNotification, object: nil)
         
-        // Set up the color View
         // Set the layout for the colorVC
         let frame = CGRect(x: 0, y: 0, width: UIScreen.mainScreen().bounds.width, height: 50)
         let layout = UICollectionViewFlowLayout()
@@ -68,6 +67,7 @@ class SJCollectionViewController: UIViewController {
         layout.minimumInteritemSpacing = 0
         layout.scrollDirection = .Horizontal
         
+        // Set up the color View
         colorCollectionVC = SJColorCollectionViewController(collectionViewLayout: layout)
         colorCollectionVC.collectionView!.frame = frame
         colorCollectionVC.collectionView!.hidden = true
@@ -88,6 +88,24 @@ class SJCollectionViewController: UIViewController {
         super.didReceiveMemoryWarning()
         templateArray = []
         picker = nil
+    }
+    
+    func handleKeyBoard(notification: NSNotification) {
+        
+        let end: CGRect = (notification.userInfo![UIKeyboardFrameEndUserInfoKey]!).CGRectValue()
+        
+        if showingText {
+            
+            // Done here becoz the key
+            let frame = CGRectMake(collectionView.contentOffset.x, end.origin.y - 50 - 64, CGRectGetWidth(UIScreen.mainScreen().bounds), 50)
+            colorCollectionVC.collectionView?.hidden = false
+            colorCollectionVC.collectionView?.alpha = 0
+            
+            UIView.animateWithDuration(0.3) {
+                self.colorCollectionVC.collectionView?.frame = frame
+                self.colorCollectionVC.collectionView?.alpha = 1
+            }
+        }
     }
 }
 
@@ -130,7 +148,8 @@ extension SJCollectionViewController: SJCollectionViewDelegate {
         
         showingText = true
         colorCollectionVC.collectionView!.hidden = true
-        
+        self.collectionView.panGestureRecognizer.enabled = false
+
         let collectionView = collectionView as! SJCollectionView
         let width = CGRectGetWidth(UIScreen.mainScreen().bounds)
         let midY = CGRectGetMidY(collectionView.bounds)
@@ -147,24 +166,12 @@ extension SJCollectionViewController: SJCollectionViewDelegate {
         
         sj_textField = textField
     }
-    
-    func handleKeyBoard(notification: NSNotification) {
-        
-        let end: CGRect = (notification.userInfo![UIKeyboardFrameEndUserInfoKey]!).CGRectValue()
-        
-        if showingText {
-            
-            // Done here becoz the key
-            let frame = CGRectMake(collectionView.contentOffset.x, end.origin.y - 50 - 64, CGRectGetWidth(UIScreen.mainScreen().bounds), 50)
-            colorCollectionVC.collectionView?.frame = frame
-            colorCollectionVC.collectionView?.hidden = false
-        }
-    }
 
     func collectionView(collectionView: UICollectionView, bottomView: UIView, didPressCameraButton button: UIButton) {
         
         colorCollectionVC.collectionView!.hidden = true
-
+        self.collectionView.panGestureRecognizer.enabled = false
+        
         // Create On Demand
         let sheet = UIAlertController(title: "Import Photo", message: nil, preferredStyle: .ActionSheet)
         
@@ -187,6 +194,9 @@ extension SJCollectionViewController: SJCollectionViewDelegate {
         // Cancel
         sheet.addAction(UIAlertAction(title: "Cancel", style: .Cancel) { action in
             self.dismissViewControllerAnimated(true, completion: nil)
+            if (collectionView as! SJCollectionView).cell_subViewsCount == 0 {
+                self.collectionView.panGestureRecognizer.enabled = true
+            }
         })
         
         presentViewController(sheet, animated: true, completion: nil)
@@ -196,22 +206,29 @@ extension SJCollectionViewController: SJCollectionViewDelegate {
         
         // Imp
         self.collectionView.panGestureRecognizer.enabled = false
-        
-        // 32 : half height of navigation buttons
-        // 50 : height of color frame
-        let height = CGRectGetHeight(UIScreen.mainScreen().bounds) -  CGRectGetHeight(bottomView.bounds) - 32 - 50 - 50
+
+        // 50 : height of color vc
+        // 64 : height of nav bar + status bar
+        let height = CGRectGetHeight(UIScreen.mainScreen().bounds)/2 - 50 - 64
         let width = CGRectGetWidth(UIScreen.mainScreen().bounds)
-        
-        colorCollectionVC.collectionView!.frame = CGRectMake(collectionView.contentOffset.x, height, width , 50)
         colorCollectionVC.collectionView!.hidden = false
+        let frame = CGRectMake(collectionView.contentOffset.x, height, width , 50)
+        
+        UIView.animateWithDuration(0.3) {
+            self.colorCollectionVC.collectionView?.frame = frame
+        }
     }
     
-    func collectionView(collectionView: UICollectionView, bottomView: UIView , didPressGridButton button:UIButton) {        colorCollectionVC.collectionView!.hidden = true
+    func collectionView(collectionView: UICollectionView, bottomView: UIView , didPressGridButton button:UIButton) {                colorCollectionVC.collectionView!.hidden = true
+        self.collectionView.panGestureRecognizer.enabled = false
+
         print("Grid")
     }
     
     func collectionView(collectionView: UICollectionView, bottomView: UIView , didPressSmileyButton button:UIButton) {
         colorCollectionVC.collectionView!.hidden = true
+        self.collectionView.panGestureRecognizer.enabled = false
+
         print("Smiley")
     }
     
@@ -233,6 +250,9 @@ extension SJCollectionViewController: SJCollectionViewDelegate {
             
             // Re enable collection view pan gesture
             self.collectionView.panGestureRecognizer.enabled = true
+            
+            // Hide the color view
+            self.colorCollectionVC.collectionView!.hidden = true
 
             // Re enable user interaction
             if let sj_bottomView = collectionView.sj_bottomView {
@@ -272,8 +292,7 @@ extension SJCollectionViewController: SJCollectionViewDelegate {
         })
         
         presentViewController(alert, animated: true, completion: nil)
-    }
-    
+    }    
 }
 
 // MARK: Text Button
@@ -297,6 +316,15 @@ extension SJCollectionViewController: UITextFieldDelegate {
         textField.resignFirstResponder()
         textField.removeFromSuperview()
         showingText = false
+        
+        if collectionView!.cell_subViewsCount == 0 {
+            collectionView!.panGestureRecognizer.enabled = true
+        }
+        
+        if !colorCollectionVC.collectionView!.hidden {
+            colorCollectionVC.collectionView!.hidden = true
+        }
+        
         if let sj_bottomView = collectionView.sj_bottomView {
             sj_bottomView.userInteractionEnabled = true
         }
@@ -309,6 +337,9 @@ extension SJCollectionViewController: UIImagePickerControllerDelegate, UINavigat
     
     func imagePickerControllerDidCancel(picker: UIImagePickerController) {
         dismissViewControllerAnimated(true, completion: nil)
+        if collectionView.cell_subViewsCount == 0 {
+            collectionView!.panGestureRecognizer.enabled = true
+        }
     }
     
     func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [NSObject : AnyObject]) {
@@ -327,7 +358,7 @@ extension SJCollectionViewController: UIImagePickerControllerDelegate, UINavigat
     }
 }
 
-// MARK: Color Collection View
+// MARK: Color Collection View Delegate
 extension SJCollectionViewController: SJColorCollectionViewControllerDelegate {
     
     func colorCollectionView(collectionView: UICollectionView, didSelectColor color: UIColor) {
@@ -340,8 +371,7 @@ extension SJCollectionViewController: SJColorCollectionViewControllerDelegate {
         // Should return only one cell
         let cells = self.collectionView.visibleCells() as! [SJCollectionViewCell]
         if cells.count == 1 {
-            let cell = cells.first!
-            cell.addColor(color)
+            cells.first!.addColor(color)
         }
     }
 }
