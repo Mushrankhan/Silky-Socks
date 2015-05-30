@@ -7,14 +7,14 @@
 	<key>IDESourceControlProjectIdentifier</key>
 	<string>0C799AF0-6BF4-4412-8775-6E0DA60D4F3B</string>
 	<key>IDESourceControlProjectName</key>
-	<string>project</string>
+	<string>Silky Socks</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
 		<key>E26646872C39777A4B8EF5AD770B4839686E6F51</key>
 		<string>github.com:saurabhj80/Silky-Socks.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>Silky Socks.xcodeproj/project.xcworkspace</string>
+	<string>Silky Socks.xcodeproj</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
 		<key>E26646872C39777A4B8EF5AD770B4839686E6F51</key>

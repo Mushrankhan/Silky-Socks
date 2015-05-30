@@ -235,8 +235,8 @@ extension SJCollectionViewController: SJCollectionViewDelegate {
     
     // Add To Cart
     func collectionView(collectionView: UICollectionView, didPressAddToCartButton button:UIButton, withSnapShotImage snapshot: UIImage, andTemplate template: Template) {
-        let cart = UserCart.sharedCart()
-        cart.addProduct(template, snapshot: snapshot)
+//        let cart = UserCart.sharedCart()
+//        cart.addProduct(template, snapshot: snapshot)
     }
     
     // Restart
