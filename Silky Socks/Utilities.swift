@@ -144,7 +144,7 @@ extension UIImage {
         CGContextScaleCTM(context, 1, -1)
 
         // set the blend mode to color burn, and the original image
-        CGContextSetBlendMode(context, kCGBlendModeDarken);
+        CGContextSetBlendMode(context, kCGBlendModeMultiply);
         let rect = CGRectMake(0, 0, size.width, size.height);
         CGContextDrawImage(context, rect, CGImage);
         

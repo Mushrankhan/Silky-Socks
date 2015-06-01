@@ -3,17 +3,17 @@
     {
       "idiom" : "universal",
       "scale" : "1x",
-      "filename" : "white tee.png"
+      "filename" : "white_tee.png"
     },
     {
       "idiom" : "universal",
       "scale" : "2x",
-      "filename" : "white tee@2x.png"
+      "filename" : "white_tee@2x.png"
     },
     {
       "idiom" : "universal",
       "scale" : "3x",
-      "filename" : "white tee@3x.png"
+      "filename" : "white_tee@3x.png"
     }
   ],
   "info" : {

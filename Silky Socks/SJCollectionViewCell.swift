@@ -172,8 +172,8 @@ class SJCollectionViewCell: UICollectionViewCell {
 //        // Add subview
 //        boundingRectView?.addSubview(sj_imgView)
         
-//        let image = ss_imgView.image?.drawImage(image)
-//        ss_imgView.image = image
+        let image = ss_imgView.image?.drawImage(image)
+        ss_imgView.image = image
         
     }
     
