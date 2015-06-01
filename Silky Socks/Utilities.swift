@@ -24,6 +24,13 @@ extension UIView {
         self.addConstraint(NSLayoutConstraint(item: self, attribute: attribute, relatedBy: NSLayoutRelation.Equal, toItem: subview, attribute: attribute, multiplier: 1.0, constant: 0))
     }
     
+    
+    func logSubViews() {
+        println(self)
+        for view in subviews as! [UIView]{
+            view.logSubViews()
+        }
+    }
 }
 
 extension UIColor {
@@ -89,11 +96,11 @@ extension UIImage {
         CGContextScaleCTM(context, 1, -1)
         
         // set the blend mode to color burn, and the original image
-        CGContextSetBlendMode(context, kCGBlendModeNormal);
+        CGContextSetBlendMode(context, kCGBlendModeDarken);
         let rect = CGRectMake(0, 0, size.width, size.height);
         CGContextDrawImage(context, rect, CGImage);
         
-        // set a mask that matches the shape of the image, then draw (color burn) a colored rectangle
+        // set a mask that matches the shape of the image, then draw a colored rectangle
         CGContextClipToMask(context, rect, CGImage);
         CGContextAddRect(context, rect);
         CGContextDrawPath(context,kCGPathFill);
@@ -102,7 +109,56 @@ extension UIImage {
         let coloredImage = UIGraphicsGetImageFromCurrentImageContext();
         UIGraphicsEndImageContext();
         
-        //return the color-burned image
+        //return the colored image
         return coloredImage;
     }
+    
+    func imageTintedWithColor(color: UIColor) -> UIImage {
+    
+        // Construct new image the same size as this one.
+        UIGraphicsBeginImageContextWithOptions(size, false, 0.0);
+        
+        var rect = CGRectZero
+        rect.size = self.size
+        
+        // tint the image
+        drawInRect(rect)
+        color.set()
+        UIRectFillUsingBlendMode(rect, kCGBlendModeDarken)
+        
+        // restore alpha channel
+        drawInRect(rect, blendMode: kCGBlendModeDestinationIn, alpha: 1.0)
+        
+        let image = UIGraphicsGetImageFromCurrentImageContext();
+        UIGraphicsEndImageContext();
+        
+        return image;
+        
+    }
+    
+    func drawImage(overlayImage: UIImage) -> UIImage {
+        
+        UIGraphicsBeginImageContext(size)
+        let context = UIGraphicsGetCurrentContext()
+        CGContextTranslateCTM(context, 0, size.height)
+        CGContextScaleCTM(context, 1, -1)
+
+        // set the blend mode to color burn, and the original image
+        CGContextSetBlendMode(context, kCGBlendModeDarken);
+        let rect = CGRectMake(0, 0, size.width, size.height);
+        CGContextDrawImage(context, rect, CGImage);
+        
+        // set a mask that matches the shape of the image, then draw a colored rectangle
+        CGContextClipToMask(context, rect, CGImage);
+        CGContextDrawImage(context, rect, overlayImage.CGImage)
+        
+        // generate a new UIImage from the graphics context we drew onto
+        let coloredImage = UIGraphicsGetImageFromCurrentImageContext();
+        UIGraphicsEndImageContext();
+        
+        //return the colored image
+        return coloredImage;
+        
+    }
+    
 }

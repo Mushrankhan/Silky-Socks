@@ -75,18 +75,17 @@ class SJCollectionViewCell: UICollectionViewCell {
         rotateGestureRecognizer.delaysTouchesBegan = true
         rotateGestureRecognizer.delegate = self
         addGestureRecognizer(rotateGestureRecognizer)
-        
     }
     
     // Prepare for reuse
     override func prepareForReuse() {
         super.prepareForReuse()
-        for view in sj_subViews {
-            view.removeFromSuperview()
-        }
-        sj_subViews.removeAll(keepCapacity: true)
-        boundingRectView?.removeFromSuperview()
-        boundingRectView = nil
+//        for view in sj_subViews {
+//            view.removeFromSuperview()
+//        }
+//        sj_subViews.removeAll(keepCapacity: true)
+//        boundingRectView?.removeFromSuperview()
+//        boundingRectView = nil
     }
     
     // Apply Layout Attributes
@@ -114,11 +113,11 @@ class SJCollectionViewCell: UICollectionViewCell {
         // Alloc the bounding View
         boundingRectView = UIView(frame: ss_imgView.frame)
         
-        // Apply the mask
+        // Masking
         maskImageView = UIImageView(frame: boundingRectView!.bounds)
         maskImageView?.contentMode = .ScaleAspectFit
         maskImageView?.image = template!.image
-        boundingRectView!.maskView = maskImageView
+        boundingRectView?.maskView = maskImageView
         
         addSubview(boundingRectView!)
     }
@@ -153,33 +152,35 @@ class SJCollectionViewCell: UICollectionViewCell {
     // Create Image
     func createImage(image: UIImage) {
         
-        // Create and add the bounding rect
-        if boundingRectView == nil {
-            addClipRect()
-        }
+//        // Create and add the bounding rect
+//        if boundingRectView == nil {
+//            addClipRect()
+//        }
+//        
+//        // Create the image
+//        let sj_imgView = UIImageView(frame: bounds)
+//        sj_imgView.contentMode = .ScaleAspectFill
+//        sj_imgView.image = image
+//        
+//        // Add it to the array of subviews
+//        sj_subViews.insert(sj_imgView, atIndex: 0)
+//        
+//        // Make sure that the last selected view
+//        // has a value
+//        lastSelectedView = sj_imgView
+//        
+//        // Add subview
+//        boundingRectView?.addSubview(sj_imgView)
         
-        // Create the image
-        let sj_imgView = UIImageView(frame: bounds)
-        sj_imgView.contentMode = .ScaleAspectFill
-        sj_imgView.image = image
+//        let image = ss_imgView.image?.drawImage(image)
+//        ss_imgView.image = image
         
-        // Add it to the array of subviews
-        sj_subViews.insert(sj_imgView, atIndex: 0)
-        
-        // Make sure that the last selected view
-        // has a value
-        lastSelectedView = sj_imgView
-        
-        // Add subview
-        boundingRectView?.addSubview(sj_imgView)
     }
     
+    // Add Color to image
     func addColor(color: UIColor) {
-        if boundingRectView == nil {
-            addClipRect()
-        }
-        
-        boundingRectView!.backgroundColor = color
+        let image = ss_imgView.image?.colorizeWith(color)
+        ss_imgView.image = image
     }
 }
 

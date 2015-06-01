@@ -37,26 +37,29 @@ class SJLabel: UILabel {
 }
 
 
-//class BoundingView: UIView {
-//    
-//    var maskImage: UIImage?
-//    
-//    override func drawRect(rect: CGRect) {
-//        
+class BoundingView: UIView {
+    
+    var maskImage: UIImage?
+    
+    override func drawRect(rect: CGRect) {
+        
 //        let context = UIGraphicsGetCurrentContext()
 //        CGContextTranslateCTM(context, 0, rect.size.height)
 //        CGContextScaleCTM(context, 1, -1)
 //        
-//        CGContextSetRGBFillColor(context, 0, 0, 1, 0.5)
+//        CGContextSetRGBFillColor(context, 1, 1, 1, 1)
 //        CGContextFillRect(context, rect)
 //        
-//        let image = maskImage!.colorizeWith(UIColor.yellowColor())
-//        CGContextDrawImage(context, rect, image.CGImage)
-//        CGContextClipToMask(context, rect, image.CGImage)
+//        CGContextDrawImage(context, rect, maskImage!.CGImage)
+//        UIColor.grayColor().set()
+//        UIRectFillUsingBlendMode(rect, kCGBlendModeColor)
+        
+        
+        
+//        CGContextClipToMask(context, rect, maskImage!.CGImage)
 //        
-//        CGContextSetRGBFillColor(context, 0, 1, 0, 0.5)
-//        CGContextFillRect(context, CGRectMake(0, 0, 100, 100))
-//    }
-//    
-//}
-//
+//        CGContextSetRGBFillColor(context, 0, 1, 1, 1)
+//        CGContextFillRect(context, rect)
+    }
+    
+}
