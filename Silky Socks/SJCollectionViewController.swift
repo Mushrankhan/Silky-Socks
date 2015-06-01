@@ -169,37 +169,37 @@ extension SJCollectionViewController: SJCollectionViewDelegate {
 
     func collectionView(collectionView: UICollectionView, bottomView: UIView, didPressCameraButton button: UIButton) {
         
-        colorCollectionVC.collectionView!.hidden = true
-        self.collectionView.panGestureRecognizer.enabled = false
-        
-        // Create On Demand
-        let sheet = UIAlertController(title: "Import Photo", message: nil, preferredStyle: .ActionSheet)
-        
-        // Take photo
-        sheet.addAction(UIAlertAction(title: "Take Photo", style: .Default) { action in
-            if UIImagePickerController.isSourceTypeAvailable(.Camera) {
-                self.picker.sourceType = .Camera
-            }
-            self.presentViewController(self.picker, animated: true, completion: nil)
-        })
-        
-        // Choose Photo
-        sheet.addAction(UIAlertAction(title: "Choose Photo", style: .Default) { action in
-            if UIImagePickerController.isSourceTypeAvailable(.PhotoLibrary) {
-                self.picker.sourceType = .PhotoLibrary
-            }
-            self.presentViewController(self.picker, animated: true, completion: nil)
-        })
-        
-        // Cancel
-        sheet.addAction(UIAlertAction(title: "Cancel", style: .Cancel) { action in
-            self.dismissViewControllerAnimated(true, completion: nil)
-            if (collectionView as! SJCollectionView).cell_subViewsCount == 0 {
-                self.collectionView.panGestureRecognizer.enabled = true
-            }
-        })
-        
-        presentViewController(sheet, animated: true, completion: nil)
+//        colorCollectionVC.collectionView!.hidden = true
+//        self.collectionView.panGestureRecognizer.enabled = false
+//        
+//        // Create On Demand
+//        let sheet = UIAlertController(title: "Import Photo", message: nil, preferredStyle: .ActionSheet)
+//        
+//        // Take photo
+//        sheet.addAction(UIAlertAction(title: "Take Photo", style: .Default) { action in
+//            if UIImagePickerController.isSourceTypeAvailable(.Camera) {
+//                self.picker.sourceType = .Camera
+//            }
+//            self.presentViewController(self.picker, animated: true, completion: nil)
+//        })
+//        
+//        // Choose Photo
+//        sheet.addAction(UIAlertAction(title: "Choose Photo", style: .Default) { action in
+//            if UIImagePickerController.isSourceTypeAvailable(.PhotoLibrary) {
+//                self.picker.sourceType = .PhotoLibrary
+//            }
+//            self.presentViewController(self.picker, animated: true, completion: nil)
+//        })
+//        
+//        // Cancel
+//        sheet.addAction(UIAlertAction(title: "Cancel", style: .Cancel) { action in
+//            self.dismissViewControllerAnimated(true, completion: nil)
+//            if (collectionView as! SJCollectionView).cell_subViewsCount == 0 {
+//                self.collectionView.panGestureRecognizer.enabled = true
+//            }
+//        })
+//        
+//        presentViewController(sheet, animated: true, completion: nil)
     }
     
     func collectionView(collectionView: UICollectionView, bottomView: UIView , didPressColorWheelButton button:UIButton){
@@ -297,9 +297,9 @@ extension SJCollectionViewController: SJCollectionViewDelegate {
     }
     
     func collectionView(collectionView: UICollectionView, touchesBegan touch: UITouch) {
-//        if !colorCollectionVC.collectionView!.hidden  {
-//            colorCollectionVC.collectionView!.hidden = true
-//        }
+        if !colorCollectionVC.collectionView!.hidden  {
+            colorCollectionVC.collectionView!.hidden = true
+        }
     }
 }
 

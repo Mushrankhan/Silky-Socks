@@ -179,7 +179,7 @@ class SJCollectionViewCell: UICollectionViewCell {
     
     // Add Color to image
     func addColor(color: UIColor) {
-        let image = ss_imgView.image?.colorizeWith(color)
+        let image = template!.image.colorizeWith(color)
         ss_imgView.image = image
     }
 }
