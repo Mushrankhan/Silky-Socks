@@ -243,57 +243,59 @@ extension SJCollectionViewController: SJCollectionViewDelegate {
     // Restart
     func collectionView(collectionView: UICollectionView, didPressRestartButton button:UIButton) {
         
-//        // Show an alert
-//        let collectionView = collectionView as! SJCollectionView
-//        let alert = UIAlertController(title: "Warning", message: "Are you sure you want to delete your current design and start over?", preferredStyle: .Alert)
-//        
-//        // Okay
-//        alert.addAction(UIAlertAction(title: "Continue", style: .Default) { action in
-//            
-//            // Re enable collection view pan gesture
-//            self.collectionView.panGestureRecognizer.enabled = true
-//            
-//            // Hide the color view
-//            self.colorCollectionVC.collectionView!.hidden = true
-//
-//            // Re enable user interaction
-//            if let sj_bottomView = collectionView.sj_bottomView {
-//                sj_bottomView.userInteractionEnabled = true
-//            }
-//            
-//            // Check if the text field exists
-//            loop: for subView in collectionView.subviews as! [UIView] {
-//                if subView.isKindOfClass(SJTextField.self) {
-//                    if subView.canResignFirstResponder() {
-//                        subView.resignFirstResponder()
-//                    }
-//                    subView.removeFromSuperview()
-//                    self.showingText = false
-//                    break loop
-//                }
-//            }
-//            
-//            // Should return only one cell
-//            let cells = collectionView.visibleCells() as! [SJCollectionViewCell]
-//            if cells.count == 1 {
-//                let cell = cells.first!
-//                for view in cell.sj_subViews {
-//                    view.removeFromSuperview()
-//                }
-//                cell.sj_subViews.removeAll(keepCapacity: true)
-//                cell.boundingRectView?.backgroundColor = UIColor.clearColor()
-//            }
-//            
-//            self.colorCollectionVC.collectionView?.hidden = true
-//            
-//        })
-//        
-//        // Cancel
-//        alert.addAction(UIAlertAction(title: "Cancel", style: .Cancel) { action in
-//            self.dismissViewControllerAnimated(true, completion: nil)
-//        })
-//        
-//        presentViewController(alert, animated: true, completion: nil)
+        // Show an alert
+        let collectionView = collectionView as! SJCollectionView
+        let alert = UIAlertController(title: "Warning", message: "Are you sure you want to delete your current design and start over?", preferredStyle: .Alert)
+        
+        // Okay
+        alert.addAction(UIAlertAction(title: "Continue", style: .Default) { action in
+            
+            // Re enable collection view pan gesture
+            self.collectionView.panGestureRecognizer.enabled = true
+            
+            // Hide the color view
+            self.colorCollectionVC.collectionView!.hidden = true
+
+            // Re enable user interaction
+            if let sj_bottomView = collectionView.sj_bottomView {
+                sj_bottomView.userInteractionEnabled = true
+            }
+            
+            // Check if the text field exists
+            loop: for subView in collectionView.subviews as! [UIView] {
+                if subView.isKindOfClass(SJTextField.self) {
+                    if subView.canResignFirstResponder() {
+                        subView.resignFirstResponder()
+                    }
+                    subView.removeFromSuperview()
+                    self.showingText = false
+                    break loop
+                }
+            }
+            
+            // Should return only one cell
+            let cells = collectionView.visibleCells() as! [SJCollectionViewCell]
+            if cells.count == 1 {
+                let cell = cells.first!
+                for view in cell.sj_subViews {
+                    view.removeFromSuperview()
+                }
+                cell.sj_subViews.removeAll(keepCapacity: true)
+                cell.boundingRectView?.backgroundColor = UIColor.clearColor()
+                cell.addColor(UIColor.clearColor())
+            }
+            
+            self.colorCollectionVC.collectionView?.hidden = true
+            
+            
+        })
+        
+        // Cancel
+        alert.addAction(UIAlertAction(title: "Cancel", style: .Cancel) { action in
+            self.dismissViewControllerAnimated(true, completion: nil)
+        })
+        
+        presentViewController(alert, animated: true, completion: nil)
     }
     
     func collectionView(collectionView: UICollectionView, touchesBegan touch: UITouch) {
