@@ -30,7 +30,10 @@ class SJCollectionViewController: UIViewController {
     private var showingText = false
     
     // The text field shown when the text button is pressed
-    private var sj_textField: SJTextField!
+    private var sj_textField: SJTextField?
+    
+    // Whether Camera button is clicked or grid button
+    private var isGridButtonTapped = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -46,9 +49,6 @@ class SJCollectionViewController: UIViewController {
         collectionView!.dataSource = self
         collectionView!.myDelegate = self
         
-        collectionView!.backgroundColor = UIColor.whiteColor()
-        collectionView!.pagingEnabled = true
-        
         // Create the image picker controller
         picker = UIImagePickerController()
         picker.delegate = self
@@ -57,6 +57,7 @@ class SJCollectionViewController: UIViewController {
         picker.sourceType = .PhotoLibrary
         
         // Track changes in the keyboard
+        // Used to display the color VC appropriately
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "handleKeyBoard:", name: UIKeyboardDidShowNotification, object: nil)
         
         // Set the layout for the colorVC
@@ -68,6 +69,7 @@ class SJCollectionViewController: UIViewController {
         layout.scrollDirection = .Horizontal
         
         // Set up the color View
+        // This VC is added as a child view controller
         colorCollectionVC = SJColorCollectionViewController(collectionViewLayout: layout)
         colorCollectionVC.collectionView!.frame = frame
         colorCollectionVC.collectionView!.hidden = true
@@ -86,17 +88,32 @@ class SJCollectionViewController: UIViewController {
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
+        // Clear out the template array
         templateArray = []
+        
+        // Delete the picker
         picker = nil
     }
+    
+    // Dismiss the colorVC when a touch is witnessed
+    func collectionView(collectionView: UICollectionView, touchesBegan touch: UITouch) {
+        if !colorCollectionVC.collectionView!.hidden  {
+            colorCollectionVC.collectionView!.hidden = true
+        }
+    }
+}
+
+// MARK: Keyboard Support
+extension SJCollectionViewController {
     
     func handleKeyBoard(notification: NSNotification) {
         
         let end: CGRect = (notification.userInfo![UIKeyboardFrameEndUserInfoKey]!).CGRectValue()
         
+        // if text button clicked
+        // then display color VC on top of keyboard
         if showingText {
             
-            // Done here becoz the key
             let frame = CGRectMake(collectionView.contentOffset.x, end.origin.y - 50 - 64, CGRectGetWidth(UIScreen.mainScreen().bounds), 50)
             colorCollectionVC.collectionView?.hidden = false
             colorCollectionVC.collectionView?.alpha = 0
@@ -108,7 +125,6 @@ class SJCollectionViewController: UIViewController {
         }
     }
 }
-
 
 // MARK: Collection View Data Source
 extension SJCollectionViewController: UICollectionViewDataSource {
@@ -144,6 +160,7 @@ extension SJCollectionViewController: UICollectionViewDataSource {
 // MARK: Collection View Delegate
 extension SJCollectionViewController: SJCollectionViewDelegate {
     
+    // Text Button
     func collectionView(collectionView: UICollectionView, bottomView: UIView , didPressTextButton button:UIButton) {
         
         showingText = true
@@ -167,41 +184,12 @@ extension SJCollectionViewController: SJCollectionViewDelegate {
         sj_textField = textField
     }
 
+    // Camera Button
     func collectionView(collectionView: UICollectionView, bottomView: UIView, didPressCameraButton button: UIButton) {
-        
-        colorCollectionVC.collectionView!.hidden = true
-        self.collectionView.panGestureRecognizer.enabled = false
-        
-        // Create On Demand
-        let sheet = UIAlertController(title: "Import Photo", message: nil, preferredStyle: .ActionSheet)
-        
-        // Take photo
-        sheet.addAction(UIAlertAction(title: "Take Photo", style: .Default) { action in
-            if UIImagePickerController.isSourceTypeAvailable(.Camera) {
-                self.picker.sourceType = .Camera
-            }
-            self.presentViewController(self.picker, animated: true, completion: nil)
-        })
-        
-        // Choose Photo
-        sheet.addAction(UIAlertAction(title: "Choose Photo", style: .Default) { action in
-            if UIImagePickerController.isSourceTypeAvailable(.PhotoLibrary) {
-                self.picker.sourceType = .PhotoLibrary
-            }
-            self.presentViewController(self.picker, animated: true, completion: nil)
-        })
-        
-        // Cancel
-        sheet.addAction(UIAlertAction(title: "Cancel", style: .Cancel) { action in
-            self.dismissViewControllerAnimated(true, completion: nil)
-            if (collectionView as! SJCollectionView).cell_subViewsCount == 0 {
-                self.collectionView.panGestureRecognizer.enabled = true
-            }
-        })
-        
-        presentViewController(sheet, animated: true, completion: nil)
+        commonCodeForPhotos(false)
     }
     
+    // Color Wheel
     func collectionView(collectionView: UICollectionView, bottomView: UIView , didPressColorWheelButton button:UIButton){
         
         // Imp
@@ -219,26 +207,65 @@ extension SJCollectionViewController: SJCollectionViewDelegate {
         }
     }
     
+    // Grid Button
     func collectionView(collectionView: UICollectionView, bottomView: UIView , didPressGridButton button:UIButton) {
-        //colorCollectionVC.collectionView!.hidden = true
-        //self.collectionView.panGestureRecognizer.enabled = false
-
-        print("Grid")
+        commonCodeForPhotos(true)
     }
     
+    // Smiley Button
     func collectionView(collectionView: UICollectionView, bottomView: UIView , didPressSmileyButton button:UIButton) {
         //showingText = true
         //colorCollectionVC.collectionView!.hidden = true
         //self.collectionView.panGestureRecognizer.enabled = false
-        
-        print("Smiley")
     }
+    
+    // Camera and Grid
+    func commonCodeForPhotos(forGrid: Bool) {
+        
+        // If grid button was pressed
+        isGridButtonTapped = forGrid
+        
+        // Initial
+        colorCollectionVC.collectionView!.hidden = true
+        self.collectionView.panGestureRecognizer.enabled = false
+        
+        // Create On Demand
+        let sheet = UIAlertController(title: "Import Photo", message: nil, preferredStyle: .ActionSheet)
+        
+        // Take photo
+        sheet.addAction(UIAlertAction(title: "Take Photo", style: .Default) { action in
+            if UIImagePickerController.isSourceTypeAvailable(.Camera) {
+                self.picker.sourceType = .Camera
+            }
+            self.presentViewController(self.picker, animated: true, completion: nil)
+            })
+        
+        // Choose Photo
+        sheet.addAction(UIAlertAction(title: "Choose Photo", style: .Default) { action in
+            if UIImagePickerController.isSourceTypeAvailable(.PhotoLibrary) {
+                self.picker.sourceType = .PhotoLibrary
+            }
+            self.presentViewController(self.picker, animated: true, completion: nil)
+            })
+        
+        // Cancel
+        sheet.addAction(UIAlertAction(title: "Cancel", style: .Cancel) { action in
+            self.dismissViewControllerAnimated(true, completion: nil)
+            if self.collectionView.cell_subViewsCount == 0 {
+                self.collectionView.panGestureRecognizer.enabled = true
+            }
+            })
+        
+        presentViewController(sheet, animated: true, completion: nil)
+    }
+    
     
     // Add To Cart
     func collectionView(collectionView: UICollectionView, didPressAddToCartButton button:UIButton, withSnapShotImage snapshot: UIImage, andTemplate template: Template) {
 //        let cart = UserCart.sharedCart()
 //        cart.addProduct(template, snapshot: snapshot)
     }
+    
     
     // Restart
     func collectionView(collectionView: UICollectionView, didPressRestartButton button:UIButton) {
@@ -255,22 +282,15 @@ extension SJCollectionViewController: SJCollectionViewDelegate {
             
             // Hide the color view
             self.colorCollectionVC.collectionView!.hidden = true
-
-            // Re enable user interaction
-            if let sj_bottomView = collectionView.sj_bottomView {
-                sj_bottomView.userInteractionEnabled = true
-            }
             
-            // Check if the text field exists
-            loop: for subView in collectionView.subviews as! [UIView] {
-                if subView.isKindOfClass(SJTextField.self) {
-                    if subView.canResignFirstResponder() {
-                        subView.resignFirstResponder()
-                    }
-                    subView.removeFromSuperview()
-                    self.showingText = false
-                    break loop
+            // Text Field
+            if let sj_textField = self.sj_textField {
+                if sj_textField.canResignFirstResponder() {
+                    sj_textField.resignFirstResponder()
                 }
+                sj_textField.removeFromSuperview()
+                self.sj_textField = nil
+                self.showingText = false
             }
             
             // Should return only one cell
@@ -285,9 +305,8 @@ extension SJCollectionViewController: SJCollectionViewDelegate {
                 cell.addColor(UIColor.clearColor())
             }
             
+            // Hide the color VC
             self.colorCollectionVC.collectionView?.hidden = true
-            
-            
         })
         
         // Cancel
@@ -298,11 +317,6 @@ extension SJCollectionViewController: SJCollectionViewDelegate {
         presentViewController(alert, animated: true, completion: nil)
     }
     
-    func collectionView(collectionView: UICollectionView, touchesBegan touch: UITouch) {
-        if !colorCollectionVC.collectionView!.hidden  {
-            colorCollectionVC.collectionView!.hidden = true
-        }
-    }
 }
 
 // MARK: Text Button
@@ -335,9 +349,6 @@ extension SJCollectionViewController: UITextFieldDelegate {
             colorCollectionVC.collectionView!.hidden = true
         }
         
-        if let sj_bottomView = collectionView.sj_bottomView {
-            sj_bottomView.userInteractionEnabled = true
-        }
         return true
     }
 }
@@ -364,7 +375,7 @@ extension SJCollectionViewController: UIImagePickerControllerDelegate, UINavigat
         dismissViewControllerAnimated(true, completion: nil)
                 
         // Pass the image object to the collection view
-        collectionView.sj_createImage(image)
+        collectionView.sj_createImage(image, forGrid: isGridButtonTapped)
     }
 }
 
@@ -373,15 +384,14 @@ extension SJCollectionViewController: SJColorCollectionViewControllerDelegate {
     
     func colorCollectionView(collectionView: UICollectionView, didSelectColor color: UIColor) {
         
+        // If pressed text button
+        // then change color of label
         if showingText {
-            sj_textField.textColor = color
+            sj_textField!.textColor = color
             return
         }
         
-        // Should return only one cell
-        let cells = self.collectionView.visibleCells() as! [SJCollectionViewCell]
-        if cells.count == 1 {
-            cells.first!.addColor(color)
-        }
+        // other change color of product
+        self.collectionView.sj_addColor(color)
     }
 }

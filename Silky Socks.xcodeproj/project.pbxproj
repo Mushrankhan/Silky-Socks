@@ -496,7 +496,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "b45a4b4e-845f-4597-8729-3d32ca853ec9";
 				SWIFT_OBJC_BRIDGING_HEADER = "$(PROJECT_DIR)/Silky Socks/BridgingHeader.h";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -516,7 +516,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "b45a4b4e-845f-4597-8729-3d32ca853ec9";
 				SWIFT_OBJC_BRIDGING_HEADER = "$(PROJECT_DIR)/Silky Socks/BridgingHeader.h";
 				TARGETED_DEVICE_FAMILY = 1;
 			};

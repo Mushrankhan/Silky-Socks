@@ -24,7 +24,7 @@ extension UIView {
         self.addConstraint(NSLayoutConstraint(item: self, attribute: attribute, relatedBy: NSLayoutRelation.Equal, toItem: subview, attribute: attribute, multiplier: 1.0, constant: 0))
     }
     
-    
+    // Print the view heirarchy
     func logSubViews() {
         println(self)
         for view in subviews as! [UIView]{
@@ -40,6 +40,7 @@ extension UIColor {
         return UIColor(red: CGFloat(red)/divisor, green: CGFloat(green)/divisor, blue: CGFloat(blue)/divisor, alpha: alpha)
     }
     
+    // Get Color Palette
     class func getColorPalette() -> [UIColor] {
         
         var array = [UIColor]()
@@ -74,6 +75,7 @@ extension UIColor {
 
 extension UIImage {
     
+    // Aspect Fit Size
     class func getBoundingSizeForAspectFit(aspectRatio: CGSize, var imageViewSize boundingSize: CGSize) -> CGSize {
         
         let mW = boundingSize.width / aspectRatio.width;
@@ -87,6 +89,7 @@ extension UIImage {
         return boundingSize
     }
     
+    // Tint the image
     func colorizeWith(color: UIColor) -> UIImage {
         
         UIGraphicsBeginImageContext(size)
@@ -96,47 +99,25 @@ extension UIImage {
         CGContextScaleCTM(context, 1, -1)
         
         // set the blend mode to color burn, and the original image
-        CGContextSetBlendMode(context, kCGBlendModeDarken);
-        let rect = CGRectMake(0, 0, size.width, size.height);
-        CGContextDrawImage(context, rect, CGImage);
+        CGContextSetBlendMode(context, kCGBlendModeDarken)
+        let rect = CGRectMake(0, 0, size.width, size.height)
+        CGContextDrawImage(context, rect, CGImage)
         
         // set a mask that matches the shape of the image, then draw a colored rectangle
-        CGContextClipToMask(context, rect, CGImage);
-        CGContextAddRect(context, rect);
-        CGContextDrawPath(context,kCGPathFill);
+        CGContextClipToMask(context, rect, CGImage)
+        CGContextAddRect(context, rect)
+        CGContextDrawPath(context,kCGPathFill)
         
         // generate a new UIImage from the graphics context we drew onto
-        let coloredImage = UIGraphicsGetImageFromCurrentImageContext();
-        UIGraphicsEndImageContext();
+        let coloredImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
         
         //return the colored image
         return coloredImage;
     }
     
-    func imageTintedWithColor(color: UIColor) -> UIImage {
-    
-        // Construct new image the same size as this one.
-        UIGraphicsBeginImageContextWithOptions(size, false, 0.0);
-        
-        var rect = CGRectZero
-        rect.size = self.size
-        
-        // tint the image
-        drawInRect(rect)
-        color.set()
-        UIRectFillUsingBlendMode(rect, kCGBlendModeDarken)
-        
-        // restore alpha channel
-        drawInRect(rect, blendMode: kCGBlendModeDestinationIn, alpha: 1.0)
-        
-        let image = UIGraphicsGetImageFromCurrentImageContext();
-        UIGraphicsEndImageContext();
-        
-        return image;
-        
-    }
-    
-    func drawImage(overlayImage: UIImage) -> UIImage {
+    // Draw image or tile
+    func drawImage(overlayImage: UIImage, forTiling tile: Bool) -> UIImage {
         
         UIGraphicsBeginImageContext(size)
         let context = UIGraphicsGetCurrentContext()
@@ -149,8 +130,9 @@ extension UIImage {
         CGContextDrawImage(context, rect, CGImage);
         
         // set a mask that matches the shape of the image, then draw a colored rectangle
-        CGContextClipToMask(context, rect, CGImage);
-        CGContextDrawImage(context, rect, overlayImage.CGImage)
+        CGContextClipToMask(context, rect, CGImage)
+        
+        tile ? CGContextDrawTiledImage(context, CGRect(origin: .zeroPoint, size: CGSize(width: 125, height: 125)) ,overlayImage.CGImage) : CGContextDrawImage(context, rect, overlayImage.CGImage)
         
         // generate a new UIImage from the graphics context we drew onto
         let coloredImage = UIGraphicsGetImageFromCurrentImageContext();

@@ -86,6 +86,11 @@ class SJCollectionViewCell: UICollectionViewCell {
 //        sj_subViews.removeAll(keepCapacity: true)
 //        boundingRectView?.removeFromSuperview()
 //        boundingRectView = nil
+//        lastSelectedView = nil
+//        activeRecognizers.removeAllObjects()
+//        referenceTransform = nil
+//        firstX = 0
+//        firstY = 0
     }
     
     // Apply Layout Attributes
@@ -102,7 +107,7 @@ class SJCollectionViewCell: UICollectionViewCell {
     // Masking that is applied to the boundingRectView
     private var maskImageView: UIImageView?
     
-    // Aspect Fit
+    // Add Bounding view
     private func addClipRect() {
         
         if let view = boundingRectView {
@@ -119,6 +124,7 @@ class SJCollectionViewCell: UICollectionViewCell {
         maskImageView?.image = template!.image
         boundingRectView?.maskView = maskImageView
         
+        // Add Subview
         addSubview(boundingRectView!)
     }
     
@@ -132,7 +138,6 @@ class SJCollectionViewCell: UICollectionViewCell {
         
         // Create the text label
         let sj_label = SJLabel(frame: .zeroRect, text: text, font: font)
-        //sj_label.frame = boundingRectView!.frame
         sj_label.frame.size.width = CGRectGetWidth(boundingRectView!.frame)
         sj_label.textColor = color
         sj_label.sizeToFit()
@@ -150,30 +155,10 @@ class SJCollectionViewCell: UICollectionViewCell {
     }
     
     // Create Image
-    func createImage(image: UIImage) {
+    func createImage(image: UIImage, forGrid: Bool) {
         
-//        // Create and add the bounding rect
-//        if boundingRectView == nil {
-//            addClipRect()
-//        }
-//        
-//        // Create the image
-//        let sj_imgView = UIImageView(frame: bounds)
-//        sj_imgView.contentMode = .ScaleAspectFill
-//        sj_imgView.image = image
-//        
-//        // Add it to the array of subviews
-//        sj_subViews.insert(sj_imgView, atIndex: 0)
-//        
-//        // Make sure that the last selected view
-//        // has a value
-//        lastSelectedView = sj_imgView
-//        
-//        // Add subview
-//        boundingRectView?.addSubview(sj_imgView)
-        
-        let image = ss_imgView.image?.drawImage(image)
-        ss_imgView.image = image
+        let finishedImage = forGrid ? template!.image.drawImage(image, forTiling: true) : ss_imgView.image?.drawImage(image, forTiling: false)
+        ss_imgView.image = finishedImage
         
     }
     
@@ -228,8 +213,10 @@ extension SJCollectionViewCell: UIGestureRecognizerDelegate {
     // Handle Rotate and Pinch Gesture
     @objc private func handleGesture(recognizer: UIGestureRecognizer) {
         
-        switch recognizer.state {
+        if let boundingRectView = boundingRectView {
             
+            switch recognizer.state {
+                
             case .Began:
                 if activeRecognizers.count == 0 {
                     referenceTransform = lastSelectedView?.transform
@@ -249,8 +236,8 @@ extension SJCollectionViewCell: UIGestureRecognizerDelegate {
                 
             default:
                 break
+            }
         }
-        
     }
     
     // Helper Function
@@ -271,36 +258,4 @@ extension SJCollectionViewCell: UIGestureRecognizerDelegate {
     func gestureRecognizer(gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWithGestureRecognizer otherGestureRecognizer: UIGestureRecognizer) -> Bool {
         return true
     }
-    
-     //Handle Pinch
-//    @objc private func handlePinch(recognizer: UIPinchGestureRecognizer) {
-//    
-//        // Base Case
-//        if recognizer.numberOfTouches() != 2 {
-//            return
-//        }
-//
-//        if recognizer.state == .Changed {
-//            
-//            if let sj_label = sj_label {
-//                
-//                // Increasing font size
-//                var fontSize = sj_label.font.pointSize
-//                fontSize = ((recognizer.velocity > 0) ? 1 : -1) * 1 + fontSize
-//                
-//                // Bounds
-//                if (fontSize < 13) { fontSize = 13 }
-//                if (fontSize > 100) { fontSize = 100 }
-//                
-//                // Change the font
-//                sj_label.font = UIFont(name: sj_label.font.fontName, size: fontSize)
-//                
-//                // Setting a new size for the frame and forcing it to re draw to get crisp text
-//                let str: NSString = sj_label.text!
-//                let size = str.boundingRectWithSize(CGSize(width: 400, height: CGFloat.max), options: NSStringDrawingOptions.UsesFontLeading | NSStringDrawingOptions.UsesLineFragmentOrigin, attributes: [NSFontAttributeName: sj_label.font], context: nil).size
-//                sj_label.frame.size = size
-//            }
-//
-//        }
-//    }
 }

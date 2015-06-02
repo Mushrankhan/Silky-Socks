@@ -52,6 +52,7 @@ class SJCollectionView: UICollectionView {
         keyboardDismissMode = .Interactive
         bounces = true
         indicatorStyle = .Black
+        pagingEnabled = true
 
         // Register the Cell
         registerNib(UINib(nibName: "SJCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: reuseIdentifier)
@@ -197,22 +198,30 @@ extension SJCollectionView: SJBottomViewDelegate {
 extension SJCollectionView {
     
     func sj_createTextLabel(text: String, afont: UIFont, acolor: UIColor) {
-        
-        let font = UIFont(name: afont.fontName, size: afont.pointSize)
-        // Should return only one cell, because one cell covers the entire area
-        let cells = visibleCells() as! [SJCollectionViewCell]
-        if cells.count == 1 {
-            cells.first!.createLabel(text, font: font!, color: acolor)
+        if let cell = findCurrentCell() {
+            cell.createLabel(text, font: afont, color: acolor)
         }
     }
     
-    func sj_createImage(image: UIImage) {
+    func sj_createImage(image: UIImage, forGrid: Bool) {
+        if let cell = findCurrentCell() {
+            cell.createImage(image, forGrid: forGrid)
+        }
+    }
+    
+    func sj_addColor(color: UIColor) {
+        if let cell = findCurrentCell() {
+            cell.addColor(color)
+        }
+    }
+    
+    final private func findCurrentCell() -> SJCollectionViewCell? {
         
-        // Should return only one cell, because one cell covers the entire area
         let cells = visibleCells() as! [SJCollectionViewCell]
         if cells.count == 1 {
-            cells.first!.createImage(image)
+            return cells.first!
         }
+        return nil
     }
 }
 
