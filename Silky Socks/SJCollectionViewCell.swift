@@ -120,9 +120,15 @@ class SJCollectionViewCell: UICollectionViewCell {
         
         // Masking
         maskImageView = UIImageView(frame: boundingRectView!.bounds)
-        maskImageView?.contentMode = .ScaleAspectFit
-        maskImageView?.image = template!.image
-        boundingRectView?.maskView = maskImageView
+        maskImageView!.contentMode = .ScaleAspectFit
+                
+        if let img = template!.maskImage {
+            maskImageView!.image = img
+        } else {
+            maskImageView!.image = template!.image
+        }
+        
+        boundingRectView!.maskView = maskImageView
         
         // Add Subview
         addSubview(boundingRectView!)
