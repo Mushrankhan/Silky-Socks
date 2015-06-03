@@ -3,17 +3,17 @@
     {
       "idiom" : "universal",
       "scale" : "1x",
-      "filename" : "blackfoot_template.png"
+      "filename" : "kneehigh.png"
     },
     {
       "idiom" : "universal",
       "scale" : "2x",
-      "filename" : "blackfoot_template@2x.png"
+      "filename" : "kneehigh@2x.png"
     },
     {
       "idiom" : "universal",
       "scale" : "3x",
-      "filename" : "blackfoot_template@3x.png"
+      "filename" : "kneehigh@3x.png"
     }
   ],
   "info" : {

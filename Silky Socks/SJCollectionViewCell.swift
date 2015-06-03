@@ -96,7 +96,7 @@ class SJCollectionViewCell: UICollectionViewCell {
     // Apply Layout Attributes
     override func applyLayoutAttributes(layoutAttributes: UICollectionViewLayoutAttributes!) {
         if let attr = layoutAttributes {
-            self.frame = attr.frame
+            frame = attr.frame
         }
     }
     
@@ -157,9 +157,51 @@ class SJCollectionViewCell: UICollectionViewCell {
     // Create Image
     func createImage(image: UIImage, forGrid: Bool) {
         
-        let finishedImage = forGrid ? template!.image.drawImage(image, forTiling: true) : ss_imgView.image?.drawImage(image, forTiling: false)
-        ss_imgView.image = finishedImage
+        func normalImage(image: UIImage) {
+            
+            // Create and add the bounding rect
+            if boundingRectView == nil {
+                addClipRect()
+            }
+    
+            let size = UIImage.getBoundingSizeForAspectFit(template!.image.size, imageViewSize: ss_imgView.frame.size)
+            var width = min(size.width, size.height)
+            
+            if template!.type == .Shirt {
+                width -= 100
+            }
+            
+            // Create the image
+            let sj_imgView = UIImageView(frame: .zeroRect)
+            sj_imgView.frame.size.width = width
+            sj_imgView.frame.size.height = width
+            sj_imgView.center = CGPoint(x: boundingRectView!.center.x, y: boundingRectView!.center.y)
+            sj_imgView.contentMode = .ScaleAspectFill
+            sj_imgView.image = image
+    
+            // Add it to the array of subviews
+            sj_subViews.insert(sj_imgView, atIndex: 0)
+    
+            // Make sure that the last selected view
+            // has a value
+            lastSelectedView = sj_imgView
+            
+            // Add subview
+            boundingRectView?.addSubview(sj_imgView)
+        }
         
+        // If grid then add image on the image
+        if forGrid {
+            let finishedImage = template!.image.drawImage(image, forTiling: true)
+            ss_imgView.image = finishedImage
+            return
+        }
+        
+        // add image on bounding view
+        normalImage(image)
+        
+//        let finishedImage = forGrid ? template!.image.drawImage(image, forTiling: true) : ss_imgView.image?.drawImage(image, forTiling: false)
+//        ss_imgView.image = finishedImage
     }
     
     // Add Color to image
