@@ -6,7 +6,6 @@
 //  Copyright (c) 2015 Full Stak. All rights reserved.
 //
 
-import Foundation
 import UIKit
 
 class SJCollectionViewController: UIViewController {
@@ -213,6 +212,7 @@ extension SJCollectionViewController: SJCollectionViewDelegate {
     }
     
     // Smiley Button
+    // Not Supported Right Now
     func collectionView(collectionView: UICollectionView, bottomView: UIView , didPressSmileyButton button:UIButton) {
         //showingText = true
         //colorCollectionVC.collectionView!.hidden = true

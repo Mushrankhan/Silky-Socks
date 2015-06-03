@@ -30,20 +30,23 @@ public let utilitiesElementkind = "Utilities"
 // for customization is a subclass of a UICollectionReusableView
 class SJBottomView: UICollectionReusableView {
     
-    // Grid Camera (4th button) constraints
-    @IBOutlet weak var gridCameraButtonTrailingConstraint: NSLayoutConstraint!
-    @IBOutlet weak var gridCameraButtonLeadingConstraint: NSLayoutConstraint!
-    
-    // Text button (2nd Button) constraints
-    @IBOutlet weak var textButtonLeadingConstraint: NSLayoutConstraint!
-    @IBOutlet weak var textButtonTrailingConstraint: NSLayoutConstraint!
+//    // Grid Camera (4th button) constraints
+//    @IBOutlet weak var gridCameraButtonTrailingConstraint: NSLayoutConstraint!
+//    @IBOutlet weak var gridCameraButtonLeadingConstraint: NSLayoutConstraint!
+//    
+//    // Text button (2nd Button) constraints
+//    @IBOutlet weak var textButtonLeadingConstraint: NSLayoutConstraint!
+//    @IBOutlet weak var textButtonTrailingConstraint: NSLayoutConstraint!
     
     // Buttons
     @IBOutlet weak var cameraButton: UIButton!
+    @IBOutlet weak var textButton: UIButton!
     @IBOutlet weak var colorWheelButton: UIButton!
-    @IBOutlet weak var simleyButton: UIButton!
+    @IBOutlet weak var gridButton: UIButton!
+    //@IBOutlet weak var simleyButton: UIButton!
     
-    // for Draw Rect
+    // Navigation
+    @IBOutlet weak var preButton: UIButton!
     @IBOutlet weak var nextButton: UIButton!
     
     // the Delegate object
@@ -59,21 +62,23 @@ class SJBottomView: UICollectionReusableView {
     override func layoutSubviews() {
         super.layoutSubviews()
         
-        // Calculate the distance between the surrounding buttons
-        var distance = fabs(cameraButton.frame.maxX - colorWheelButton.frame.minX)
+        // Used when having the emoji button
         
-        // Subtract the width of the button
-        distance -= cameraButton.frame.width
-        
-        // Set the trailing and the leading constraint to be half of the distance
-        textButtonLeadingConstraint.constant = distance/2
-        textButtonTrailingConstraint.constant = distance/2
-        
-        // Same for the grid camera button
-        distance = fabs(colorWheelButton.frame.maxX - simleyButton.frame.minX)
-        distance -= colorWheelButton.frame.width
-        gridCameraButtonLeadingConstraint.constant = distance/2
-        gridCameraButtonTrailingConstraint.constant = distance/2
+//        // Calculate the distance between the surrounding buttons
+//        var distance = fabs(cameraButton.frame.maxX - colorWheelButton.frame.minX)
+//        
+//        // Subtract the width of the button
+//        distance -= cameraButton.frame.width
+//        
+//        // Set the trailing and the leading constraint to be half of the distance
+//        textButtonLeadingConstraint.constant = distance/2
+//        textButtonTrailingConstraint.constant = distance/2
+//        
+//        // Same for the grid camera button
+//        distance = fabs(colorWheelButton.frame.maxX - simleyButton.frame.minX)
+//        distance -= colorWheelButton.frame.width
+//        gridCameraButtonLeadingConstraint.constant = distance/2
+//        gridCameraButtonTrailingConstraint.constant = distance/2
     }
     
     /* Custom Drawing */
