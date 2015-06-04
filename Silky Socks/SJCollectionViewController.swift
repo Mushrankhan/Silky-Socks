@@ -321,8 +321,10 @@ extension SJCollectionViewController: SJCollectionViewDelegate {
     // Share
     func collectionView(collectionView: UICollectionView, didPressShareButton button: UIButton, withSnapShotImage snapshot: UIImage) {
         
-        
-        
+        let items = ["Check out the design I created on the silky socks app. http://www.silkysocks.com/app", snapshot]
+        let activity = UIActivityViewController(activityItems: items, applicationActivities: nil)
+        activity.excludedActivityTypes = [UIActivityTypeAddToReadingList, UIActivityTypeAssignToContact, UIActivityTypePrint, UIActivityTypeSaveToCameraRoll]
+        presentViewController(activity, animated: true, completion: nil)
     }
     
 }
