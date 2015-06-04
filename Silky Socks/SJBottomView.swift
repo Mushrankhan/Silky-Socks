@@ -58,27 +58,9 @@ class SJBottomView: UICollectionReusableView {
         setTranslatesAutoresizingMaskIntoConstraints(false)
     }
     
-    // Set the constraints appropriately
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        
-        // Used when having the emoji button
-        
-//        // Calculate the distance between the surrounding buttons
-//        var distance = fabs(cameraButton.frame.maxX - colorWheelButton.frame.minX)
-//        
-//        // Subtract the width of the button
-//        distance -= cameraButton.frame.width
-//        
-//        // Set the trailing and the leading constraint to be half of the distance
-//        textButtonLeadingConstraint.constant = distance/2
-//        textButtonTrailingConstraint.constant = distance/2
-//        
-//        // Same for the grid camera button
-//        distance = fabs(colorWheelButton.frame.maxX - simleyButton.frame.minX)
-//        distance -= colorWheelButton.frame.width
-//        gridCameraButtonLeadingConstraint.constant = distance/2
-//        gridCameraButtonTrailingConstraint.constant = distance/2
+    // Return Nib
+    class func nib() -> UINib {
+        return UINib(nibName: "SJBottomView", bundle: nil)
     }
     
     /* Custom Drawing */
@@ -106,6 +88,29 @@ class SJBottomView: UICollectionReusableView {
         // The dark grey box
         CGContextSetFillColorWithColor(context, UIColor.getColor(red: 216, green: 216, blue: 216, alpha: 1.0).CGColor)
         CGContextFillRect(context, darkGrayRect)
+    }
+    
+    // Set the constraints appropriately
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        
+        // Used when having the emoji button
+        
+        //        // Calculate the distance between the surrounding buttons
+        //        var distance = fabs(cameraButton.frame.maxX - colorWheelButton.frame.minX)
+        //
+        //        // Subtract the width of the button
+        //        distance -= cameraButton.frame.width
+        //
+        //        // Set the trailing and the leading constraint to be half of the distance
+        //        textButtonLeadingConstraint.constant = distance/2
+        //        textButtonTrailingConstraint.constant = distance/2
+        //
+        //        // Same for the grid camera button
+        //        distance = fabs(colorWheelButton.frame.maxX - simleyButton.frame.minX)
+        //        distance -= colorWheelButton.frame.width
+        //        gridCameraButtonLeadingConstraint.constant = distance/2
+        //        gridCameraButtonTrailingConstraint.constant = distance/2
     }
 }
 

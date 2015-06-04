@@ -2,7 +2,7 @@
 //  Utilities.swift
 //  Silky Socks
 //
-//  Created by Kevin Koeller on 4/19/15.
+//  Created by Saurabh Jain on 4/19/15.
 //  Copyright (c) 2015 Full Stak. All rights reserved.
 //
 
@@ -10,6 +10,7 @@ import UIKit
 
 extension UIView {
     
+    // Pin a subview to the edges of the superview
     func pinSubviewToView(#subView: UIView) {
         
         addAttributeToView(NSLayoutAttribute.Top, subview: subView)
@@ -21,7 +22,17 @@ extension UIView {
     }
     
     private func addAttributeToView(attribute: NSLayoutAttribute, subview: UIView) {
-        self.addConstraint(NSLayoutConstraint(item: self, attribute: attribute, relatedBy: NSLayoutRelation.Equal, toItem: subview, attribute: attribute, multiplier: 1.0, constant: 0))
+        addConstraint(NSLayoutConstraint(item: self, attribute: attribute, relatedBy: NSLayoutRelation.Equal, toItem: subview, attribute: attribute, multiplier: 1.0, constant: 0))
+    }
+    
+    // Clicks a snapshot of the view
+    func clickSnapShot(size: CGSize) -> UIImage {
+        
+        UIGraphicsBeginImageContextWithOptions(size, opaque, 0)
+        layer.renderInContext(UIGraphicsGetCurrentContext())
+        let image = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        return image
     }
     
     // Print the view heirarchy
@@ -35,6 +46,7 @@ extension UIView {
 
 extension UIColor {
     
+    // Helper Function
     class func getColor(#red: Int, green: Int, blue: Int, alpha: CGFloat) -> UIColor {
         let divisor: CGFloat = 255
         return UIColor(red: CGFloat(red)/divisor, green: CGFloat(green)/divisor, blue: CGFloat(blue)/divisor, alpha: alpha)
@@ -78,7 +90,8 @@ extension UIImage {
         
         UIGraphicsBeginImageContext(size)
         let context = UIGraphicsGetCurrentContext()
-        color.setFill()
+
+        // Flip
         CGContextTranslateCTM(context, 0, size.height)
         CGContextScaleCTM(context, 1, -1)
         
@@ -90,13 +103,14 @@ extension UIImage {
         // set a mask that matches the shape of the image, then draw a colored rectangle
         CGContextClipToMask(context, rect, CGImage)
         CGContextAddRect(context, rect)
+        color.setFill()
         CGContextDrawPath(context,kCGPathFill)
         
-        // generate a new UIImage from the graphics context we drew onto
+        // new image
         let coloredImage = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
         
-        //return the colored image
+        //return the tinted image
         return coloredImage;
     }
     
@@ -105,25 +119,28 @@ extension UIImage {
         
         UIGraphicsBeginImageContext(size)
         let context = UIGraphicsGetCurrentContext()
+        
+        // Flip the context
         CGContextTranslateCTM(context, 0, size.height)
         CGContextScaleCTM(context, 1, -1)
 
         // set the blend mode to color burn, and the original image
-        CGContextSetBlendMode(context, kCGBlendModeMultiply);
-        let rect = CGRectMake(0, 0, size.width, size.height);
-        CGContextDrawImage(context, rect, CGImage);
+        CGContextSetBlendMode(context, kCGBlendModeMultiply)
+        let rect = CGRect(origin: .zeroPoint, size: size)
+        CGContextDrawImage(context, rect, CGImage)
         
         // set a mask that matches the shape of the image, then draw a colored rectangle
         CGContextClipToMask(context, rect, CGImage)
         
+        // Draw normal or tiled image
         tile ? CGContextDrawTiledImage(context, CGRect(origin: .zeroPoint, size: CGSize(width: 125, height: 125)) ,overlayImage.CGImage) : CGContextDrawImage(context, rect, overlayImage.CGImage)
         
         // generate a new UIImage from the graphics context we drew onto
-        let coloredImage = UIGraphicsGetImageFromCurrentImageContext();
+        let image = UIGraphicsGetImageFromCurrentImageContext();
         UIGraphicsEndImageContext();
         
-        //return the colored image
-        return coloredImage;
+        //return the image
+        return image;
         
     }
     

@@ -9,17 +9,14 @@
 import UIKit
 
 class SJLabel: UILabel {
-        
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        initialSetUp()
-    }
     
+    // When instatiated from storyboard
     required init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         initialSetUp()
     }
     
+    // Custom Init
     init(frame: CGRect, text: String, font: UIFont) {
         super.init(frame: frame)
         self.text = text
@@ -27,6 +24,7 @@ class SJLabel: UILabel {
         initialSetUp()
     }
     
+    // Basic Set Up
     private func initialSetUp() {
         numberOfLines = 1
         backgroundColor = UIColor.clearColor()
@@ -34,32 +32,4 @@ class SJLabel: UILabel {
         textAlignment = .Center
         adjustsFontSizeToFitWidth = true
     }
-}
-
-
-class BoundingView: UIView {
-    
-    var maskImage: UIImage?
-    
-    override func drawRect(rect: CGRect) {
-        
-//        let context = UIGraphicsGetCurrentContext()
-//        CGContextTranslateCTM(context, 0, rect.size.height)
-//        CGContextScaleCTM(context, 1, -1)
-//        
-//        CGContextSetRGBFillColor(context, 1, 1, 1, 1)
-//        CGContextFillRect(context, rect)
-//        
-//        CGContextDrawImage(context, rect, maskImage!.CGImage)
-//        UIColor.grayColor().set()
-//        UIRectFillUsingBlendMode(rect, kCGBlendModeColor)
-        
-        
-        
-//        CGContextClipToMask(context, rect, maskImage!.CGImage)
-//        
-//        CGContextSetRGBFillColor(context, 0, 1, 1, 1)
-//        CGContextFillRect(context, rect)
-    }
-    
 }

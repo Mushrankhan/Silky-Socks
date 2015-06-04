@@ -8,26 +8,21 @@
 
 import UIKit
 
-//class UserCart: BUYCart {
-//   
-//    // User Cart
-////    private var cart = [Template]()
-//    
-//    // Singleton support
-//    class func sharedCart() -> UserCart {
-//        struct Singleton {
-//            static let sharedInstance = UserCart()
-//        }
-//        return Singleton.sharedInstance
-//    }
-//    
-//    // Add Product
-//    func addProduct(template: Template, snapshot: UIImage) {
-//        
-//    }
-//    
-//    // Remove Product
-//    func removeProduct(template: Template) {
-//        
-//    }
-//}
+class UserCart: NSObject {
+   
+    // Singleton support
+    static let sharedCart = UserCart()
+    
+    // User Cart
+    private var cart = [Template]()
+    
+    // Add Product
+    func addProduct(template: Template, snapshot: UIImage) {
+        
+    }
+    
+    // Remove Product
+    func removeProduct(template: Template) {
+        
+    }
+}

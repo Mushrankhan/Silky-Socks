@@ -18,7 +18,12 @@ class SJCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var nameLabel: UILabel!
     
     // Array containing all the views added to the template
-    var sj_subViews = [UIView]()
+    private var sj_subViews = [UIView]()
+    
+    // The number of the elements in the array
+    var sj_subViews_count: Int {
+        return count(sj_subViews)
+    }
     
     // Last selected view
     private var lastSelectedView: UIView?
@@ -52,8 +57,14 @@ class SJCollectionViewCell: UICollectionViewCell {
     // initial transform
     private var referenceTransform: CGAffineTransform?
     
+    // Add the label as a subview of boundingRectView
+    // Is a view around the image because the image is smaller than the image view
+    private(set) var boundingRectView: UIView?
+    
+    // Masking that is applied to the boundingRectView
+    private var maskImageView: UIImageView?
+    
     // Initialization
-    // Called when instantiated from nib
     override func awakeFromNib() {
         super.awakeFromNib()
         autoresizingMask = UIViewAutoresizing.FlexibleHeight | .FlexibleWidth
@@ -80,17 +91,27 @@ class SJCollectionViewCell: UICollectionViewCell {
     // Prepare for reuse
     override func prepareForReuse() {
         super.prepareForReuse()
-//        for view in sj_subViews {
-//            view.removeFromSuperview()
-//        }
-//        sj_subViews.removeAll(keepCapacity: true)
-//        boundingRectView?.removeFromSuperview()
-//        boundingRectView = nil
-//        lastSelectedView = nil
-//        activeRecognizers.removeAllObjects()
-//        referenceTransform = nil
-//        firstX = 0
-//        firstY = 0
+        performCleanUp()
+    }
+    
+    func performCleanUp() {
+        
+        addColor(UIColor.clearColor())
+
+        // Clear the subviews added to the cell
+        for view in sj_subViews {
+            view.removeFromSuperview()
+        }
+        sj_subViews.removeAll(keepCapacity: true)
+        
+        // Bounding zview
+        boundingRectView?.removeFromSuperview()
+        boundingRectView = nil
+        
+        lastSelectedView = nil
+        activeRecognizers.removeAllObjects()
+        referenceTransform = nil
+        firstX = 0; firstY = 0
     }
     
     // Apply Layout Attributes
@@ -100,12 +121,21 @@ class SJCollectionViewCell: UICollectionViewCell {
         }
     }
     
-    // Add the label as a subview of boundingRectView
-    // Is a view around the image because the image is smaller than the image view
-    private(set) var boundingRectView: UIView?
+    class func nib() -> UINib {
+        return UINib(nibName: "SJCollectionViewCell", bundle: nil)
+    }
     
-    // Masking that is applied to the boundingRectView
-    private var maskImageView: UIImageView?
+    
+    func shouldPan() -> Bool {
+        if template!.image != ss_imgView.image || sj_subViews_count > 0 {
+            return false
+        }
+        return true
+    }
+}
+
+// MARK: Customized Look
+extension SJCollectionViewCell {
     
     // Add Bounding view
     private func addClipRect() {
@@ -121,13 +151,14 @@ class SJCollectionViewCell: UICollectionViewCell {
         // Masking
         maskImageView = UIImageView(frame: boundingRectView!.bounds)
         maskImageView!.contentMode = .ScaleAspectFit
-                
+        
         if let img = template!.maskImage {
             maskImageView!.image = img
         } else {
             maskImageView!.image = template!.image
         }
         
+        // Mask it
         boundingRectView!.maskView = maskImageView
         
         // Add Subview
@@ -151,7 +182,7 @@ class SJCollectionViewCell: UICollectionViewCell {
         
         // Add the label to the array of sub views
         sj_subViews.insert(sj_label, atIndex: 0)
-
+        
         // Make sure that the last selected view
         // has a value
         lastSelectedView = sj_label
@@ -159,6 +190,7 @@ class SJCollectionViewCell: UICollectionViewCell {
         // Add subview
         boundingRectView?.addSubview(sj_label)
     }
+    
     
     // Create Image
     func createImage(image: UIImage, forGrid: Bool) {
@@ -169,25 +201,24 @@ class SJCollectionViewCell: UICollectionViewCell {
             if boundingRectView == nil {
                 addClipRect()
             }
-    
+            
             let size = UIImage.getBoundingSizeForAspectFit(template!.image.size, imageViewSize: ss_imgView.frame.size)
             var width = min(size.width, size.height)
             
             if template!.type == .Shirt {
-                width -= 100
+                width -= 150
             }
             
             // Create the image
             let sj_imgView = UIImageView(frame: .zeroRect)
-            sj_imgView.frame.size.width = width
-            sj_imgView.frame.size.height = width
+            sj_imgView.frame.size = CGSize(width: width, height: width)
             sj_imgView.center = CGPoint(x: boundingRectView!.center.x, y: boundingRectView!.center.y)
             sj_imgView.contentMode = .ScaleAspectFill
             sj_imgView.image = image
-    
+            
             // Add it to the array of subviews
             sj_subViews.insert(sj_imgView, atIndex: 0)
-    
+            
             // Make sure that the last selected view
             // has a value
             lastSelectedView = sj_imgView
@@ -205,17 +236,25 @@ class SJCollectionViewCell: UICollectionViewCell {
         
         // add image on bounding view
         normalImage(image)
-        
-//        let finishedImage = forGrid ? template!.image.drawImage(image, forTiling: true) : ss_imgView.image?.drawImage(image, forTiling: false)
-//        ss_imgView.image = finishedImage
     }
+    
     
     // Add Color to image
     func addColor(color: UIColor) {
+        
+        if color == UIColor.clearColor() {
+            ss_imgView.image = template?.image
+            return
+        }
+        
+        // Add the color on the image itself rather than
+        // placing the color on top the image
         let image = template!.image.colorizeWith(color)
         ss_imgView.image = image
     }
+    
 }
+
 
 // MARK: Gesture Support
 extension SJCollectionViewCell: UIGestureRecognizerDelegate {
@@ -224,7 +263,6 @@ extension SJCollectionViewCell: UIGestureRecognizerDelegate {
     @objc private func handlePan(recognizer: UIPanGestureRecognizer) {
         
         // Make sure that the bounding view exists
-        // which it always will
         if let boundingRectView = boundingRectView {
             
             // Find the location
@@ -236,20 +274,25 @@ extension SJCollectionViewCell: UIGestureRecognizerDelegate {
                 
                 // If one subview contains the point
                 if CGRectContainsPoint(view.frame, location) {
+                    
                     switch recognizer.state {
+                        
                         case .Began:
                             if recognizer.state == .Began {
                                 firstX = view.center.x
                                 firstY = view.center.y
                             }
+                        
                         case .Changed:
                             view.center = CGPointMake(firstX + translatedpoint.x, firstY + translatedpoint.y)
                             // Break the loop after changing one view
                             // Done in order to prevent multiple views 
                             // from moving simultaneously
                             break loop
+                        
                         case .Ended:
                             lastSelectedView = view
+                        
                         default:
                             break
                     }
@@ -261,35 +304,35 @@ extension SJCollectionViewCell: UIGestureRecognizerDelegate {
     // Handle Rotate and Pinch Gesture
     @objc private func handleGesture(recognizer: UIGestureRecognizer) {
         
+        // Make sure that the bounding view exists
         if let boundingRectView = boundingRectView {
             
             switch recognizer.state {
-                
-            case .Began:
-                if activeRecognizers.count == 0 {
-                    referenceTransform = lastSelectedView?.transform
-                }
-                activeRecognizers.addObject(recognizer)
-                
-            case .Ended:
-                referenceTransform = applyRecognizer(recognizer, toTransform: referenceTransform!)
-                activeRecognizers.removeObject(recognizer)
-                
-            case .Changed:
-                var transform = referenceTransform
-                for gesture in activeRecognizers {
-                    transform = applyRecognizer(gesture as! UIGestureRecognizer, toTransform: transform!)
-                }
-                lastSelectedView?.transform = transform!
-                
-            default:
-                break
+                case .Began:
+                    if activeRecognizers.count == 0 {
+                        referenceTransform = lastSelectedView?.transform
+                    }
+                    activeRecognizers.addObject(recognizer)
+                    
+                case .Ended:
+                    referenceTransform = applyRecognizer(recognizer, toTransform: referenceTransform!)
+                    activeRecognizers.removeObject(recognizer)
+                    
+                case .Changed:
+                    var transform = referenceTransform
+                    for gesture in activeRecognizers {
+                        transform = applyRecognizer(gesture as! UIGestureRecognizer, toTransform: transform!)
+                    }
+                    lastSelectedView?.transform = transform!
+                    
+                default:
+                    break
             }
         }
     }
     
     // Helper Function
-    final private func applyRecognizer(recognizer: UIGestureRecognizer, toTransform transform:CGAffineTransform) -> CGAffineTransform {
+    private func applyRecognizer(recognizer: UIGestureRecognizer, toTransform transform:CGAffineTransform) -> CGAffineTransform {
         
         if recognizer.respondsToSelector("rotation") {
             return CGAffineTransformRotate(transform, (recognizer as! UIRotationGestureRecognizer).rotation)

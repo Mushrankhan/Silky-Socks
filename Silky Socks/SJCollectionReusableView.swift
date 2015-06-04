@@ -41,6 +41,11 @@ class RestartViewCollectionReusableView: UICollectionReusableView {
         }
     }
     
+    // Return Nib
+    class func nib() -> UINib {
+        return UINib(nibName: "SJCollectionRestartReusableView", bundle: nil)
+    }
+    
 }
 
 protocol ShareViewCollectionReusableViewDelegate: NSObjectProtocol {
@@ -64,6 +69,11 @@ class ShareViewCollectionReusableView: UICollectionReusableView {
             }
         }
     }
+    
+    // Return Nib
+    class func nib() -> UINib {
+        return UINib(nibName: "SJCollectionShareReusableView", bundle: nil)
+    }
 }
 
 protocol CartViewCollectionReusableViewDelegate: NSObjectProtocol {
@@ -85,5 +95,10 @@ class CartViewCollectionReusableView: UICollectionReusableView {
                 frame = layoutAttributes.frame
             }
         }
+    }
+    
+    // Return Nib
+    class func nib() -> UINib {
+        return UINib(nibName: "SJCollectionAddToCartReusableView", bundle: nil)
     }
 }

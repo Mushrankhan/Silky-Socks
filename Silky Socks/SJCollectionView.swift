@@ -11,27 +11,35 @@ import UIKit
 class SJCollectionView: UICollectionView {
     
     // Custom delegate
-    var myDelegate: SJCollectionViewDelegate?
-    
-    // the width of the screen bounds
-    private var width: CGFloat {
-        get {
-           return CGRectGetWidth(UIScreen.mainScreen().bounds)
-        }
-    }
+    weak var myDelegate: SJCollectionViewDelegate?
     
     // The bottom view
-    private(set) var sj_bottomView: SJBottomView?
+    private var sj_bottomView: SJBottomView?
     
     // The Count
     var cell_subViewsCount: Int {
         get {
-            let cells = visibleCells() as! [SJCollectionViewCell]
-            if cells.count == 1 {
-                return cells.first!.sj_subViews.count
+            if let cell = visibleCell {
+                return cell.sj_subViews_count
             }
             return 0
         }
+    }
+    
+    // Return the currently visible Cell
+    var visibleCell: SJCollectionViewCell? {
+        get {
+            let cells = visibleCells() as! [SJCollectionViewCell]
+            if cells.count == 1 {
+                return cells.first!
+            }
+            return nil
+        }
+    }
+    
+    // the width of the screen bounds
+    private var width: CGFloat {
+        return CGRectGetWidth(UIScreen.mainScreen().bounds)
     }
     
     // Initialization
@@ -55,25 +63,18 @@ class SJCollectionView: UICollectionView {
         pagingEnabled = true
 
         // Register the Cell
-        registerNib(UINib(nibName: "SJCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: reuseIdentifier)
+        registerNib(SJCollectionViewCell.nib(), forCellWithReuseIdentifier: reuseIdentifier)
         
         // Register Supplementary View
-        registerNib(UINib(nibName: "SJCollectionRestartReusableView", bundle: nil), forSupplementaryViewOfKind: restartElementkind, withReuseIdentifier: restartIdentifier)
-        registerNib(UINib(nibName: "SJCollectionShareReusableView", bundle: nil), forSupplementaryViewOfKind: shareElementKind, withReuseIdentifier: shareIdentifier)
-        registerNib(UINib(nibName: "SJCollectionAddToCartReusableView", bundle: nil), forSupplementaryViewOfKind: addToCartElementKind, withReuseIdentifier: addToCartIdentifier)
-        registerNib(UINib(nibName: "SJBottomView", bundle: nil), forSupplementaryViewOfKind: utilitiesElementkind, withReuseIdentifier: utilitiesReuseIdentifier)
+        registerNib(RestartViewCollectionReusableView.nib(), forSupplementaryViewOfKind: restartElementkind, withReuseIdentifier: restartIdentifier)
+        registerNib(ShareViewCollectionReusableView.nib(), forSupplementaryViewOfKind: shareElementKind, withReuseIdentifier: shareIdentifier)
+        registerNib(CartViewCollectionReusableView.nib(), forSupplementaryViewOfKind: addToCartElementKind, withReuseIdentifier: addToCartIdentifier)
+        registerNib(SJBottomView.nib(), forSupplementaryViewOfKind: utilitiesElementkind, withReuseIdentifier: utilitiesReuseIdentifier)
         
         // Register the decoration view
         // Decoration views are owned by the layout object
         let layout = collectionViewLayout as! SJLayout
         layout.registerNib(UINib(nibName: "SJCollectionDecorationSilkySocksLogoReusableView", bundle: nil), forDecorationViewOfKind: logoElementKind)
-    }
-    
-    // Using it to dismiss the color palette
-    override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
-        let touch = touches.first as! UITouch
-        myDelegate?.collectionView(self, touchesBegan: touch)
-        super.touchesBegan(touches, withEvent: event)
     }
 }
 
@@ -82,7 +83,6 @@ extension SJCollectionView {
     
     // Dequeue the bottom utilities view
     func dequeueReusableBottomUtilitiesView(#indexPath: NSIndexPath) -> SJBottomView {
-        
         let view = super.dequeueReusableSupplementaryViewOfKind(utilitiesElementkind, withReuseIdentifier: utilitiesReuseIdentifier, forIndexPath: indexPath) as! SJBottomView
         view.delegate = self // important
         sj_bottomView = view
@@ -91,7 +91,6 @@ extension SJCollectionView {
 
     // Dequeue the restart buttom
     func dequeueReusableRestartView(#indexPath: NSIndexPath) -> RestartViewCollectionReusableView {
-        
         let view = super.dequeueReusableSupplementaryViewOfKind(restartElementkind, withReuseIdentifier: restartIdentifier, forIndexPath: indexPath) as! RestartViewCollectionReusableView
         view.delegate = self // important
         return view
@@ -99,7 +98,6 @@ extension SJCollectionView {
     
     // Dequeue the share button
     func dequeueReusableShareView(#indexPath: NSIndexPath) -> ShareViewCollectionReusableView {
-        
         let view = super.dequeueReusableSupplementaryViewOfKind(shareElementKind, withReuseIdentifier: shareIdentifier, forIndexPath: indexPath) as! ShareViewCollectionReusableView
         view.delegate = self // important
         return view
@@ -107,7 +105,6 @@ extension SJCollectionView {
     
     // Dequeue the add to cart button
     func dequeueReusableAddToCartView(#indexPath: NSIndexPath) -> CartViewCollectionReusableView {
-        
         let view = super.dequeueReusableSupplementaryViewOfKind(addToCartElementKind, withReuseIdentifier: addToCartIdentifier, forIndexPath: indexPath) as! CartViewCollectionReusableView
         view.delegate = self // important
         return view
@@ -124,15 +121,8 @@ extension SJCollectionView: RestartViewCollectionReusableViewDelegate {
 // MARK: Share
 extension SJCollectionView: ShareViewCollectionReusableViewDelegate {
     func shareReusableView(view: ShareViewCollectionReusableView, didPressShareButton sender: UIButton) {
-        
-        let cells = visibleCells() as! [SJCollectionViewCell]
-        if cells.count == 1 {
-            let cell = cells.first!
-            UIGraphicsBeginImageContextWithOptions(cell.frame.size, cell.opaque, 0)
-            cell.layer.renderInContext(UIGraphicsGetCurrentContext())
-            let image = UIGraphicsGetImageFromCurrentImageContext()
-            UIGraphicsEndImageContext()
-        
+        if let cell = visibleCell {
+            let image = cell.clickSnapShot(cell.frame.size)
             myDelegate?.collectionView(self, didPressShareButton: sender, withSnapShotImage: image)
         }
     }
@@ -141,15 +131,8 @@ extension SJCollectionView: ShareViewCollectionReusableViewDelegate {
 // MARK: Add To Cart
 extension SJCollectionView: CartViewCollectionReusableViewDelegate {
     func cartReusableView(view: CartViewCollectionReusableView, didPressAddToCartButton sender: UIButton) {
-        let cells = visibleCells() as! [SJCollectionViewCell]
-        if cells.count == 1 {
-            let cell = cells.first!
-            UIGraphicsBeginImageContextWithOptions(cell.frame.size, cell.opaque, 0)
-            cell.layer.renderInContext(UIGraphicsGetCurrentContext())
-            let image = UIGraphicsGetImageFromCurrentImageContext()
-            UIGraphicsEndImageContext()
-            
-            // Do Something with the snapshot
+        if let cell = visibleCell {
+            let image = cell.clickSnapShot(cell.frame.size)
             myDelegate?.collectionView(self, didPressAddToCartButton: sender, withSnapShotImage: image, andTemplate: cell.template!)
         }
     }
@@ -163,17 +146,21 @@ extension SJCollectionView: SJBottomViewDelegate {
     
     // Navigate Right
     func sj_bottomView(view: SJBottomView, didPressRightButton button: UIButton) {
-        if cell_subViewsCount == 0 {
-            let xOffset = min(contentSize.width - width, contentOffset.x + width)
-            setContentOffset(CGPoint(x: xOffset, y: contentOffset.y), animated: true)
+        if let cell = visibleCell {
+            if cell.shouldPan() {
+                let xOffset = min(contentSize.width - width, contentOffset.x + width)
+                setContentOffset(CGPoint(x: xOffset, y: contentOffset.y), animated: true)
+            }
         }
     }
     
     // Navigate Left
     func sj_bottomView(view: SJBottomView, didPressLeftButton button: UIButton) {
-        if cell_subViewsCount == 0 {
-            let xOffset = max(0, contentOffset.x - width)
-            setContentOffset(CGPoint(x: xOffset, y: contentOffset.y), animated: true)
+        if let cell = visibleCell {
+            if cell.shouldPan() {
+                let xOffset = max(0, contentOffset.x - width)
+                setContentOffset(CGPoint(x: xOffset, y: contentOffset.y), animated: true)
+            }
         }
     }
     
@@ -201,38 +188,40 @@ extension SJCollectionView: SJBottomViewDelegate {
     func sj_bottomView(view: SJBottomView, didPressSmileyButton button:UIButton) {
         myDelegate?.collectionView(self, bottomView: view, didPressSmileyButton: button)
     }
+    
+    // Using it to dismiss the color palette
+    override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
+        let touch = touches.first as! UITouch
+        myDelegate?.collectionView(self, touchesBegan: touch)
+        super.touchesBegan(touches, withEvent: event)
+    }
 }
 
 // MARK: Messages from the VC
 // Delegate to the cell to create the appropriate views
 extension SJCollectionView {
     
+    // Pass the message to the appropriate cell
     func sj_createTextLabel(text: String, afont: UIFont, acolor: UIColor) {
-        if let cell = findCurrentCell() {
+        if let cell = visibleCell {
             cell.createLabel(text, font: afont, color: acolor)
         }
     }
     
+    // Pass the message to the appropriate cell
     func sj_createImage(image: UIImage, forGrid: Bool) {
-        if let cell = findCurrentCell() {
+        if let cell = visibleCell {
             cell.createImage(image, forGrid: forGrid)
         }
     }
     
+    // Pass the message to the appropriate cell
     func sj_addColor(color: UIColor) {
-        if let cell = findCurrentCell() {
+        if let cell = visibleCell {
             cell.addColor(color)
         }
     }
-    
-    final private func findCurrentCell() -> SJCollectionViewCell? {
-        
-        let cells = visibleCells() as! [SJCollectionViewCell]
-        if cells.count == 1 {
-            return cells.first!
-        }
-        return nil
-    }
+
 }
 
 // MARK: Gesture Handling

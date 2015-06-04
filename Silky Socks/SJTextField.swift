@@ -10,16 +10,19 @@ import UIKit
 
 class SJTextField: UITextField {
 
+    // When instantiated in code
     override init(frame: CGRect) {
         super.init(frame: frame)
         initialSetUp()
     }
     
+    // When instantiated in storyboard
     required init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         initialSetUp()
     }
     
+    // Basic Setup
     private func initialSetUp() {
         backgroundColor = UIColor.clearColor()
         textAlignment = .Center

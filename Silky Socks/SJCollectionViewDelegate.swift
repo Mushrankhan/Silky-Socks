@@ -19,8 +19,11 @@ protocol SJCollectionViewDelegate: UICollectionViewDelegate {
 
     // Add To Cart
     func collectionView(collectionView: UICollectionView, didPressAddToCartButton button:UIButton, withSnapShotImage snapshot: UIImage, andTemplate template: Template)
+    
     // Restart
     func collectionView(collectionView: UICollectionView, didPressRestartButton button:UIButton)
+    
+    // Share
     func collectionView(collectionView: UICollectionView, didPressShareButton button: UIButton, withSnapShotImage snapshot: UIImage)
     
     // Tells the collection VC that a touch happened

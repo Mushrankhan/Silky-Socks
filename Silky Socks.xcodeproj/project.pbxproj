@@ -117,7 +117,6 @@
 			children = (
 				4F8D38C51AE441F700F42E23 /* SJCollectionViewCell.swift */,
 				4F55B5531AE46E4900679048 /* SJCollectionViewCell.xib */,
-				1F88389D1B0D875D00E3BBB6 /* SJLabel.swift */,
 			);
 			name = Cell;
 			sourceTree = "<group>";
@@ -133,6 +132,23 @@
 				1FCF509C1B07F0C7005D8578 /* SJCollectionDecorationSilkySocksLogoReusableView.xib */,
 			);
 			name = "Supplementary Views";
+			sourceTree = "<group>";
+		};
+		1FFB38701B2042D3007E9390 /* Collection View */ = {
+			isa = PBXGroup;
+			children = (
+				1FCF508E1B070F4C005D8578 /* SJCollectionView.swift */,
+			);
+			name = "Collection View";
+			sourceTree = "<group>";
+		};
+		1FFB38711B204F62007E9390 /* Normal */ = {
+			isa = PBXGroup;
+			children = (
+				1F88389D1B0D875D00E3BBB6 /* SJLabel.swift */,
+				1F88389B1B0D731200E3BBB6 /* SJTextField.swift */,
+			);
+			name = Normal;
 			sourceTree = "<group>";
 		};
 		4F55B55B1AE480D900679048 /* Layout */ = {
@@ -208,10 +224,10 @@
 		4F8D38CF1AE4461700F42E23 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				1FFB38711B204F62007E9390 /* Normal */,
 				1FCF509E1B07FF06005D8578 /* Cell */,
 				1FCF509F1B07FF0B005D8578 /* Supplementary Views */,
-				1FCF508E1B070F4C005D8578 /* SJCollectionView.swift */,
-				1F88389B1B0D731200E3BBB6 /* SJTextField.swift */,
+				1FFB38701B2042D3007E9390 /* Collection View */,
 			);
 			name = View;
 			sourceTree = "<group>";
