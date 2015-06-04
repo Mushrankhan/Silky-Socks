@@ -298,6 +298,7 @@ extension SJCollectionViewController: UITextFieldDelegate {
     // When Done button is pressed
     func textFieldShouldReturn(textField: UITextField) -> Bool {
         
+        // If text field has some text
         if count(textField.text) > 0 {
             if textField.canResignFirstResponder() {
                 textField.resignFirstResponder()
@@ -316,9 +317,9 @@ extension SJCollectionViewController: UITextFieldDelegate {
 
         if let cell = collectionView.visibleCell {
             if cell.shouldPan() {
-                    collectionView!.panGestureRecognizer.enabled = true
-                }
+                collectionView!.panGestureRecognizer.enabled = true
             }
+        }
         
         if !colorCollectionVC.collectionView!.hidden {
             colorCollectionVC.collectionView!.hidden = true
@@ -362,8 +363,10 @@ extension SJCollectionViewController: UIImagePickerControllerDelegate, UINavigat
         sheet.addAction(UIAlertAction(title: "Cancel", style: .Cancel) { action in
             self.dismissViewControllerAnimated(true, completion: nil)
             // If nothing was added to the cell, then enable the pan gesture
-            if self.collectionView.cell_subViewsCount == 0 {
-                self.collectionView.panGestureRecognizer.enabled = true
+            if let cell = self.collectionView.visibleCell {
+                if cell.shouldPan() {
+                    self.collectionView!.panGestureRecognizer.enabled = true
+                }
             }
         })
         
