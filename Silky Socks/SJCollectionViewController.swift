@@ -275,6 +275,7 @@ extension SJCollectionViewController: SJCollectionViewDelegate {
         let activity = UIActivityViewController(activityItems: items, applicationActivities: nil)
         activity.excludedActivityTypes = [UIActivityTypeAddToReadingList, UIActivityTypeAssignToContact, UIActivityTypePrint, UIActivityTypeSaveToCameraRoll]
         presentViewController(activity, animated: true, completion: nil)
+        items = nil
     }
     
     // Touch
@@ -350,6 +351,7 @@ extension SJCollectionViewController: UIImagePickerControllerDelegate, UINavigat
             if UIImagePickerController.isSourceTypeAvailable(.Camera) {
                 self.picker.sourceType = .Camera
             }
+            self.presentViewController(self.picker, animated: true, completion: nil)
         })
         
         // Choose Photo
@@ -357,6 +359,7 @@ extension SJCollectionViewController: UIImagePickerControllerDelegate, UINavigat
             if UIImagePickerController.isSourceTypeAvailable(.PhotoLibrary) {
                 self.picker.sourceType = .PhotoLibrary
             }
+            self.presentViewController(self.picker, animated: true, completion: nil)
         })
         
         // Cancel
