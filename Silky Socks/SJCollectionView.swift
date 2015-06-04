@@ -125,6 +125,16 @@ extension SJCollectionView: RestartViewCollectionReusableViewDelegate {
 extension SJCollectionView: ShareViewCollectionReusableViewDelegate {
     func shareReusableView(view: ShareViewCollectionReusableView, didPressShareButton sender: UIButton) {
         
+        let cells = visibleCells() as! [SJCollectionViewCell]
+        if cells.count == 1 {
+            let cell = cells.first!
+            UIGraphicsBeginImageContextWithOptions(cell.frame.size, cell.opaque, 0)
+            cell.layer.renderInContext(UIGraphicsGetCurrentContext())
+            let image = UIGraphicsGetImageFromCurrentImageContext()
+            UIGraphicsEndImageContext()
+        
+            myDelegate?.collectionView(self, didPressShareButton: sender, withSnapShotImage: image)
+        }
     }
 }
 

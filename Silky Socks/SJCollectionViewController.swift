@@ -317,6 +317,14 @@ extension SJCollectionViewController: SJCollectionViewDelegate {
         presentViewController(alert, animated: true, completion: nil)
     }
     
+    
+    // Share
+    func collectionView(collectionView: UICollectionView, didPressShareButton button: UIButton, withSnapShotImage snapshot: UIImage) {
+        
+        
+        
+    }
+    
 }
 
 // MARK: Text Button

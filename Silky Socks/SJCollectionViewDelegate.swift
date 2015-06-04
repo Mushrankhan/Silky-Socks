@@ -21,6 +21,7 @@ protocol SJCollectionViewDelegate: UICollectionViewDelegate {
     func collectionView(collectionView: UICollectionView, didPressAddToCartButton button:UIButton, withSnapShotImage snapshot: UIImage, andTemplate template: Template)
     // Restart
     func collectionView(collectionView: UICollectionView, didPressRestartButton button:UIButton)
+    func collectionView(collectionView: UICollectionView, didPressShareButton button: UIButton, withSnapShotImage snapshot: UIImage)
     
     // Tells the collection VC that a touch happened
     // Used for dismissing the color VC if it is visible
