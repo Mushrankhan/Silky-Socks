@@ -35,13 +35,29 @@ class SJCollectionViewController: UIViewController {
     // Whether Camera button is clicked or grid button
     private var isGridButtonTapped = false
     
-    // Width
+    // Width of screen
     private var width: CGFloat {
         return CGRectGetWidth(UIScreen.mainScreen().bounds)
     }
     
     // The height of the color view controller
     private let heightOfColorVC: CGFloat = 50
+    
+    // The x and check view
+    private var approvalVC: SJApprovalViewController!
+    
+    // Height of the approval view
+    private let heightOfApprovalView: CGFloat = 80
+    
+    // the showing rect of the approval vc
+    private var showRect: CGRect {
+        return CGRect(x: collectionView.contentOffset.x, y: CGRectGetHeight(UIScreen.mainScreen().bounds) - 64 - heightOfApprovalView , width: width, height: heightOfApprovalView)
+    }
+    
+    // the hiding rect of the approval vc
+    private var hideRect: CGRect {
+        return CGRect(x: collectionView.contentOffset.x, y: CGRectGetHeight(UIScreen.mainScreen().bounds) - 64, width: width, height: heightOfApprovalView)
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -69,7 +85,7 @@ class SJCollectionViewController: UIViewController {
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "handleKeyBoard:", name: UIKeyboardDidShowNotification, object: nil)
         
         // Set the layout for the colorVC
-        let frame = CGRect(x: 0, y: 0, width: width, height: heightOfColorVC)
+        var frame = CGRect(x: 0, y: 0, width: width, height: heightOfColorVC)
         let layout = UICollectionViewFlowLayout()
         layout.itemSize = CGSize(width: heightOfColorVC - 16, height: heightOfColorVC)
         layout.minimumLineSpacing = 0
@@ -82,6 +98,12 @@ class SJCollectionViewController: UIViewController {
         colorCollectionVC.collectionView!.frame = frame
         colorCollectionVC.collectionView!.hidden = true
         colorCollectionVC.delegate = self
+        
+        // Set Up the approval VC
+        // Added as a child VC
+        approvalVC = SJApprovalViewController(nibName: "SJApprovalViewController", bundle: nil)
+        approvalVC.delegate = self
+        approvalVC.view.frame = hideRect
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -92,6 +114,10 @@ class SJCollectionViewController: UIViewController {
         collectionView.addSubview(colorCollectionVC.collectionView!)
         addChildViewController(colorCollectionVC)
         colorCollectionVC.didMoveToParentViewController(self)
+        
+        collectionView.addSubview(approvalVC.view)
+        addChildViewController(approvalVC)
+        approvalVC.didMoveToParentViewController(self)
     }
 
     override func didReceiveMemoryWarning() {
@@ -209,6 +235,9 @@ extension SJCollectionViewController: SJCollectionViewDelegate {
         UIView.animateWithDuration(0.3) {
             self.colorCollectionVC.collectionView?.frame = frame
         }
+        
+        // Show the approval VC
+        showApprovalVC(button.tag)
     }
     
     // Smiley Button
@@ -271,11 +300,10 @@ extension SJCollectionViewController: SJCollectionViewDelegate {
     // Share
     func collectionView(collectionView: UICollectionView, didPressShareButton button: UIButton, withSnapShotImage snapshot: UIImage) {
         
-        let items = ["Check out the design I created on the silky socks app. http://www.silkysocks.com/app", snapshot]
+        var items = ["Check out the design I created on the silky socks app. http://www.silkysocks.com/app", snapshot]
         let activity = UIActivityViewController(activityItems: items, applicationActivities: nil)
         activity.excludedActivityTypes = [UIActivityTypeAddToReadingList, UIActivityTypeAssignToContact, UIActivityTypePrint, UIActivityTypeSaveToCameraRoll]
         presentViewController(activity, animated: true, completion: nil)
-        items = nil
     }
     
     // Touch
@@ -308,6 +336,7 @@ extension SJCollectionViewController: UITextFieldDelegate {
                 showingText = false
                 // Create The label
                 collectionView.sj_createTextLabel(textField.text, afont: textField.font, acolor: textField.textColor)
+                showApprovalVC(2)
                 return true
             }
         }
@@ -398,6 +427,9 @@ extension SJCollectionViewController: UIImagePickerControllerDelegate, UINavigat
                 
         // Pass the image object to the collection view
         collectionView.sj_createImage(image, forGrid: isGridButtonTapped)
+        
+        // Show Approval VC
+        isGridButtonTapped ? showApprovalVC(4) : showApprovalVC(1)
     }
 }
 
@@ -416,3 +448,93 @@ extension SJCollectionViewController: SJColorCollectionViewControllerDelegate {
         self.collectionView.sj_addColor(color)
     }
 }
+
+// MARK: Approval View Controller Delegate
+extension SJCollectionViewController: SJApprovalViewControllerDelegate {
+    
+    func showApprovalVC(tag: Int) {
+        UIView.animateWithDuration(0.3) {
+            self.approvalVC.view.frame = self.showRect
+        }
+        approvalVC.buttonPressedTag = tag
+        collectionView.sj_bottomView?.hidden = true
+    }
+    
+    func approvalView(viewController: SJApprovalViewController, didPressCheckButton button: UIButton) {
+
+        if let tag = viewController.buttonPressedTag {
+            switch tag {
+                case 3:
+                    hideColorCollectionVC()
+                default:
+                    break
+            }
+        }
+
+        // Hide
+        hideApprovalVC()
+    }
+    
+    
+    func approvalView(viewController: SJApprovalViewController, didPressXButton button: UIButton) {
+        
+        if let tag = viewController.buttonPressedTag {
+            switch tag {
+                // Image
+                case 1:
+                    collectionView.sj_undo()
+                // Text
+                case 2:
+                    collectionView.sj_undo()
+                // Color
+                case 3:
+                    hideColorCollectionVC()
+                    collectionView.sj_addColor(UIColor.clearColor())
+                // Grid
+                case 4:
+                    collectionView.sj_undoGrid()
+                default:
+                    break
+            }
+        }
+        
+        // Hide
+        hideApprovalVC()
+    }
+    
+    // Dismiss
+    func hideApprovalVC() {
+        
+        // Check if should pan
+        shouldPan()
+        
+        UIView.animateWithDuration(0.3) {
+            self.approvalVC.view.frame = self.hideRect
+        }
+        collectionView.sj_bottomView?.hidden = false
+    }
+}
+
+// MARK: Helper Function
+extension SJCollectionViewController {
+    
+    private func hideColorCollectionVC() {
+        if !colorCollectionVC.collectionView!.hidden  {
+            colorCollectionVC.collectionView!.hidden = true
+        }
+    }
+    
+    private func shouldPan() {
+        
+        if let cell = collectionView.visibleCell {
+            if cell.shouldPan() {
+                collectionView!.panGestureRecognizer.enabled = true
+            }
+        }
+        
+    }
+    
+}
+
+
+

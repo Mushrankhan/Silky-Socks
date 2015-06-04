@@ -14,7 +14,7 @@ class SJCollectionView: UICollectionView {
     weak var myDelegate: SJCollectionViewDelegate?
     
     // The bottom view
-    private var sj_bottomView: SJBottomView?
+    private(set) var sj_bottomView: SJBottomView?
     
     // The Count
     var cell_subViewsCount: Int {
@@ -219,6 +219,18 @@ extension SJCollectionView {
     func sj_addColor(color: UIColor) {
         if let cell = visibleCell {
             cell.addColor(color)
+        }
+    }
+    
+    func sj_undoGrid() {
+        if let cell = visibleCell {
+            cell.undoGrid()
+        }
+    }
+    
+    func sj_undo() {
+        if let cell = visibleCell {
+            cell.undo()
         }
     }
 

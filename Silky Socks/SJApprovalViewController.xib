@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SJApprovalViewController" customModule="Silky_Socks" customModuleProvider="target">
+            <connections>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="125"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="A3I-Kb-iiy">
+                    <rect key="frame" x="247" y="37" width="50" height="50"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="50" id="cR0-li-zOu"/>
+                        <constraint firstAttribute="height" constant="50" id="dkR-GC-y7A"/>
+                    </constraints>
+                    <state key="normal" image="check">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="approvalButtonPressed:" destination="-1" eventType="touchUpInside" id="pNz-lm-5FN"/>
+                    </connections>
+                </button>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JVd-lm-uSq">
+                    <rect key="frame" x="177.5" y="52.5" width="20" height="20"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="20" id="3Ca-Vm-uHQ"/>
+                        <constraint firstAttribute="width" constant="20" id="Xoa-iP-lqN"/>
+                    </constraints>
+                </view>
+                <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="82I-AN-u8K">
+                    <rect key="frame" x="77" y="37" width="50" height="50"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="50" id="B94-Hp-exL"/>
+                        <constraint firstAttribute="width" constant="50" id="p0R-kt-3jo"/>
+                    </constraints>
+                    <state key="normal" image="x">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="approvalButtonPressed:" destination="-1" eventType="touchUpInside" id="Qod-Z9-b5e"/>
+                    </connections>
+                </button>
+            </subviews>
+            <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="A3I-Kb-iiy" firstAttribute="leading" secondItem="JVd-lm-uSq" secondAttribute="trailing" constant="50" id="HMj-WT-ccn"/>
+                <constraint firstAttribute="centerY" secondItem="JVd-lm-uSq" secondAttribute="centerY" id="ZRC-0r-faI"/>
+                <constraint firstItem="A3I-Kb-iiy" firstAttribute="top" secondItem="82I-AN-u8K" secondAttribute="top" id="Zbn-xo-xHa"/>
+                <constraint firstAttribute="centerX" secondItem="JVd-lm-uSq" secondAttribute="centerX" id="fKL-pT-pvp"/>
+                <constraint firstItem="JVd-lm-uSq" firstAttribute="leading" secondItem="82I-AN-u8K" secondAttribute="trailing" constant="50" id="j0P-3l-ZPy"/>
+                <constraint firstItem="A3I-Kb-iiy" firstAttribute="bottom" secondItem="82I-AN-u8K" secondAttribute="bottom" id="lfb-1W-gQK"/>
+                <constraint firstItem="A3I-Kb-iiy" firstAttribute="centerY" secondItem="JVd-lm-uSq" secondAttribute="centerY" id="qTe-f2-hfT"/>
+                <constraint firstItem="A3I-Kb-iiy" firstAttribute="centerY" secondItem="82I-AN-u8K" secondAttribute="centerY" id="t3K-49-sfb"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="check" width="44" height="35"/>
+        <image name="x" width="37" height="37"/>
+    </resources>
+</document>

@@ -104,7 +104,7 @@ class SJCollectionViewCell: UICollectionViewCell {
         }
         sj_subViews.removeAll(keepCapacity: true)
         
-        // Bounding zview
+        // Bounding view
         boundingRectView?.removeFromSuperview()
         boundingRectView = nil
         
@@ -242,6 +242,7 @@ extension SJCollectionViewCell {
     // Add Color to image
     func addColor(color: UIColor) {
         
+        // Used to undo the color
         if color == UIColor.clearColor() {
             ss_imgView.image = template?.image
             return
@@ -251,10 +252,36 @@ extension SJCollectionViewCell {
         // placing the color on top the image
         let image = template!.image.colorizeWith(color)
         ss_imgView.image = image
+
     }
-    
 }
 
+// MARK: Undo
+extension SJCollectionViewCell {
+    
+    // Undo the grid
+    func undoGrid() {
+        ss_imgView.image = template?.image
+    }
+    
+    // Undo - Label/Image
+    func undo() {
+        sj_subViews[0].removeFromSuperview()
+        sj_subViews.removeAtIndex(0)
+        
+        // If nothing exists, then
+        if sj_subViews.count == 0 {
+            
+            boundingRectView?.removeFromSuperview()
+            boundingRectView = nil
+            
+            lastSelectedView = nil
+            activeRecognizers.removeAllObjects()
+            referenceTransform = nil
+            firstX = 0; firstY = 0
+        }
+    }
+}
 
 // MARK: Gesture Support
 extension SJCollectionViewCell: UIGestureRecognizerDelegate {
