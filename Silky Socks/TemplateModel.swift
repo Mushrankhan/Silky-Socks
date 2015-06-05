@@ -38,7 +38,7 @@ class Template {
             Template(image: Img(named: "white_tee")!,caption: "White Tee", type: .Shirt, maskImage: Img(named: "white_nocollar")),
             Template(image: Img(named: "tank")!,caption: "Tank", type: .Tank, maskImage: Img(named: "tank_nocollar")),
             Template(image: Img(named: "black_sleeve")!,caption: "Black Sleeve Tee", type: .Shirt, maskImage: Img(named: "black_sleeve_nocollar")),
-            Template(image: Img(named: "new_shirt_temp")!, caption: "", type: .Shirt, maskImage: nil)
+            //Template(image: Img(named: "new_shirt_temp")!, caption: "", type: .Shirt, maskImage: nil)
         ]
     }
 }

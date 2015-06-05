@@ -26,10 +26,25 @@ extension UIView {
     }
     
     // Clicks a snapshot of the view
-    func clickSnapShot(size: CGSize) -> UIImage {
+    func clickSnapShot(size: CGSize, withLogo logo: UIImage?) -> UIImage {
         
         UIGraphicsBeginImageContextWithOptions(size, opaque, 0)
-        layer.renderInContext(UIGraphicsGetCurrentContext())
+        let context = UIGraphicsGetCurrentContext()
+        
+        // Render before flipping
+        layer.renderInContext(context)
+
+        // Flip
+        CGContextTranslateCTM(context, 0, size.height)
+        CGContextScaleCTM(context, 1, -1)
+        
+        // Draw
+        if let logo = logo {
+            let rect = CGRect(x: 0, y: 0, width: 50, height: 50)
+            CGContextDrawImage(UIGraphicsGetCurrentContext(), rect, logo.CGImage)
+        }
+        
+        // New Image
         let image = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
         return image
@@ -141,7 +156,10 @@ extension UIImage {
         
         //return the image
         return image;
-        
+    }
+    
+    class func SilkySocksLogo() -> UIImage? {
+        return UIImage(named: "logo_left_of_template")
     }
     
 }

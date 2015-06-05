@@ -122,7 +122,7 @@ extension SJCollectionView: RestartViewCollectionReusableViewDelegate {
 extension SJCollectionView: ShareViewCollectionReusableViewDelegate {
     func shareReusableView(view: ShareViewCollectionReusableView, didPressShareButton sender: UIButton) {
         if let cell = visibleCell {
-            let image = cell.clickSnapShot(cell.frame.size)
+            let image = cell.clickSnapShot(cell.frame.size, withLogo: UIImage.SilkySocksLogo())
             myDelegate?.collectionView(self, didPressShareButton: sender, withSnapShotImage: image)
         }
     }
@@ -132,7 +132,7 @@ extension SJCollectionView: ShareViewCollectionReusableViewDelegate {
 extension SJCollectionView: CartViewCollectionReusableViewDelegate {
     func cartReusableView(view: CartViewCollectionReusableView, didPressAddToCartButton sender: UIButton) {
         if let cell = visibleCell {
-            let image = cell.clickSnapShot(cell.frame.size)
+            let image = cell.clickSnapShot(cell.frame.size, withLogo: UIImage.SilkySocksLogo())
             myDelegate?.collectionView(self, didPressAddToCartButton: sender, withSnapShotImage: image, andTemplate: cell.template!)
         }
     }
