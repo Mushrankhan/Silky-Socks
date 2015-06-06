@@ -140,8 +140,6 @@ class SJCollectionViewCell: UICollectionViewCell {
         pinchGestureRecognizer = nil
         rotateGestureRecognizer = nil
         
-        // The template object
-        template = nil
     }
     
     // Apply Layout Attributes
