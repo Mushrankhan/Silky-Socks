@@ -34,6 +34,13 @@
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
 	</array>
+	<key>UIAppFonts</key>
+	<array>
+		<string>College.ttf</string>
+		<string>Walkway Black.ttf</string>
+		<string>Maiden.ttf</string>
+		<string>DoubleFeature.ttf</string>
+	</array>
 	<key>UISupportedInterfaceOrientations~ipad</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>

@@ -21,6 +21,10 @@
 		1FD558001B2086CA003BDE2A /* SJApprovalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD557FE1B2086CA003BDE2A /* SJApprovalViewController.swift */; };
 		1FD558011B2086CA003BDE2A /* SJApprovalViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1FD557FF1B2086CA003BDE2A /* SJApprovalViewController.xib */; };
 		1FF794061B21EEFD000CB14D /* SJColorFontCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FF794051B21EEFD000CB14D /* SJColorFontCollectionViewCell.swift */; };
+		1FF794081B22DBBF000CB14D /* DoubleFeature.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1FF794071B22DBBF000CB14D /* DoubleFeature.ttf */; };
+		1FF7940A1B22DCB2000CB14D /* Maiden.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1FF794091B22DCB2000CB14D /* Maiden.ttf */; };
+		1FF7940C1B22DD05000CB14D /* Walkway Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1FF7940B1B22DD05000CB14D /* Walkway Black.ttf */; };
+		1FF7940E1B22DD69000CB14D /* College.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1FF7940D1B22DD69000CB14D /* College.ttf */; };
 		4F55B5541AE46E4900679048 /* SJCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4F55B5531AE46E4900679048 /* SJCollectionViewCell.xib */; };
 		4F55B55D1AE480F400679048 /* SJLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F55B55C1AE480F400679048 /* SJLayout.swift */; };
 		4F8D38A31AE440DE00F42E23 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F8D38A21AE440DE00F42E23 /* AppDelegate.swift */; };
@@ -63,6 +67,10 @@
 		1FD557FE1B2086CA003BDE2A /* SJApprovalViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SJApprovalViewController.swift; sourceTree = "<group>"; };
 		1FD557FF1B2086CA003BDE2A /* SJApprovalViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SJApprovalViewController.xib; sourceTree = "<group>"; };
 		1FF794051B21EEFD000CB14D /* SJColorFontCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SJColorFontCollectionViewCell.swift; sourceTree = "<group>"; };
+		1FF794071B22DBBF000CB14D /* DoubleFeature.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = DoubleFeature.ttf; sourceTree = "<group>"; };
+		1FF794091B22DCB2000CB14D /* Maiden.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Maiden.ttf; sourceTree = "<group>"; };
+		1FF7940B1B22DD05000CB14D /* Walkway Black.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Walkway Black.ttf"; sourceTree = "<group>"; };
+		1FF7940D1B22DD69000CB14D /* College.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = College.ttf; sourceTree = "<group>"; };
 		4F55B5531AE46E4900679048 /* SJCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SJCollectionViewCell.xib; sourceTree = "<group>"; };
 		4F55B55C1AE480F400679048 /* SJLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SJLayout.swift; sourceTree = "<group>"; };
 		4F8D389D1AE440DE00F42E23 /* Silky Socks.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Silky Socks.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -141,6 +149,17 @@
 			name = "Supplementary Views";
 			sourceTree = "<group>";
 		};
+		1FF7940F1B22DE9D000CB14D /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				1FF7940D1B22DD69000CB14D /* College.ttf */,
+				1FF794071B22DBBF000CB14D /* DoubleFeature.ttf */,
+				1FF794091B22DCB2000CB14D /* Maiden.ttf */,
+				1FF7940B1B22DD05000CB14D /* Walkway Black.ttf */,
+			);
+			name = Fonts;
+			sourceTree = "<group>";
+		};
 		1FFB38701B2042D3007E9390 /* Collection View */ = {
 			isa = PBXGroup;
 			children = (
@@ -207,6 +226,7 @@
 				4F8D38AE1AE440DE00F42E23 /* LaunchScreen.xib */,
 				4F8D38A41AE440DE00F42E23 /* Silky_Socks.xcdatamodeld */,
 				4F8D38A11AE440DE00F42E23 /* Info.plist */,
+				1FF7940F1B22DE9D000CB14D /* Fonts */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -342,15 +362,19 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1FF7940C1B22DD05000CB14D /* Walkway Black.ttf in Resources */,
 				4FB6C9C31AE4AF7A001A6E50 /* SJBottomView.xib in Resources */,
 				1F39440B1B094EA4008E73E0 /* SJCollectionAddToCartReusableView.xib in Resources */,
 				1FCF509B1B07ED8A005D8578 /* SJCollectionShareReusableView.xib in Resources */,
 				4F8D38AB1AE440DE00F42E23 /* Main.storyboard in Resources */,
+				1FF7940A1B22DCB2000CB14D /* Maiden.ttf in Resources */,
+				1FF794081B22DBBF000CB14D /* DoubleFeature.ttf in Resources */,
 				1FCF50991B07ECA3005D8578 /* SJCollectionRestartReusableView.xib in Resources */,
 				1FD558011B2086CA003BDE2A /* SJApprovalViewController.xib in Resources */,
 				1FCF509D1B07F0C7005D8578 /* SJCollectionDecorationSilkySocksLogoReusableView.xib in Resources */,
 				4F55B5541AE46E4900679048 /* SJCollectionViewCell.xib in Resources */,
 				4F8D38B01AE440DE00F42E23 /* LaunchScreen.xib in Resources */,
+				1FF7940E1B22DD69000CB14D /* College.ttf in Resources */,
 				4F8D38AD1AE440DE00F42E23 /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

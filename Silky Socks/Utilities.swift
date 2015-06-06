@@ -87,6 +87,7 @@ extension UIColor {
 
 extension UIFont {
     
+    // Get the fonts used in the app
     class func getFontPalette() -> [UIFont] {
         
         var array = [UIFont]()
@@ -100,28 +101,27 @@ extension UIFont {
         array.append(UIFont(name: "Futura-Medium", size: size)!)
         array.append(UIFont(name: "AmericanTypewriter", size: size)!)
         array.append(UIFont(name: "GillSans", size: size)!)
+        array.append(UIFont(name: "Double Feature", size: size)!)
         array.append(UIFont(name: "Courier", size: size)!)
-        //array.append(UIFont(name: "Phosphate-Inline", size: size)!)
         array.append(UIFont(name: "Arial", size: size)!)
         array.append(UIFont(name: "AvenirNext-Regular", size: size)!)
         array.append(UIFont(name: "Verdana", size: size)!)
-        //array.append(UIFont(name: "Beirut-Regular", size: size)!)
-        //array.append(UIFont(name: "PTSans-Regular", size: size)!)
-        //array.append(UIFont(name: "Lucida Grande", size: size)!)
+        array.append(UIFont(name: "Iron Maiden", size: size)!)
         array.append(UIFont(name: "Times New Roman", size: size)!)
         array.append(UIFont(name: "Copperplate", size: size)!)
-        //array.append(UIFont(name: "ComicSansMS-Regular", size: size)!)
-//        array.append(UIFont(name: "Copperplate", size: size)!)
-//        array.append(UIFont(name: "Copperplate", size: size)!)
+        array.append(UIFont(name: "Walkway Black", size: size)!)
+        array.append(UIFont(name: "College", size: size)!)
         
         return array
         
     }
     
+    // Size of fonts
     class func AppFontSize() -> CGFloat {
         return 60
     }
     
+    // Helper to print all font names
     class func printFontNames() {
         for family in UIFont.familyNames() {
             println("Font :\(family)")
@@ -207,6 +207,7 @@ extension UIImage {
         return image;
     }
     
+    // Return the logo
     class func SilkySocksLogo() -> UIImage? {
         return UIImage(named: "logo_left_of_template")
     }

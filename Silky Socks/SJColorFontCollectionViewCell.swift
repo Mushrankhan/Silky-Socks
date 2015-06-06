@@ -22,6 +22,7 @@ class SJColorFontCollectionViewCell: UICollectionViewCell {
         }
     }
     
+    // Text support added to the cell
     private var textLabel: UILabel?
     
     required init(coder aDecoder: NSCoder) {
@@ -34,14 +35,18 @@ class SJColorFontCollectionViewCell: UICollectionViewCell {
         initialSetup()
     }
     
-    
+    // Basic Set up
     private func initialSetup() {
-        
         textLabel = UILabel(frame: bounds)
         textLabel?.textColor = UIColor.whiteColor()
         textLabel?.textAlignment = .Center
         addSubview(textLabel!)
         pinSubviewToView(subView: textLabel!)
+    }
+    
+    // Essential
+    override func prepareForReuse() {
+        text = nil
     }
     
 }

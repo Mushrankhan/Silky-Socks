@@ -19,6 +19,8 @@ class SJColorCollectionViewController: UICollectionViewController {
     lazy private var colors = UIColor.getColorPalette()
     lazy private var fonts = UIFont.getFontPalette()
     
+    var wantFont: Bool = false
+    
     // Used for passing data from this vc to the parent vc
     weak var delegate: SJColorCollectionViewControllerDelegate?
     
@@ -42,7 +44,8 @@ class SJColorCollectionViewController: UICollectionViewController {
 extension SJColorCollectionViewController {
 
     override func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
-        return 2
+        if wantFont { return 2 }
+        return 1
     }
     
     override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -72,6 +75,7 @@ extension SJColorCollectionViewController {
 extension SJColorCollectionViewController {
     
     override func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+        // Section is 0, then pass on color : pass on font
         indexPath.section == 0 ? delegate?.colorCollectionView(collectionView, didSelectColorOrFont: colors[indexPath.row]) : delegate?.colorCollectionView(collectionView, didSelectColorOrFont: fonts[indexPath.row])
     }
     

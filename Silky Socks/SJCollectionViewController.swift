@@ -174,9 +174,16 @@ extension SJCollectionViewController {
         // then display color VC on top of keyboard
         if showingText {
             
-            let frame = CGRectMake(collectionView.contentOffset.x, end.origin.y - heightOfColorVC - 64, width, heightOfColorVC)
+            // Want font
+            colorCollectionVC.wantFont = true
+            
+            // Reload to get fonts
+            colorCollectionVC.collectionView?.reloadData()
             colorCollectionVC.collectionView?.hidden = false
             colorCollectionVC.collectionView?.alpha = 0
+            
+            // New Frame
+            let frame = CGRectMake(collectionView.contentOffset.x, end.origin.y - heightOfColorVC - 64, width, heightOfColorVC)
             
             UIView.animateWithDuration(0.3) {
                 self.colorCollectionVC.collectionView?.frame = frame
@@ -214,12 +221,12 @@ extension SJCollectionViewController: SJCollectionViewDelegate {
 
     // Camera Button
     func collectionView(collectionView: UICollectionView, bottomView: UIView, didPressCameraButton button: UIButton) {
-        commonCodeForPhotos(false)
+        commonCodeForPhotos(forGrid: false)
     }
     
     // Grid Button
     func collectionView(collectionView: UICollectionView, bottomView: UIView , didPressGridButton button:UIButton) {
-        commonCodeForPhotos(true)
+        commonCodeForPhotos(forGrid: true)
     }
     
     // Color Wheel
@@ -231,13 +238,15 @@ extension SJCollectionViewController: SJCollectionViewDelegate {
         let height = CGRectGetHeight(UIScreen.mainScreen().bounds)/2 - heightOfColorVC - 64
         colorCollectionVC.collectionView!.hidden = false
         let frame = CGRectMake(collectionView.contentOffset.x, height, width , heightOfColorVC)
+        colorCollectionVC.wantFont = false
+        colorCollectionVC.collectionView?.reloadData()
         
         UIView.animateWithDuration(0.3) {
             self.colorCollectionVC.collectionView?.frame = frame
         }
         
         // Show the approval VC
-        showApprovalVC(button.tag)
+        showApprovalVC(SJBottomViewConstants.Color)
     }
     
     // Smiley Button
@@ -336,7 +345,7 @@ extension SJCollectionViewController: UITextFieldDelegate {
                 showingText = false
                 // Create The label
                 collectionView.sj_createTextLabel(textField.text, afont: textField.font, acolor: textField.textColor)
-                showApprovalVC(2)
+                showApprovalVC(SJBottomViewConstants.Text)
                 return true
             }
         }
@@ -363,7 +372,7 @@ extension SJCollectionViewController: UITextFieldDelegate {
 extension SJCollectionViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     // Camera and Grid
-    func commonCodeForPhotos(forGrid: Bool) {
+    func commonCodeForPhotos(#forGrid: Bool) {
         
         // If grid button was pressed
         isGridButtonTapped = forGrid
@@ -429,7 +438,7 @@ extension SJCollectionViewController: UIImagePickerControllerDelegate, UINavigat
         collectionView.sj_createImage(image, forGrid: isGridButtonTapped)
         
         // Show Approval VC
-        isGridButtonTapped ? showApprovalVC(4) : showApprovalVC(1)
+        isGridButtonTapped ? showApprovalVC(SJBottomViewConstants.Grid) : showApprovalVC(SJBottomViewConstants.Image)
     }
 }
 
@@ -438,6 +447,7 @@ extension SJCollectionViewController: SJColorCollectionViewControllerDelegate {
     
     func colorCollectionView<T>(collectionView: UICollectionView, didSelectColorOrFont object: T) {
         
+        // UIColor
         if let object = object as? UIColor {
             
             // If pressed text button, then change color of label
@@ -450,6 +460,7 @@ extension SJCollectionViewController: SJColorCollectionViewControllerDelegate {
             self.collectionView.sj_addColor(object)
         }
         
+        // UIFont
         else if let object = object as? UIFont {
             
             if showingText {
@@ -462,7 +473,7 @@ extension SJCollectionViewController: SJColorCollectionViewControllerDelegate {
 // MARK: Approval View Controller Delegate
 extension SJCollectionViewController: SJApprovalViewControllerDelegate {
     
-    func showApprovalVC(tag: Int) {
+    func showApprovalVC(tag: Int?) {
         UIView.animateWithDuration(0.3) {
             self.approvalVC.view.frame = self.showRect
         }
@@ -474,7 +485,7 @@ extension SJCollectionViewController: SJApprovalViewControllerDelegate {
 
         if let tag = viewController.buttonPressedTag {
             switch tag {
-                case 3:
+                case SJBottomViewConstants.Color:
                     hideColorCollectionVC()
                 default:
                     break
@@ -491,17 +502,17 @@ extension SJCollectionViewController: SJApprovalViewControllerDelegate {
         if let tag = viewController.buttonPressedTag {
             switch tag {
                 // Image
-                case 1:
+                case SJBottomViewConstants.Image:
                     collectionView.sj_undo()
                 // Text
-                case 2:
+                case SJBottomViewConstants.Text:
                     collectionView.sj_undo()
                 // Color
-                case 3:
+                case SJBottomViewConstants.Color:
                     hideColorCollectionVC()
                     collectionView.sj_addColor(UIColor.clearColor())
                 // Grid
-                case 4:
+                case SJBottomViewConstants.Grid:
                     collectionView.sj_undoGrid()
                 default:
                     break
@@ -541,10 +552,5 @@ extension SJCollectionViewController {
                 collectionView!.panGestureRecognizer.enabled = true
             }
         }
-        
     }
-    
 }
-
-
-

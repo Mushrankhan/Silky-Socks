@@ -136,15 +136,15 @@ extension SJBottomView {
         // Switching on the tags
         // Done to prevent multiple IBActions
         switch sender.tag {
-            case 1:
+            case SJBottomViewConstants.Image:
                 delegate?.sj_bottomView(self, didPressCameraButton: sender)
-            case 2:
+            case SJBottomViewConstants.Text:
                 delegate?.sj_bottomView(self, didPressTextButton: sender)
-            case 3:
+            case SJBottomViewConstants.Color:
                 delegate?.sj_bottomView(self, didPressColorWheelButton: sender)
-            case 4:
+            case SJBottomViewConstants.Grid:
                 delegate?.sj_bottomView(self, didPressGridButton: sender)
-            case 5:
+            case SJBottomViewConstants.Smiley:
                 delegate?.sj_bottomView(self, didPressSmileyButton: sender)
             default:
                 break
@@ -152,4 +152,14 @@ extension SJBottomView {
     }
     
 }
+
+// Storing the tags for the buttons
+struct SJBottomViewConstants {
+    static let Image = 1
+    static let Text = 2
+    static let Color = 3
+    static let Grid = 4
+    static let Smiley = 5
+}
+
 
