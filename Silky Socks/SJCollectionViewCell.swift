@@ -55,13 +55,17 @@ class SJCollectionViewCell: UICollectionViewCell {
                 nameLabel.text = template.caption
                 
                 // Set color
-                if let color = NSUserDefaults.standardUserDefaults().colorForKey("color") {
-                    println(color)
-                    addColor(color)
-                }
+                addColor(Static.sj_color)
             }
         }
     }
+    
+    // static variable
+    private struct Static {
+        static var sj_color = UIColor.clearColor()
+    }
+    
+    //static private var sj_color = UIColor.clearColor()
     
     // Add the label as a subview of boundingRectView
     // Is a view around the image because the image is smaller than the image view
@@ -269,9 +273,9 @@ extension SJCollectionViewCell {
     // Add Color to image
     func addColor(color: UIColor) {
         
-        // Keep track
-        NSUserDefaults.standardUserDefaults().setColor(color, forKey: "color")
-        NSUserDefaults.standardUserDefaults().synchronize()
+        // Static Variable
+        // Lot Better than saving in NSUserDefaults
+        Static.sj_color = color
         
         if color == UIColor.clearColor() {
             ss_imgView.image = template?.image

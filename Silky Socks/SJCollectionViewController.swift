@@ -72,6 +72,7 @@ class SJCollectionViewController: UIViewController {
         // Data Source
         collectionView!.dataSource = self
         collectionView!.myDelegate = self
+        collectionView!.delegate = self
         
         // Create the image picker controller
         picker = UIImagePickerController()
@@ -83,7 +84,7 @@ class SJCollectionViewController: UIViewController {
         // Track changes in the keyboard
         // Used to display the color VC appropriately
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "handleKeyBoard:", name: UIKeyboardDidShowNotification, object: nil)
-        
+
         // Set the layout for the colorVC
         var frame = CGRect(x: 0, y: 0, width: width, height: heightOfColorVC)
         let layout = UICollectionViewFlowLayout()
@@ -318,15 +319,10 @@ extension SJCollectionViewController: SJCollectionViewDelegate {
     // Touch
     // Dismiss the colorVC when a touch is witnessed
     func collectionView(collectionView: UICollectionView, touchesBegan touch: UITouch) {
-        if !colorCollectionVC.collectionView!.hidden  {
-            colorCollectionVC.collectionView!.hidden = true
-        }
-        
-        if let cell = self.collectionView.visibleCell {
-            if cell.shouldPan() {
-                self.collectionView!.panGestureRecognizer.enabled = true
-            }
-        }
+        // Hide the color collection vc
+        hideColorCollectionVC()
+        // Check if the collection view should pan
+        shouldPan()
     }
 }
 
@@ -354,15 +350,8 @@ extension SJCollectionViewController: UITextFieldDelegate {
         textField.removeFromSuperview()
         showingText = false
 
-        if let cell = collectionView.visibleCell {
-            if cell.shouldPan() {
-                collectionView!.panGestureRecognizer.enabled = true
-            }
-        }
-        
-        if !colorCollectionVC.collectionView!.hidden {
-            colorCollectionVC.collectionView!.hidden = true
-        }
+        shouldPan()
+        hideColorCollectionVC()
         
         return true
     }
@@ -404,11 +393,7 @@ extension SJCollectionViewController: UIImagePickerControllerDelegate, UINavigat
         sheet.addAction(UIAlertAction(title: "Cancel", style: .Cancel) { action in
             self.dismissViewControllerAnimated(true, completion: nil)
             // If nothing was added to the cell, then enable the pan gesture
-            if let cell = self.collectionView.visibleCell {
-                if cell.shouldPan() {
-                    self.collectionView!.panGestureRecognizer.enabled = true
-                }
-            }
+            self.shouldPan()
         })
         
         presentViewController(sheet, animated: true, completion: nil)
@@ -417,9 +402,7 @@ extension SJCollectionViewController: UIImagePickerControllerDelegate, UINavigat
     // Did Cancel
     func imagePickerControllerDidCancel(picker: UIImagePickerController) {
         dismissViewControllerAnimated(true, completion: nil)
-        if collectionView.cell_subViewsCount == 0 {
-            collectionView!.panGestureRecognizer.enabled = true
-        }
+        shouldPan()
     }
     
     // Did Pick Image
