@@ -146,22 +146,14 @@ extension SJCollectionView: SJBottomViewDelegate {
     
     // Navigate Right
     func sj_bottomView(view: SJBottomView, didPressRightButton button: UIButton) {
-        if let cell = visibleCell {
-            if cell.shouldPan() {
-                let xOffset = min(contentSize.width - width, contentOffset.x + width)
-                setContentOffset(CGPoint(x: xOffset, y: contentOffset.y), animated: true)
-            }
-        }
+        let xOffset = min(contentSize.width - width, contentOffset.x + width)
+        setContentOffset(CGPoint(x: xOffset, y: contentOffset.y), animated: true)
     }
     
     // Navigate Left
     func sj_bottomView(view: SJBottomView, didPressLeftButton button: UIButton) {
-        if let cell = visibleCell {
-            if cell.shouldPan() {
-                let xOffset = max(0, contentOffset.x - width)
-                setContentOffset(CGPoint(x: xOffset, y: contentOffset.y), animated: true)
-            }
-        }
+        let xOffset = max(0, contentOffset.x - width)
+        setContentOffset(CGPoint(x: xOffset, y: contentOffset.y), animated: true)
     }
     
     // Text button clicked
@@ -222,18 +214,19 @@ extension SJCollectionView {
         }
     }
     
+    // Undo Grid
     func sj_undoGrid() {
         if let cell = visibleCell {
             cell.undoGrid()
         }
     }
     
+    // Undo Label/Image
     func sj_undo() {
         if let cell = visibleCell {
             cell.undo()
         }
     }
-
 }
 
 // MARK: Gesture Handling

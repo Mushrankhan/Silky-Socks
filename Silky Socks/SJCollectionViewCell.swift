@@ -22,10 +22,10 @@ class SJCollectionViewCell: UICollectionViewCell {
     
     // The number of the elements in the array
     var sj_subViews_count: Int {
-        return count(sj_subViews)
+        return sj_subViews.count
     }
     
-    // Last selected view
+    // Last selected view - Used in gestures
     private var lastSelectedView: UIView?
     
     // The pan gesture recognizer
@@ -41,21 +41,27 @@ class SJCollectionViewCell: UICollectionViewCell {
     private var firstX: CGFloat = 0
     private var firstY: CGFloat = 0
     
+    // Set containing the gesture - rotate and pinch
+    private var activeRecognizers = NSMutableSet()
+    
+    // initial transform
+    private var referenceTransform: CGAffineTransform?
+    
     // Template object
     var template:Template? {
         didSet {
             if let template = template {
                 ss_imgView?.image = template.image
                 nameLabel.text = template.caption
+                
+                // Set color
+                if let color = NSUserDefaults.standardUserDefaults().colorForKey("color") {
+                    println(color)
+                    addColor(color)
+                }
             }
         }
     }
-    
-    // Set containing the gesture - rotate and pinch
-    private var activeRecognizers = NSMutableSet()
-    
-    // initial transform
-    private var referenceTransform: CGAffineTransform?
     
     // Add the label as a subview of boundingRectView
     // Is a view around the image because the image is smaller than the image view
@@ -88,16 +94,27 @@ class SJCollectionViewCell: UICollectionViewCell {
         addGestureRecognizer(rotateGestureRecognizer)
     }
     
+    // Can be called by instances to clean up
+    func performCleanUp() {
+        
+        // No Color
+        addColor(UIColor.clearColor())
+        
+        // Clean up
+        cleanUp()
+    }
+    
+    
     // Prepare for reuse
     override func prepareForReuse() {
         super.prepareForReuse()
-        performCleanUp()
+        cleanUp()
     }
     
-    func performCleanUp() {
-        
-        addColor(UIColor.clearColor())
-
+    
+    // Used for cleaning up the cell
+    // Not to clear up the color when cleaning up
+    private func cleanUp() {
         // Clear the subviews added to the cell
         for view in sj_subViews {
             view.removeFromSuperview()
@@ -108,10 +125,19 @@ class SJCollectionViewCell: UICollectionViewCell {
         boundingRectView?.removeFromSuperview()
         boundingRectView = nil
         
+        // Tracking variables
         lastSelectedView = nil
         activeRecognizers.removeAllObjects()
         referenceTransform = nil
         firstX = 0; firstY = 0
+        
+        // Gestures
+        panGestureRecognizer = nil
+        pinchGestureRecognizer = nil
+        rotateGestureRecognizer = nil
+        
+        // The template object
+        template = nil
     }
     
     // Apply Layout Attributes
@@ -121,11 +147,12 @@ class SJCollectionViewCell: UICollectionViewCell {
         }
     }
     
+    // Returns the nib associated with the cell
     class func nib() -> UINib {
         return UINib(nibName: "SJCollectionViewCell", bundle: nil)
     }
     
-    
+    // Returns whether the collection view should pan or not
     func shouldPan() -> Bool {
         if template!.image != ss_imgView.image || sj_subViews_count > 0 {
             return false
@@ -242,7 +269,10 @@ extension SJCollectionViewCell {
     // Add Color to image
     func addColor(color: UIColor) {
         
-        // Used to undo the color
+        // Keep track
+        NSUserDefaults.standardUserDefaults().setColor(color, forKey: "color")
+        NSUserDefaults.standardUserDefaults().synchronize()
+        
         if color == UIColor.clearColor() {
             ss_imgView.image = template?.image
             return
@@ -271,14 +301,7 @@ extension SJCollectionViewCell {
         
         // If nothing exists, then
         if sj_subViews.count == 0 {
-            
-            boundingRectView?.removeFromSuperview()
-            boundingRectView = nil
-            
-            lastSelectedView = nil
-            activeRecognizers.removeAllObjects()
-            referenceTransform = nil
-            firstX = 0; firstY = 0
+            cleanUp()
         }
     }
 }

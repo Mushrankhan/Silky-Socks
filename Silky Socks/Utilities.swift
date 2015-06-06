@@ -8,6 +8,7 @@
 
 import UIKit
 
+// MARK: UIView
 extension UIView {
     
     // Pin a subview to the edges of the superview
@@ -59,6 +60,7 @@ extension UIView {
     }
 }
 
+// MARK: UIColor
 extension UIColor {
     
     // Helper Function
@@ -84,7 +86,7 @@ extension UIColor {
     }
 }
 
-
+// MARK: UIFont
 extension UIFont {
     
     // Get the fonts used in the app
@@ -133,6 +135,7 @@ extension UIFont {
     
 }
 
+// MARK: UIImage
 extension UIImage {
     
     // Aspect Fit Size
@@ -210,6 +213,26 @@ extension UIImage {
     // Return the logo
     class func SilkySocksLogo() -> UIImage? {
         return UIImage(named: "logo_left_of_template")
+    }
+}
+
+// MARK: NSUserDefaults
+extension NSUserDefaults {
+    
+    func colorForKey(key: String) -> UIColor? {
+        var color: UIColor?
+        if let colorData = dataForKey(key) {
+            color = NSKeyedUnarchiver.unarchiveObjectWithData(colorData) as? UIColor
+        }
+        return color
+    }
+    
+    func setColor(color: UIColor?, forKey key: String) {
+        var colorData: NSData?
+        if let color = color {
+            colorData = NSKeyedArchiver.archivedDataWithRootObject(color)
+        }
+        setObject(colorData, forKey: key)
     }
     
 }
