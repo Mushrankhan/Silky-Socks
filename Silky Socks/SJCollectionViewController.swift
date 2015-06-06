@@ -47,7 +47,7 @@ class SJCollectionViewController: UIViewController {
     private var approvalVC: SJApprovalViewController!
     
     // Height of the approval view
-    private let heightOfApprovalView: CGFloat = 80
+    private let heightOfApprovalView: CGFloat = 75
     
     // the showing rect of the approval vc
     private var showRect: CGRect {
@@ -436,16 +436,26 @@ extension SJCollectionViewController: UIImagePickerControllerDelegate, UINavigat
 // MARK: Color Collection View Delegate
 extension SJCollectionViewController: SJColorCollectionViewControllerDelegate {
     
-    func colorCollectionView(collectionView: UICollectionView, didSelectColor color: UIColor) {
+    func colorCollectionView<T>(collectionView: UICollectionView, didSelectColorOrFont object: T) {
         
-        // If pressed text button, then change color of label
-        if showingText {
-            sj_textField!.textColor = color
-            return
+        if let object = object as? UIColor {
+            
+            // If pressed text button, then change color of label
+            if showingText {
+                sj_textField!.textColor = object
+                return
+            }
+            
+            // other change color of product
+            self.collectionView.sj_addColor(object)
         }
         
-        // other change color of product
-        self.collectionView.sj_addColor(color)
+        else if let object = object as? UIFont {
+            
+            if showingText {
+                sj_textField!.font = object
+            }            
+        }
     }
 }
 

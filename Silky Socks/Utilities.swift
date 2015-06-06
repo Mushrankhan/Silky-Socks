@@ -84,6 +84,55 @@ extension UIColor {
     }
 }
 
+
+extension UIFont {
+    
+    class func getFontPalette() -> [UIFont] {
+        
+        var array = [UIFont]()
+        let size: CGFloat = UIFont.AppFontSize()
+        
+        array.append(UIFont(name: "Helvetica Neue", size: size)!)
+        array.append(UIFont(name: "HelveticaNeue-CondensedBold", size: size)!)
+        array.append(UIFont(name: "HelveticaNeue-Italic", size: size)!)
+        array.append(UIFont(name: "HelveticaNeue-Light", size: size)!)
+        array.append(UIFont(name: "HelveticaNeue-UltraLight", size: size)!)
+        array.append(UIFont(name: "Futura-Medium", size: size)!)
+        array.append(UIFont(name: "AmericanTypewriter", size: size)!)
+        array.append(UIFont(name: "GillSans", size: size)!)
+        array.append(UIFont(name: "Courier", size: size)!)
+        //array.append(UIFont(name: "Phosphate-Inline", size: size)!)
+        array.append(UIFont(name: "Arial", size: size)!)
+        array.append(UIFont(name: "AvenirNext-Regular", size: size)!)
+        array.append(UIFont(name: "Verdana", size: size)!)
+        //array.append(UIFont(name: "Beirut-Regular", size: size)!)
+        //array.append(UIFont(name: "PTSans-Regular", size: size)!)
+        //array.append(UIFont(name: "Lucida Grande", size: size)!)
+        array.append(UIFont(name: "Times New Roman", size: size)!)
+        array.append(UIFont(name: "Copperplate", size: size)!)
+        //array.append(UIFont(name: "ComicSansMS-Regular", size: size)!)
+//        array.append(UIFont(name: "Copperplate", size: size)!)
+//        array.append(UIFont(name: "Copperplate", size: size)!)
+        
+        return array
+        
+    }
+    
+    class func AppFontSize() -> CGFloat {
+        return 60
+    }
+    
+    class func printFontNames() {
+        for family in UIFont.familyNames() {
+            println("Font :\(family)")
+            for name in UIFont.fontNamesForFamilyName(family as! String) {
+                println("  \(name)")
+            }
+        }
+    }
+    
+}
+
 extension UIImage {
     
     // Aspect Fit Size
