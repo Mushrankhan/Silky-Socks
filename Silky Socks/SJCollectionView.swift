@@ -16,17 +16,8 @@ class SJCollectionView: UICollectionView {
     // The bottom view
     private(set) var sj_bottomView: SJBottomView?
     
-    // The Count
-    var cell_subViewsCount: Int {
-        get {
-            if let cell = visibleCell {
-                return cell.sj_subViews_count
-            }
-            return 0
-        }
-    }
-    
     // Return the currently visible Cell
+    
     var visibleCell: SJCollectionViewCell? {
         get {
             let cells = visibleCells() as! [SJCollectionViewCell]
@@ -164,6 +155,7 @@ extension SJCollectionView: SJBottomViewDelegate {
     // Navigate Right
     func sj_bottomView(view: SJBottomView, didPressRightButton button: UIButton) {
         // Make sure that the content offset is not being changed
+        // when the right button is clicked
         if !changingOffset {
             let xOffset = min(contentSize.width - width, contentOffset.x + width)
             setContentOffset(CGPoint(x: xOffset, y: contentOffset.y), animated: true)
@@ -173,6 +165,7 @@ extension SJCollectionView: SJBottomViewDelegate {
     // Navigate Left
     func sj_bottomView(view: SJBottomView, didPressLeftButton button: UIButton) {
         // Make sure that the content offset is not being changed
+        // when the left button is clicked
         if !changingOffset {
             let xOffset = max(0, contentOffset.x - width)
             setContentOffset(CGPoint(x: xOffset, y: contentOffset.y), animated: true)
@@ -213,7 +206,7 @@ extension SJCollectionView: SJBottomViewDelegate {
 }
 
 // MARK: Messages from the VC
-// Delegate to the cell to create the appropriate views
+// Pass on to the cell to create/remove the appropriate views
 extension SJCollectionView {
     
     // Pass the message to the appropriate cell
@@ -231,6 +224,7 @@ extension SJCollectionView {
     }
     
     // Pass the message to the appropriate cell
+    // Passing on UIColor.clearColor() will get rid of the color
     func sj_addColor(color: UIColor) {
         if let cell = visibleCell {
             cell.addColor(color)
