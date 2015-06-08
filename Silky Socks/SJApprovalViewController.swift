@@ -21,14 +21,6 @@ class SJApprovalViewController: UIViewController {
     var buttonPressedTag: Int?
     var approvalViewForView: UIView?
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-    }
-    
     // IBAction
     @IBAction func approvalButtonPressed(sender: UIButton) {
         

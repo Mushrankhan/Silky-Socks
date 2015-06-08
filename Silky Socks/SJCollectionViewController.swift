@@ -319,7 +319,7 @@ extension SJCollectionViewController: SJCollectionViewDelegate {
         presentViewController(activity, animated: true, completion: nil)
     }
     
-    
+    // Tapped in the cell
     func collectionView(collectionView: UICollectionView, touchesBegan point: CGPoint) {
         // Hide the color VC
         hideColorCollectionVC()
@@ -327,10 +327,24 @@ extension SJCollectionViewController: SJCollectionViewDelegate {
         shouldPan()
     }
     
+    // Tapped at a subview inside the cell
     func collectionView(collectionView: UICollectionView, didTapSubview view: UIView) {
         if !CGRectEqualToRect(approvalVC.view.frame, showRect) {
             showApprovalVC(nil, forView: view)
         }
+    }
+    
+    // Tapped at info Button
+    func collectionView(collectionView: UICollectionView, didTapInfoButton button: UIButton, withTemplateObject template: Template) {
+        
+        let infoVC = TemplateInfoViewController(nibName: TemplateInfoViewController.NibName(), bundle: nil)
+        infoVC.template = template
+        infoVC.modalPresentationStyle = .Popover
+        
+        // Wrap it in a navigation controller
+        let navController = UINavigationController(rootViewController: infoVC)
+        presentViewController(navController, animated: true, completion: nil)
+        
     }
 }
 

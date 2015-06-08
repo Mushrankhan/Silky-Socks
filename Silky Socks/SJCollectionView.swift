@@ -260,6 +260,10 @@ extension SJCollectionView : SJCollectionViewCellDelegate {
             myDelegate?.collectionView(self, touchesBegan: point)
         }
     }
+    
+    func collectionViewCell(cell: UICollectionViewCell, didTapInfoButton button: UIButton) {
+        myDelegate?.collectionView(self, didTapInfoButton: button, withTemplateObject: (cell as! SJCollectionViewCell).template!)
+    }
 }
 
 

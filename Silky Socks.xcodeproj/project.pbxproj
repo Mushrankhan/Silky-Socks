@@ -22,6 +22,8 @@
 		1FCF50A11B083D70005D8578 /* SJCollectionViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FCF50A01B083D70005D8578 /* SJCollectionViewDelegate.swift */; };
 		1FD558001B2086CA003BDE2A /* SJApprovalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD557FE1B2086CA003BDE2A /* SJApprovalViewController.swift */; };
 		1FD558011B2086CA003BDE2A /* SJApprovalViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1FD557FF1B2086CA003BDE2A /* SJApprovalViewController.xib */; };
+		1FF543CC1B26259F007B6B19 /* TemplateInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FF543CA1B26259F007B6B19 /* TemplateInfoViewController.swift */; };
+		1FF543CD1B26259F007B6B19 /* TemplateInfoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1FF543CB1B26259F007B6B19 /* TemplateInfoViewController.xib */; };
 		1FF794061B21EEFD000CB14D /* SJColorFontCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FF794051B21EEFD000CB14D /* SJColorFontCollectionViewCell.swift */; };
 		1FF794081B22DBBF000CB14D /* DoubleFeature.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1FF794071B22DBBF000CB14D /* DoubleFeature.ttf */; };
 		1FF7940A1B22DCB2000CB14D /* Maiden.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1FF794091B22DCB2000CB14D /* Maiden.ttf */; };
@@ -70,6 +72,8 @@
 		1FCF50A01B083D70005D8578 /* SJCollectionViewDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SJCollectionViewDelegate.swift; sourceTree = "<group>"; };
 		1FD557FE1B2086CA003BDE2A /* SJApprovalViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SJApprovalViewController.swift; sourceTree = "<group>"; };
 		1FD557FF1B2086CA003BDE2A /* SJApprovalViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SJApprovalViewController.xib; sourceTree = "<group>"; };
+		1FF543CA1B26259F007B6B19 /* TemplateInfoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TemplateInfoViewController.swift; sourceTree = "<group>"; };
+		1FF543CB1B26259F007B6B19 /* TemplateInfoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TemplateInfoViewController.xib; sourceTree = "<group>"; };
 		1FF794051B21EEFD000CB14D /* SJColorFontCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SJColorFontCollectionViewCell.swift; sourceTree = "<group>"; };
 		1FF794071B22DBBF000CB14D /* DoubleFeature.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = DoubleFeature.ttf; sourceTree = "<group>"; };
 		1FF794091B22DCB2000CB14D /* Maiden.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Maiden.ttf; sourceTree = "<group>"; };
@@ -292,6 +296,8 @@
 				1F232D2E1B196CB200ECD753 /* SJColorCollectionViewController.swift */,
 				1FD557FE1B2086CA003BDE2A /* SJApprovalViewController.swift */,
 				1FD557FF1B2086CA003BDE2A /* SJApprovalViewController.xib */,
+				1FF543CA1B26259F007B6B19 /* TemplateInfoViewController.swift */,
+				1FF543CB1B26259F007B6B19 /* TemplateInfoViewController.xib */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -392,6 +398,7 @@
 				4F55B5541AE46E4900679048 /* SJCollectionViewCell.xib in Resources */,
 				4F8D38B01AE440DE00F42E23 /* LaunchScreen.xib in Resources */,
 				1FF7940E1B22DD69000CB14D /* College.ttf in Resources */,
+				1FF543CD1B26259F007B6B19 /* TemplateInfoViewController.xib in Resources */,
 				4F8D38AD1AE440DE00F42E23 /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -426,6 +433,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1FF543CC1B26259F007B6B19 /* TemplateInfoViewController.swift in Sources */,
 				4F55B55D1AE480F400679048 /* SJLayout.swift in Sources */,
 				1FCF508F1B070F4C005D8578 /* SJCollectionView.swift in Sources */,
 				1F88389E1B0D875D00E3BBB6 /* SJLabel.swift in Sources */,

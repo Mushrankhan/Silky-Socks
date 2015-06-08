@@ -32,4 +32,7 @@ protocol SJCollectionViewDelegate: UICollectionViewDelegate {
     
     // Tells that label/image was tapped in the collection view
     func collectionView(collectionView: UICollectionView, didTapSubview view: UIView)
+    
+    // Tells the collection view controller that the info button was tapped
+    func collectionView(collectionView: UICollectionView, didTapInfoButton button: UIButton, withTemplateObject template: Template)
 }

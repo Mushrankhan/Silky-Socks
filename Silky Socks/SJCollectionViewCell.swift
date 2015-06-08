@@ -14,6 +14,7 @@ public let reuseIdentifier = "Cell"
 // MARK: SJCollectionViewCellDelegate
 protocol SJCollectionViewCellDelegate: class {
     func collectionViewCell(cell: UICollectionViewCell, didSelectView view: UIView?, atPoint point: CGPoint)
+    func collectionViewCell(cell: UICollectionViewCell, didTapInfoButton button: UIButton)
 }
 
 // MARK: SJCollectionViewCell Class
@@ -184,7 +185,7 @@ class SJCollectionViewCell: UICollectionViewCell {
 extension SJCollectionViewCell {
     
     @IBAction func infoButtonPressed(sender: UIButton) {
-        println("Info")
+        delegate?.collectionViewCell(self, didTapInfoButton: sender)
     }
 }
 
