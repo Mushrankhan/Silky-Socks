@@ -197,12 +197,6 @@ extension SJCollectionView: SJBottomViewDelegate {
         myDelegate?.collectionView(self, bottomView: view, didPressSmileyButton: button)
     }
     
-    // Using it to dismiss the color palette
-    override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
-        let touch = touches.first as! UITouch
-        myDelegate?.collectionView(self, touchesBegan: touch)
-        super.touchesBegan(touches, withEvent: event)
-    }
 }
 
 // MARK: Messages from the VC
@@ -244,7 +238,25 @@ extension SJCollectionView {
             cell.undo()
         }
     }
+    
+    func sj_undo(view: UIView) {
+        if let cell = visibleCell {
+            cell.undo(view)
+        }
+    }
 }
+
+extension SJCollectionView : SJCollectionViewCellDelegate {
+    
+    func collectionViewCell(cell: UICollectionViewCell, didSelectView view: UIView?, atPoint point: CGPoint) {
+        if let view = view {
+            myDelegate?.collectionView(self, didTapSubview: view)
+        } else {
+            myDelegate?.collectionView(self, touchesBegan: point)
+        }
+    }
+}
+
 
 // MARK: Gesture Handling
 extension SJCollectionView: UIGestureRecognizerDelegate {

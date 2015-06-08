@@ -11,11 +11,19 @@ import UIKit
 // Cell Reuse identifier
 public let reuseIdentifier = "Cell"
 
+protocol SJCollectionViewCellDelegate: class {
+    func collectionViewCell(cell: UICollectionViewCell, didSelectView view: UIView?, atPoint point: CGPoint)
+}
+
+
 class SJCollectionViewCell: UICollectionViewCell {
 
     // IBOutlets
     @IBOutlet weak var ss_imgView: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
+    
+    // Delegate
+    weak var delegate: SJCollectionViewCellDelegate?
     
     // Array containing all the views added to the template
     private var sj_subViews = [UIView]()
@@ -37,6 +45,9 @@ class SJCollectionViewCell: UICollectionViewCell {
     // The rotation gesture
     private var rotateGestureRecognizer: UIRotationGestureRecognizer!
 
+    // The tap gesture
+    private var tapGestureRecognizer: UITapGestureRecognizer!
+    
     // Used in pan calculations
     private var firstX: CGFloat = 0
     private var firstY: CGFloat = 0
@@ -64,9 +75,7 @@ class SJCollectionViewCell: UICollectionViewCell {
     private struct Static {
         static var sj_color = UIColor.clearColor()
     }
-    
-    //static private var sj_color = UIColor.clearColor()
-    
+        
     // Add the label as a subview of boundingRectView
     // Is a view around the image because the image is smaller than the image view
     private(set) var boundingRectView: UIView?
@@ -96,6 +105,10 @@ class SJCollectionViewCell: UICollectionViewCell {
         rotateGestureRecognizer.delaysTouchesBegan = true
         rotateGestureRecognizer.delegate = self
         addGestureRecognizer(rotateGestureRecognizer)
+        
+        tapGestureRecognizer = UITapGestureRecognizer(target: self, action: "handleTap:")
+        tapGestureRecognizer.delaysTouchesBegan = true
+        addGestureRecognizer(tapGestureRecognizer)
     }
     
     // Can be called by instances to clean up
@@ -306,10 +319,35 @@ extension SJCollectionViewCell {
             cleanUp()
         }
     }
+    
+    func undo(view: UIView) {
+        for (index,subview) in enumerate(sj_subViews) {
+            if subview == view {
+                subview.removeFromSuperview()
+                sj_subViews.removeAtIndex(index)
+            }
+        }
+        
+        if sj_subViews.count == 0 {
+            cleanUp()
+        }
+    }
 }
 
 // MARK: Gesture Support
 extension SJCollectionViewCell: UIGestureRecognizerDelegate {
+    
+    // Handle Tap
+    func handleTap(recognizer: UITapGestureRecognizer) {
+        let location = recognizer.locationInView(self)
+        var selectedView: UIView?
+        for view in sj_subViews {
+            if CGRectContainsPoint(view.frame, location) {
+                selectedView = view
+            }
+        }
+        delegate?.collectionViewCell(self, didSelectView: selectedView, atPoint: location)
+    }
     
     // Handle Pan Gesture
     @objc private func handlePan(recognizer: UIPanGestureRecognizer) {

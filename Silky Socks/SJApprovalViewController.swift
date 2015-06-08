@@ -10,8 +10,8 @@ import UIKit
 
 protocol SJApprovalViewControllerDelegate: class {
     
-    func approvalView(viewController: SJApprovalViewController, didPressXButton button: UIButton)
-    func approvalView(viewController: SJApprovalViewController, didPressCheckButton button: UIButton)
+    func approvalView(viewController: SJApprovalViewController, didPressXButton button: UIButton, forView view: UIView?, withTag tag: Int?)
+    func approvalView(viewController: SJApprovalViewController, didPressCheckButton button: UIButton, forView view: UIView?, withTag tag: Int?)
 }
 
 class SJApprovalViewController: UIViewController {
@@ -19,6 +19,7 @@ class SJApprovalViewController: UIViewController {
     weak var delegate: SJApprovalViewControllerDelegate?
     
     var buttonPressedTag: Int?
+    var approvalViewForView: UIView?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,9 +34,9 @@ class SJApprovalViewController: UIViewController {
         
         switch sender.tag {
         case 1:
-            delegate?.approvalView(self, didPressXButton: sender)
+            delegate?.approvalView(self, didPressXButton: sender, forView: approvalViewForView, withTag: buttonPressedTag)
         case 2:
-            delegate?.approvalView(self, didPressCheckButton: sender)
+            delegate?.approvalView(self, didPressCheckButton: sender, forView: approvalViewForView, withTag: buttonPressedTag)
         default:
             break
         }

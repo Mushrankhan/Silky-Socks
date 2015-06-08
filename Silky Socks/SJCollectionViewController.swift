@@ -116,6 +116,7 @@ class SJCollectionViewController: UIViewController {
         addChildViewController(colorCollectionVC)
         colorCollectionVC.didMoveToParentViewController(self)
         
+        // Add approval VC as a child view controller
         collectionView.addSubview(approvalVC.view)
         addChildViewController(approvalVC)
         approvalVC.didMoveToParentViewController(self)
@@ -142,6 +143,7 @@ extension SJCollectionViewController: UICollectionViewDataSource {
         
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier(reuseIdentifier, forIndexPath: indexPath) as! SJCollectionViewCell
         cell.template = templateArray[indexPath.row]
+        cell.delegate = self.collectionView // Very Essential
         return cell
     }
     
@@ -247,7 +249,7 @@ extension SJCollectionViewController: SJCollectionViewDelegate {
         }
         
         // Show the approval VC
-        showApprovalVC(SJBottomViewConstants.Color)
+        showApprovalVC(SJBottomViewConstants.Color, forView: nil)
     }
     
     // Smiley Button
@@ -316,13 +318,18 @@ extension SJCollectionViewController: SJCollectionViewDelegate {
         presentViewController(activity, animated: true, completion: nil)
     }
     
-    // Touch
-    // Dismiss the colorVC when a touch is witnessed
-    func collectionView(collectionView: UICollectionView, touchesBegan touch: UITouch) {
-        // Hide the color collection vc
+    
+    func collectionView(collectionView: UICollectionView, touchesBegan point: CGPoint) {
+        // Hide the color VC
         hideColorCollectionVC()
-        // Check if the collection view should pan
+        // Check if we should pan
         shouldPan()
+    }
+    
+    func collectionView(collectionView: UICollectionView, didTapSubview view: UIView) {
+        if !CGRectEqualToRect(approvalVC.view.frame, showRect) {
+            showApprovalVC(nil, forView: view)
+        }
     }
 }
 
@@ -341,7 +348,7 @@ extension SJCollectionViewController: UITextFieldDelegate {
                 showingText = false
                 // Create The label
                 collectionView.sj_createTextLabel(textField.text, afont: textField.font, acolor: textField.textColor)
-                showApprovalVC(SJBottomViewConstants.Text)
+                showApprovalVC(SJBottomViewConstants.Text, forView: nil)
                 return true
             }
         }
@@ -421,7 +428,7 @@ extension SJCollectionViewController: UIImagePickerControllerDelegate, UINavigat
         collectionView.sj_createImage(image, forGrid: isGridButtonTapped)
         
         // Show Approval VC
-        isGridButtonTapped ? showApprovalVC(SJBottomViewConstants.Grid) : showApprovalVC(SJBottomViewConstants.Image)
+        isGridButtonTapped ? showApprovalVC(SJBottomViewConstants.Grid, forView: nil) : showApprovalVC(SJBottomViewConstants.Image, forView: nil)
     }
 }
 
@@ -456,17 +463,18 @@ extension SJCollectionViewController: SJColorCollectionViewControllerDelegate {
 // MARK: Approval View Controller Delegate
 extension SJCollectionViewController: SJApprovalViewControllerDelegate {
     
-    func showApprovalVC(tag: Int?) {
+    func showApprovalVC(tag: Int?, forView view: UIView?) {
         UIView.animateWithDuration(0.3) {
             self.approvalVC.view.frame = self.showRect
         }
         approvalVC.buttonPressedTag = tag
+        approvalVC.approvalViewForView = view
         collectionView.sj_bottomView?.hidden = true
     }
     
-    func approvalView(viewController: SJApprovalViewController, didPressCheckButton button: UIButton) {
+    func approvalView(viewController: SJApprovalViewController, didPressCheckButton button: UIButton, forView view: UIView?, withTag tag: Int?) {
 
-        if let tag = viewController.buttonPressedTag {
+        if let tag = tag {
             switch tag {
                 case SJBottomViewConstants.Color:
                     hideColorCollectionVC()
@@ -480,25 +488,29 @@ extension SJCollectionViewController: SJApprovalViewControllerDelegate {
     }
     
     
-    func approvalView(viewController: SJApprovalViewController, didPressXButton button: UIButton) {
-        
-        if let tag = viewController.buttonPressedTag {
-            switch tag {
-                // Image
+    func approvalView(viewController: SJApprovalViewController, didPressXButton button: UIButton, forView view: UIView?, withTag tag: Int?) {
+    
+        if let view = view {
+            collectionView.sj_undo(view)
+        } else {
+            if let tag = tag {
+                switch tag {
+                    // Image
                 case SJBottomViewConstants.Image:
-                    collectionView.sj_undo()
-                // Text
+                    fallthrough
+                    // Text
                 case SJBottomViewConstants.Text:
                     collectionView.sj_undo()
-                // Color
+                    // Color
                 case SJBottomViewConstants.Color:
                     hideColorCollectionVC()
                     collectionView.sj_addColor(UIColor.clearColor())
-                // Grid
+                    // Grid
                 case SJBottomViewConstants.Grid:
                     collectionView.sj_undoGrid()
                 default:
                     break
+                }
             }
         }
         
@@ -522,12 +534,14 @@ extension SJCollectionViewController: SJApprovalViewControllerDelegate {
 // MARK: Helper Function
 extension SJCollectionViewController {
     
+    // Hide the color view controller
     private func hideColorCollectionVC() {
         if !colorCollectionVC.collectionView!.hidden  {
             colorCollectionVC.collectionView!.hidden = true
         }
     }
     
+    // Asks the cell, if we should pan
     private func shouldPan() {
         
         if let cell = collectionView.visibleCell {

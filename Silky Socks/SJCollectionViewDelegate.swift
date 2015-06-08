@@ -28,5 +28,8 @@ protocol SJCollectionViewDelegate: UICollectionViewDelegate {
     
     // Tells the collection VC that a touch happened
     // Used for dismissing the color VC if it is visible
-    func collectionView(collectionView: UICollectionView, touchesBegan touch: UITouch)
+    func collectionView(collectionView: UICollectionView, touchesBegan point: CGPoint)
+    
+    // Tells that label/image was tapped in the collection view
+    func collectionView(collectionView: UICollectionView, didTapSubview view: UIView)
 }
