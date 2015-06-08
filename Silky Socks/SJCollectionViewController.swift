@@ -235,14 +235,15 @@ extension SJCollectionViewController: SJCollectionViewDelegate {
     // Color Wheel
     func collectionView(collectionView: UICollectionView, bottomView: UIView , didPressColorWheelButton button:UIButton){
         
+        // Dis-able pan gesture
         collectionView.panGestureRecognizer.enabled = false
         
         // 64 : height of nav bar + status bar
-        let height = CGRectGetHeight(UIScreen.mainScreen().bounds)/2 - heightOfColorVC - 64
-        colorCollectionVC.collectionView!.hidden = false
+        let height = CGRectGetHeight(UIScreen.mainScreen().bounds) - heightOfApprovalView - heightOfColorVC - 64
         let frame = CGRectMake(collectionView.contentOffset.x, height, width , heightOfColorVC)
         colorCollectionVC.wantFont = false
         colorCollectionVC.collectionView?.reloadData()
+        colorCollectionVC.collectionView!.hidden = false
         
         UIView.animateWithDuration(0.3) {
             self.colorCollectionVC.collectionView?.frame = frame

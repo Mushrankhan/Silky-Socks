@@ -14,12 +14,24 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="8HJ-dd-euu">
-                        <rect key="frame" x="0.0" y="21" width="240" height="191"/>
+                        <rect key="frame" x="0.0" y="43" width="240" height="169"/>
                     </imageView>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eNn-7y-7NY">
-                        <rect key="frame" x="0.0" y="0.0" width="240" height="21"/>
+                    <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="k9N-Jp-M0o">
+                        <rect key="frame" x="0.0" y="0.0" width="240" height="22"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="21" id="wwR-Lr-6Oi"/>
+                            <constraint firstAttribute="height" constant="22" id="Yjl-DW-lxK"/>
+                        </constraints>
+                        <state key="normal" image="information">
+                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                        </state>
+                        <connections>
+                            <action selector="infoButtonPressed:" destination="CEv-10-1vb" eventType="touchUpInside" id="To9-aS-QF7"/>
+                        </connections>
+                    </button>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eNn-7y-7NY">
+                        <rect key="frame" x="0.0" y="22" width="240" height="21"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="21" id="SQL-H5-stf"/>
                         </constraints>
                         <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="12"/>
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -29,20 +41,27 @@
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             </view>
             <constraints>
-                <constraint firstItem="8HJ-dd-euu" firstAttribute="leading" secondItem="CEv-10-1vb" secondAttribute="leading" id="CYG-sG-ZqQ"/>
-                <constraint firstAttribute="bottom" secondItem="8HJ-dd-euu" secondAttribute="bottom" id="Gjs-xu-bFu"/>
-                <constraint firstAttribute="trailing" secondItem="8HJ-dd-euu" secondAttribute="trailing" id="HZQ-F9-iRb"/>
-                <constraint firstItem="eNn-7y-7NY" firstAttribute="top" secondItem="CEv-10-1vb" secondAttribute="top" id="Qjm-rn-6GW"/>
-                <constraint firstItem="8HJ-dd-euu" firstAttribute="top" secondItem="eNn-7y-7NY" secondAttribute="bottom" id="dSG-JM-3rG"/>
-                <constraint firstItem="eNn-7y-7NY" firstAttribute="leading" secondItem="CEv-10-1vb" secondAttribute="leading" id="hhT-9T-Yvc"/>
-                <constraint firstAttribute="trailing" secondItem="eNn-7y-7NY" secondAttribute="trailing" id="ne8-Xa-3JI"/>
+                <constraint firstItem="eNn-7y-7NY" firstAttribute="leading" secondItem="CEv-10-1vb" secondAttribute="leading" id="0iO-mY-N0b"/>
+                <constraint firstItem="8HJ-dd-euu" firstAttribute="leading" secondItem="CEv-10-1vb" secondAttribute="leading" id="Fxn-RB-0Yn"/>
+                <constraint firstItem="8HJ-dd-euu" firstAttribute="top" secondItem="eNn-7y-7NY" secondAttribute="bottom" id="InJ-lC-Z9B"/>
+                <constraint firstAttribute="trailing" secondItem="eNn-7y-7NY" secondAttribute="trailing" id="S76-eb-KXd"/>
+                <constraint firstItem="k9N-Jp-M0o" firstAttribute="top" secondItem="CEv-10-1vb" secondAttribute="top" id="Tdf-om-5o5"/>
+                <constraint firstAttribute="trailing" secondItem="8HJ-dd-euu" secondAttribute="trailing" id="cUO-KZ-u3A"/>
+                <constraint firstItem="eNn-7y-7NY" firstAttribute="top" secondItem="k9N-Jp-M0o" secondAttribute="bottom" id="cz7-Vf-Imh"/>
+                <constraint firstAttribute="bottom" secondItem="8HJ-dd-euu" secondAttribute="bottom" id="evZ-MB-reJ"/>
+                <constraint firstItem="k9N-Jp-M0o" firstAttribute="leading" secondItem="CEv-10-1vb" secondAttribute="leading" id="vug-5e-Rz8"/>
+                <constraint firstAttribute="trailing" secondItem="k9N-Jp-M0o" secondAttribute="trailing" id="xOR-7j-w9E"/>
             </constraints>
             <size key="customSize" width="240" height="212"/>
             <connections>
+                <outlet property="infoButton" destination="k9N-Jp-M0o" id="sYM-uN-qKY"/>
                 <outlet property="nameLabel" destination="eNn-7y-7NY" id="rMZ-u6-Qz9"/>
                 <outlet property="ss_imgView" destination="8HJ-dd-euu" id="Ep9-dc-0UJ"/>
             </connections>
             <point key="canvasLocation" x="476" y="235"/>
         </collectionViewCell>
     </objects>
+    <resources>
+        <image name="information" width="22" height="22"/>
+    </resources>
 </document>

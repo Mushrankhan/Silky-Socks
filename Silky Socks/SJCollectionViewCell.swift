@@ -15,12 +15,12 @@ protocol SJCollectionViewCellDelegate: class {
     func collectionViewCell(cell: UICollectionViewCell, didSelectView view: UIView?, atPoint point: CGPoint)
 }
 
-
 class SJCollectionViewCell: UICollectionViewCell {
 
     // IBOutlets
     @IBOutlet weak var ss_imgView: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
+    @IBOutlet weak var infoButton: UIButton!
     
     // Delegate
     weak var delegate: SJCollectionViewCellDelegate?
@@ -173,6 +173,14 @@ class SJCollectionViewCell: UICollectionViewCell {
             return false
         }
         return true
+    }
+}
+
+// MARK: IBAction
+extension SJCollectionViewCell {
+    
+    @IBAction func infoButtonPressed(sender: UIButton) {
+        
     }
 }
 
