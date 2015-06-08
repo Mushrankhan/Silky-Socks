@@ -464,6 +464,7 @@ extension SJCollectionViewController: SJColorCollectionViewControllerDelegate {
 // MARK: Approval View Controller Delegate
 extension SJCollectionViewController: SJApprovalViewControllerDelegate {
     
+    // Show the Approval VC
     func showApprovalVC(tag: Int?, forView view: UIView?) {
         UIView.animateWithDuration(0.3) {
             self.approvalVC.view.frame = self.showRect
@@ -473,6 +474,7 @@ extension SJCollectionViewController: SJApprovalViewControllerDelegate {
         collectionView.sj_bottomView?.hidden = true
     }
     
+    // Pressed check button
     func approvalView(viewController: SJApprovalViewController, didPressCheckButton button: UIButton, forView view: UIView?, withTag tag: Int?) {
 
         if let tag = tag {
@@ -488,7 +490,7 @@ extension SJCollectionViewController: SJApprovalViewControllerDelegate {
         hideApprovalVC()
     }
     
-    
+    // Pressed X Button
     func approvalView(viewController: SJApprovalViewController, didPressXButton button: UIButton, forView view: UIView?, withTag tag: Int?) {
     
         if let view = view {
@@ -519,15 +521,18 @@ extension SJCollectionViewController: SJApprovalViewControllerDelegate {
         hideApprovalVC()
     }
     
-    // Dismiss
+    // Dismiss the Approval VC
     func hideApprovalVC() {
         
         // Check if should pan
         shouldPan()
         
+        // Hide
         UIView.animateWithDuration(0.3) {
             self.approvalVC.view.frame = self.hideRect
         }
+        
+        // Show the bottom view
         collectionView.sj_bottomView?.hidden = false
     }
 }
@@ -545,6 +550,7 @@ extension SJCollectionViewController {
     // Asks the cell, if we should pan
     private func shouldPan() {
         
+        // Get the currently visible cell
         if let cell = collectionView.visibleCell {
             if cell.shouldPan() {
                 collectionView!.panGestureRecognizer.enabled = true

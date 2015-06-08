@@ -11,10 +11,12 @@ import UIKit
 // Cell Reuse identifier
 public let reuseIdentifier = "Cell"
 
+// MARK: SJCollectionViewCellDelegate
 protocol SJCollectionViewCellDelegate: class {
     func collectionViewCell(cell: UICollectionViewCell, didSelectView view: UIView?, atPoint point: CGPoint)
 }
 
+// MARK: SJCollectionViewCell Class
 class SJCollectionViewCell: UICollectionViewCell {
 
     // IBOutlets
@@ -66,7 +68,9 @@ class SJCollectionViewCell: UICollectionViewCell {
                 nameLabel.text = template.caption
                 
                 // Set color
-                addColor(Static.sj_color)
+                if Static.sj_color != UIColor.clearColor() {
+                    addColor(Static.sj_color)
+                }
             }
         }
     }
@@ -202,6 +206,7 @@ extension SJCollectionViewCell {
         maskImageView = UIImageView(frame: boundingRectView!.bounds)
         maskImageView!.contentMode = .ScaleAspectFit
         
+        // if have a special mask image, then apply it
         if let img = template!.maskImage {
             maskImageView!.image = img
         } else {
@@ -303,18 +308,24 @@ extension SJCollectionViewCell {
         
         // Add the color on the image itself rather than
         // placing the color on top the image
+        // coz we need some kind of blending
         let image = template!.image.colorizeWith(color)
         ss_imgView.image = image
 
     }
 }
 
-// MARK: Undo
+// MARK: Undo Support
 extension SJCollectionViewCell {
     
     // Undo the grid
     func undoGrid() {
         ss_imgView.image = template?.image
+        
+        // If nothing exists, then
+        if sj_subViews.count == 0 {
+            cleanUp()
+        }
     }
     
     // Undo - Label/Image
@@ -336,6 +347,7 @@ extension SJCollectionViewCell {
             }
         }
         
+        // If nothing exists, then
         if sj_subViews.count == 0 {
             cleanUp()
         }
