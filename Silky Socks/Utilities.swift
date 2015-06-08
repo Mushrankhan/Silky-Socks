@@ -27,16 +27,17 @@ extension UIView {
     }
     
     // Clicks a snapshot of the view
-    func clickSnapShot(size: CGSize, withLogo logo: UIImage?) -> UIImage {
+    func clickSnapShot(area: CGRect, withLogo logo: UIImage?) -> UIImage {
         
-        UIGraphicsBeginImageContextWithOptions(size, opaque, 0)
+        UIGraphicsBeginImageContextWithOptions(area.size, opaque, 0)
         let context = UIGraphicsGetCurrentContext()
         
         // Render before flipping
+        CGContextTranslateCTM(context, -area.origin.x, -area.origin.y);
         layer.renderInContext(context)
 
         // Flip
-        CGContextTranslateCTM(context, 0, size.height)
+        CGContextTranslateCTM(context, 0, area.size.height)
         CGContextScaleCTM(context, 1, -1)
         
         // Draw

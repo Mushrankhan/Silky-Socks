@@ -130,7 +130,10 @@ extension SJCollectionView: RestartViewCollectionReusableViewDelegate {
 extension SJCollectionView: ShareViewCollectionReusableViewDelegate {
     func shareReusableView(view: ShareViewCollectionReusableView, didPressShareButton sender: UIButton) {
         if let cell = visibleCell {
-            let image = cell.clickSnapShot(cell.frame.size, withLogo: UIImage.SilkySocksLogo())
+            // due to the presence of the info button
+            let y = cell.infoButton.bounds.size.height
+            let rect = CGRect(origin: CGPoint(x: 0, y: y), size: cell.frame.size)
+            let image = cell.clickSnapShot(rect, withLogo: UIImage.SilkySocksLogo())
             myDelegate?.collectionView(self, didPressShareButton: sender, withSnapShotImage: image)
         }
     }
@@ -140,7 +143,9 @@ extension SJCollectionView: ShareViewCollectionReusableViewDelegate {
 extension SJCollectionView: CartViewCollectionReusableViewDelegate {
     func cartReusableView(view: CartViewCollectionReusableView, didPressAddToCartButton sender: UIButton) {
         if let cell = visibleCell {
-            let image = cell.clickSnapShot(cell.frame.size, withLogo: UIImage.SilkySocksLogo())
+            let y = cell.infoButton.bounds.size.height
+            let rect = CGRect(origin: CGPoint(x: 0, y: y), size: cell.frame.size)
+            let image = cell.clickSnapShot(rect, withLogo: UIImage.SilkySocksLogo())
             myDelegate?.collectionView(self, didPressAddToCartButton: sender, withSnapShotImage: image, andTemplate: cell.template!)
         }
     }

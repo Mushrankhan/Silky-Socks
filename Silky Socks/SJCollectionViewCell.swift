@@ -339,6 +339,7 @@ extension SJCollectionViewCell {
         }
     }
     
+    // Delete a view
     func undo(view: UIView) {
         for (index,subview) in enumerate(sj_subViews) {
             if subview == view {
@@ -359,7 +360,7 @@ extension SJCollectionViewCell: UIGestureRecognizerDelegate {
     
     // Handle Tap
     func handleTap(recognizer: UITapGestureRecognizer) {
-        let location = recognizer.locationInView(self)
+        let location = recognizer.locationInView(boundingRectView)
         var selectedView: UIView?
         for view in sj_subViews {
             if CGRectContainsPoint(view.frame, location) {
