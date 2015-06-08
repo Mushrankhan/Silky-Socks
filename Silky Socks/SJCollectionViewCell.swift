@@ -184,7 +184,7 @@ class SJCollectionViewCell: UICollectionViewCell {
 extension SJCollectionViewCell {
     
     @IBAction func infoButtonPressed(sender: UIButton) {
-        
+        println("Info")
     }
 }
 

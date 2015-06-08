@@ -32,6 +32,11 @@ extension UIView {
         UIGraphicsBeginImageContextWithOptions(area.size, opaque, 0)
         let context = UIGraphicsGetCurrentContext()
         
+        // Essential to get rid of the black screen
+        // when saving to photos and opening it
+        UIColor.whiteColor().setFill()
+        CGContextFillRect(context, bounds)
+        
         // Render before flipping
         CGContextTranslateCTM(context, -area.origin.x, -area.origin.y);
         layer.renderInContext(context)
