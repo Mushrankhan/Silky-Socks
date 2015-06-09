@@ -87,14 +87,17 @@ class SJCollectionViewController: UIViewController {
 
         // Set the layout for the colorVC
         var frame = CGRect(x: 0, y: 0, width: width, height: heightOfColorVC)
-        let layout = UICollectionViewFlowLayout()
+        let layout = SJStickyFontHeaderLayout()
         layout.itemSize = CGSize(width: heightOfColorVC - 16, height: heightOfColorVC)
         layout.minimumLineSpacing = 0
         layout.minimumInteritemSpacing = 0
         layout.scrollDirection = .Horizontal
+        layout.headerReferenceSize = CGSize(width: heightOfColorVC, height: heightOfColorVC)
         
         // Set up the color View
         // This VC is added as a child view controller
+        // Using the same color view controller both for the text and color button
+        // will show the font option in the text button by dequeuing a header view
         colorCollectionVC = SJColorCollectionViewController(collectionViewLayout: layout)
         colorCollectionVC.collectionView!.frame = frame
         colorCollectionVC.collectionView!.hidden = true
@@ -135,6 +138,7 @@ class SJCollectionViewController: UIViewController {
 // MARK: Collection View Data Source
 extension SJCollectionViewController: UICollectionViewDataSource {
 
+    // Number of templates = number of rows
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return templateArray.count
      }
@@ -147,6 +151,7 @@ extension SJCollectionViewController: UICollectionViewDataSource {
         return cell
     }
     
+    // Dequeue the various supplementary view
     func collectionView(collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, atIndexPath indexPath: NSIndexPath) -> UICollectionReusableView {
         
         let collView = collectionView as! SJCollectionView
@@ -178,9 +183,10 @@ extension SJCollectionViewController {
         if showingText {
             
             // Want font
+            // Tells the color collection vc that we want to give users the option to switch to fonts
             colorCollectionVC.wantFont = true
             
-            // Reload to get fonts
+            // Reload to dequeue the header view (FontCollectionReusableViewDelegate)
             colorCollectionVC.collectionView?.reloadData()
             colorCollectionVC.collectionView?.hidden = false
             colorCollectionVC.collectionView?.alpha = 0
@@ -188,7 +194,7 @@ extension SJCollectionViewController {
             // New Frame
             let frame = CGRectMake(collectionView.contentOffset.x, end.origin.y - heightOfColorVC - 64, width, heightOfColorVC)
             
-            UIView.animateWithDuration(0.3) {
+            UIView.animateWithDuration(0.3) { [unowned self] in
                 self.colorCollectionVC.collectionView?.frame = frame
                 self.colorCollectionVC.collectionView?.alpha = 1
             }
@@ -202,6 +208,7 @@ extension SJCollectionViewController: SJCollectionViewDelegate {
     // Text Button
     func collectionView(collectionView: UICollectionView, bottomView: UIView , didPressTextButton button:UIButton) {
         
+        // Basic
         showingText = true
         colorCollectionVC.collectionView!.hidden = true
         collectionView.panGestureRecognizer.enabled = false
@@ -219,6 +226,7 @@ extension SJCollectionViewController: SJCollectionViewDelegate {
         // Add Text Field to collection view
         collectionView.addSubview(textField)
         
+        // Make the private var point to this text field
         sj_textField = textField
     }
 
@@ -241,6 +249,9 @@ extension SJCollectionViewController: SJCollectionViewDelegate {
         // 64 : height of nav bar + status bar
         let height = CGRectGetHeight(UIScreen.mainScreen().bounds) - heightOfApprovalView - heightOfColorVC - 64
         let frame = CGRectMake(collectionView.contentOffset.x, height, width , heightOfColorVC)
+        
+        // Tells the color collection vc that we dont want to 
+        // give people the option to switch to fonts
         colorCollectionVC.wantFont = false
         colorCollectionVC.collectionView?.reloadData()
         colorCollectionVC.collectionView!.hidden = false
@@ -265,7 +276,6 @@ extension SJCollectionViewController: SJCollectionViewDelegate {
     func collectionView(collectionView: UICollectionView, didPressAddToCartButton button:UIButton, withSnapShotImage snapshot: UIImage, andTemplate template: Template) {
         
         
-        
     }
     
     
@@ -274,7 +284,9 @@ extension SJCollectionViewController: SJCollectionViewDelegate {
         
         // Show an alert
         let collectionView = collectionView as! SJCollectionView
-        let alert = UIAlertController(title: "Warning", message: "Are you sure you want to delete your current design and start over?", preferredStyle: .Alert)
+        let title = "Warning"
+        let message = "Are you sure you want to delete your current design and start over?"
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .Alert)
         
         // Okay - Restart
         alert.addAction(UIAlertAction(title: "Continue", style: .Default) { action in
@@ -313,13 +325,14 @@ extension SJCollectionViewController: SJCollectionViewDelegate {
     // Share
     func collectionView(collectionView: UICollectionView, didPressShareButton button: UIButton, withSnapShotImage snapshot: UIImage) {
         
+        // Create Activity Controller on Demand
         var items = ["Check out the design I created on the silky socks app. http://www.silkysocks.com/app", snapshot]
         let activity = UIActivityViewController(activityItems: items, applicationActivities: nil)
         activity.excludedActivityTypes = [UIActivityTypeAddToReadingList, UIActivityTypeAssignToContact, UIActivityTypePrint, UIActivityTypeSaveToCameraRoll]
         presentViewController(activity, animated: true, completion: nil)
     }
     
-    // Tapped in the cell
+    // Tapped in the collection view cell
     func collectionView(collectionView: UICollectionView, touchesBegan point: CGPoint) {
         // Hide the color VC
         hideColorCollectionVC()
@@ -327,8 +340,10 @@ extension SJCollectionViewController: SJCollectionViewDelegate {
         shouldPan()
     }
     
-    // Tapped at a subview inside the cell
+    // Tapped on a subview inside the cell
     func collectionView(collectionView: UICollectionView, didTapSubview view: UIView) {
+        
+        // If approval VC is not already present then show it
         if !CGRectEqualToRect(approvalVC.view.frame, showRect) {
             showApprovalVC(nil, forView: view)
         }
@@ -337,6 +352,7 @@ extension SJCollectionViewController: SJCollectionViewDelegate {
     // Tapped at info Button
     func collectionView(collectionView: UICollectionView, didTapInfoButton button: UIButton, withTemplateObject template: Template) {
         
+        // Create a TemplateInfoViewController on Demand
         let infoVC = TemplateInfoViewController(nibName: TemplateInfoViewController.NibName(), bundle: nil)
         infoVC.template = template
         infoVC.modalPresentationStyle = .Popover
@@ -344,7 +360,6 @@ extension SJCollectionViewController: SJCollectionViewDelegate {
         // Wrap it in a navigation controller
         let navController = UINavigationController(rootViewController: infoVC)
         presentViewController(navController, animated: true, completion: nil)
-        
     }
 }
 
@@ -364,7 +379,7 @@ extension SJCollectionViewController: UITextFieldDelegate {
                 // Create The label
                 collectionView.sj_createTextLabel(textField.text, afont: textField.font, acolor: textField.textColor)
                 showApprovalVC(SJBottomViewConstants.Text, forView: nil)
-                return true
+                return false
             }
         }
 
@@ -372,6 +387,7 @@ extension SJCollectionViewController: UITextFieldDelegate {
         textField.removeFromSuperview()
         showingText = false
 
+        // Check if we should pan && hide the coloe collection vc
         shouldPan()
         hideColorCollectionVC()
         
@@ -450,29 +466,26 @@ extension SJCollectionViewController: UIImagePickerControllerDelegate, UINavigat
 // MARK: Color Collection View Delegate
 extension SJCollectionViewController: SJColorCollectionViewControllerDelegate {
     
-    func colorCollectionView<T>(collectionView: UICollectionView, didSelectColorOrFont object: T) {
+    // Color
+    func colorCollectionView(collectionView: UICollectionView, didSelectColor color: UIColor) {
         
-        // UIColor
-        if let object = object as? UIColor {
-            
-            // If pressed text button, then change color of label
-            if showingText {
-                sj_textField!.textColor = object
-                return
-            }
-            
-            // other change color of product
-            self.collectionView.sj_addColor(object)
+        // If pressed text button, then change color of label
+        if showingText {
+            sj_textField!.textColor = color
+            return
         }
         
-        // UIFont
-        else if let object = object as? UIFont {
-            
-            if showingText {
-                sj_textField!.font = object
-            }            
+        // other change color of product
+        self.collectionView.sj_addColor(color)
+    }
+    
+    // Font
+    func colorCollectionView(collectionView: UICollectionView, didSelectFont font: UIFont) {
+        if showingText {
+            sj_textField!.font = font
         }
     }
+
 }
 
 // MARK: Approval View Controller Delegate
@@ -480,11 +493,16 @@ extension SJCollectionViewController: SJApprovalViewControllerDelegate {
     
     // Show the Approval VC
     func showApprovalVC(tag: Int?, forView view: UIView?) {
+        
+        // Animate from bottom
         UIView.animateWithDuration(0.3) {
             self.approvalVC.view.frame = self.showRect
         }
+        
         approvalVC.buttonPressedTag = tag
         approvalVC.approvalViewForView = view
+        
+        // Hide the bottom view
         collectionView.sj_bottomView?.hidden = true
     }
     
@@ -507,9 +525,13 @@ extension SJCollectionViewController: SJApprovalViewControllerDelegate {
     // Pressed X Button
     func approvalView(viewController: SJApprovalViewController, didPressXButton button: UIButton, forView view: UIView?, withTag tag: Int?) {
     
+        // If view exists, then remove it
         if let view = view {
             collectionView.sj_undo(view)
-        } else {
+        }
+        
+        // Remove the last added subview
+        else {
             if let tag = tag {
                 switch tag {
                     // Image

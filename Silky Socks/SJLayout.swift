@@ -8,6 +8,7 @@
 
 import UIKit
 
+// MARK: SJCollectionViewController
 class SJLayout: UICollectionViewLayout {
     
     // Cache to store the attributes
@@ -167,5 +168,83 @@ class SJLayout: UICollectionViewLayout {
     /* Invalidate the layout for bounds change. Very Essential */
     override func shouldInvalidateLayoutForBoundsChange(newBounds: CGRect) -> Bool {
         return true
+    }
+}
+
+
+// MARK: Font Header View - SJColorCollectionViewController
+// Layout used for the font reusable view
+class SJStickyFontHeaderLayout: UICollectionViewFlowLayout {
+    
+    // Essential
+    override func shouldInvalidateLayoutForBoundsChange(newBounds: CGRect) -> Bool {
+        return true
+    }
+    
+    override func layoutAttributesForElementsInRect(rect: CGRect) -> [AnyObject]? {
+        
+        // Super
+        var layoutAttributes = super.layoutAttributesForElementsInRect(rect) as! [UICollectionViewLayoutAttributes]
+        
+        // Keep track of header
+        var headerNeedingLayout = NSMutableIndexSet()
+        
+        // Register the index path section for the current cells
+        for attr in layoutAttributes {
+            if attr.representedElementCategory == .Cell {
+                headerNeedingLayout.addIndex(attr.indexPath.section)
+            }
+        }
+        
+        // Remove the index path section of the header included in the rect
+        for attr in layoutAttributes {
+            if let element = attr.representedElementKind {
+                if element == UICollectionElementKindSectionHeader {
+                    headerNeedingLayout.removeIndex(attr.indexPath.section)
+                }
+            }
+        }
+        
+        // Append the attributes of the header
+        headerNeedingLayout.enumerateIndexesUsingBlock { (index, stop) -> Void in
+            layoutAttributes.append(self.layoutAttributesForSupplementaryViewOfKind(UICollectionElementKindSectionHeader, atIndexPath: NSIndexPath(forItem: 0, inSection: index)))
+        }
+        
+        // Get the attributes for the header
+        for attributes in layoutAttributes {
+            if let element = attributes.representedElementKind {
+                if element == UICollectionElementKindSectionHeader {
+                    
+                    // Section in which the header belongs
+                    let section = attributes.indexPath.section
+                    
+                    // Index path for first cell
+                    let indexPath = NSIndexPath(forItem: 0, inSection: section)
+                    
+                    // Index Path for last cell
+                    let lastIndexPath = NSIndexPath(forItem: collectionView!.numberOfItemsInSection(section) - 1, inSection: section)
+                    
+                    // Attributes for first cell
+                    let attrForFirstElement = layoutAttributesForItemAtIndexPath(indexPath)
+                    // Attributes for last cell
+                    let attrForLastElement = layoutAttributesForItemAtIndexPath(lastIndexPath)
+                    
+                    // Frame for header
+                    var frame = attributes.frame
+                    
+                    let width = CGRectGetWidth(UIScreen.mainScreen().bounds)
+                    let minX = CGRectGetMinX(attrForFirstElement.frame) - (2 * frame.width) + width
+                    let maxX = CGRectGetMaxX(attrForLastElement.frame) - (2 * frame.width) + width
+                    let offset = collectionView!.contentOffset.x
+                    let x = max(minX, minX + offset)
+                    frame.origin.x = x
+                    
+                    attributes.frame = frame
+                    attributes.zIndex = 100
+                }
+            }
+        }
+        
+        return layoutAttributes
     }
 }

@@ -102,3 +102,62 @@ class CartViewCollectionReusableView: UICollectionReusableView {
         return UINib(nibName: "SJCollectionAddToCartReusableView", bundle: nil)
     }
 }
+
+
+// MARK: SJColorCollectionViewController Header View
+// The following class is a sub class of UICollectionReusableView, and is used to dequeue a UICollectionElementKindHeader View for the SJColorCollectionViewController. The following view is to give users the option to switch between colors and fonts appropriately.
+
+public let fontReuseIdentifier = "fontReuseIdentifier"
+
+protocol FontCollectionReusableViewDelegate: class {
+    func fontColorHeaderReusableView(headerView: UICollectionReusableView, didTapHeaderButton sender: UIButton)
+}
+
+class FontCollectionReusableView: UICollectionReusableView {
+    
+    // Init
+    required init(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        initialSetUp()
+    }
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        initialSetUp()
+    }
+    
+    // Delegate
+    weak var delegate: FontCollectionReusableViewDelegate?
+    
+    // UIButton
+    private var textButton: UIButton!
+    
+    // Title displayed on the button
+    var title: String = "T" {
+        didSet {
+            textButton?.setTitle(title, forState: .Normal)
+        }
+    }
+    
+    private func initialSetUp() {
+        
+        // Add a UIButton
+        textButton = UIButton(frame: bounds)
+        textButton.backgroundColor = UIColor.blackColor()
+        textButton.setTitle(title, forState: .Normal)
+        textButton.setTitleColor(UIColor.whiteColor(), forState: .Normal)
+        textButton.titleLabel?.font = UIFont.preferredFontForTextStyle(UIFontTextStyleHeadline)
+        textButton.backgroundColor = UIColor.blackColor()
+        textButton.addTarget(self, action: "handleButtonTap:", forControlEvents: .TouchUpInside)
+        
+        // Add and Pin SubView
+        addSubview(textButton)
+        pinSubviewToView(subView: textButton)
+    }
+    
+    // Button SEL
+    @objc private func handleButtonTap(sender: UIButton) {
+        delegate?.fontColorHeaderReusableView(self, didTapHeaderButton: sender)
+    }
+    
+}
