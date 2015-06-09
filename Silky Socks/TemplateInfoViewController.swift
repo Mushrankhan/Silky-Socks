@@ -14,8 +14,10 @@ class TemplateInfoViewController: UIViewController {
     @IBOutlet weak var infoImageView: UIImageView!
     @IBOutlet weak var infoDescription: UILabel!
     
+    // Model
     var template: Template!
 
+    // Constants
     private struct Nib {
         static let Name = "TemplateInfoViewController"
     }
@@ -34,10 +36,13 @@ class TemplateInfoViewController: UIViewController {
         infoImageView!.image = template.infoImage
         infoDescription!.attributedText = attrString
         
-        let leftBarButton = UIBarButtonItem(image: UIImage(named: "Back Arrow"), style: .Done, target: self, action: "dismiss")
+        // Set the back button
+        let backArrow = UIImage(named: "Back Arrow")
+        let leftBarButton = UIBarButtonItem(image: backArrow, style: .Done, target: self, action: "dismiss")
         leftBarButton.tintColor = UIColor.blackColor()
         navigationItem.leftBarButtonItem = leftBarButton
         
+        // Title
         title = template.infoCaption
     }
     
