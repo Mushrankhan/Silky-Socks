@@ -47,7 +47,7 @@ extension UIView {
         
         // Draw
         if let logo = logo {
-            let rect = CGRect(x: 0, y: 0, width: 50, height: 50)
+            let rect = CGRect(x: 0, y: 0, width: 60, height: 50)
             CGContextDrawImage(UIGraphicsGetCurrentContext(), rect, logo.CGImage)
         }
         

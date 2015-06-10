@@ -69,7 +69,7 @@ class SJCollectionViewCell: UICollectionViewCell {
         didSet {
             if let template = template {
                 ss_imgView?.image = template.image
-                nameLabel.text = template.caption
+                nameLabel.text = template.infoCaption
                 
                 // Set color
                 if Static.sj_color != UIColor.clearColor() {
