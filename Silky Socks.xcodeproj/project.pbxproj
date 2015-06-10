@@ -22,6 +22,7 @@
 		1FCF50A11B083D70005D8578 /* SJCollectionViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FCF50A01B083D70005D8578 /* SJCollectionViewDelegate.swift */; };
 		1FD558001B2086CA003BDE2A /* SJApprovalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD557FE1B2086CA003BDE2A /* SJApprovalViewController.swift */; };
 		1FD558011B2086CA003BDE2A /* SJApprovalViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1FD557FF1B2086CA003BDE2A /* SJApprovalViewController.xib */; };
+		1FEABD451B284B7300EAD3E6 /* Buy.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1FEABD441B284B7300EAD3E6 /* Buy.framework */; };
 		1FF543CC1B26259F007B6B19 /* TemplateInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FF543CA1B26259F007B6B19 /* TemplateInfoViewController.swift */; };
 		1FF543CD1B26259F007B6B19 /* TemplateInfoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1FF543CB1B26259F007B6B19 /* TemplateInfoViewController.xib */; };
 		1FF794061B21EEFD000CB14D /* SJColorFontCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FF794051B21EEFD000CB14D /* SJColorFontCollectionViewCell.swift */; };
@@ -72,6 +73,7 @@
 		1FCF50A01B083D70005D8578 /* SJCollectionViewDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SJCollectionViewDelegate.swift; sourceTree = "<group>"; };
 		1FD557FE1B2086CA003BDE2A /* SJApprovalViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SJApprovalViewController.swift; sourceTree = "<group>"; };
 		1FD557FF1B2086CA003BDE2A /* SJApprovalViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SJApprovalViewController.xib; sourceTree = "<group>"; };
+		1FEABD441B284B7300EAD3E6 /* Buy.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Buy.framework; sourceTree = "<group>"; };
 		1FF543CA1B26259F007B6B19 /* TemplateInfoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TemplateInfoViewController.swift; sourceTree = "<group>"; };
 		1FF543CB1B26259F007B6B19 /* TemplateInfoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TemplateInfoViewController.xib; sourceTree = "<group>"; };
 		1FF794051B21EEFD000CB14D /* SJColorFontCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SJColorFontCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -106,6 +108,7 @@
 			files = (
 				1F535DEE1B242084008663DF /* Crashlytics.framework in Frameworks */,
 				1F535DED1B242084008663DF /* Fabric.framework in Frameworks */,
+				1FEABD451B284B7300EAD3E6 /* Buy.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -122,6 +125,7 @@
 		1F535DEF1B242164008663DF /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				1FEABD441B284B7300EAD3E6 /* Buy.framework */,
 				1F535DEB1B242084008663DF /* Fabric.framework */,
 				1F535DEC1B242084008663DF /* Crashlytics.framework */,
 			);
@@ -588,6 +592,8 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/Silky",
+					Socks,
 				);
 				GCC_TREAT_INCOMPATIBLE_POINTER_TYPE_WARNINGS_AS_ERRORS = YES;
 				GCC_WARN_NON_VIRTUAL_DESTRUCTOR = YES;
@@ -615,6 +621,8 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/Silky",
+					Socks,
 				);
 				GCC_TREAT_INCOMPATIBLE_POINTER_TYPE_WARNINGS_AS_ERRORS = YES;
 				GCC_WARN_NON_VIRTUAL_DESTRUCTOR = YES;
