@@ -24,7 +24,11 @@ class SJColorCollectionViewController: UICollectionViewController {
     lazy private var fonts = UIFont.getFontPalette()
     
     // Tells that the user wants to dequeue the supplementary header view or not
-    var wantFont: Bool = false
+    var wantFont: Bool = false {
+        didSet {
+            showFont = false
+        }
+    }
     
     // Used to switch between colors and fonts, if 'wantFont' is true
     private var showFont: Bool = false

@@ -55,6 +55,9 @@ class SJCollectionViewCell: UICollectionViewCell {
     private var firstX: CGFloat = 0
     private var firstY: CGFloat = 0
     
+    // Used for keeping track of views in pan gesture
+    private var selectedView: UIView?
+
     // Set containing the gesture - rotate and pinch
     private var activeRecognizers = NSMutableSet()
     
@@ -310,9 +313,13 @@ extension SJCollectionViewCell {
         // Add the color on the image itself rather than
         // placing the color on top the image
         // coz we need some kind of blending
-        let image = template!.image.colorizeWith(color)
-        ss_imgView.image = image
-
+        
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0)) {
+            let image = self.template!.image.colorizeWith(color)
+            dispatch_async(dispatch_get_main_queue()) {
+                self.ss_imgView.image = image
+            }
+        }
     }
 }
 
@@ -361,11 +368,14 @@ extension SJCollectionViewCell: UIGestureRecognizerDelegate {
     
     // Handle Tap
     func handleTap(recognizer: UITapGestureRecognizer) {
-        let location = recognizer.locationInView(boundingRectView)
+        let location = recognizer.locationInView(self)
         var selectedView: UIView?
         for view in sj_subViews {
-            if CGRectContainsPoint(view.frame, location) {
+            // Converting the sub view into the coordinate space of the cell from the bounding view
+            let rect = convertRect(view.frame, fromView: boundingRectView)
+            if CGRectContainsPoint(rect, location) {
                 selectedView = view
+                lastSelectedView = view
             }
         }
         delegate?.collectionViewCell(self, didSelectView: selectedView, atPoint: location)
@@ -378,37 +388,41 @@ extension SJCollectionViewCell: UIGestureRecognizerDelegate {
         if let boundingRectView = boundingRectView {
             
             // Find the location
-            var location = recognizer.locationInView(boundingRectView)
-            var translatedpoint = recognizer.translationInView(boundingRectView)
+            var location = recognizer.locationInView(self)
+            var translatedpoint = recognizer.translationInView(self)
             
-            // Loop through the sub views array
-            loop: for view in sj_subViews {
+            switch recognizer.state {
                 
-                // If one subview contains the point
-                if CGRectContainsPoint(view.frame, location) {
-                    
-                    switch recognizer.state {
+                case .Began:
+                    if recognizer.state == .Began {
                         
-                        case .Began:
-                            if recognizer.state == .Began {
-                                firstX = view.center.x
-                                firstY = view.center.y
+                        // Loop through the sub views array
+                        loop: for view in sj_subViews {
+                            
+                            // If one subview contains the point
+                            let rect = convertRect(view.frame, fromView: boundingRectView)
+                            if CGRectContainsPoint(rect, location) {
+                                selectedView = view
+                                break loop
                             }
+                        }
                         
-                        case .Changed:
-                            view.center = CGPointMake(firstX + translatedpoint.x, firstY + translatedpoint.y)
-                            // Break the loop after changing one view
-                            // Done in order to prevent multiple views 
-                            // from moving simultaneously
-                            break loop
-                        
-                        case .Ended:
-                            lastSelectedView = view
-                        
-                        default:
-                            break
+                        firstX = selectedView!.center.x
+                        firstY = selectedView!.center.y
                     }
-                }
+                    
+                case .Changed:
+                    if let view = selectedView {
+                        view.center = CGPointMake(firstX + translatedpoint.x, firstY + translatedpoint.y)
+                    }
+                
+                case .Ended:
+                    if let view = selectedView {
+                        lastSelectedView = selectedView
+                    }
+                
+                default:
+                    break
             }
         }
     }
