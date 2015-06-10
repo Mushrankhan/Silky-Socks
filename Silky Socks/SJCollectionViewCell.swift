@@ -407,8 +407,10 @@ extension SJCollectionViewCell: UIGestureRecognizerDelegate {
                             }
                         }
                         
-                        firstX = selectedView!.center.x
-                        firstY = selectedView!.center.y
+                        if selectedView != nil {
+                            firstX = selectedView!.center.x
+                            firstY = selectedView!.center.y
+                        }
                     }
                     
                 case .Changed:
