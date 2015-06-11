@@ -21,8 +21,14 @@ protocol SJCollectionViewCellDelegate: class {
 class SJCollectionViewCell: UICollectionViewCell {
 
     // IBOutlets
-    @IBOutlet weak var ss_imgView: UIImageView!
-    @IBOutlet weak var nameLabel: UILabel!
+    @IBOutlet private weak var ss_imgView: UIImageView! {
+        didSet {
+            ss_imgView!.layer.shadowColor = UIColor.blackColor().CGColor
+            ss_imgView!.layer.shadowOpacity = 1
+            ss_imgView!.layer.shadowOffset = CGSize(width: 0, height: 1)
+        }
+    }
+    @IBOutlet private weak var nameLabel: UILabel!
     @IBOutlet weak var infoButton: UIButton!
     
     // Delegate
@@ -86,7 +92,12 @@ class SJCollectionViewCell: UICollectionViewCell {
         
     // Add the label as a subview of boundingRectView
     // Is a view around the image because the image is smaller than the image view
-    private(set) var boundingRectView: UIView?
+    private(set) var boundingRectView: UIView? {
+        didSet {
+            // ? coz it might be set to nil
+            boundingRectView?.alpha = 0.9
+        }
+    }
     
     // Masking that is applied to the boundingRectView
     private var maskImageView: UIImageView?
@@ -114,6 +125,7 @@ class SJCollectionViewCell: UICollectionViewCell {
         rotateGestureRecognizer.delegate = self
         addGestureRecognizer(rotateGestureRecognizer)
         
+        // Tap
         tapGestureRecognizer = UITapGestureRecognizer(target: self, action: "handleTap:")
         tapGestureRecognizer.delaysTouchesBegan = true
         addGestureRecognizer(tapGestureRecognizer)
@@ -313,13 +325,17 @@ extension SJCollectionViewCell {
         // Add the color on the image itself rather than
         // placing the color on top the image
         // coz we need some kind of blending
-        
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0)) {
             let image = self.template!.image.colorizeWith(color)
             dispatch_async(dispatch_get_main_queue()) {
                 self.ss_imgView.image = image
             }
         }
+        
+        // Alternative
+//        addClipRect()
+//        boundingRectView?.backgroundColor = color
+//        boundingRectView?.alpha = 0.7
     }
 }
 
