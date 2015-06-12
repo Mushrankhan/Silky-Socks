@@ -142,12 +142,12 @@ extension SJCollectionView: ShareViewCollectionReusableViewDelegate {
 // MARK: Add To Cart
 extension SJCollectionView: CartViewCollectionReusableViewDelegate {
     func cartReusableView(view: CartViewCollectionReusableView, didPressAddToCartButton sender: UIButton) {
-        if let cell = visibleCell {
-            let y = cell.infoButton.bounds.size.height
-            let rect = CGRect(origin: CGPoint(x: 0, y: y), size: cell.frame.size)
-            let image = cell.clickSnapShot(rect, withLogo: UIImage.SilkySocksLogo())
-            myDelegate?.collectionView(self, didPressAddToCartButton: sender, withSnapShotImage: image, andTemplate: cell.template!)
-        }
+//        if let cell = visibleCell {
+//            let y = cell.infoButton.bounds.size.height
+//            let rect = CGRect(origin: CGPoint(x: 0, y: y), size: cell.frame.size)
+//            let image = cell.clickSnapShot(rect, withLogo: UIImage.SilkySocksLogo())
+//            myDelegate?.collectionView(self, didPressAddToCartButton: sender, withSnapShotImage: image, andTemplate: cell.template!)
+//        }
     }
 }
 
@@ -161,20 +161,20 @@ extension SJCollectionView: SJBottomViewDelegate {
     func sj_bottomView(view: SJBottomView, didPressRightButton button: UIButton) {
         // Make sure that the content offset is not being changed
         // when the right button is clicked
-        if !changingOffset {
+        //if !changingOffset {
             let xOffset = min(contentSize.width - width, contentOffset.x + width)
             setContentOffset(CGPoint(x: xOffset, y: contentOffset.y), animated: true)
-        }
+        //}
     }
     
     // Navigate Left
     func sj_bottomView(view: SJBottomView, didPressLeftButton button: UIButton) {
         // Make sure that the content offset is not being changed
         // when the left button is clicked
-        if !changingOffset {
+        //if !changingOffset {
             let xOffset = max(0, contentOffset.x - width)
             setContentOffset(CGPoint(x: xOffset, y: contentOffset.y), animated: true)
-        }
+        //}
     }
     
     // Text button clicked
@@ -251,6 +251,7 @@ extension SJCollectionView {
     }
 }
 
+// MARK: SJCollectionViewCellDelegate
 extension SJCollectionView : SJCollectionViewCellDelegate {
     
     func collectionViewCell(cell: UICollectionViewCell, didSelectView view: UIView?, atPoint point: CGPoint) {

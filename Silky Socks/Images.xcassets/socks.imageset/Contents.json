@@ -3,17 +3,17 @@
     {
       "idiom" : "universal",
       "scale" : "1x",
-      "filename" : "blank.png"
+      "filename" : "socks.png"
     },
     {
       "idiom" : "universal",
       "scale" : "2x",
-      "filename" : "blank@2x.png"
+      "filename" : "socks@2x.png"
     },
     {
       "idiom" : "universal",
       "scale" : "3x",
-      "filename" : "blank@3x.png"
+      "filename" : "socks@3x.png"
     }
   ],
   "info" : {

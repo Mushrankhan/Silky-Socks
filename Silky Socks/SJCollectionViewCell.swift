@@ -172,7 +172,6 @@ class SJCollectionViewCell: UICollectionViewCell {
         panGestureRecognizer = nil
         pinchGestureRecognizer = nil
         rotateGestureRecognizer = nil
-        
     }
     
     // Apply Layout Attributes
@@ -189,7 +188,7 @@ class SJCollectionViewCell: UICollectionViewCell {
     
     // Returns whether the collection view should pan or not
     func shouldPan() -> Bool {
-        if template!.image != ss_imgView.image || sj_subViews_count > 0 {
+        if sj_subViews_count > 0 || template!.image != ss_imgView.image {
             return false
         }
         return true
@@ -354,12 +353,14 @@ extension SJCollectionViewCell {
     
     // Undo - Label/Image
     func undo() {
-        sj_subViews[0].removeFromSuperview()
-        sj_subViews.removeAtIndex(0)
-        
-        // If nothing exists, then
-        if sj_subViews.count == 0 {
-            cleanUp()
+        if sj_subViews.count > 0 {
+            sj_subViews[0].removeFromSuperview()
+            sj_subViews.removeAtIndex(0)
+            
+            // If nothing exists, then
+            if sj_subViews.count == 0 {
+                cleanUp()
+            }
         }
     }
     

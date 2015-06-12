@@ -232,12 +232,12 @@ extension SJCollectionViewController: SJCollectionViewDelegate {
 
     // Camera Button
     func collectionView(collectionView: UICollectionView, bottomView: UIView, didPressCameraButton button: UIButton) {
-        commonCodeForPhotos(forGrid: false)
+        commonCodeForPhotos(forGrid: false, sender: button)
     }
     
     // Grid Button
     func collectionView(collectionView: UICollectionView, bottomView: UIView , didPressGridButton button:UIButton) {
-        commonCodeForPhotos(forGrid: true)
+        commonCodeForPhotos(forGrid: true, sender: button)
     }
     
     // Color Wheel
@@ -399,7 +399,7 @@ extension SJCollectionViewController: UITextFieldDelegate {
 extension SJCollectionViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     // Camera and Grid
-    func commonCodeForPhotos(#forGrid: Bool) {
+    func commonCodeForPhotos(#forGrid: Bool, sender: UIButton) {
         
         // If grid button was pressed
         isGridButtonTapped = forGrid
