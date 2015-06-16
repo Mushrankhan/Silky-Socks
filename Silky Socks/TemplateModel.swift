@@ -2,29 +2,41 @@
 //  TemplateModel.swift
 //  
 //
-//  Created by Kevin Koeller on 4/19/15.
+//  Created by Saurabh Jain on 4/19/15.
 
 import UIKit
 
-enum Type {
+/*!
+    @enum       Template Type
+    @abstract   Info contained in the template class regarding the type of the template
+
+    @constant   Socks
+    @constant   Shirt
+    @constant   Tank
+*/
+enum TemplateType {
     case Socks
     case Shirt
     case Tank
 }
 
+/*!
+    @class      Template
+    @abstract   Represnt a way to encapsulate the image templates used in the app
+*/
 class Template: NSObject, Printable {
     
     // For the main screen
     var image: UIImage
     var maskImage: UIImage?
-    var type: Type
+    var type: TemplateType
     
     // For the Info Page
     var infoCaption: String
     var info: String
     var infoImage: UIImage?
     
-    init(image: UIImage, type: Type, maskImage: UIImage?, infoCaption: String, info: String, infoImage: UIImage?) {
+    init(image: UIImage, type: TemplateType, maskImage: UIImage?, infoCaption: String, info: String, infoImage: UIImage?) {
         self.image = image
         self.type = type
         self.maskImage = maskImage
@@ -34,6 +46,7 @@ class Template: NSObject, Printable {
         self.infoImage = infoImage
     }
 
+    // Printable Protocol
     override var description: String {
         get {
             let str = "Caption: \(infoCaption)\n" + "Info : \(info)\n"

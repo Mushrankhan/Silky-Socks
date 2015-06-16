@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import MessageUI
 
 class SJCollectionViewController: UIViewController {
 
@@ -203,7 +204,7 @@ extension SJCollectionViewController {
 }
 
 // MARK: Collection View Delegate
-extension SJCollectionViewController: SJCollectionViewDelegate {
+extension SJCollectionViewController: SJCollectionViewDelegate, MFMailComposeViewControllerDelegate {
     
     // Text Button
     func collectionView(collectionView: UICollectionView, bottomView: UIView , didPressTextButton button:UIButton) {
@@ -273,9 +274,18 @@ extension SJCollectionViewController: SJCollectionViewDelegate {
     }
     
     // Add To Cart
+    // Right now send a mail to check for correct size
     func collectionView(collectionView: UICollectionView, didPressAddToCartButton button:UIButton, withSnapShotImage snapshot: UIImage, andTemplate template: Template) {
         
-        
+        let mail = MFMailComposeViewController()
+        mail.addAttachmentData(UIImageJPEGRepresentation(snapshot, 1), mimeType: "image/jpeg", fileName: "Design")
+        mail.delegate = self
+        presentViewController(mail, animated: true, completion: nil)
+    }
+    
+    // Dismiss the mail compose view controller
+    func mailComposeController(controller: MFMailComposeViewController!, didFinishWithResult result: MFMailComposeResult, error: NSError!) {
+        dismissViewControllerAnimated(true, completion: nil)
     }
     
     

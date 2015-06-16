@@ -27,7 +27,7 @@ extension UIView {
     }
     
     // Clicks a snapshot of the view
-    func clickSnapShot(area: CGRect, withLogo logo: UIImage?) -> UIImage {
+    func clickSnapShot(area: CGRect, withLogo logo: UIImage?, forBuying buy: Bool) -> UIImage {
         
         UIGraphicsBeginImageContextWithOptions(area.size, opaque, 0)
         let context = UIGraphicsGetCurrentContext()
@@ -54,6 +54,25 @@ extension UIView {
         // New Image
         let image = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
+        
+        // If we clicked add to cart
+        // then draw the image in a rect of 36 x 32 inches
+        // 1 inch = 72 points
+        if buy {
+            let scale = UIScreen.mainScreen().scale
+            
+            // Dividing by scale is essential in order to get the right dimensions
+            let size = CGSize(width: 2592/scale, height: 2304/scale)
+            let rect = CGRect(origin: .zeroPoint, size: size)
+            
+            UIGraphicsBeginImageContextWithOptions(rect.size, opaque, 0)
+            image.drawInRect(rect)
+            let newImage = UIGraphicsGetImageFromCurrentImageContext()
+            UIGraphicsEndImageContext()
+            return newImage
+        }
+        
+        // If we are sharing then return the normal size image
         return image
     }
     

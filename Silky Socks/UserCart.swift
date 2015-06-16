@@ -8,6 +8,12 @@
 
 import UIKit
 
+/*! 
+    @class          User Cart Class
+    @abstract       Used to encapsulate the cart system
+    @description    Singleton support, becuase every user can have only one cart
+
+*/
 class UserCart: NSObject {
    
     // Singleton support
