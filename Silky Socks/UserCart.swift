@@ -16,15 +16,19 @@ import UIKit
 */
 class UserCart: NSObject {
    
-    internal struct UserCartNotifications {
-        static let AddToCartNotification = "Add"
+    struct UserCartNotifications {
+        static let AddToCartNotification = "AddToCartNotification"
     }
     
     // Singleton support
     static let sharedCart = UserCart()
     
     // User Cart
-    private var cart = [CartProduct]()
+    var cart = [CartProduct]()
+    
+    var numberOfItems: Int {
+        return cart.count
+    }
     
     // Add Product
     func addProduct(template: CartProduct) {
@@ -44,7 +48,12 @@ class UserCart: NSObject {
     
     // Remove Product
     func removeProduct(template: CartProduct) {
-        
+        for (index , product) in enumerate(cart) {
+            if product == template {
+                cart.removeAtIndex(index)
+                return
+            }
+        }
     }
 }
 

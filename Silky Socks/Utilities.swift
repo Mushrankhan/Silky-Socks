@@ -58,19 +58,19 @@ extension UIView {
         // If we clicked add to cart
         // then draw the image in a rect of 36 x 32 inches
         // 1 inch = 72 points
-        if buy {
-            let scale = UIScreen.mainScreen().scale
-            
-            // Dividing by scale is essential in order to get the right dimensions
-            let size = CGSize(width: 2592/scale, height: 2304/scale)
-            let rect = CGRect(origin: .zeroPoint, size: size)
-            
-            UIGraphicsBeginImageContextWithOptions(rect.size, opaque, 0)
-            image.drawInRect(rect)
-            let newImage = UIGraphicsGetImageFromCurrentImageContext()
-            UIGraphicsEndImageContext()
-            return newImage
-        }
+//        if buy {
+//            let scale = UIScreen.mainScreen().scale
+//            // Dividing by scale is essential in order to get the right dimensions
+//            let width = 2592.0 / scale; let height = 2304.0 / scale
+//            let size = CGSize(width: width, height: height)
+//            let rect = CGRect(origin: .zeroPoint, size: size)
+//            
+//            UIGraphicsBeginImageContextWithOptions(rect.size, opaque, 0)
+//            image.drawInRect(rect)
+//            let newImage = UIGraphicsGetImageFromCurrentImageContext()
+//            UIGraphicsEndImageContext()
+//            return newImage
+//        }
         
         // If we are sharing then return the normal size image
         return image

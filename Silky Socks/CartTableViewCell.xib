@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cart Cell" rowHeight="31" id="KGk-i7-Jjw" customClass="CartTableViewCell" customModule="Silky_Socks" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="551" height="125"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="1Tw-W8-STx">
+                        <rect key="frame" x="8" y="8" width="108" height="108.5"/>
+                        <constraints>
+                            <constraint firstAttribute="width" secondItem="1Tw-W8-STx" secondAttribute="height" multiplier="1:1" id="hVy-kL-w8u"/>
+                        </constraints>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="S8c-SD-XYj">
+                        <rect key="frame" x="124" y="8" width="419" height="21.5"/>
+                        <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="18"/>
+                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <stepper opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="1" minimumValue="1" maximumValue="10" translatesAutoresizingMaskIntoConstraints="NO" id="VZX-oc-ANl">
+                        <rect key="frame" x="124" y="87" width="94" height="29"/>
+                        <color key="tintColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <connections>
+                            <action selector="incrementQuantity:" destination="KGk-i7-Jjw" eventType="valueChanged" id="wIF-m7-pel"/>
+                        </connections>
+                    </stepper>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" placeholderIntrinsicWidth="94" placeholderIntrinsicHeight="41" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jcv-Jg-N20">
+                        <rect key="frame" x="124" y="38" width="94" height="41"/>
+                        <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="24"/>
+                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="Jcv-Jg-N20" firstAttribute="width" secondItem="VZX-oc-ANl" secondAttribute="width" id="54D-Zx-UR9"/>
+                    <constraint firstItem="S8c-SD-XYj" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="BiS-9w-MM1"/>
+                    <constraint firstItem="1Tw-W8-STx" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="8" id="F3G-B3-ehj"/>
+                    <constraint firstItem="S8c-SD-XYj" firstAttribute="leading" secondItem="1Tw-W8-STx" secondAttribute="trailing" constant="8" id="Hwg-IS-uHL"/>
+                    <constraint firstAttribute="trailing" secondItem="S8c-SD-XYj" secondAttribute="trailing" constant="8" id="Pqh-fE-nIa"/>
+                    <constraint firstItem="VZX-oc-ANl" firstAttribute="leading" secondItem="1Tw-W8-STx" secondAttribute="trailing" constant="8" id="VNm-xq-PYG"/>
+                    <constraint firstItem="VZX-oc-ANl" firstAttribute="top" secondItem="Jcv-Jg-N20" secondAttribute="bottom" constant="8" id="XWe-HN-nVZ"/>
+                    <constraint firstItem="1Tw-W8-STx" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="Z6Q-eX-F6I"/>
+                    <constraint firstAttribute="bottom" secondItem="1Tw-W8-STx" secondAttribute="bottom" constant="8" id="d63-Ib-4GH"/>
+                    <constraint firstItem="Jcv-Jg-N20" firstAttribute="leading" secondItem="1Tw-W8-STx" secondAttribute="trailing" constant="8" id="eda-fZ-6fN"/>
+                    <constraint firstItem="Jcv-Jg-N20" firstAttribute="top" secondItem="S8c-SD-XYj" secondAttribute="bottom" constant="8" id="mUJ-hG-v8q"/>
+                    <constraint firstItem="1Tw-W8-STx" firstAttribute="bottom" secondItem="VZX-oc-ANl" secondAttribute="bottom" id="xoi-SX-VRg"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="cartImgView" destination="1Tw-W8-STx" id="AY9-cd-JVi"/>
+                <outlet property="cartProductName" destination="S8c-SD-XYj" id="egs-De-mok"/>
+                <outlet property="cartQuantity" destination="Jcv-Jg-N20" id="mc4-Pv-VgW"/>
+            </connections>
+            <point key="canvasLocation" x="502.5" y="359.5"/>
+        </tableViewCell>
+    </objects>
+</document>

@@ -118,13 +118,17 @@ class SJCollectionViewController: UIViewController {
         cartView.setImage(UIImage(named: "cart"), forState: .Normal)
         cartView.addTarget(self, action: "cartButtonPressed:", forControlEvents: .TouchUpInside)
         
-        
         let cartButton = UIBarButtonItem(customView: cartView)
         navigationItem.rightBarButtonItem = cartButton
         
         // Set up the badge
         notificationHub = RKNotificationHub(view: cartView)
         notificationHub.scaleCircleSizeBy(0.5)
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        notificationHub.count = UInt(UserCart.sharedCart.numberOfItems)
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -164,7 +168,7 @@ class SJCollectionViewController: UIViewController {
     @objc private func cartButtonPressed(button: UIBarButtonItem) {
         // Do Something
         if notificationHub.count > 0 {
-            
+            performSegueWithIdentifier("cartSegue", sender: nil)
         }
     }
 }
