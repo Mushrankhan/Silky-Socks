@@ -86,6 +86,9 @@ class SJCollectionViewController: UIViewController {
         // Used to display the color VC appropriately
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "handleKeyBoard:", name: UIKeyboardDidShowNotification, object: nil)
 
+        // When an object is added to the cart, then do something
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "incrementCartCount:", name: UserCart.UserCartNotifications.AddToCartNotification, object: nil)
+        
         // Set the layout for the colorVC
         var frame = CGRect(x: 0, y: 0, width: width, height: heightOfColorVC)
         let layout = SJStickyFontHeaderLayout()
@@ -109,6 +112,19 @@ class SJCollectionViewController: UIViewController {
         approvalVC = SJApprovalViewController(nibName: "SJApprovalViewController", bundle: nil)
         approvalVC.delegate = self
         approvalVC.view.frame = hideRect
+        
+        // Right Bar Button item
+        let cartView = UIButton(frame: CGRect(origin: .zeroPoint, size: CGSize(width: 30, height: 30)))
+        cartView.setImage(UIImage(named: "cart"), forState: .Normal)
+        cartView.addTarget(self, action: "cartButtonPressed:", forControlEvents: .TouchUpInside)
+        
+        
+        let cartButton = UIBarButtonItem(customView: cartView)
+        navigationItem.rightBarButtonItem = cartButton
+        
+        // Set up the badge
+        notificationHub = RKNotificationHub(view: cartView)
+        notificationHub.scaleCircleSizeBy(0.5)
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -133,6 +149,23 @@ class SJCollectionViewController: UIViewController {
         
         // Delete the picker
         picker = nil
+    }
+    
+    // Used to increment the badge count on the cart bar button item
+    private var notificationHub: RKNotificationHub!
+    
+    // Cart Increment Notification SEL
+    @objc private func incrementCartCount(notification: NSNotification) {
+        notificationHub.increment()
+        notificationHub.pop()
+    }
+    
+    // Cart button Pressed SEL
+    @objc private func cartButtonPressed(button: UIBarButtonItem) {
+        // Do Something
+        if notificationHub.count > 0 {
+            
+        }
     }
 }
 
@@ -277,17 +310,20 @@ extension SJCollectionViewController: SJCollectionViewDelegate, MFMailComposeVie
     // Right now send a mail to check for correct size
     func collectionView(collectionView: UICollectionView, didPressAddToCartButton button:UIButton, withSnapShotImage snapshot: UIImage, andTemplate template: Template) {
         
-        let mail = MFMailComposeViewController()
-        mail.addAttachmentData(UIImageJPEGRepresentation(snapshot, 1), mimeType: "image/jpeg", fileName: "Design")
-        mail.delegate = self
-        presentViewController(mail, animated: true, completion: nil)
+//        let mail = MFMailComposeViewController()
+//        mail.addAttachmentData(UIImageJPEGRepresentation(snapshot, 0.7), mimeType: "image/jpeg", fileName: "Design")
+//        mail.mailComposeDelegate = self
+//        presentViewController(mail, animated: true, completion: nil)
+        
+        // Create a cart Product
+        let product = CartProduct(template: template, withImage: snapshot)
+        UserCart.sharedCart.addProduct(product)
     }
     
     // Dismiss the mail compose view controller
     func mailComposeController(controller: MFMailComposeViewController!, didFinishWithResult result: MFMailComposeResult, error: NSError!) {
         dismissViewControllerAnimated(true, completion: nil)
     }
-    
     
     // Restart
     func collectionView(collectionView: UICollectionView, didPressRestartButton button:UIButton) {
@@ -340,7 +376,9 @@ extension SJCollectionViewController: SJCollectionViewDelegate, MFMailComposeVie
         let activity = UIActivityViewController(activityItems: items, applicationActivities: nil)
         activity.excludedActivityTypes = [UIActivityTypeAddToReadingList, UIActivityTypeAssignToContact, UIActivityTypePrint, UIActivityTypeSaveToCameraRoll]
         presentViewController(activity, animated: true, completion: nil)
+
     }
+    
     
     // Tapped in the collection view cell
     func collectionView(collectionView: UICollectionView, touchesBegan point: CGPoint) {

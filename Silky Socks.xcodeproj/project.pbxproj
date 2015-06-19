@@ -1,716 +1,1874 @@
-// !$*UTF8*$!
-{
-	archiveVersion = 1;
-	classes = {
-	};
-	objectVersion = 46;
-	objects = {
-
-/* Begin PBXBuildFile section */
-		1F232D2F1B196CB200ECD753 /* SJColorCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F232D2E1B196CB200ECD753 /* SJColorCollectionViewController.swift */; };
-		1F39440B1B094EA4008E73E0 /* SJCollectionAddToCartReusableView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1F39440A1B094EA4008E73E0 /* SJCollectionAddToCartReusableView.xib */; };
-		1F535DED1B242084008663DF /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F535DEB1B242084008663DF /* Fabric.framework */; };
-		1F535DEE1B242084008663DF /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F535DEC1B242084008663DF /* Crashlytics.framework */; };
-		1F88389C1B0D731200E3BBB6 /* SJTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F88389B1B0D731200E3BBB6 /* SJTextField.swift */; };
-		1F88389E1B0D875D00E3BBB6 /* SJLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F88389D1B0D875D00E3BBB6 /* SJLabel.swift */; };
-		1FC258AB1B14B60700EAEF20 /* UserCart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FC258AA1B14B60700EAEF20 /* UserCart.swift */; };
-		1FCF508F1B070F4C005D8578 /* SJCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FCF508E1B070F4C005D8578 /* SJCollectionView.swift */; };
-		1FCF50951B07EBAB005D8578 /* SJCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FCF50941B07EBAB005D8578 /* SJCollectionReusableView.swift */; };
-		1FCF50991B07ECA3005D8578 /* SJCollectionRestartReusableView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1FCF50981B07ECA3005D8578 /* SJCollectionRestartReusableView.xib */; };
-		1FCF509B1B07ED8A005D8578 /* SJCollectionShareReusableView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1FCF509A1B07ED8A005D8578 /* SJCollectionShareReusableView.xib */; };
-		1FCF509D1B07F0C7005D8578 /* SJCollectionDecorationSilkySocksLogoReusableView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1FCF509C1B07F0C7005D8578 /* SJCollectionDecorationSilkySocksLogoReusableView.xib */; };
-		1FCF50A11B083D70005D8578 /* SJCollectionViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FCF50A01B083D70005D8578 /* SJCollectionViewDelegate.swift */; };
-		1FD558001B2086CA003BDE2A /* SJApprovalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD557FE1B2086CA003BDE2A /* SJApprovalViewController.swift */; };
-		1FD558011B2086CA003BDE2A /* SJApprovalViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1FD557FF1B2086CA003BDE2A /* SJApprovalViewController.xib */; };
-		1FECA5841B3019EB009CC8AF /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1FECA5831B3019EB009CC8AF /* MessageUI.framework */; };
-		1FF543CC1B26259F007B6B19 /* TemplateInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FF543CA1B26259F007B6B19 /* TemplateInfoViewController.swift */; };
-		1FF543CD1B26259F007B6B19 /* TemplateInfoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1FF543CB1B26259F007B6B19 /* TemplateInfoViewController.xib */; };
-		1FF794061B21EEFD000CB14D /* SJColorFontCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FF794051B21EEFD000CB14D /* SJColorFontCollectionViewCell.swift */; };
-		1FF794081B22DBBF000CB14D /* DoubleFeature.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1FF794071B22DBBF000CB14D /* DoubleFeature.ttf */; };
-		1FF7940A1B22DCB2000CB14D /* Maiden.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1FF794091B22DCB2000CB14D /* Maiden.ttf */; };
-		1FF7940C1B22DD05000CB14D /* Walkway Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1FF7940B1B22DD05000CB14D /* Walkway Black.ttf */; };
-		1FF7940E1B22DD69000CB14D /* College.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1FF7940D1B22DD69000CB14D /* College.ttf */; };
-		4F55B5541AE46E4900679048 /* SJCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4F55B5531AE46E4900679048 /* SJCollectionViewCell.xib */; };
-		4F55B55D1AE480F400679048 /* SJLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F55B55C1AE480F400679048 /* SJLayout.swift */; };
-		4F8D38A31AE440DE00F42E23 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F8D38A21AE440DE00F42E23 /* AppDelegate.swift */; };
-		4F8D38A61AE440DE00F42E23 /* Silky_Socks.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 4F8D38A41AE440DE00F42E23 /* Silky_Socks.xcdatamodeld */; };
-		4F8D38AB1AE440DE00F42E23 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4F8D38A91AE440DE00F42E23 /* Main.storyboard */; };
-		4F8D38AD1AE440DE00F42E23 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4F8D38AC1AE440DE00F42E23 /* Images.xcassets */; };
-		4F8D38B01AE440DE00F42E23 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4F8D38AE1AE440DE00F42E23 /* LaunchScreen.xib */; };
-		4F8D38BC1AE440DE00F42E23 /* Silky_SocksTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F8D38BB1AE440DE00F42E23 /* Silky_SocksTests.swift */; };
-		4F8D38C61AE441F700F42E23 /* SJCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F8D38C51AE441F700F42E23 /* SJCollectionViewCell.swift */; };
-		4F8D38CA1AE4451000F42E23 /* SJCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F8D38C91AE4451000F42E23 /* SJCollectionViewController.swift */; };
-		4F8D38CC1AE4457800F42E23 /* TemplateModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F8D38CB1AE4457800F42E23 /* TemplateModel.swift */; };
-		4FB6C9C11AE4AF70001A6E50 /* SJBottomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FB6C9C01AE4AF70001A6E50 /* SJBottomView.swift */; };
-		4FB6C9C31AE4AF7A001A6E50 /* SJBottomView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4FB6C9C21AE4AF7A001A6E50 /* SJBottomView.xib */; };
-		4FB6C9C51AE4B394001A6E50 /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FB6C9C41AE4B394001A6E50 /* Utilities.swift */; };
-/* End PBXBuildFile section */
-
-/* Begin PBXContainerItemProxy section */
-		4F8D38B61AE440DE00F42E23 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 4F8D38951AE440DE00F42E23 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 4F8D389C1AE440DE00F42E23;
-			remoteInfo = "Silky Socks";
-		};
-/* End PBXContainerItemProxy section */
-
-/* Begin PBXFileReference section */
-		1F232D2E1B196CB200ECD753 /* SJColorCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SJColorCollectionViewController.swift; sourceTree = "<group>"; };
-		1F39440A1B094EA4008E73E0 /* SJCollectionAddToCartReusableView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SJCollectionAddToCartReusableView.xib; sourceTree = "<group>"; };
-		1F535DEB1B242084008663DF /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Fabric.framework; sourceTree = SOURCE_ROOT; };
-		1F535DEC1B242084008663DF /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = SOURCE_ROOT; };
-		1F54AD201B1602D6007E9E48 /* BridgingHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BridgingHeader.h; sourceTree = "<group>"; };
-		1F88389B1B0D731200E3BBB6 /* SJTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SJTextField.swift; sourceTree = "<group>"; };
-		1F88389D1B0D875D00E3BBB6 /* SJLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SJLabel.swift; sourceTree = "<group>"; };
-		1FC258AA1B14B60700EAEF20 /* UserCart.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserCart.swift; sourceTree = "<group>"; };
-		1FCF508E1B070F4C005D8578 /* SJCollectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SJCollectionView.swift; sourceTree = "<group>"; };
-		1FCF50941B07EBAB005D8578 /* SJCollectionReusableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SJCollectionReusableView.swift; sourceTree = "<group>"; };
-		1FCF50981B07ECA3005D8578 /* SJCollectionRestartReusableView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SJCollectionRestartReusableView.xib; sourceTree = "<group>"; };
-		1FCF509A1B07ED8A005D8578 /* SJCollectionShareReusableView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SJCollectionShareReusableView.xib; sourceTree = "<group>"; };
-		1FCF509C1B07F0C7005D8578 /* SJCollectionDecorationSilkySocksLogoReusableView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SJCollectionDecorationSilkySocksLogoReusableView.xib; sourceTree = "<group>"; };
-		1FCF50A01B083D70005D8578 /* SJCollectionViewDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SJCollectionViewDelegate.swift; sourceTree = "<group>"; };
-		1FD557FE1B2086CA003BDE2A /* SJApprovalViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SJApprovalViewController.swift; sourceTree = "<group>"; };
-		1FD557FF1B2086CA003BDE2A /* SJApprovalViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SJApprovalViewController.xib; sourceTree = "<group>"; };
-		1FECA5831B3019EB009CC8AF /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
-		1FF543CA1B26259F007B6B19 /* TemplateInfoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TemplateInfoViewController.swift; sourceTree = "<group>"; };
-		1FF543CB1B26259F007B6B19 /* TemplateInfoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TemplateInfoViewController.xib; sourceTree = "<group>"; };
-		1FF794051B21EEFD000CB14D /* SJColorFontCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SJColorFontCollectionViewCell.swift; sourceTree = "<group>"; };
-		1FF794071B22DBBF000CB14D /* DoubleFeature.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = DoubleFeature.ttf; sourceTree = "<group>"; };
-		1FF794091B22DCB2000CB14D /* Maiden.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Maiden.ttf; sourceTree = "<group>"; };
-		1FF7940B1B22DD05000CB14D /* Walkway Black.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Walkway Black.ttf"; sourceTree = "<group>"; };
-		1FF7940D1B22DD69000CB14D /* College.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = College.ttf; sourceTree = "<group>"; };
-		4F55B5531AE46E4900679048 /* SJCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SJCollectionViewCell.xib; sourceTree = "<group>"; };
-		4F55B55C1AE480F400679048 /* SJLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SJLayout.swift; sourceTree = "<group>"; };
-		4F8D389D1AE440DE00F42E23 /* Silky Socks.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Silky Socks.app"; sourceTree = BUILT_PRODUCTS_DIR; };
-		4F8D38A11AE440DE00F42E23 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		4F8D38A21AE440DE00F42E23 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		4F8D38A51AE440DE00F42E23 /* Silky_Socks.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Silky_Socks.xcdatamodel; sourceTree = "<group>"; };
-		4F8D38AA1AE440DE00F42E23 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		4F8D38AC1AE440DE00F42E23 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		4F8D38AF1AE440DE00F42E23 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
-		4F8D38B51AE440DE00F42E23 /* Silky SocksTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Silky SocksTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		4F8D38BA1AE440DE00F42E23 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		4F8D38BB1AE440DE00F42E23 /* Silky_SocksTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Silky_SocksTests.swift; sourceTree = "<group>"; };
-		4F8D38C51AE441F700F42E23 /* SJCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SJCollectionViewCell.swift; sourceTree = "<group>"; };
-		4F8D38C91AE4451000F42E23 /* SJCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SJCollectionViewController.swift; sourceTree = "<group>"; };
-		4F8D38CB1AE4457800F42E23 /* TemplateModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TemplateModel.swift; sourceTree = "<group>"; };
-		4FB6C9C01AE4AF70001A6E50 /* SJBottomView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SJBottomView.swift; sourceTree = "<group>"; };
-		4FB6C9C21AE4AF7A001A6E50 /* SJBottomView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SJBottomView.xib; sourceTree = "<group>"; };
-		4FB6C9C41AE4B394001A6E50 /* Utilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
-/* End PBXFileReference section */
-
-/* Begin PBXFrameworksBuildPhase section */
-		4F8D389A1AE440DE00F42E23 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				1FECA5841B3019EB009CC8AF /* MessageUI.framework in Frameworks */,
-				1F535DEE1B242084008663DF /* Crashlytics.framework in Frameworks */,
-				1F535DED1B242084008663DF /* Fabric.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		4F8D38B21AE440DE00F42E23 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXFrameworksBuildPhase section */
-
-/* Begin PBXGroup section */
-		1F535DEF1B242164008663DF /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				1FECA5831B3019EB009CC8AF /* MessageUI.framework */,
-				1F535DEB1B242084008663DF /* Fabric.framework */,
-				1F535DEC1B242084008663DF /* Crashlytics.framework */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		1FC258A91B14901500EAEF20 /* Bottom View */ = {
-			isa = PBXGroup;
-			children = (
-				4FB6C9C01AE4AF70001A6E50 /* SJBottomView.swift */,
-				4FB6C9C21AE4AF7A001A6E50 /* SJBottomView.xib */,
-			);
-			name = "Bottom View";
-			sourceTree = "<group>";
-		};
-		1FCF508D1B070EA6005D8578 /* Data Source & Delegate */ = {
-			isa = PBXGroup;
-			children = (
-				1FCF50A01B083D70005D8578 /* SJCollectionViewDelegate.swift */,
-			);
-			name = "Data Source & Delegate";
-			sourceTree = "<group>";
-		};
-		1FCF509E1B07FF06005D8578 /* Cell */ = {
-			isa = PBXGroup;
-			children = (
-				4F8D38C51AE441F700F42E23 /* SJCollectionViewCell.swift */,
-				4F55B5531AE46E4900679048 /* SJCollectionViewCell.xib */,
-				1FF794051B21EEFD000CB14D /* SJColorFontCollectionViewCell.swift */,
-			);
-			name = Cell;
-			sourceTree = "<group>";
-		};
-		1FCF509F1B07FF0B005D8578 /* Supplementary Views */ = {
-			isa = PBXGroup;
-			children = (
-				1FC258A91B14901500EAEF20 /* Bottom View */,
-				1FCF50941B07EBAB005D8578 /* SJCollectionReusableView.swift */,
-				1FCF50981B07ECA3005D8578 /* SJCollectionRestartReusableView.xib */,
-				1FCF509A1B07ED8A005D8578 /* SJCollectionShareReusableView.xib */,
-				1F39440A1B094EA4008E73E0 /* SJCollectionAddToCartReusableView.xib */,
-				1FCF509C1B07F0C7005D8578 /* SJCollectionDecorationSilkySocksLogoReusableView.xib */,
-			);
-			name = "Supplementary Views";
-			sourceTree = "<group>";
-		};
-		1FF7940F1B22DE9D000CB14D /* Fonts */ = {
-			isa = PBXGroup;
-			children = (
-				1FF7940D1B22DD69000CB14D /* College.ttf */,
-				1FF794071B22DBBF000CB14D /* DoubleFeature.ttf */,
-				1FF794091B22DCB2000CB14D /* Maiden.ttf */,
-				1FF7940B1B22DD05000CB14D /* Walkway Black.ttf */,
-			);
-			name = Fonts;
-			sourceTree = "<group>";
-		};
-		1FFB38701B2042D3007E9390 /* Collection View */ = {
-			isa = PBXGroup;
-			children = (
-				1FCF508E1B070F4C005D8578 /* SJCollectionView.swift */,
-			);
-			name = "Collection View";
-			sourceTree = "<group>";
-		};
-		1FFB38711B204F62007E9390 /* Normal */ = {
-			isa = PBXGroup;
-			children = (
-				1F88389D1B0D875D00E3BBB6 /* SJLabel.swift */,
-				1F88389B1B0D731200E3BBB6 /* SJTextField.swift */,
-			);
-			name = Normal;
-			sourceTree = "<group>";
-		};
-		4F55B55B1AE480D900679048 /* Layout */ = {
-			isa = PBXGroup;
-			children = (
-				4F55B55C1AE480F400679048 /* SJLayout.swift */,
-			);
-			name = Layout;
-			sourceTree = "<group>";
-		};
-		4F8D38941AE440DE00F42E23 = {
-			isa = PBXGroup;
-			children = (
-				4F8D389F1AE440DE00F42E23 /* Silky Socks */,
-				4F8D38B81AE440DE00F42E23 /* Silky SocksTests */,
-				4F8D389E1AE440DE00F42E23 /* Products */,
-			);
-			sourceTree = "<group>";
-		};
-		4F8D389E1AE440DE00F42E23 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				4F8D389D1AE440DE00F42E23 /* Silky Socks.app */,
-				4F8D38B51AE440DE00F42E23 /* Silky SocksTests.xctest */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
-		4F8D389F1AE440DE00F42E23 /* Silky Socks */ = {
-			isa = PBXGroup;
-			children = (
-				1F535DEF1B242164008663DF /* Frameworks */,
-				4F8D38D01AE4461C00F42E23 /* Model */,
-				1FCF508D1B070EA6005D8578 /* Data Source & Delegate */,
-				4F8D38CF1AE4461700F42E23 /* View */,
-				4F55B55B1AE480D900679048 /* Layout */,
-				4F8D38D11AE4462D00F42E23 /* Controller */,
-				4F8D38A01AE440DE00F42E23 /* Supporting Files */,
-			);
-			path = "Silky Socks";
-			sourceTree = "<group>";
-		};
-		4F8D38A01AE440DE00F42E23 /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				1F54AD201B1602D6007E9E48 /* BridgingHeader.h */,
-				4F8D38A21AE440DE00F42E23 /* AppDelegate.swift */,
-				4F8D38A91AE440DE00F42E23 /* Main.storyboard */,
-				4F8D38AC1AE440DE00F42E23 /* Images.xcassets */,
-				4F8D38AE1AE440DE00F42E23 /* LaunchScreen.xib */,
-				4F8D38A41AE440DE00F42E23 /* Silky_Socks.xcdatamodeld */,
-				4F8D38A11AE440DE00F42E23 /* Info.plist */,
-				1FF7940F1B22DE9D000CB14D /* Fonts */,
-			);
-			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		4F8D38B81AE440DE00F42E23 /* Silky SocksTests */ = {
-			isa = PBXGroup;
-			children = (
-				4F8D38BB1AE440DE00F42E23 /* Silky_SocksTests.swift */,
-				4F8D38B91AE440DE00F42E23 /* Supporting Files */,
-			);
-			path = "Silky SocksTests";
-			sourceTree = "<group>";
-		};
-		4F8D38B91AE440DE00F42E23 /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				4F8D38BA1AE440DE00F42E23 /* Info.plist */,
-			);
-			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		4F8D38CF1AE4461700F42E23 /* View */ = {
-			isa = PBXGroup;
-			children = (
-				1FFB38711B204F62007E9390 /* Normal */,
-				1FCF509E1B07FF06005D8578 /* Cell */,
-				1FCF509F1B07FF0B005D8578 /* Supplementary Views */,
-				1FFB38701B2042D3007E9390 /* Collection View */,
-			);
-			name = View;
-			sourceTree = "<group>";
-		};
-		4F8D38D01AE4461C00F42E23 /* Model */ = {
-			isa = PBXGroup;
-			children = (
-				4FB6C9C41AE4B394001A6E50 /* Utilities.swift */,
-				4F8D38CB1AE4457800F42E23 /* TemplateModel.swift */,
-				1FC258AA1B14B60700EAEF20 /* UserCart.swift */,
-			);
-			name = Model;
-			sourceTree = "<group>";
-		};
-		4F8D38D11AE4462D00F42E23 /* Controller */ = {
-			isa = PBXGroup;
-			children = (
-				4F8D38C91AE4451000F42E23 /* SJCollectionViewController.swift */,
-				1F232D2E1B196CB200ECD753 /* SJColorCollectionViewController.swift */,
-				1FD557FE1B2086CA003BDE2A /* SJApprovalViewController.swift */,
-				1FD557FF1B2086CA003BDE2A /* SJApprovalViewController.xib */,
-				1FF543CA1B26259F007B6B19 /* TemplateInfoViewController.swift */,
-				1FF543CB1B26259F007B6B19 /* TemplateInfoViewController.xib */,
-			);
-			name = Controller;
-			sourceTree = "<group>";
-		};
-/* End PBXGroup section */
-
-/* Begin PBXNativeTarget section */
-		4F8D389C1AE440DE00F42E23 /* Silky Socks */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 4F8D38BF1AE440DE00F42E23 /* Build configuration list for PBXNativeTarget "Silky Socks" */;
-			buildPhases = (
-				4F8D38991AE440DE00F42E23 /* Sources */,
-				4F8D389A1AE440DE00F42E23 /* Frameworks */,
-				4F8D389B1AE440DE00F42E23 /* Resources */,
-				1F535DEA1B242057008663DF /* ShellScript */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = "Silky Socks";
-			productName = "Silky Socks";
-			productReference = 4F8D389D1AE440DE00F42E23 /* Silky Socks.app */;
-			productType = "com.apple.product-type.application";
-		};
-		4F8D38B41AE440DE00F42E23 /* Silky SocksTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 4F8D38C21AE440DE00F42E23 /* Build configuration list for PBXNativeTarget "Silky SocksTests" */;
-			buildPhases = (
-				4F8D38B11AE440DE00F42E23 /* Sources */,
-				4F8D38B21AE440DE00F42E23 /* Frameworks */,
-				4F8D38B31AE440DE00F42E23 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				4F8D38B71AE440DE00F42E23 /* PBXTargetDependency */,
-			);
-			name = "Silky SocksTests";
-			productName = "Silky SocksTests";
-			productReference = 4F8D38B51AE440DE00F42E23 /* Silky SocksTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
-/* End PBXNativeTarget section */
-
-/* Begin PBXProject section */
-		4F8D38951AE440DE00F42E23 /* Project object */ = {
-			isa = PBXProject;
-			attributes = {
-				LastUpgradeCheck = 0630;
-				ORGANIZATIONNAME = "Full Stak";
-				TargetAttributes = {
-					4F8D389C1AE440DE00F42E23 = {
-						CreatedOnToolsVersion = 6.3;
-						DevelopmentTeam = RK8DK924Z5;
-					};
-					4F8D38B41AE440DE00F42E23 = {
-						CreatedOnToolsVersion = 6.3;
-						DevelopmentTeam = RK8DK924Z5;
-						TestTargetID = 4F8D389C1AE440DE00F42E23;
-					};
-				};
-			};
-			buildConfigurationList = 4F8D38981AE440DE00F42E23 /* Build configuration list for PBXProject "Silky Socks" */;
-			compatibilityVersion = "Xcode 3.2";
-			developmentRegion = English;
-			hasScannedForEncodings = 0;
-			knownRegions = (
-				en,
-				Base,
-			);
-			mainGroup = 4F8D38941AE440DE00F42E23;
-			productRefGroup = 4F8D389E1AE440DE00F42E23 /* Products */;
-			projectDirPath = "";
-			projectRoot = "";
-			targets = (
-				4F8D389C1AE440DE00F42E23 /* Silky Socks */,
-				4F8D38B41AE440DE00F42E23 /* Silky SocksTests */,
-			);
-		};
-/* End PBXProject section */
-
-/* Begin PBXResourcesBuildPhase section */
-		4F8D389B1AE440DE00F42E23 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				1FF7940C1B22DD05000CB14D /* Walkway Black.ttf in Resources */,
-				4FB6C9C31AE4AF7A001A6E50 /* SJBottomView.xib in Resources */,
-				1F39440B1B094EA4008E73E0 /* SJCollectionAddToCartReusableView.xib in Resources */,
-				1FCF509B1B07ED8A005D8578 /* SJCollectionShareReusableView.xib in Resources */,
-				4F8D38AB1AE440DE00F42E23 /* Main.storyboard in Resources */,
-				1FF7940A1B22DCB2000CB14D /* Maiden.ttf in Resources */,
-				1FF794081B22DBBF000CB14D /* DoubleFeature.ttf in Resources */,
-				1FCF50991B07ECA3005D8578 /* SJCollectionRestartReusableView.xib in Resources */,
-				1FD558011B2086CA003BDE2A /* SJApprovalViewController.xib in Resources */,
-				1FCF509D1B07F0C7005D8578 /* SJCollectionDecorationSilkySocksLogoReusableView.xib in Resources */,
-				4F55B5541AE46E4900679048 /* SJCollectionViewCell.xib in Resources */,
-				4F8D38B01AE440DE00F42E23 /* LaunchScreen.xib in Resources */,
-				1FF7940E1B22DD69000CB14D /* College.ttf in Resources */,
-				1FF543CD1B26259F007B6B19 /* TemplateInfoViewController.xib in Resources */,
-				4F8D38AD1AE440DE00F42E23 /* Images.xcassets in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		4F8D38B31AE440DE00F42E23 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXResourcesBuildPhase section */
-
-/* Begin PBXShellScriptBuildPhase section */
-		1F535DEA1B242057008663DF /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "./Fabric.framework/run b3b1168b6205c64c88b1da59643b6a6d7deb7415 88d810b27f890b6a069b6a50c6fea5e8c31c1f724449146876a299e04f78dc25";
-		};
-/* End PBXShellScriptBuildPhase section */
-
-/* Begin PBXSourcesBuildPhase section */
-		4F8D38991AE440DE00F42E23 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				1FF543CC1B26259F007B6B19 /* TemplateInfoViewController.swift in Sources */,
-				4F55B55D1AE480F400679048 /* SJLayout.swift in Sources */,
-				1FCF508F1B070F4C005D8578 /* SJCollectionView.swift in Sources */,
-				1F88389E1B0D875D00E3BBB6 /* SJLabel.swift in Sources */,
-				1F88389C1B0D731200E3BBB6 /* SJTextField.swift in Sources */,
-				4F8D38CC1AE4457800F42E23 /* TemplateModel.swift in Sources */,
-				4F8D38C61AE441F700F42E23 /* SJCollectionViewCell.swift in Sources */,
-				1F232D2F1B196CB200ECD753 /* SJColorCollectionViewController.swift in Sources */,
-				1FF794061B21EEFD000CB14D /* SJColorFontCollectionViewCell.swift in Sources */,
-				4F8D38A61AE440DE00F42E23 /* Silky_Socks.xcdatamodeld in Sources */,
-				1FD558001B2086CA003BDE2A /* SJApprovalViewController.swift in Sources */,
-				1FCF50A11B083D70005D8578 /* SJCollectionViewDelegate.swift in Sources */,
-				4F8D38CA1AE4451000F42E23 /* SJCollectionViewController.swift in Sources */,
-				4FB6C9C11AE4AF70001A6E50 /* SJBottomView.swift in Sources */,
-				1FCF50951B07EBAB005D8578 /* SJCollectionReusableView.swift in Sources */,
-				4FB6C9C51AE4B394001A6E50 /* Utilities.swift in Sources */,
-				1FC258AB1B14B60700EAEF20 /* UserCart.swift in Sources */,
-				4F8D38A31AE440DE00F42E23 /* AppDelegate.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		4F8D38B11AE440DE00F42E23 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				4F8D38BC1AE440DE00F42E23 /* Silky_SocksTests.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		4F8D38B71AE440DE00F42E23 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 4F8D389C1AE440DE00F42E23 /* Silky Socks */;
-			targetProxy = 4F8D38B61AE440DE00F42E23 /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
-
-/* Begin PBXVariantGroup section */
-		4F8D38A91AE440DE00F42E23 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				4F8D38AA1AE440DE00F42E23 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-		4F8D38AE1AE440DE00F42E23 /* LaunchScreen.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				4F8D38AF1AE440DE00F42E23 /* Base */,
-			);
-			name = LaunchScreen.xib;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
-
-/* Begin XCBuildConfiguration section */
-		4F8D38BD1AE440DE00F42E23 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
-				CLANG_CXX_LIBRARY = "libc++";
-				CLANG_ENABLE_MODULES = YES;
-				CLANG_ENABLE_OBJC_ARC = YES;
-				CLANG_WARN_BOOL_CONVERSION = YES;
-				CLANG_WARN_CONSTANT_CONVERSION = YES;
-				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
-				CLANG_WARN_EMPTY_BODY = YES;
-				CLANG_WARN_ENUM_CONVERSION = YES;
-				CLANG_WARN_INT_CONVERSION = YES;
-				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
-				CLANG_WARN_UNREACHABLE_CODE = YES;
-				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				COPY_PHASE_STRIP = NO;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_C_LANGUAGE_STANDARD = gnu99;
-				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_NO_COMMON_BLOCKS = YES;
-				GCC_OPTIMIZATION_LEVEL = 0;
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
-				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
-				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
-				GCC_WARN_UNDECLARED_SELECTOR = YES;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
-				GCC_WARN_UNUSED_FUNCTION = YES;
-				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
-				MTL_ENABLE_DEBUG_INFO = YES;
-				ONLY_ACTIVE_ARCH = YES;
-				SDKROOT = iphoneos;
-				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Debug;
-		};
-		4F8D38BE1AE440DE00F42E23 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
-				CLANG_CXX_LIBRARY = "libc++";
-				CLANG_ENABLE_MODULES = YES;
-				CLANG_ENABLE_OBJC_ARC = YES;
-				CLANG_WARN_BOOL_CONVERSION = YES;
-				CLANG_WARN_CONSTANT_CONVERSION = YES;
-				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
-				CLANG_WARN_EMPTY_BODY = YES;
-				CLANG_WARN_ENUM_CONVERSION = YES;
-				CLANG_WARN_INT_CONVERSION = YES;
-				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
-				CLANG_WARN_UNREACHABLE_CODE = YES;
-				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				COPY_PHASE_STRIP = NO;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				ENABLE_NS_ASSERTIONS = NO;
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_C_LANGUAGE_STANDARD = gnu99;
-				GCC_NO_COMMON_BLOCKS = YES;
-				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
-				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
-				GCC_WARN_UNDECLARED_SELECTOR = YES;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
-				GCC_WARN_UNUSED_FUNCTION = YES;
-				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
-				MTL_ENABLE_DEBUG_INFO = NO;
-				SDKROOT = iphoneos;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VALIDATE_PRODUCT = YES;
-			};
-			name = Release;
-		};
-		4F8D38C01AE440DE00F42E23 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CLANG_WARN_CXX0X_EXTENSIONS = YES;
-				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
-				CLANG_WARN_OBJC_RECEIVER_WEAK = YES;
-				CLANG_WARN_OBJC_REPEATED_USE_OF_WEAK = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Saurabh Jain (4RMTDD3346)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Saurabh Jain (4RMTDD3346)";
-				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)";
-				GCC_TREAT_INCOMPATIBLE_POINTER_TYPE_WARNINGS_AS_ERRORS = YES;
-				GCC_WARN_NON_VIRTUAL_DESTRUCTOR = YES;
-				INFOPLIST_FILE = "Silky Socks/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "b45a4b4e-845f-4597-8729-3d32ca853ec9";
-				SWIFT_OBJC_BRIDGING_HEADER = "$(PROJECT_DIR)/Silky Socks/BridgingHeader.h";
-				TARGETED_DEVICE_FAMILY = 1;
-				WARNING_CFLAGS = "-Wundeclared-selector";
-			};
-			name = Debug;
-		};
-		4F8D38C11AE440DE00F42E23 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CLANG_WARN_CXX0X_EXTENSIONS = YES;
-				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
-				CLANG_WARN_OBJC_RECEIVER_WEAK = YES;
-				CLANG_WARN_OBJC_REPEATED_USE_OF_WEAK = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Saurabh Jain (4RMTDD3346)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Saurabh Jain (4RMTDD3346)";
-				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)";
-				GCC_TREAT_INCOMPATIBLE_POINTER_TYPE_WARNINGS_AS_ERRORS = YES;
-				GCC_WARN_NON_VIRTUAL_DESTRUCTOR = YES;
-				INFOPLIST_FILE = "Silky Socks/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "b45a4b4e-845f-4597-8729-3d32ca853ec9";
-				SWIFT_OBJC_BRIDGING_HEADER = "$(PROJECT_DIR)/Silky Socks/BridgingHeader.h";
-				TARGETED_DEVICE_FAMILY = 1;
-				WARNING_CFLAGS = "-Wundeclared-selector";
-			};
-			name = Release;
-		};
-		4F8D38C31AE440DE00F42E23 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-				);
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = "Silky SocksTests/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Silky Socks.app/Silky Socks";
-			};
-			name = Debug;
-		};
-		4F8D38C41AE440DE00F42E23 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = "Silky SocksTests/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Silky Socks.app/Silky Socks";
-			};
-			name = Release;
-		};
-/* End XCBuildConfiguration section */
-
-/* Begin XCConfigurationList section */
-		4F8D38981AE440DE00F42E23 /* Build configuration list for PBXProject "Silky Socks" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				4F8D38BD1AE440DE00F42E23 /* Debug */,
-				4F8D38BE1AE440DE00F42E23 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		4F8D38BF1AE440DE00F42E23 /* Build configuration list for PBXNativeTarget "Silky Socks" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				4F8D38C01AE440DE00F42E23 /* Debug */,
-				4F8D38C11AE440DE00F42E23 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		4F8D38C21AE440DE00F42E23 /* Build configuration list for PBXNativeTarget "Silky SocksTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				4F8D38C31AE440DE00F42E23 /* Debug */,
-				4F8D38C41AE440DE00F42E23 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-/* End XCConfigurationList section */
-
-/* Begin XCVersionGroup section */
-		4F8D38A41AE440DE00F42E23 /* Silky_Socks.xcdatamodeld */ = {
-			isa = XCVersionGroup;
-			children = (
-				4F8D38A51AE440DE00F42E23 /* Silky_Socks.xcdatamodel */,
-			);
-			currentVersion = 4F8D38A51AE440DE00F42E23 /* Silky_Socks.xcdatamodel */;
-			path = Silky_Socks.xcdatamodeld;
-			sourceTree = "<group>";
-			versionGroupType = wrapper.xcdatamodel;
-		};
-/* End XCVersionGroup section */
-	};
-	rootObject = 4F8D38951AE440DE00F42E23 /* Project object */;
-}
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>archiveVersion</key>
+	<string>1</string>
+	<key>classes</key>
+	<dict/>
+	<key>objectVersion</key>
+	<string>46</string>
+	<key>objects</key>
+	<dict>
+		<key>03D0DB065B417786232B937D</key>
+		<dict>
+			<key>buildActionMask</key>
+			<string>2147483647</string>
+			<key>files</key>
+			<array/>
+			<key>inputPaths</key>
+			<array/>
+			<key>isa</key>
+			<string>PBXShellScriptBuildPhase</string>
+			<key>name</key>
+			<string>Check Pods Manifest.lock</string>
+			<key>outputPaths</key>
+			<array/>
+			<key>runOnlyForDeploymentPostprocessing</key>
+			<string>0</string>
+			<key>shellPath</key>
+			<string>/bin/sh</string>
+			<key>shellScript</key>
+			<string>diff "${PODS_ROOT}/../Podfile.lock" "${PODS_ROOT}/Manifest.lock" &gt; /dev/null
+if [[ $? != 0 ]] ; then
+    cat &lt;&lt; EOM
+error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.
+EOM
+    exit 1
+fi
+</string>
+			<key>showEnvVarsInLog</key>
+			<string>0</string>
+		</dict>
+		<key>1F232D2E1B196CB200ECD753</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.swift</string>
+			<key>path</key>
+			<string>SJColorCollectionViewController.swift</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>1F232D2F1B196CB200ECD753</key>
+		<dict>
+			<key>fileRef</key>
+			<string>1F232D2E1B196CB200ECD753</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>1F39440A1B094EA4008E73E0</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>file.xib</string>
+			<key>path</key>
+			<string>SJCollectionAddToCartReusableView.xib</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>1F39440B1B094EA4008E73E0</key>
+		<dict>
+			<key>fileRef</key>
+			<string>1F39440A1B094EA4008E73E0</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>1F535DEA1B242057008663DF</key>
+		<dict>
+			<key>buildActionMask</key>
+			<string>2147483647</string>
+			<key>files</key>
+			<array/>
+			<key>inputPaths</key>
+			<array/>
+			<key>isa</key>
+			<string>PBXShellScriptBuildPhase</string>
+			<key>outputPaths</key>
+			<array/>
+			<key>runOnlyForDeploymentPostprocessing</key>
+			<string>0</string>
+			<key>shellPath</key>
+			<string>/bin/sh</string>
+			<key>shellScript</key>
+			<string>./Fabric.framework/run b3b1168b6205c64c88b1da59643b6a6d7deb7415 88d810b27f890b6a069b6a50c6fea5e8c31c1f724449146876a299e04f78dc25</string>
+		</dict>
+		<key>1F535DEB1B242084008663DF</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>wrapper.framework</string>
+			<key>path</key>
+			<string>Fabric.framework</string>
+			<key>sourceTree</key>
+			<string>SOURCE_ROOT</string>
+		</dict>
+		<key>1F535DEC1B242084008663DF</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>wrapper.framework</string>
+			<key>path</key>
+			<string>Crashlytics.framework</string>
+			<key>sourceTree</key>
+			<string>SOURCE_ROOT</string>
+		</dict>
+		<key>1F535DED1B242084008663DF</key>
+		<dict>
+			<key>fileRef</key>
+			<string>1F535DEB1B242084008663DF</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>1F535DEE1B242084008663DF</key>
+		<dict>
+			<key>fileRef</key>
+			<string>1F535DEC1B242084008663DF</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>1F535DEF1B242164008663DF</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>1FECA5831B3019EB009CC8AF</string>
+				<string>1F535DEB1B242084008663DF</string>
+				<string>1F535DEC1B242084008663DF</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>name</key>
+			<string>Frameworks</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>1F54AD201B1602D6007E9E48</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>path</key>
+			<string>BridgingHeader.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>1F88389B1B0D731200E3BBB6</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.swift</string>
+			<key>path</key>
+			<string>SJTextField.swift</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>1F88389C1B0D731200E3BBB6</key>
+		<dict>
+			<key>fileRef</key>
+			<string>1F88389B1B0D731200E3BBB6</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>1F88389D1B0D875D00E3BBB6</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.swift</string>
+			<key>path</key>
+			<string>SJLabel.swift</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>1F88389E1B0D875D00E3BBB6</key>
+		<dict>
+			<key>fileRef</key>
+			<string>1F88389D1B0D875D00E3BBB6</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>1FC258A91B14901500EAEF20</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>4FB6C9C01AE4AF70001A6E50</string>
+				<string>4FB6C9C21AE4AF7A001A6E50</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>name</key>
+			<string>Bottom View</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>1FC258AA1B14B60700EAEF20</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.swift</string>
+			<key>path</key>
+			<string>UserCart.swift</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>1FC258AB1B14B60700EAEF20</key>
+		<dict>
+			<key>fileRef</key>
+			<string>1FC258AA1B14B60700EAEF20</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>1FCF508D1B070EA6005D8578</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>1FCF50A01B083D70005D8578</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>name</key>
+			<string>Data Source &amp; Delegate</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>1FCF508E1B070F4C005D8578</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.swift</string>
+			<key>path</key>
+			<string>SJCollectionView.swift</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>1FCF508F1B070F4C005D8578</key>
+		<dict>
+			<key>fileRef</key>
+			<string>1FCF508E1B070F4C005D8578</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>1FCF50941B07EBAB005D8578</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.swift</string>
+			<key>path</key>
+			<string>SJCollectionReusableView.swift</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>1FCF50951B07EBAB005D8578</key>
+		<dict>
+			<key>fileRef</key>
+			<string>1FCF50941B07EBAB005D8578</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>1FCF50981B07ECA3005D8578</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>file.xib</string>
+			<key>path</key>
+			<string>SJCollectionRestartReusableView.xib</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>1FCF50991B07ECA3005D8578</key>
+		<dict>
+			<key>fileRef</key>
+			<string>1FCF50981B07ECA3005D8578</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>1FCF509A1B07ED8A005D8578</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>file.xib</string>
+			<key>path</key>
+			<string>SJCollectionShareReusableView.xib</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>1FCF509B1B07ED8A005D8578</key>
+		<dict>
+			<key>fileRef</key>
+			<string>1FCF509A1B07ED8A005D8578</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>1FCF509C1B07F0C7005D8578</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>file.xib</string>
+			<key>path</key>
+			<string>SJCollectionDecorationSilkySocksLogoReusableView.xib</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>1FCF509D1B07F0C7005D8578</key>
+		<dict>
+			<key>fileRef</key>
+			<string>1FCF509C1B07F0C7005D8578</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>1FCF509E1B07FF06005D8578</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>4F8D38C51AE441F700F42E23</string>
+				<string>4F55B5531AE46E4900679048</string>
+				<string>1FF794051B21EEFD000CB14D</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>name</key>
+			<string>Cell</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>1FCF509F1B07FF0B005D8578</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>1FC258A91B14901500EAEF20</string>
+				<string>1FCF50941B07EBAB005D8578</string>
+				<string>1FCF50981B07ECA3005D8578</string>
+				<string>1FCF509A1B07ED8A005D8578</string>
+				<string>1F39440A1B094EA4008E73E0</string>
+				<string>1FCF509C1B07F0C7005D8578</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>name</key>
+			<string>Supplementary Views</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>1FCF50A01B083D70005D8578</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.swift</string>
+			<key>path</key>
+			<string>SJCollectionViewDelegate.swift</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>1FCF50A11B083D70005D8578</key>
+		<dict>
+			<key>fileRef</key>
+			<string>1FCF50A01B083D70005D8578</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>1FD557FE1B2086CA003BDE2A</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.swift</string>
+			<key>path</key>
+			<string>SJApprovalViewController.swift</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>1FD557FF1B2086CA003BDE2A</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>file.xib</string>
+			<key>path</key>
+			<string>SJApprovalViewController.xib</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>1FD558001B2086CA003BDE2A</key>
+		<dict>
+			<key>fileRef</key>
+			<string>1FD557FE1B2086CA003BDE2A</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>1FD558011B2086CA003BDE2A</key>
+		<dict>
+			<key>fileRef</key>
+			<string>1FD557FF1B2086CA003BDE2A</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>1FECA5831B3019EB009CC8AF</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>wrapper.framework</string>
+			<key>name</key>
+			<string>MessageUI.framework</string>
+			<key>path</key>
+			<string>System/Library/Frameworks/MessageUI.framework</string>
+			<key>sourceTree</key>
+			<string>SDKROOT</string>
+		</dict>
+		<key>1FECA5841B3019EB009CC8AF</key>
+		<dict>
+			<key>fileRef</key>
+			<string>1FECA5831B3019EB009CC8AF</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>1FF543CA1B26259F007B6B19</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.swift</string>
+			<key>path</key>
+			<string>TemplateInfoViewController.swift</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>1FF543CB1B26259F007B6B19</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>file.xib</string>
+			<key>path</key>
+			<string>TemplateInfoViewController.xib</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>1FF543CC1B26259F007B6B19</key>
+		<dict>
+			<key>fileRef</key>
+			<string>1FF543CA1B26259F007B6B19</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>1FF543CD1B26259F007B6B19</key>
+		<dict>
+			<key>fileRef</key>
+			<string>1FF543CB1B26259F007B6B19</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>1FF794051B21EEFD000CB14D</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.swift</string>
+			<key>path</key>
+			<string>SJColorFontCollectionViewCell.swift</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>1FF794061B21EEFD000CB14D</key>
+		<dict>
+			<key>fileRef</key>
+			<string>1FF794051B21EEFD000CB14D</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>1FF794071B22DBBF000CB14D</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>file</string>
+			<key>path</key>
+			<string>DoubleFeature.ttf</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>1FF794081B22DBBF000CB14D</key>
+		<dict>
+			<key>fileRef</key>
+			<string>1FF794071B22DBBF000CB14D</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>1FF794091B22DCB2000CB14D</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>file</string>
+			<key>path</key>
+			<string>Maiden.ttf</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>1FF7940A1B22DCB2000CB14D</key>
+		<dict>
+			<key>fileRef</key>
+			<string>1FF794091B22DCB2000CB14D</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>1FF7940B1B22DD05000CB14D</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>file</string>
+			<key>path</key>
+			<string>Walkway Black.ttf</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>1FF7940C1B22DD05000CB14D</key>
+		<dict>
+			<key>fileRef</key>
+			<string>1FF7940B1B22DD05000CB14D</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>1FF7940D1B22DD69000CB14D</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>file</string>
+			<key>path</key>
+			<string>College.ttf</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>1FF7940E1B22DD69000CB14D</key>
+		<dict>
+			<key>fileRef</key>
+			<string>1FF7940D1B22DD69000CB14D</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>1FF7940F1B22DE9D000CB14D</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>1FF7940D1B22DD69000CB14D</string>
+				<string>1FF794071B22DBBF000CB14D</string>
+				<string>1FF794091B22DCB2000CB14D</string>
+				<string>1FF7940B1B22DD05000CB14D</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>name</key>
+			<string>Fonts</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>1FFB38701B2042D3007E9390</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>1FCF508E1B070F4C005D8578</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>name</key>
+			<string>Collection View</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>1FFB38711B204F62007E9390</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>1F88389D1B0D875D00E3BBB6</string>
+				<string>1F88389B1B0D731200E3BBB6</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>name</key>
+			<string>Normal</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>20F629CA8399A212F90F7A37</key>
+		<dict>
+			<key>buildActionMask</key>
+			<string>2147483647</string>
+			<key>files</key>
+			<array/>
+			<key>inputPaths</key>
+			<array/>
+			<key>isa</key>
+			<string>PBXShellScriptBuildPhase</string>
+			<key>name</key>
+			<string>Copy Pods Resources</string>
+			<key>outputPaths</key>
+			<array/>
+			<key>runOnlyForDeploymentPostprocessing</key>
+			<string>0</string>
+			<key>shellPath</key>
+			<string>/bin/sh</string>
+			<key>shellScript</key>
+			<string>"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh"
+</string>
+			<key>showEnvVarsInLog</key>
+			<string>0</string>
+		</dict>
+		<key>4F55B5531AE46E4900679048</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>file.xib</string>
+			<key>path</key>
+			<string>SJCollectionViewCell.xib</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>4F55B5541AE46E4900679048</key>
+		<dict>
+			<key>fileRef</key>
+			<string>4F55B5531AE46E4900679048</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>4F55B55B1AE480D900679048</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>4F55B55C1AE480F400679048</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>name</key>
+			<string>Layout</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>4F55B55C1AE480F400679048</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.swift</string>
+			<key>path</key>
+			<string>SJLayout.swift</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>4F55B55D1AE480F400679048</key>
+		<dict>
+			<key>fileRef</key>
+			<string>4F55B55C1AE480F400679048</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>4F8D38941AE440DE00F42E23</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>4F8D389F1AE440DE00F42E23</string>
+				<string>4F8D38B81AE440DE00F42E23</string>
+				<string>4F8D389E1AE440DE00F42E23</string>
+				<string>F200BE60744ED0B90EE8F191</string>
+				<string>B1D24AED7E9578EEC501D2B4</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>4F8D38951AE440DE00F42E23</key>
+		<dict>
+			<key>attributes</key>
+			<dict>
+				<key>LastUpgradeCheck</key>
+				<string>0630</string>
+				<key>ORGANIZATIONNAME</key>
+				<string>Full Stak</string>
+				<key>TargetAttributes</key>
+				<dict>
+					<key>4F8D389C1AE440DE00F42E23</key>
+					<dict>
+						<key>CreatedOnToolsVersion</key>
+						<string>6.3</string>
+						<key>DevelopmentTeam</key>
+						<string>RK8DK924Z5</string>
+					</dict>
+					<key>4F8D38B41AE440DE00F42E23</key>
+					<dict>
+						<key>CreatedOnToolsVersion</key>
+						<string>6.3</string>
+						<key>DevelopmentTeam</key>
+						<string>RK8DK924Z5</string>
+						<key>TestTargetID</key>
+						<string>4F8D389C1AE440DE00F42E23</string>
+					</dict>
+				</dict>
+			</dict>
+			<key>buildConfigurationList</key>
+			<string>4F8D38981AE440DE00F42E23</string>
+			<key>compatibilityVersion</key>
+			<string>Xcode 3.2</string>
+			<key>developmentRegion</key>
+			<string>English</string>
+			<key>hasScannedForEncodings</key>
+			<string>0</string>
+			<key>isa</key>
+			<string>PBXProject</string>
+			<key>knownRegions</key>
+			<array>
+				<string>en</string>
+				<string>Base</string>
+			</array>
+			<key>mainGroup</key>
+			<string>4F8D38941AE440DE00F42E23</string>
+			<key>productRefGroup</key>
+			<string>4F8D389E1AE440DE00F42E23</string>
+			<key>projectDirPath</key>
+			<string></string>
+			<key>projectReferences</key>
+			<array/>
+			<key>projectRoot</key>
+			<string></string>
+			<key>targets</key>
+			<array>
+				<string>4F8D389C1AE440DE00F42E23</string>
+				<string>4F8D38B41AE440DE00F42E23</string>
+			</array>
+		</dict>
+		<key>4F8D38981AE440DE00F42E23</key>
+		<dict>
+			<key>buildConfigurations</key>
+			<array>
+				<string>4F8D38BD1AE440DE00F42E23</string>
+				<string>4F8D38BE1AE440DE00F42E23</string>
+			</array>
+			<key>defaultConfigurationIsVisible</key>
+			<string>0</string>
+			<key>defaultConfigurationName</key>
+			<string>Release</string>
+			<key>isa</key>
+			<string>XCConfigurationList</string>
+		</dict>
+		<key>4F8D38991AE440DE00F42E23</key>
+		<dict>
+			<key>buildActionMask</key>
+			<string>2147483647</string>
+			<key>files</key>
+			<array>
+				<string>1FF543CC1B26259F007B6B19</string>
+				<string>4F55B55D1AE480F400679048</string>
+				<string>1FCF508F1B070F4C005D8578</string>
+				<string>1F88389E1B0D875D00E3BBB6</string>
+				<string>1F88389C1B0D731200E3BBB6</string>
+				<string>4F8D38CC1AE4457800F42E23</string>
+				<string>4F8D38C61AE441F700F42E23</string>
+				<string>1F232D2F1B196CB200ECD753</string>
+				<string>1FF794061B21EEFD000CB14D</string>
+				<string>4F8D38A61AE440DE00F42E23</string>
+				<string>1FD558001B2086CA003BDE2A</string>
+				<string>1FCF50A11B083D70005D8578</string>
+				<string>4F8D38CA1AE4451000F42E23</string>
+				<string>4FB6C9C11AE4AF70001A6E50</string>
+				<string>1FCF50951B07EBAB005D8578</string>
+				<string>4FB6C9C51AE4B394001A6E50</string>
+				<string>1FC258AB1B14B60700EAEF20</string>
+				<string>4F8D38A31AE440DE00F42E23</string>
+			</array>
+			<key>isa</key>
+			<string>PBXSourcesBuildPhase</string>
+			<key>runOnlyForDeploymentPostprocessing</key>
+			<string>0</string>
+		</dict>
+		<key>4F8D389A1AE440DE00F42E23</key>
+		<dict>
+			<key>buildActionMask</key>
+			<string>2147483647</string>
+			<key>files</key>
+			<array>
+				<string>1FECA5841B3019EB009CC8AF</string>
+				<string>1F535DEE1B242084008663DF</string>
+				<string>1F535DED1B242084008663DF</string>
+				<string>DCE5E79073B5F6D74B71392E</string>
+			</array>
+			<key>isa</key>
+			<string>PBXFrameworksBuildPhase</string>
+			<key>runOnlyForDeploymentPostprocessing</key>
+			<string>0</string>
+		</dict>
+		<key>4F8D389B1AE440DE00F42E23</key>
+		<dict>
+			<key>buildActionMask</key>
+			<string>2147483647</string>
+			<key>files</key>
+			<array>
+				<string>1FF7940C1B22DD05000CB14D</string>
+				<string>4FB6C9C31AE4AF7A001A6E50</string>
+				<string>1F39440B1B094EA4008E73E0</string>
+				<string>1FCF509B1B07ED8A005D8578</string>
+				<string>4F8D38AB1AE440DE00F42E23</string>
+				<string>1FF7940A1B22DCB2000CB14D</string>
+				<string>1FF794081B22DBBF000CB14D</string>
+				<string>1FCF50991B07ECA3005D8578</string>
+				<string>1FD558011B2086CA003BDE2A</string>
+				<string>1FCF509D1B07F0C7005D8578</string>
+				<string>4F55B5541AE46E4900679048</string>
+				<string>4F8D38B01AE440DE00F42E23</string>
+				<string>1FF7940E1B22DD69000CB14D</string>
+				<string>1FF543CD1B26259F007B6B19</string>
+				<string>4F8D38AD1AE440DE00F42E23</string>
+			</array>
+			<key>isa</key>
+			<string>PBXResourcesBuildPhase</string>
+			<key>runOnlyForDeploymentPostprocessing</key>
+			<string>0</string>
+		</dict>
+		<key>4F8D389C1AE440DE00F42E23</key>
+		<dict>
+			<key>buildConfigurationList</key>
+			<string>4F8D38BF1AE440DE00F42E23</string>
+			<key>buildPhases</key>
+			<array>
+				<string>03D0DB065B417786232B937D</string>
+				<string>4F8D38991AE440DE00F42E23</string>
+				<string>4F8D389A1AE440DE00F42E23</string>
+				<string>4F8D389B1AE440DE00F42E23</string>
+				<string>1F535DEA1B242057008663DF</string>
+				<string>20F629CA8399A212F90F7A37</string>
+			</array>
+			<key>buildRules</key>
+			<array/>
+			<key>dependencies</key>
+			<array/>
+			<key>isa</key>
+			<string>PBXNativeTarget</string>
+			<key>name</key>
+			<string>Silky Socks</string>
+			<key>productName</key>
+			<string>Silky Socks</string>
+			<key>productReference</key>
+			<string>4F8D389D1AE440DE00F42E23</string>
+			<key>productType</key>
+			<string>com.apple.product-type.application</string>
+		</dict>
+		<key>4F8D389D1AE440DE00F42E23</key>
+		<dict>
+			<key>explicitFileType</key>
+			<string>wrapper.application</string>
+			<key>includeInIndex</key>
+			<string>0</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>path</key>
+			<string>Silky Socks.app</string>
+			<key>sourceTree</key>
+			<string>BUILT_PRODUCTS_DIR</string>
+		</dict>
+		<key>4F8D389E1AE440DE00F42E23</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>4F8D389D1AE440DE00F42E23</string>
+				<string>4F8D38B51AE440DE00F42E23</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>name</key>
+			<string>Products</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>4F8D389F1AE440DE00F42E23</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>1F535DEF1B242164008663DF</string>
+				<string>4F8D38D01AE4461C00F42E23</string>
+				<string>1FCF508D1B070EA6005D8578</string>
+				<string>4F8D38CF1AE4461700F42E23</string>
+				<string>4F55B55B1AE480D900679048</string>
+				<string>4F8D38D11AE4462D00F42E23</string>
+				<string>4F8D38A01AE440DE00F42E23</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>path</key>
+			<string>Silky Socks</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>4F8D38A01AE440DE00F42E23</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>1F54AD201B1602D6007E9E48</string>
+				<string>4F8D38A21AE440DE00F42E23</string>
+				<string>4F8D38A91AE440DE00F42E23</string>
+				<string>4F8D38AC1AE440DE00F42E23</string>
+				<string>4F8D38AE1AE440DE00F42E23</string>
+				<string>4F8D38A41AE440DE00F42E23</string>
+				<string>4F8D38A11AE440DE00F42E23</string>
+				<string>1FF7940F1B22DE9D000CB14D</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>name</key>
+			<string>Supporting Files</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>4F8D38A11AE440DE00F42E23</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>text.plist.xml</string>
+			<key>path</key>
+			<string>Info.plist</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>4F8D38A21AE440DE00F42E23</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.swift</string>
+			<key>path</key>
+			<string>AppDelegate.swift</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>4F8D38A31AE440DE00F42E23</key>
+		<dict>
+			<key>fileRef</key>
+			<string>4F8D38A21AE440DE00F42E23</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>4F8D38A41AE440DE00F42E23</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>4F8D38A51AE440DE00F42E23</string>
+			</array>
+			<key>currentVersion</key>
+			<string>4F8D38A51AE440DE00F42E23</string>
+			<key>isa</key>
+			<string>XCVersionGroup</string>
+			<key>path</key>
+			<string>Silky_Socks.xcdatamodeld</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+			<key>versionGroupType</key>
+			<string>wrapper.xcdatamodel</string>
+		</dict>
+		<key>4F8D38A51AE440DE00F42E23</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>wrapper.xcdatamodel</string>
+			<key>path</key>
+			<string>Silky_Socks.xcdatamodel</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>4F8D38A61AE440DE00F42E23</key>
+		<dict>
+			<key>fileRef</key>
+			<string>4F8D38A41AE440DE00F42E23</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>4F8D38A91AE440DE00F42E23</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>4F8D38AA1AE440DE00F42E23</string>
+			</array>
+			<key>isa</key>
+			<string>PBXVariantGroup</string>
+			<key>name</key>
+			<string>Main.storyboard</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>4F8D38AA1AE440DE00F42E23</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>file.storyboard</string>
+			<key>name</key>
+			<string>Base</string>
+			<key>path</key>
+			<string>Base.lproj/Main.storyboard</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>4F8D38AB1AE440DE00F42E23</key>
+		<dict>
+			<key>fileRef</key>
+			<string>4F8D38A91AE440DE00F42E23</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>4F8D38AC1AE440DE00F42E23</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>folder.assetcatalog</string>
+			<key>path</key>
+			<string>Images.xcassets</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>4F8D38AD1AE440DE00F42E23</key>
+		<dict>
+			<key>fileRef</key>
+			<string>4F8D38AC1AE440DE00F42E23</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>4F8D38AE1AE440DE00F42E23</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>4F8D38AF1AE440DE00F42E23</string>
+			</array>
+			<key>isa</key>
+			<string>PBXVariantGroup</string>
+			<key>name</key>
+			<string>LaunchScreen.xib</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>4F8D38AF1AE440DE00F42E23</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>file.xib</string>
+			<key>name</key>
+			<string>Base</string>
+			<key>path</key>
+			<string>Base.lproj/LaunchScreen.xib</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>4F8D38B01AE440DE00F42E23</key>
+		<dict>
+			<key>fileRef</key>
+			<string>4F8D38AE1AE440DE00F42E23</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>4F8D38B11AE440DE00F42E23</key>
+		<dict>
+			<key>buildActionMask</key>
+			<string>2147483647</string>
+			<key>files</key>
+			<array>
+				<string>4F8D38BC1AE440DE00F42E23</string>
+			</array>
+			<key>isa</key>
+			<string>PBXSourcesBuildPhase</string>
+			<key>runOnlyForDeploymentPostprocessing</key>
+			<string>0</string>
+		</dict>
+		<key>4F8D38B21AE440DE00F42E23</key>
+		<dict>
+			<key>buildActionMask</key>
+			<string>2147483647</string>
+			<key>files</key>
+			<array/>
+			<key>isa</key>
+			<string>PBXFrameworksBuildPhase</string>
+			<key>runOnlyForDeploymentPostprocessing</key>
+			<string>0</string>
+		</dict>
+		<key>4F8D38B31AE440DE00F42E23</key>
+		<dict>
+			<key>buildActionMask</key>
+			<string>2147483647</string>
+			<key>files</key>
+			<array/>
+			<key>isa</key>
+			<string>PBXResourcesBuildPhase</string>
+			<key>runOnlyForDeploymentPostprocessing</key>
+			<string>0</string>
+		</dict>
+		<key>4F8D38B41AE440DE00F42E23</key>
+		<dict>
+			<key>buildConfigurationList</key>
+			<string>4F8D38C21AE440DE00F42E23</string>
+			<key>buildPhases</key>
+			<array>
+				<string>4F8D38B11AE440DE00F42E23</string>
+				<string>4F8D38B21AE440DE00F42E23</string>
+				<string>4F8D38B31AE440DE00F42E23</string>
+			</array>
+			<key>buildRules</key>
+			<array/>
+			<key>dependencies</key>
+			<array>
+				<string>4F8D38B71AE440DE00F42E23</string>
+			</array>
+			<key>isa</key>
+			<string>PBXNativeTarget</string>
+			<key>name</key>
+			<string>Silky SocksTests</string>
+			<key>productName</key>
+			<string>Silky SocksTests</string>
+			<key>productReference</key>
+			<string>4F8D38B51AE440DE00F42E23</string>
+			<key>productType</key>
+			<string>com.apple.product-type.bundle.unit-test</string>
+		</dict>
+		<key>4F8D38B51AE440DE00F42E23</key>
+		<dict>
+			<key>explicitFileType</key>
+			<string>wrapper.cfbundle</string>
+			<key>includeInIndex</key>
+			<string>0</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>path</key>
+			<string>Silky SocksTests.xctest</string>
+			<key>sourceTree</key>
+			<string>BUILT_PRODUCTS_DIR</string>
+		</dict>
+		<key>4F8D38B61AE440DE00F42E23</key>
+		<dict>
+			<key>containerPortal</key>
+			<string>4F8D38951AE440DE00F42E23</string>
+			<key>isa</key>
+			<string>PBXContainerItemProxy</string>
+			<key>proxyType</key>
+			<string>1</string>
+			<key>remoteGlobalIDString</key>
+			<string>4F8D389C1AE440DE00F42E23</string>
+			<key>remoteInfo</key>
+			<string>Silky Socks</string>
+		</dict>
+		<key>4F8D38B71AE440DE00F42E23</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXTargetDependency</string>
+			<key>target</key>
+			<string>4F8D389C1AE440DE00F42E23</string>
+			<key>targetProxy</key>
+			<string>4F8D38B61AE440DE00F42E23</string>
+		</dict>
+		<key>4F8D38B81AE440DE00F42E23</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>4F8D38BB1AE440DE00F42E23</string>
+				<string>4F8D38B91AE440DE00F42E23</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>path</key>
+			<string>Silky SocksTests</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>4F8D38B91AE440DE00F42E23</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>4F8D38BA1AE440DE00F42E23</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>name</key>
+			<string>Supporting Files</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>4F8D38BA1AE440DE00F42E23</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>text.plist.xml</string>
+			<key>path</key>
+			<string>Info.plist</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>4F8D38BB1AE440DE00F42E23</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.swift</string>
+			<key>path</key>
+			<string>Silky_SocksTests.swift</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>4F8D38BC1AE440DE00F42E23</key>
+		<dict>
+			<key>fileRef</key>
+			<string>4F8D38BB1AE440DE00F42E23</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>4F8D38BD1AE440DE00F42E23</key>
+		<dict>
+			<key>buildSettings</key>
+			<dict>
+				<key>ALWAYS_SEARCH_USER_PATHS</key>
+				<string>NO</string>
+				<key>CLANG_CXX_LANGUAGE_STANDARD</key>
+				<string>gnu++0x</string>
+				<key>CLANG_CXX_LIBRARY</key>
+				<string>libc++</string>
+				<key>CLANG_ENABLE_MODULES</key>
+				<string>YES</string>
+				<key>CLANG_ENABLE_OBJC_ARC</key>
+				<string>YES</string>
+				<key>CLANG_WARN_BOOL_CONVERSION</key>
+				<string>YES</string>
+				<key>CLANG_WARN_CONSTANT_CONVERSION</key>
+				<string>YES</string>
+				<key>CLANG_WARN_DIRECT_OBJC_ISA_USAGE</key>
+				<string>YES_ERROR</string>
+				<key>CLANG_WARN_EMPTY_BODY</key>
+				<string>YES</string>
+				<key>CLANG_WARN_ENUM_CONVERSION</key>
+				<string>YES</string>
+				<key>CLANG_WARN_INT_CONVERSION</key>
+				<string>YES</string>
+				<key>CLANG_WARN_OBJC_ROOT_CLASS</key>
+				<string>YES_ERROR</string>
+				<key>CLANG_WARN_UNREACHABLE_CODE</key>
+				<string>YES</string>
+				<key>CLANG_WARN__DUPLICATE_METHOD_MATCH</key>
+				<string>YES</string>
+				<key>CODE_SIGN_IDENTITY[sdk=iphoneos*]</key>
+				<string>iPhone Developer</string>
+				<key>COPY_PHASE_STRIP</key>
+				<string>NO</string>
+				<key>DEBUG_INFORMATION_FORMAT</key>
+				<string>dwarf-with-dsym</string>
+				<key>ENABLE_STRICT_OBJC_MSGSEND</key>
+				<string>YES</string>
+				<key>GCC_C_LANGUAGE_STANDARD</key>
+				<string>gnu99</string>
+				<key>GCC_DYNAMIC_NO_PIC</key>
+				<string>NO</string>
+				<key>GCC_NO_COMMON_BLOCKS</key>
+				<string>YES</string>
+				<key>GCC_OPTIMIZATION_LEVEL</key>
+				<string>0</string>
+				<key>GCC_PREPROCESSOR_DEFINITIONS</key>
+				<array>
+					<string>DEBUG=1</string>
+					<string>$(inherited)</string>
+				</array>
+				<key>GCC_SYMBOLS_PRIVATE_EXTERN</key>
+				<string>NO</string>
+				<key>GCC_WARN_64_TO_32_BIT_CONVERSION</key>
+				<string>YES</string>
+				<key>GCC_WARN_ABOUT_RETURN_TYPE</key>
+				<string>YES_ERROR</string>
+				<key>GCC_WARN_UNDECLARED_SELECTOR</key>
+				<string>YES</string>
+				<key>GCC_WARN_UNINITIALIZED_AUTOS</key>
+				<string>YES_AGGRESSIVE</string>
+				<key>GCC_WARN_UNUSED_FUNCTION</key>
+				<string>YES</string>
+				<key>GCC_WARN_UNUSED_VARIABLE</key>
+				<string>YES</string>
+				<key>IPHONEOS_DEPLOYMENT_TARGET</key>
+				<string>8.3</string>
+				<key>MTL_ENABLE_DEBUG_INFO</key>
+				<string>YES</string>
+				<key>ONLY_ACTIVE_ARCH</key>
+				<string>YES</string>
+				<key>SDKROOT</key>
+				<string>iphoneos</string>
+				<key>SWIFT_OPTIMIZATION_LEVEL</key>
+				<string>-Onone</string>
+				<key>TARGETED_DEVICE_FAMILY</key>
+				<string>1,2</string>
+			</dict>
+			<key>isa</key>
+			<string>XCBuildConfiguration</string>
+			<key>name</key>
+			<string>Debug</string>
+		</dict>
+		<key>4F8D38BE1AE440DE00F42E23</key>
+		<dict>
+			<key>buildSettings</key>
+			<dict>
+				<key>ALWAYS_SEARCH_USER_PATHS</key>
+				<string>NO</string>
+				<key>CLANG_CXX_LANGUAGE_STANDARD</key>
+				<string>gnu++0x</string>
+				<key>CLANG_CXX_LIBRARY</key>
+				<string>libc++</string>
+				<key>CLANG_ENABLE_MODULES</key>
+				<string>YES</string>
+				<key>CLANG_ENABLE_OBJC_ARC</key>
+				<string>YES</string>
+				<key>CLANG_WARN_BOOL_CONVERSION</key>
+				<string>YES</string>
+				<key>CLANG_WARN_CONSTANT_CONVERSION</key>
+				<string>YES</string>
+				<key>CLANG_WARN_DIRECT_OBJC_ISA_USAGE</key>
+				<string>YES_ERROR</string>
+				<key>CLANG_WARN_EMPTY_BODY</key>
+				<string>YES</string>
+				<key>CLANG_WARN_ENUM_CONVERSION</key>
+				<string>YES</string>
+				<key>CLANG_WARN_INT_CONVERSION</key>
+				<string>YES</string>
+				<key>CLANG_WARN_OBJC_ROOT_CLASS</key>
+				<string>YES_ERROR</string>
+				<key>CLANG_WARN_UNREACHABLE_CODE</key>
+				<string>YES</string>
+				<key>CLANG_WARN__DUPLICATE_METHOD_MATCH</key>
+				<string>YES</string>
+				<key>CODE_SIGN_IDENTITY[sdk=iphoneos*]</key>
+				<string>iPhone Developer</string>
+				<key>COPY_PHASE_STRIP</key>
+				<string>NO</string>
+				<key>DEBUG_INFORMATION_FORMAT</key>
+				<string>dwarf-with-dsym</string>
+				<key>ENABLE_NS_ASSERTIONS</key>
+				<string>NO</string>
+				<key>ENABLE_STRICT_OBJC_MSGSEND</key>
+				<string>YES</string>
+				<key>GCC_C_LANGUAGE_STANDARD</key>
+				<string>gnu99</string>
+				<key>GCC_NO_COMMON_BLOCKS</key>
+				<string>YES</string>
+				<key>GCC_WARN_64_TO_32_BIT_CONVERSION</key>
+				<string>YES</string>
+				<key>GCC_WARN_ABOUT_RETURN_TYPE</key>
+				<string>YES_ERROR</string>
+				<key>GCC_WARN_UNDECLARED_SELECTOR</key>
+				<string>YES</string>
+				<key>GCC_WARN_UNINITIALIZED_AUTOS</key>
+				<string>YES_AGGRESSIVE</string>
+				<key>GCC_WARN_UNUSED_FUNCTION</key>
+				<string>YES</string>
+				<key>GCC_WARN_UNUSED_VARIABLE</key>
+				<string>YES</string>
+				<key>IPHONEOS_DEPLOYMENT_TARGET</key>
+				<string>8.3</string>
+				<key>MTL_ENABLE_DEBUG_INFO</key>
+				<string>NO</string>
+				<key>SDKROOT</key>
+				<string>iphoneos</string>
+				<key>TARGETED_DEVICE_FAMILY</key>
+				<string>1,2</string>
+				<key>VALIDATE_PRODUCT</key>
+				<string>YES</string>
+			</dict>
+			<key>isa</key>
+			<string>XCBuildConfiguration</string>
+			<key>name</key>
+			<string>Release</string>
+		</dict>
+		<key>4F8D38BF1AE440DE00F42E23</key>
+		<dict>
+			<key>buildConfigurations</key>
+			<array>
+				<string>4F8D38C01AE440DE00F42E23</string>
+				<string>4F8D38C11AE440DE00F42E23</string>
+			</array>
+			<key>defaultConfigurationIsVisible</key>
+			<string>0</string>
+			<key>defaultConfigurationName</key>
+			<string>Release</string>
+			<key>isa</key>
+			<string>XCConfigurationList</string>
+		</dict>
+		<key>4F8D38C01AE440DE00F42E23</key>
+		<dict>
+			<key>baseConfigurationReference</key>
+			<string>A6BF6C0E20899D5B992A342B</string>
+			<key>buildSettings</key>
+			<dict>
+				<key>ASSETCATALOG_COMPILER_APPICON_NAME</key>
+				<string>AppIcon</string>
+				<key>CLANG_WARN_CXX0X_EXTENSIONS</key>
+				<string>YES</string>
+				<key>CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF</key>
+				<string>YES</string>
+				<key>CLANG_WARN_OBJC_RECEIVER_WEAK</key>
+				<string>YES</string>
+				<key>CLANG_WARN_OBJC_REPEATED_USE_OF_WEAK</key>
+				<string>YES</string>
+				<key>CODE_SIGN_IDENTITY</key>
+				<string>iPhone Developer: Saurabh Jain (4RMTDD3346)</string>
+				<key>CODE_SIGN_IDENTITY[sdk=iphoneos*]</key>
+				<string>iPhone Developer: Saurabh Jain (4RMTDD3346)</string>
+				<key>FRAMEWORK_SEARCH_PATHS</key>
+				<string>$(PROJECT_DIR)</string>
+				<key>GCC_TREAT_INCOMPATIBLE_POINTER_TYPE_WARNINGS_AS_ERRORS</key>
+				<string>YES</string>
+				<key>GCC_WARN_NON_VIRTUAL_DESTRUCTOR</key>
+				<string>YES</string>
+				<key>INFOPLIST_FILE</key>
+				<string>Silky Socks/Info.plist</string>
+				<key>IPHONEOS_DEPLOYMENT_TARGET</key>
+				<string>8.0</string>
+				<key>LD_RUNPATH_SEARCH_PATHS</key>
+				<string>$(inherited) @executable_path/Frameworks</string>
+				<key>PRODUCT_NAME</key>
+				<string>$(TARGET_NAME)</string>
+				<key>PROVISIONING_PROFILE</key>
+				<string>b45a4b4e-845f-4597-8729-3d32ca853ec9</string>
+				<key>SWIFT_OBJC_BRIDGING_HEADER</key>
+				<string>$(PROJECT_DIR)/Silky Socks/BridgingHeader.h</string>
+				<key>TARGETED_DEVICE_FAMILY</key>
+				<string>1</string>
+				<key>WARNING_CFLAGS</key>
+				<string>-Wundeclared-selector</string>
+			</dict>
+			<key>isa</key>
+			<string>XCBuildConfiguration</string>
+			<key>name</key>
+			<string>Debug</string>
+		</dict>
+		<key>4F8D38C11AE440DE00F42E23</key>
+		<dict>
+			<key>baseConfigurationReference</key>
+			<string>C8123369B14342C6083D9FB8</string>
+			<key>buildSettings</key>
+			<dict>
+				<key>ASSETCATALOG_COMPILER_APPICON_NAME</key>
+				<string>AppIcon</string>
+				<key>CLANG_WARN_CXX0X_EXTENSIONS</key>
+				<string>YES</string>
+				<key>CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF</key>
+				<string>YES</string>
+				<key>CLANG_WARN_OBJC_RECEIVER_WEAK</key>
+				<string>YES</string>
+				<key>CLANG_WARN_OBJC_REPEATED_USE_OF_WEAK</key>
+				<string>YES</string>
+				<key>CODE_SIGN_IDENTITY</key>
+				<string>iPhone Developer: Saurabh Jain (4RMTDD3346)</string>
+				<key>CODE_SIGN_IDENTITY[sdk=iphoneos*]</key>
+				<string>iPhone Developer: Saurabh Jain (4RMTDD3346)</string>
+				<key>FRAMEWORK_SEARCH_PATHS</key>
+				<string>$(PROJECT_DIR)</string>
+				<key>GCC_TREAT_INCOMPATIBLE_POINTER_TYPE_WARNINGS_AS_ERRORS</key>
+				<string>YES</string>
+				<key>GCC_WARN_NON_VIRTUAL_DESTRUCTOR</key>
+				<string>YES</string>
+				<key>INFOPLIST_FILE</key>
+				<string>Silky Socks/Info.plist</string>
+				<key>IPHONEOS_DEPLOYMENT_TARGET</key>
+				<string>8.0</string>
+				<key>LD_RUNPATH_SEARCH_PATHS</key>
+				<string>$(inherited) @executable_path/Frameworks</string>
+				<key>PRODUCT_NAME</key>
+				<string>$(TARGET_NAME)</string>
+				<key>PROVISIONING_PROFILE</key>
+				<string>b45a4b4e-845f-4597-8729-3d32ca853ec9</string>
+				<key>SWIFT_OBJC_BRIDGING_HEADER</key>
+				<string>$(PROJECT_DIR)/Silky Socks/BridgingHeader.h</string>
+				<key>TARGETED_DEVICE_FAMILY</key>
+				<string>1</string>
+				<key>WARNING_CFLAGS</key>
+				<string>-Wundeclared-selector</string>
+			</dict>
+			<key>isa</key>
+			<string>XCBuildConfiguration</string>
+			<key>name</key>
+			<string>Release</string>
+		</dict>
+		<key>4F8D38C21AE440DE00F42E23</key>
+		<dict>
+			<key>buildConfigurations</key>
+			<array>
+				<string>4F8D38C31AE440DE00F42E23</string>
+				<string>4F8D38C41AE440DE00F42E23</string>
+			</array>
+			<key>defaultConfigurationIsVisible</key>
+			<string>0</string>
+			<key>defaultConfigurationName</key>
+			<string>Release</string>
+			<key>isa</key>
+			<string>XCConfigurationList</string>
+		</dict>
+		<key>4F8D38C31AE440DE00F42E23</key>
+		<dict>
+			<key>buildSettings</key>
+			<dict>
+				<key>BUNDLE_LOADER</key>
+				<string>$(TEST_HOST)</string>
+				<key>CODE_SIGN_IDENTITY</key>
+				<string>iPhone Developer</string>
+				<key>CODE_SIGN_IDENTITY[sdk=iphoneos*]</key>
+				<string>iPhone Developer</string>
+				<key>FRAMEWORK_SEARCH_PATHS</key>
+				<array>
+					<string>$(SDKROOT)/Developer/Library/Frameworks</string>
+					<string>$(inherited)</string>
+				</array>
+				<key>GCC_PREPROCESSOR_DEFINITIONS</key>
+				<array>
+					<string>DEBUG=1</string>
+					<string>$(inherited)</string>
+				</array>
+				<key>INFOPLIST_FILE</key>
+				<string>Silky SocksTests/Info.plist</string>
+				<key>LD_RUNPATH_SEARCH_PATHS</key>
+				<string>$(inherited) @executable_path/Frameworks @loader_path/Frameworks</string>
+				<key>PRODUCT_NAME</key>
+				<string>$(TARGET_NAME)</string>
+				<key>PROVISIONING_PROFILE</key>
+				<string></string>
+				<key>TEST_HOST</key>
+				<string>$(BUILT_PRODUCTS_DIR)/Silky Socks.app/Silky Socks</string>
+			</dict>
+			<key>isa</key>
+			<string>XCBuildConfiguration</string>
+			<key>name</key>
+			<string>Debug</string>
+		</dict>
+		<key>4F8D38C41AE440DE00F42E23</key>
+		<dict>
+			<key>buildSettings</key>
+			<dict>
+				<key>BUNDLE_LOADER</key>
+				<string>$(TEST_HOST)</string>
+				<key>CODE_SIGN_IDENTITY</key>
+				<string>iPhone Developer</string>
+				<key>CODE_SIGN_IDENTITY[sdk=iphoneos*]</key>
+				<string>iPhone Developer</string>
+				<key>FRAMEWORK_SEARCH_PATHS</key>
+				<array>
+					<string>$(SDKROOT)/Developer/Library/Frameworks</string>
+					<string>$(inherited)</string>
+				</array>
+				<key>INFOPLIST_FILE</key>
+				<string>Silky SocksTests/Info.plist</string>
+				<key>LD_RUNPATH_SEARCH_PATHS</key>
+				<string>$(inherited) @executable_path/Frameworks @loader_path/Frameworks</string>
+				<key>PRODUCT_NAME</key>
+				<string>$(TARGET_NAME)</string>
+				<key>PROVISIONING_PROFILE</key>
+				<string></string>
+				<key>TEST_HOST</key>
+				<string>$(BUILT_PRODUCTS_DIR)/Silky Socks.app/Silky Socks</string>
+			</dict>
+			<key>isa</key>
+			<string>XCBuildConfiguration</string>
+			<key>name</key>
+			<string>Release</string>
+		</dict>
+		<key>4F8D38C51AE441F700F42E23</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.swift</string>
+			<key>path</key>
+			<string>SJCollectionViewCell.swift</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>4F8D38C61AE441F700F42E23</key>
+		<dict>
+			<key>fileRef</key>
+			<string>4F8D38C51AE441F700F42E23</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>4F8D38C91AE4451000F42E23</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.swift</string>
+			<key>path</key>
+			<string>SJCollectionViewController.swift</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>4F8D38CA1AE4451000F42E23</key>
+		<dict>
+			<key>fileRef</key>
+			<string>4F8D38C91AE4451000F42E23</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>4F8D38CB1AE4457800F42E23</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.swift</string>
+			<key>path</key>
+			<string>TemplateModel.swift</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>4F8D38CC1AE4457800F42E23</key>
+		<dict>
+			<key>fileRef</key>
+			<string>4F8D38CB1AE4457800F42E23</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>4F8D38CF1AE4461700F42E23</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>1FFB38711B204F62007E9390</string>
+				<string>1FCF509E1B07FF06005D8578</string>
+				<string>1FCF509F1B07FF0B005D8578</string>
+				<string>1FFB38701B2042D3007E9390</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>name</key>
+			<string>View</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>4F8D38D01AE4461C00F42E23</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>4FB6C9C41AE4B394001A6E50</string>
+				<string>4F8D38CB1AE4457800F42E23</string>
+				<string>1FC258AA1B14B60700EAEF20</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>name</key>
+			<string>Model</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>4F8D38D11AE4462D00F42E23</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>4F8D38C91AE4451000F42E23</string>
+				<string>1F232D2E1B196CB200ECD753</string>
+				<string>1FD557FE1B2086CA003BDE2A</string>
+				<string>1FD557FF1B2086CA003BDE2A</string>
+				<string>1FF543CA1B26259F007B6B19</string>
+				<string>1FF543CB1B26259F007B6B19</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>name</key>
+			<string>Controller</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>4FB6C9C01AE4AF70001A6E50</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.swift</string>
+			<key>path</key>
+			<string>SJBottomView.swift</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>4FB6C9C11AE4AF70001A6E50</key>
+		<dict>
+			<key>fileRef</key>
+			<string>4FB6C9C01AE4AF70001A6E50</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>4FB6C9C21AE4AF7A001A6E50</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>file.xib</string>
+			<key>path</key>
+			<string>SJBottomView.xib</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>4FB6C9C31AE4AF7A001A6E50</key>
+		<dict>
+			<key>fileRef</key>
+			<string>4FB6C9C21AE4AF7A001A6E50</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>4FB6C9C41AE4B394001A6E50</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.swift</string>
+			<key>path</key>
+			<string>Utilities.swift</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>4FB6C9C51AE4B394001A6E50</key>
+		<dict>
+			<key>fileRef</key>
+			<string>4FB6C9C41AE4B394001A6E50</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>A500CDA46CB30110A9692251</key>
+		<dict>
+			<key>explicitFileType</key>
+			<string>archive.ar</string>
+			<key>includeInIndex</key>
+			<string>0</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>path</key>
+			<string>libPods.a</string>
+			<key>sourceTree</key>
+			<string>BUILT_PRODUCTS_DIR</string>
+		</dict>
+		<key>A6BF6C0E20899D5B992A342B</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>text.xcconfig</string>
+			<key>name</key>
+			<string>Pods.debug.xcconfig</string>
+			<key>path</key>
+			<string>Pods/Target Support Files/Pods/Pods.debug.xcconfig</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>B1D24AED7E9578EEC501D2B4</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>A500CDA46CB30110A9692251</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>name</key>
+			<string>Frameworks</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>C8123369B14342C6083D9FB8</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>text.xcconfig</string>
+			<key>name</key>
+			<string>Pods.release.xcconfig</string>
+			<key>path</key>
+			<string>Pods/Target Support Files/Pods/Pods.release.xcconfig</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>DCE5E79073B5F6D74B71392E</key>
+		<dict>
+			<key>fileRef</key>
+			<string>A500CDA46CB30110A9692251</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>F200BE60744ED0B90EE8F191</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>A6BF6C0E20899D5B992A342B</string>
+				<string>C8123369B14342C6083D9FB8</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>name</key>
+			<string>Pods</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+	</dict>
+	<key>rootObject</key>
+	<string>4F8D38951AE440DE00F42E23</string>
+</dict>
+</plist>

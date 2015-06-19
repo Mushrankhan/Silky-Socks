@@ -10,5 +10,6 @@
 #define Silky_Socks_BridgingHeader_h
 
 //@import Buy;
+#import "RKNotificationHub.h"
 
 #endif
