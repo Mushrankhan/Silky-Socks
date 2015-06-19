@@ -12,6 +12,7 @@ let cartCellReuseIdentifier = "Cart Cell"
 
 class CartTableViewCell: UITableViewCell {
 
+    // Nib
     class func nib() -> UINib {
         return UINib(nibName: "CartTableViewCell", bundle: nil)
     }
@@ -21,6 +22,7 @@ class CartTableViewCell: UITableViewCell {
     @IBOutlet private weak var cartProductName: UILabel!
     @IBOutlet private weak var cartQuantity: UILabel!
     
+    // Object passed to init self
     var cartProduct: CartProduct? {
         didSet {
             cartImgView?.image = cartProduct?.productImage
@@ -29,21 +31,9 @@ class CartTableViewCell: UITableViewCell {
         }
     }
     
-    
+    // Stepper IBAction
     @IBAction func incrementQuantity(sender: UIStepper) {
         cartProduct!.quantity = Int(sender.value)
         cartQuantity?.text = "\(cartProduct!.quantity)"
     }
-    
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
-    }
-
-    override func setSelected(selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
-    }
-    
 }

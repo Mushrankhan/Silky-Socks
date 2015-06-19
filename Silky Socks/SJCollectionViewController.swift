@@ -164,11 +164,16 @@ class SJCollectionViewController: UIViewController {
         notificationHub.pop()
     }
     
+    // Storing Constants from the Storyboard
+    private struct Storyboard {
+        static let CartSegue = "cartSegue"
+    }
+    
     // Cart button Pressed SEL
     @objc private func cartButtonPressed(button: UIBarButtonItem) {
         // Do Something
         if notificationHub.count > 0 {
-            performSegueWithIdentifier("cartSegue", sender: nil)
+            performSegueWithIdentifier(Storyboard.CartSegue, sender: nil)
         }
     }
 }

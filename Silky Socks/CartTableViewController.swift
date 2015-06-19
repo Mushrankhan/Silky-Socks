@@ -33,7 +33,7 @@ class CartTableViewController: UIViewController, UITableViewDataSource, UITableV
 
     // MARK: - Table view data source
 
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int{
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return UserCart.sharedCart.numberOfItems
     }
 
