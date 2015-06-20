@@ -20,7 +20,13 @@ class CartTableViewCell: UITableViewCell {
     // IBOutlets
     @IBOutlet private weak var cartImgView: UIImageView!
     @IBOutlet private weak var cartProductName: UILabel!
-    @IBOutlet private weak var cartQuantity: UILabel!
+    @IBOutlet private weak var cartQuantity: UILabel! {
+        didSet {
+            if let product = cartProduct {
+                product.price  = Float(product.quantity) * product.basePrice
+            }
+        }
+    }
     
     // Object passed to init self
     var cartProduct: CartProduct? {
@@ -35,5 +41,10 @@ class CartTableViewCell: UITableViewCell {
     @IBAction func incrementQuantity(sender: UIStepper) {
         cartProduct!.quantity = Int(sender.value)
         cartQuantity?.text = "\(cartProduct!.quantity)"
+    }
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        selectionStyle = .None
     }
 }

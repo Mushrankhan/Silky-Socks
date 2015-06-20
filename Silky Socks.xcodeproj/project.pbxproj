@@ -14,6 +14,8 @@
 		1F58FE621B340ED6003E2507 /* CartTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F58FE611B340ED6003E2507 /* CartTableViewController.swift */; };
 		1F58FE661B340F27003E2507 /* CartTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F58FE641B340F27003E2507 /* CartTableViewCell.swift */; };
 		1F58FE671B340F27003E2507 /* CartTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1F58FE651B340F27003E2507 /* CartTableViewCell.xib */; };
+		1F58FE6C1B343DA3003E2507 /* Buy.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F58FE6B1B343DA3003E2507 /* Buy.framework */; };
+		1F58FE6D1B343DA3003E2507 /* Buy.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 1F58FE6B1B343DA3003E2507 /* Buy.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		1F88389C1B0D731200E3BBB6 /* SJTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F88389B1B0D731200E3BBB6 /* SJTextField.swift */; };
 		1F88389E1B0D875D00E3BBB6 /* SJLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F88389D1B0D875D00E3BBB6 /* SJLabel.swift */; };
 		1FC258AB1B14B60700EAEF20 /* UserCart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FC258AA1B14B60700EAEF20 /* UserCart.swift */; };
@@ -60,6 +62,20 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		1F58FE6E1B343DA3003E2507 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				1F58FE6D1B343DA3003E2507 /* Buy.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		1F232D2E1B196CB200ECD753 /* SJColorCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SJColorCollectionViewController.swift; sourceTree = "<group>"; };
 		1F39440A1B094EA4008E73E0 /* SJCollectionAddToCartReusableView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SJCollectionAddToCartReusableView.xib; sourceTree = "<group>"; };
@@ -69,6 +85,7 @@
 		1F58FE611B340ED6003E2507 /* CartTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CartTableViewController.swift; sourceTree = "<group>"; };
 		1F58FE641B340F27003E2507 /* CartTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CartTableViewCell.swift; sourceTree = "<group>"; };
 		1F58FE651B340F27003E2507 /* CartTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CartTableViewCell.xib; sourceTree = "<group>"; };
+		1F58FE6B1B343DA3003E2507 /* Buy.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Buy.framework; path = ../Buy.framework; sourceTree = "<group>"; };
 		1F88389B1B0D731200E3BBB6 /* SJTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SJTextField.swift; sourceTree = "<group>"; };
 		1F88389D1B0D875D00E3BBB6 /* SJLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SJLabel.swift; sourceTree = "<group>"; };
 		1FC258AA1B14B60700EAEF20 /* UserCart.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserCart.swift; sourceTree = "<group>"; };
@@ -119,6 +136,7 @@
 				1FECA5841B3019EB009CC8AF /* MessageUI.framework in Frameworks */,
 				1F535DEE1B242084008663DF /* Crashlytics.framework in Frameworks */,
 				1F535DED1B242084008663DF /* Fabric.framework in Frameworks */,
+				1F58FE6C1B343DA3003E2507 /* Buy.framework in Frameworks */,
 				DCE5E79073B5F6D74B71392E /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -136,6 +154,7 @@
 		1F535DEF1B242164008663DF /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				1F58FE6B1B343DA3003E2507 /* Buy.framework */,
 				1FECA5831B3019EB009CC8AF /* MessageUI.framework */,
 				1F535DEB1B242084008663DF /* Fabric.framework */,
 				1F535DEC1B242084008663DF /* Crashlytics.framework */,
@@ -360,6 +379,8 @@
 				4F8D389B1AE440DE00F42E23 /* Resources */,
 				1F535DEA1B242057008663DF /* ShellScript */,
 				20F629CA8399A212F90F7A37 /* Copy Pods Resources */,
+				1F58FE6A1B343D63003E2507 /* Run Script */,
+				1F58FE6E1B343DA3003E2507 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -488,6 +509,20 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "./Fabric.framework/run b3b1168b6205c64c88b1da59643b6a6d7deb7415 88d810b27f890b6a069b6a50c6fea5e8c31c1f724449146876a299e04f78dc25";
+		};
+		1F58FE6A1B343D63003E2507 /* Run Script */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Run Script";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "APP_PATH=\"${TARGET_BUILD_DIR}/${WRAPPER_NAME}\"\n\n# This script loops through the frameworks embedded in the application and\n# removes unused architectures.\nfind \"$APP_PATH\" -name '*.framework' -type d | while read -r FRAMEWORK\ndo\nFRAMEWORK_EXECUTABLE_NAME=$(defaults read \"$FRAMEWORK/Info.plist\" CFBundleExecutable)\nFRAMEWORK_EXECUTABLE_PATH=\"$FRAMEWORK/$FRAMEWORK_EXECUTABLE_NAME\"\necho \"Executable is $FRAMEWORK_EXECUTABLE_PATH\"\n\nEXTRACTED_ARCHS=()\n\nfor ARCH in $ARCHS\ndo\necho \"Extracting $ARCH from $FRAMEWORK_EXECUTABLE_NAME\"\nlipo -extract \"$ARCH\" \"$FRAMEWORK_EXECUTABLE_PATH\" -o \"$FRAMEWORK_EXECUTABLE_PATH-$ARCH\"\nEXTRACTED_ARCHS+=(\"$FRAMEWORK_EXECUTABLE_PATH-$ARCH\")\ndone\n\necho \"Merging extracted architectures: ${ARCHS}\"\nlipo -o \"$FRAMEWORK_EXECUTABLE_PATH-merged\" -create \"${EXTRACTED_ARCHS[@]}\"\nrm \"${EXTRACTED_ARCHS[@]}\"\n\necho \"Replacing original executable with thinned version\"\nrm \"$FRAMEWORK_EXECUTABLE_PATH\"\nmv \"$FRAMEWORK_EXECUTABLE_PATH-merged\" \"$FRAMEWORK_EXECUTABLE_PATH\"\n\ndone";
 		};
 		20F629CA8399A212F90F7A37 /* Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;

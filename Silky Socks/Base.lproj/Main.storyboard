@@ -74,26 +74,29 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="xjd-2g-5CM">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="556"/>
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="536"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </tableView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OPW-zv-g09">
-                                <rect key="frame" x="0.0" y="556" width="600" height="44"/>
+                                <rect key="frame" x="0.0" y="536" width="600" height="64"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xHj-nF-9La">
-                                        <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="600" height="64"/>
                                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="22"/>
                                         <state key="normal" title="CheckOut">
                                             <color key="titleColor" red="0.99989169836044312" green="1" blue="0.99988096952438354" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
+                                        <connections>
+                                            <action selector="didPressCheckoutButton:" destination="Cxu-xa-GSE" eventType="touchUpInside" id="8rJ-pU-cpe"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstItem="xHj-nF-9La" firstAttribute="leading" secondItem="OPW-zv-g09" secondAttribute="leading" id="4Wh-bd-cwN"/>
-                                    <constraint firstAttribute="height" constant="44" id="C2g-NT-4du"/>
+                                    <constraint firstAttribute="height" constant="64" id="C2g-NT-4du"/>
                                     <constraint firstItem="xHj-nF-9La" firstAttribute="top" secondItem="OPW-zv-g09" secondAttribute="top" id="R2b-sO-a0q"/>
                                     <constraint firstAttribute="bottom" secondItem="xHj-nF-9La" secondAttribute="bottom" id="UaK-n6-7Zi"/>
                                     <constraint firstAttribute="trailing" secondItem="xHj-nF-9La" secondAttribute="trailing" id="etg-km-yqk"/>
@@ -112,6 +115,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="checkOutButton" destination="xHj-nF-9La" id="rSP-Qj-Eh7"/>
                         <outlet property="tableView" destination="xjd-2g-5CM" id="0Oz-GS-JNi"/>
                     </connections>
                 </viewController>

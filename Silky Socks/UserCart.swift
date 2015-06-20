@@ -65,8 +65,11 @@ class UserCart: NSObject {
 */
 class CartProduct: NSObject, Printable, Equatable {
     
-    var productImage: UIImage
-    var name: String
+    private(set) var productImage: UIImage
+    private(set) var name: String
+    private(set) var basePrice: Float
+    
+    // Only Price and Quantity can be changed
     var price: Float
     var quantity: Int
     
@@ -76,6 +79,7 @@ class CartProduct: NSObject, Printable, Equatable {
         self.productImage = productImage
         self.price = price
         self.quantity = 1
+        self.basePrice = self.price
         
     }
     
