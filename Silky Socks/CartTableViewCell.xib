@@ -3,6 +3,7 @@
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
@@ -39,6 +40,12 @@
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" placeholderIntrinsicWidth="141" placeholderIntrinsicHeight="41" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3hv-5g-g7b">
+                        <rect key="frame" x="226" y="38" width="141" height="41"/>
+                        <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="17"/>
+                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
                 </subviews>
                 <constraints>
                     <constraint firstItem="Jcv-Jg-N20" firstAttribute="width" secondItem="VZX-oc-ANl" secondAttribute="width" id="54D-Zx-UR9"/>
@@ -46,19 +53,24 @@
                     <constraint firstItem="1Tw-W8-STx" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="8" id="F3G-B3-ehj"/>
                     <constraint firstItem="S8c-SD-XYj" firstAttribute="leading" secondItem="1Tw-W8-STx" secondAttribute="trailing" constant="8" id="Hwg-IS-uHL"/>
                     <constraint firstAttribute="trailing" secondItem="S8c-SD-XYj" secondAttribute="trailing" constant="8" id="Pqh-fE-nIa"/>
+                    <constraint firstItem="3hv-5g-g7b" firstAttribute="trailing" secondItem="H2p-sc-9uM" secondAttribute="trailingMargin" id="TDO-M6-V9s"/>
                     <constraint firstItem="VZX-oc-ANl" firstAttribute="leading" secondItem="1Tw-W8-STx" secondAttribute="trailing" constant="8" id="VNm-xq-PYG"/>
                     <constraint firstItem="VZX-oc-ANl" firstAttribute="top" secondItem="Jcv-Jg-N20" secondAttribute="bottom" constant="8" id="XWe-HN-nVZ"/>
+                    <constraint firstItem="3hv-5g-g7b" firstAttribute="top" secondItem="S8c-SD-XYj" secondAttribute="bottom" constant="8" id="YoC-1U-cTW"/>
                     <constraint firstItem="1Tw-W8-STx" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="Z6Q-eX-F6I"/>
                     <constraint firstAttribute="bottom" secondItem="1Tw-W8-STx" secondAttribute="bottom" constant="8" id="d63-Ib-4GH"/>
                     <constraint firstItem="Jcv-Jg-N20" firstAttribute="leading" secondItem="1Tw-W8-STx" secondAttribute="trailing" constant="8" id="eda-fZ-6fN"/>
                     <constraint firstItem="Jcv-Jg-N20" firstAttribute="top" secondItem="S8c-SD-XYj" secondAttribute="bottom" constant="8" id="mUJ-hG-v8q"/>
+                    <constraint firstItem="3hv-5g-g7b" firstAttribute="leading" secondItem="Jcv-Jg-N20" secondAttribute="trailing" constant="8" id="w9V-hV-H6m"/>
                     <constraint firstItem="1Tw-W8-STx" firstAttribute="bottom" secondItem="VZX-oc-ANl" secondAttribute="bottom" id="xoi-SX-VRg"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
                 <outlet property="cartImgView" destination="1Tw-W8-STx" id="AY9-cd-JVi"/>
-                <outlet property="cartProductName" destination="S8c-SD-XYj" id="egs-De-mok"/>
-                <outlet property="cartQuantity" destination="Jcv-Jg-N20" id="mc4-Pv-VgW"/>
+                <outlet property="priceLabel" destination="3hv-5g-g7b" id="ALe-6t-G0h"/>
+                <outlet property="productNameLabel" destination="S8c-SD-XYj" id="VQA-5G-OMQ"/>
+                <outlet property="quantityLabel" destination="Jcv-Jg-N20" id="kW2-yw-aHF"/>
+                <outlet property="quantityStepper" destination="VZX-oc-ANl" id="00o-h8-xyq"/>
             </connections>
             <point key="canvasLocation" x="502.5" y="359.5"/>
         </tableViewCell>

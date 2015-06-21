@@ -26,14 +26,7 @@ class CartTableViewController: UIViewController, UITableViewDataSource, UITableV
     @IBOutlet weak var checkOutButton: UIButton!
     
     // Cart Empty Label
-    private var cartEmptyLabel: UILabel! {
-        didSet {
-            cartEmptyLabel = UILabel(frame: tableView.bounds)
-            cartEmptyLabel.text = "Cart is Empty"
-            cartEmptyLabel.textAlignment = .Center
-            cartEmptyLabel.font = UIFont(name: "HelveticaNeue-Light", size: 48)
-        }
-    }
+    private var cartEmptyLabel: UILabel!
     
     // Number of items in the cart
     var numberOfItemsInCart: Int {
@@ -51,6 +44,12 @@ class CartTableViewController: UIViewController, UITableViewDataSource, UITableV
         
         // Hide unwanted cells
         tableView.tableFooterView = UIView(frame: CGRectZero)
+        
+        // Set up the empty cart label
+        cartEmptyLabel = UILabel(frame: tableView.bounds)
+        cartEmptyLabel.text = "Cart is Empty"
+        cartEmptyLabel.textAlignment = .Center
+        cartEmptyLabel.font = UIFont(name: "HelveticaNeue-Light", size: 48)
         
         // Header view
         tableView.tableHeaderView = numberOfItemsInCart == 0 ? cartEmptyLabel : nil
@@ -90,10 +89,27 @@ class CartTableViewController: UIViewController, UITableViewDataSource, UITableV
             }
         }
     }
+    
+    private struct Storyboard {
+        static let CheckoutSegue = "CheckoutSegue"
+    }
 
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        
+        if let identifier = segue.identifier {
+            if identifier == Storyboard.CheckoutSegue {
+                let vc = segue.destinationViewController as! CheckoutViewController
+                vc.product = UserCart.sharedCart.cart[0]
+            }
+        }
+        
+    }
+    
     // MARK: - Check Out
     
     @IBAction func didPressCheckoutButton(sender: UIButton) {
+        
+        // Go to Check Out View Controller
         
     }
     

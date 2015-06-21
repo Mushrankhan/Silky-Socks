@@ -7,6 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1F17F2881B36AA7200DBFEBC /* CheckoutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F17F2871B36AA7200DBFEBC /* CheckoutViewController.swift */; };
+		1F17F28A1B36B11D00DBFEBC /* CheckoutTableHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F17F2891B36B11D00DBFEBC /* CheckoutTableHeaderView.swift */; };
+		1F17F28C1B36BC2000DBFEBC /* CheckoutTableHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1F17F28B1B36BC2000DBFEBC /* CheckoutTableHeaderView.xib */; };
+		1F17F2901B36BE8A00DBFEBC /* CheckoutInfoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F17F28E1B36BE8A00DBFEBC /* CheckoutInfoTableViewCell.swift */; };
+		1F17F2911B36BE8A00DBFEBC /* CheckoutInfoTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1F17F28F1B36BE8A00DBFEBC /* CheckoutInfoTableViewCell.xib */; };
+		1F17F2951B370AB700DBFEBC /* StatesPickerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F17F2931B370AB700DBFEBC /* StatesPickerTableViewCell.swift */; };
+		1F17F2961B370AB700DBFEBC /* StatesPickerTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1F17F2941B370AB700DBFEBC /* StatesPickerTableViewCell.xib */; };
 		1F232D2F1B196CB200ECD753 /* SJColorCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F232D2E1B196CB200ECD753 /* SJColorCollectionViewController.swift */; };
 		1F39440B1B094EA4008E73E0 /* SJCollectionAddToCartReusableView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1F39440A1B094EA4008E73E0 /* SJCollectionAddToCartReusableView.xib */; };
 		1F535DED1B242084008663DF /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F535DEB1B242084008663DF /* Fabric.framework */; };
@@ -77,6 +84,13 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		1F17F2871B36AA7200DBFEBC /* CheckoutViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckoutViewController.swift; sourceTree = "<group>"; };
+		1F17F2891B36B11D00DBFEBC /* CheckoutTableHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckoutTableHeaderView.swift; sourceTree = "<group>"; };
+		1F17F28B1B36BC2000DBFEBC /* CheckoutTableHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CheckoutTableHeaderView.xib; sourceTree = "<group>"; };
+		1F17F28E1B36BE8A00DBFEBC /* CheckoutInfoTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckoutInfoTableViewCell.swift; sourceTree = "<group>"; };
+		1F17F28F1B36BE8A00DBFEBC /* CheckoutInfoTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CheckoutInfoTableViewCell.xib; sourceTree = "<group>"; };
+		1F17F2931B370AB700DBFEBC /* StatesPickerTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatesPickerTableViewCell.swift; sourceTree = "<group>"; };
+		1F17F2941B370AB700DBFEBC /* StatesPickerTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StatesPickerTableViewCell.xib; sourceTree = "<group>"; };
 		1F232D2E1B196CB200ECD753 /* SJColorCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SJColorCollectionViewController.swift; sourceTree = "<group>"; };
 		1F39440A1B094EA4008E73E0 /* SJCollectionAddToCartReusableView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SJCollectionAddToCartReusableView.xib; sourceTree = "<group>"; };
 		1F535DEB1B242084008663DF /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Fabric.framework; sourceTree = SOURCE_ROOT; };
@@ -151,6 +165,28 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1F17F28D1B36BE3600DBFEBC /* Table View Cells */ = {
+			isa = PBXGroup;
+			children = (
+				1F17F2931B370AB700DBFEBC /* StatesPickerTableViewCell.swift */,
+				1F17F2941B370AB700DBFEBC /* StatesPickerTableViewCell.xib */,
+				1F17F28E1B36BE8A00DBFEBC /* CheckoutInfoTableViewCell.swift */,
+				1F17F28F1B36BE8A00DBFEBC /* CheckoutInfoTableViewCell.xib */,
+				1F58FE641B340F27003E2507 /* CartTableViewCell.swift */,
+				1F58FE651B340F27003E2507 /* CartTableViewCell.xib */,
+			);
+			name = "Table View Cells";
+			sourceTree = "<group>";
+		};
+		1F17F2921B36BED200DBFEBC /* Checkout Table Header View */ = {
+			isa = PBXGroup;
+			children = (
+				1F17F2891B36B11D00DBFEBC /* CheckoutTableHeaderView.swift */,
+				1F17F28B1B36BC2000DBFEBC /* CheckoutTableHeaderView.xib */,
+			);
+			name = "Checkout Table Header View";
+			sourceTree = "<group>";
+		};
 		1F535DEF1B242164008663DF /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -191,16 +227,14 @@
 			name = "Data Source & Delegate";
 			sourceTree = "<group>";
 		};
-		1FCF509E1B07FF06005D8578 /* Cell */ = {
+		1FCF509E1B07FF06005D8578 /* Collection View Cell */ = {
 			isa = PBXGroup;
 			children = (
-				1F58FE641B340F27003E2507 /* CartTableViewCell.swift */,
-				1F58FE651B340F27003E2507 /* CartTableViewCell.xib */,
 				4F8D38C51AE441F700F42E23 /* SJCollectionViewCell.swift */,
 				4F55B5531AE46E4900679048 /* SJCollectionViewCell.xib */,
 				1FF794051B21EEFD000CB14D /* SJColorFontCollectionViewCell.swift */,
 			);
-			name = Cell;
+			name = "Collection View Cell";
 			sourceTree = "<group>";
 		};
 		1FCF509F1B07FF0B005D8578 /* Supplementary Views */ = {
@@ -321,8 +355,10 @@
 		4F8D38CF1AE4461700F42E23 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				1F17F2921B36BED200DBFEBC /* Checkout Table Header View */,
 				1FFB38711B204F62007E9390 /* Normal */,
-				1FCF509E1B07FF06005D8578 /* Cell */,
+				1F17F28D1B36BE3600DBFEBC /* Table View Cells */,
+				1FCF509E1B07FF06005D8578 /* Collection View Cell */,
 				1FCF509F1B07FF0B005D8578 /* Supplementary Views */,
 				1FFB38701B2042D3007E9390 /* Collection View */,
 			);
@@ -344,6 +380,7 @@
 			children = (
 				4F8D38C91AE4451000F42E23 /* SJCollectionViewController.swift */,
 				1F58FE611B340ED6003E2507 /* CartTableViewController.swift */,
+				1F17F2871B36AA7200DBFEBC /* CheckoutViewController.swift */,
 				1F58FE631B340EDE003E2507 /* VC */,
 			);
 			name = Controller;
@@ -462,12 +499,15 @@
 				1FF7940A1B22DCB2000CB14D /* Maiden.ttf in Resources */,
 				1FF794081B22DBBF000CB14D /* DoubleFeature.ttf in Resources */,
 				1FCF50991B07ECA3005D8578 /* SJCollectionRestartReusableView.xib in Resources */,
+				1F17F2911B36BE8A00DBFEBC /* CheckoutInfoTableViewCell.xib in Resources */,
 				1FD558011B2086CA003BDE2A /* SJApprovalViewController.xib in Resources */,
 				1FCF509D1B07F0C7005D8578 /* SJCollectionDecorationSilkySocksLogoReusableView.xib in Resources */,
 				4F55B5541AE46E4900679048 /* SJCollectionViewCell.xib in Resources */,
 				4F8D38B01AE440DE00F42E23 /* LaunchScreen.xib in Resources */,
 				1FF7940E1B22DD69000CB14D /* College.ttf in Resources */,
+				1F17F28C1B36BC2000DBFEBC /* CheckoutTableHeaderView.xib in Resources */,
 				1FF543CD1B26259F007B6B19 /* TemplateInfoViewController.xib in Resources */,
+				1F17F2961B370AB700DBFEBC /* StatesPickerTableViewCell.xib in Resources */,
 				4F8D38AD1AE440DE00F42E23 /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -554,11 +594,15 @@
 				4F8D38CC1AE4457800F42E23 /* TemplateModel.swift in Sources */,
 				4F8D38C61AE441F700F42E23 /* SJCollectionViewCell.swift in Sources */,
 				1F58FE661B340F27003E2507 /* CartTableViewCell.swift in Sources */,
+				1F17F2901B36BE8A00DBFEBC /* CheckoutInfoTableViewCell.swift in Sources */,
 				1F232D2F1B196CB200ECD753 /* SJColorCollectionViewController.swift in Sources */,
 				1FF794061B21EEFD000CB14D /* SJColorFontCollectionViewCell.swift in Sources */,
+				1F17F28A1B36B11D00DBFEBC /* CheckoutTableHeaderView.swift in Sources */,
 				4F8D38A61AE440DE00F42E23 /* Silky_Socks.xcdatamodeld in Sources */,
 				1FD558001B2086CA003BDE2A /* SJApprovalViewController.swift in Sources */,
 				1FCF50A11B083D70005D8578 /* SJCollectionViewDelegate.swift in Sources */,
+				1F17F2951B370AB700DBFEBC /* StatesPickerTableViewCell.swift in Sources */,
+				1F17F2881B36AA7200DBFEBC /* CheckoutViewController.swift in Sources */,
 				4F8D38CA1AE4451000F42E23 /* SJCollectionViewController.swift in Sources */,
 				4FB6C9C11AE4AF70001A6E50 /* SJBottomView.swift in Sources */,
 				1F58FE621B340ED6003E2507 /* CartTableViewController.swift in Sources */,

@@ -71,7 +71,11 @@ class CartProduct: NSObject, Printable, Equatable {
     
     // Only Price and Quantity can be changed
     var price: Float
-    var quantity: Int
+    var quantity: Int { // If quantity changes, then change the price
+        didSet {
+            price = Float(quantity) * basePrice
+        }
+    }
     
     init(name: String, productImage: UIImage, price: Float) {
         
@@ -96,5 +100,5 @@ class CartProduct: NSObject, Printable, Equatable {
 
 // MARK: Equatable
 func ==(lhs: CartProduct, rhs: CartProduct) -> Bool {
-    return (lhs.name == rhs.name && lhs.price == rhs.price && lhs.productImage == rhs.productImage)
+    return (lhs.name == rhs.name && lhs.productImage == rhs.productImage)
 }

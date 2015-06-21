@@ -12,6 +12,11 @@ let cartCellReuseIdentifier = "Cart Cell"
 
 class CartTableViewCell: UITableViewCell {
 
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        selectionStyle = .None
+    }
+    
     // Nib
     class func nib() -> UINib {
         return UINib(nibName: "CartTableViewCell", bundle: nil)
@@ -19,32 +24,32 @@ class CartTableViewCell: UITableViewCell {
     
     // IBOutlets
     @IBOutlet private weak var cartImgView: UIImageView!
-    @IBOutlet private weak var cartProductName: UILabel!
-    @IBOutlet private weak var cartQuantity: UILabel! {
-        didSet {
-            if let product = cartProduct {
-                product.price  = Float(product.quantity) * product.basePrice
-            }
-        }
-    }
+    @IBOutlet private weak var productNameLabel: UILabel!
+    @IBOutlet private weak var quantityLabel: UILabel!
+    @IBOutlet private weak var quantityStepper: UIStepper!
+    @IBOutlet private weak var priceLabel: UILabel!
     
     // Object passed to init self
     var cartProduct: CartProduct? {
         didSet {
+            // Set image and product name once
             cartImgView?.image = cartProduct?.productImage
-            cartProductName?.text = cartProduct?.name
-            cartQuantity?.text = "\(cartProduct!.quantity)"
+            productNameLabel?.text = cartProduct?.name
+            
+            // Update UI
+            updateUI()
         }
     }
     
     // Stepper IBAction
     @IBAction func incrementQuantity(sender: UIStepper) {
-        cartProduct!.quantity = Int(sender.value)
-        cartQuantity?.text = "\(cartProduct!.quantity)"
+        cartProduct!.quantity = Int(sender.value)        // Increase quantity in the model
+        updateUI()
     }
     
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        selectionStyle = .None
+    private func updateUI() {
+        quantityLabel?.text = "\(cartProduct!.quantity)"
+        quantityStepper?.value = Double(cartProduct!.quantity)
+        priceLabel?.text = "\(cartProduct!.price)"
     }
 }

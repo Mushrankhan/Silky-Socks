@@ -90,6 +90,7 @@
                                         </state>
                                         <connections>
                                             <action selector="didPressCheckoutButton:" destination="Cxu-xa-GSE" eventType="touchUpInside" id="8rJ-pU-cpe"/>
+                                            <segue destination="9Ft-3Z-Ady" kind="show" identifier="CheckoutSegue" id="7Ho-7j-JSR"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -122,6 +123,24 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YCz-dE-QcL" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2847" y="412"/>
+        </scene>
+        <!--Checkout View Controller-->
+        <scene sceneID="MYm-WP-yFH">
+            <objects>
+                <tableViewController id="9Ft-3Z-Ady" customClass="CheckoutViewController" customModule="Silky_Socks" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="Zfv-Yl-JQ9">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <connections>
+                            <outlet property="dataSource" destination="9Ft-3Z-Ady" id="99o-97-lGO"/>
+                            <outlet property="delegate" destination="9Ft-3Z-Ady" id="BCw-13-yWB"/>
+                        </connections>
+                    </tableView>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="w5C-cO-VZj" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3548" y="412"/>
         </scene>
     </scenes>
 </document>
