@@ -28,6 +28,7 @@ class CartTableViewCell: UITableViewCell {
     @IBOutlet private weak var quantityLabel: UILabel!
     @IBOutlet private weak var quantityStepper: UIStepper!
     @IBOutlet private weak var priceLabel: UILabel!
+    @IBOutlet weak var basePriceLabel: UILabel!
     
     // Object passed to init self
     var cartProduct: CartProduct? {
@@ -50,6 +51,7 @@ class CartTableViewCell: UITableViewCell {
     private func updateUI() {
         quantityLabel?.text = "\(cartProduct!.quantity)"
         quantityStepper?.value = Double(cartProduct!.quantity)
-        priceLabel?.text = "\(cartProduct!.price)"
+        priceLabel?.text = "$ \(cartProduct!.price)"
+        basePriceLabel?.text = "$ \(cartProduct!.basePrice)/pc"
     }
 }
