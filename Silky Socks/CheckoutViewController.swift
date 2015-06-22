@@ -133,7 +133,24 @@ class CheckoutViewController: UITableViewController {
 
 extension CheckoutViewController: CheckoutTableFooterViewDelegate {
     func checkOutTableFooterView(view: CheckoutTableFooterView, didPressNextButton sender: UIButton) {
-        print("Next")
+        
+        // Create Cart and add product
+        let cart = BUYCart()
+        cart.addProduct(product)
+        
+        // Shipping address
+        let address = BUYAddress()
+        address.firstName = "Saurabh"
+        address.lastName = "Jain"
+        address.address1 = "7357 Franklin Avenue"
+        address.city = "Los Angeles"
+        address.zip = "90046"
+        address.province = "CA"
+        address.countryCode = "US"
+        
+        // Create Checkout
+        let checkout = BUYCheckout(cart: cart)
+        checkout.shippingAddress = address
+        
     }
 }
-
