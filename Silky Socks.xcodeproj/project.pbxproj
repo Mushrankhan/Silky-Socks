@@ -357,8 +357,8 @@
 		4F8D38CF1AE4461700F42E23 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				1F17F2921B36BED200DBFEBC /* Checkout Table Header View */,
 				1FFB38711B204F62007E9390 /* Normal */,
+				1F17F2921B36BED200DBFEBC /* Checkout Table Header View */,
 				1F17F28D1B36BE3600DBFEBC /* Table View Cells */,
 				1FCF509E1B07FF06005D8578 /* Collection View Cell */,
 				1FCF509F1B07FF0B005D8578 /* Supplementary Views */,

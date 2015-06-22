@@ -71,6 +71,8 @@ class CartTableViewController: UIViewController, UITableViewDataSource, UITableV
         return cell
     }
 
+    // MARK: - Table View Delegate
+    
     func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         if editingStyle == .Delete {
             // Delete the row from the data source
@@ -90,27 +92,18 @@ class CartTableViewController: UIViewController, UITableViewDataSource, UITableV
         }
     }
     
+    // MARK: - Navigation
+    
     private struct Storyboard {
         static let CheckoutSegue = "CheckoutSegue"
     }
 
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        
         if let identifier = segue.identifier {
             if identifier == Storyboard.CheckoutSegue {
                 let vc = segue.destinationViewController as! CheckoutViewController
                 vc.product = UserCart.sharedCart.cart[0]
             }
         }
-        
     }
-    
-    // MARK: - Check Out
-    
-    @IBAction func didPressCheckoutButton(sender: UIButton) {
-        
-        // Go to Check Out View Controller
-        
-    }
-    
 }
