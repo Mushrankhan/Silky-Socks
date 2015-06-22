@@ -15,6 +15,8 @@
 		1F17F2951B370AB700DBFEBC /* StatesPickerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F17F2931B370AB700DBFEBC /* StatesPickerTableViewCell.swift */; };
 		1F17F2961B370AB700DBFEBC /* StatesPickerTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1F17F2941B370AB700DBFEBC /* StatesPickerTableViewCell.xib */; };
 		1F232D2F1B196CB200ECD753 /* SJColorCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F232D2E1B196CB200ECD753 /* SJColorCollectionViewController.swift */; };
+		1F293BF21B382AAC00551A40 /* CheckoutTableFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F293BF11B382AAC00551A40 /* CheckoutTableFooterView.swift */; };
+		1F293BF41B382AC000551A40 /* CheckoutTableFooterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1F293BF31B382AC000551A40 /* CheckoutTableFooterView.xib */; };
 		1F39440B1B094EA4008E73E0 /* SJCollectionAddToCartReusableView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1F39440A1B094EA4008E73E0 /* SJCollectionAddToCartReusableView.xib */; };
 		1F535DED1B242084008663DF /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F535DEB1B242084008663DF /* Fabric.framework */; };
 		1F535DEE1B242084008663DF /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F535DEC1B242084008663DF /* Crashlytics.framework */; };
@@ -93,6 +95,8 @@
 		1F17F2941B370AB700DBFEBC /* StatesPickerTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StatesPickerTableViewCell.xib; sourceTree = "<group>"; };
 		1F232D2E1B196CB200ECD753 /* SJColorCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SJColorCollectionViewController.swift; sourceTree = "<group>"; };
 		1F293BF01B38240000551A40 /* Silky Socks.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "Silky Socks.entitlements"; sourceTree = "<group>"; };
+		1F293BF11B382AAC00551A40 /* CheckoutTableFooterView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckoutTableFooterView.swift; sourceTree = "<group>"; };
+		1F293BF31B382AC000551A40 /* CheckoutTableFooterView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CheckoutTableFooterView.xib; sourceTree = "<group>"; };
 		1F39440A1B094EA4008E73E0 /* SJCollectionAddToCartReusableView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SJCollectionAddToCartReusableView.xib; sourceTree = "<group>"; };
 		1F535DEB1B242084008663DF /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Fabric.framework; sourceTree = SOURCE_ROOT; };
 		1F535DEC1B242084008663DF /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = SOURCE_ROOT; };
@@ -186,6 +190,15 @@
 				1F17F28B1B36BC2000DBFEBC /* CheckoutTableHeaderView.xib */,
 			);
 			name = "Checkout Table Header View";
+			sourceTree = "<group>";
+		};
+		1F293BF51B382B1E00551A40 /* Checkout Table Footer View */ = {
+			isa = PBXGroup;
+			children = (
+				1F293BF11B382AAC00551A40 /* CheckoutTableFooterView.swift */,
+				1F293BF31B382AC000551A40 /* CheckoutTableFooterView.xib */,
+			);
+			name = "Checkout Table Footer View";
 			sourceTree = "<group>";
 		};
 		1F535DEF1B242164008663DF /* Frameworks */ = {
@@ -359,6 +372,7 @@
 			children = (
 				1FFB38711B204F62007E9390 /* Normal */,
 				1F17F2921B36BED200DBFEBC /* Checkout Table Header View */,
+				1F293BF51B382B1E00551A40 /* Checkout Table Footer View */,
 				1F17F28D1B36BE3600DBFEBC /* Table View Cells */,
 				1FCF509E1B07FF06005D8578 /* Collection View Cell */,
 				1FCF509F1B07FF0B005D8578 /* Supplementary Views */,
@@ -505,6 +519,7 @@
 				4F8D38AB1AE440DE00F42E23 /* Main.storyboard in Resources */,
 				1FF7940A1B22DCB2000CB14D /* Maiden.ttf in Resources */,
 				1FF794081B22DBBF000CB14D /* DoubleFeature.ttf in Resources */,
+				1F293BF41B382AC000551A40 /* CheckoutTableFooterView.xib in Resources */,
 				1FCF50991B07ECA3005D8578 /* SJCollectionRestartReusableView.xib in Resources */,
 				1F17F2911B36BE8A00DBFEBC /* CheckoutInfoTableViewCell.xib in Resources */,
 				1FD558011B2086CA003BDE2A /* SJApprovalViewController.xib in Resources */,
@@ -603,6 +618,7 @@
 				1F58FE661B340F27003E2507 /* CartTableViewCell.swift in Sources */,
 				1F17F2901B36BE8A00DBFEBC /* CheckoutInfoTableViewCell.swift in Sources */,
 				1F232D2F1B196CB200ECD753 /* SJColorCollectionViewController.swift in Sources */,
+				1F293BF21B382AAC00551A40 /* CheckoutTableFooterView.swift in Sources */,
 				1FF794061B21EEFD000CB14D /* SJColorFontCollectionViewCell.swift in Sources */,
 				1F17F28A1B36B11D00DBFEBC /* CheckoutTableHeaderView.swift in Sources */,
 				4F8D38A61AE440DE00F42E23 /* Silky_Socks.xcdatamodeld in Sources */,

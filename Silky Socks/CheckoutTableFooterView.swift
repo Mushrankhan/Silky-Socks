@@ -1,0 +1,25 @@
+//
+//  CheckoutTableFooterView.swift
+//  Silky Socks
+//
+//  Created by Saurabh Jain on 6/22/15.
+//  Copyright (c) 2015 Full Stak. All rights reserved.
+//
+
+import UIKit
+
+protocol CheckoutTableFooterViewDelegate: class {
+    
+    func checkOutTableFooterView(view: CheckoutTableFooterView, didPressNextButton sender: UIButton)
+}
+
+class CheckoutTableFooterView: UIView {
+
+    weak var delegate: CheckoutTableFooterViewDelegate?
+    
+    @IBAction func nextButtonClecked(sender: UIButton) {
+        delegate?.checkOutTableFooterView(self, didPressNextButton: sender)
+    }
+
+}
+

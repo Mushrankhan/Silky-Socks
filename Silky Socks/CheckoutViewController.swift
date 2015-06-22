@@ -14,7 +14,7 @@ class CheckoutViewController: UITableViewController {
     var product: CartProduct!
     
     // Placeholders
-    lazy var infoToBeAsked = [["First Name", "Last Name"], ["Street Address", "Street Address 2", "City", "State", "Zip" ,"Country"], ["Front and Back", "Size", "Quantity", "Cost", "Shipping", "Total"]]
+    lazy var infoToBeAsked = [["First Name", "Last Name"], ["Street Address", "Street Address 2", "City", "State", "Zip" ,"Country"], ["Front and Back", "Size", "Quantity", "Cost"]]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,12 +25,15 @@ class CheckoutViewController: UITableViewController {
         // Register Cell
         tableView.registerNib(UINib(nibName: "CheckoutInfoTableViewCell", bundle: nil), forCellReuseIdentifier: Storyboard.InfoCellReuseIdentifier)
         tableView.registerNib(UINib(nibName: "StatesPickerTableViewCell", bundle: nil), forCellReuseIdentifier: Storyboard.StatesPickerReuseIdentifier)
-        //tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: Storyboard.NormalCellReuseIdentifier)
         
         // Set up the table header view
         let headerView = NSBundle.mainBundle().loadNibNamed("CheckoutTableHeaderView", owner: nil, options: nil).first as! CheckoutTableHeaderView
         headerView.productImageView.image = product.productImage
         tableView.tableHeaderView = headerView
+        
+        let footerView = NSBundle.mainBundle().loadNibNamed("CheckoutTableFooterView", owner: nil, options: nil).first as! CheckoutTableFooterView
+        footerView.delegate = self
+        tableView.tableFooterView = footerView
     }
     
     // Constants
@@ -58,7 +61,7 @@ class CheckoutViewController: UITableViewController {
             case 1 :
                 return 6
             case 2:
-                return 6
+                return 4
             default:
                 return 0
         }
@@ -67,12 +70,14 @@ class CheckoutViewController: UITableViewController {
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
+        // Special Cell for States: StatesPickerTableViewCell
         if indexPath == indexPathForStatesCell {
             let cell = tableView.dequeueReusableCellWithIdentifier(Storyboard.StatesPickerReuseIdentifier, forIndexPath: indexPath) as! StatesPickerTableViewCell
             cell.selectionStyle = .None
             return cell
         }
         
+        // Get Info Cell: CheckoutInfoTableViewCell
         if indexPath.section < 2 {
             let cell = tableView.dequeueReusableCellWithIdentifier(Storyboard.InfoCellReuseIdentifier, forIndexPath: indexPath) as! CheckoutInfoTableViewCell
             cell.infoTextField.placeholder = infoToBeAsked[indexPath.section][indexPath.row]
@@ -80,6 +85,7 @@ class CheckoutViewController: UITableViewController {
             return cell
         }
         
+        // Show Info Cell: UITableViewCell
         let cell = tableView.dequeueReusableCellWithIdentifier(Storyboard.NormalCellReuseIdentifier, forIndexPath: indexPath) as! UITableViewCell
         cell.textLabel?.font = UIFont.preferredFontForTextStyle(UIFontTextStyleFootnote)
         cell.textLabel?.text = infoToBeAsked[indexPath.section][indexPath.row]
@@ -90,12 +96,8 @@ class CheckoutViewController: UITableViewController {
             segmentedControl.selectedSegmentIndex = 2
             cell.accessoryView = segmentedControl
         }
-        if indexPath.row == 2 {
-            cell.detailTextLabel?.text = "\(product.quantity)"
-        }
-        if indexPath.row == 3 {
-            cell.detailTextLabel?.text = "\(product.price)"
-        }
+        if indexPath.row == 2 { cell.detailTextLabel?.text = "\(product.quantity)" }
+        if indexPath.row == 3 { cell.detailTextLabel?.text = "\(product.price)" }
         return cell
     }
     
@@ -124,22 +126,14 @@ class CheckoutViewController: UITableViewController {
             tableView.deselectRowAtIndexPath(indexPath, animated: true)
         }
     }
-    
-//    override func tableView(tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-//        if section == 2 {
-//            let footerView = UIButton()
-//            footerView.backgroundColor = UIColor.blackColor()
-//            footerView.setTitle("Next", forState: .Normal)
-//            footerView.titleLabel?.font = UIFont(name: "HelveticeNeue-Light", size: 24)
-//            return footerView
-//        }
-//        return nil
-//    }
-//    
-//    override func tableView(tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-//        if section == 2 {
-//            return 44
-//        }
-//        return 10
-//    }
 }
+
+
+// MARK: Checkout Table Footer View Delegate
+
+extension CheckoutViewController: CheckoutTableFooterViewDelegate {
+    func checkOutTableFooterView(view: CheckoutTableFooterView, didPressNextButton sender: UIButton) {
+        print("Next")
+    }
+}
+
