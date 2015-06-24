@@ -134,10 +134,6 @@ class CheckoutViewController: UITableViewController {
 extension CheckoutViewController: CheckoutTableFooterViewDelegate {
     func checkOutTableFooterView(view: CheckoutTableFooterView, didPressNextButton sender: UIButton) {
         
-        // Create Cart and add product
-        let cart = BUYCart()
-        cart.addProduct(product)
-        
         // Shipping address
         let address = BUYAddress()
         address.firstName = "Saurabh"
@@ -148,9 +144,41 @@ extension CheckoutViewController: CheckoutTableFooterViewDelegate {
         address.province = "CA"
         address.countryCode = "US"
         
-        // Create Checkout
-        let checkout = BUYCheckout(cart: cart)
-        checkout.shippingAddress = address
+        // Create Client
+        let client = BUYClient(shopDomain: Shopify.ShopDomain, apiKey: Shopify.ApiKey, channelId: Shopify.ChannelId)
+        client.enableApplePayWithMerchantId(Shopify.ApplePayMerchantId)
+        
+        // Get the product
+        client.getProductById("1334414273") { (product, error) in
+            
+            if product != nil {
+                let variants = product.variants as! [BUYProductVariant]
+                
+                if variants.count > 0 {
+                    let variant = variants.first!
+                    
+                    // Create Cart and add product
+                    let cart = BUYCart()
+                    cart.addProduct(self.product, withVariant: variant)
+                    
+                    // Create Checkout
+                    let checkout = BUYCheckout(cart: cart)
+                    checkout.shippingAddress = address
+                    
+                    client.createCheckout(checkout) { (checkout, error) in
+                        println(error.userInfo)
+                        if error == nil {
+                            client.getShippingRatesForCheckout(checkout) { (rates, status, error) in
+                                println(rates)
+                                println(status)
+                            }
+                        }
+                    }
+
+                }
+            }
+        }
         
     }
+    
 }

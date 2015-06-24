@@ -37,7 +37,7 @@ class StatesPickerTableViewCell: UITableViewCell, UIPickerViewDataSource, UIPick
     
     // returns the # of rows in each component..
     func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return 52
+        return states.count
     }
     
     func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String! {
