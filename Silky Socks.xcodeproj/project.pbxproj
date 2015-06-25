@@ -438,8 +438,8 @@
 				4F8D389B1AE440DE00F42E23 /* Resources */,
 				1F535DEA1B242057008663DF /* ShellScript */,
 				20F629CA8399A212F90F7A37 /* Copy Pods Resources */,
-				1F58FE6A1B343D63003E2507 /* Run Script */,
 				1F58FE6E1B343DA3003E2507 /* Embed Frameworks */,
+				1F58FE6A1B343D63003E2507 /* Run Script */,
 			);
 			buildRules = (
 			);
@@ -479,7 +479,7 @@
 				TargetAttributes = {
 					4F8D389C1AE440DE00F42E23 = {
 						CreatedOnToolsVersion = 6.3;
-						DevelopmentTeam = RK8DK924Z5;
+						DevelopmentTeam = DYNDWV74W5;
 						SystemCapabilities = {
 							com.apple.OMC = {
 								enabled = 1;
@@ -775,8 +775,8 @@
 				CLANG_WARN_OBJC_RECEIVER_WEAK = YES;
 				CLANG_WARN_OBJC_REPEATED_USE_OF_WEAK = YES;
 				CODE_SIGN_ENTITLEMENTS = "Silky Socks/Silky Socks.entitlements";
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: KAUSAR INDUSTRIES INC (DYNDWV74W5)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: KAUSAR INDUSTRIES INC (DYNDWV74W5)";
 				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)";
 				GCC_TREAT_INCOMPATIBLE_POINTER_TYPE_WARNINGS_AS_ERRORS = YES;
 				GCC_WARN_NON_VIRTUAL_DESTRUCTOR = YES;
@@ -784,7 +784,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "80a2aeca-7797-4a89-92c2-c859701df35b";
 				SWIFT_OBJC_BRIDGING_HEADER = "$(PROJECT_DIR)/Silky Socks/BridgingHeader.h";
 				TARGETED_DEVICE_FAMILY = 1;
 				WARNING_CFLAGS = "-Wundeclared-selector";
@@ -801,8 +801,8 @@
 				CLANG_WARN_OBJC_RECEIVER_WEAK = YES;
 				CLANG_WARN_OBJC_REPEATED_USE_OF_WEAK = YES;
 				CODE_SIGN_ENTITLEMENTS = "Silky Socks/Silky Socks.entitlements";
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: KAUSAR INDUSTRIES INC (DYNDWV74W5)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: KAUSAR INDUSTRIES INC (DYNDWV74W5)";
 				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)";
 				GCC_TREAT_INCOMPATIBLE_POINTER_TYPE_WARNINGS_AS_ERRORS = YES;
 				GCC_WARN_NON_VIRTUAL_DESTRUCTOR = YES;
@@ -810,7 +810,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "80a2aeca-7797-4a89-92c2-c859701df35b";
 				SWIFT_OBJC_BRIDGING_HEADER = "$(PROJECT_DIR)/Silky Socks/BridgingHeader.h";
 				TARGETED_DEVICE_FAMILY = 1;
 				WARNING_CFLAGS = "-Wundeclared-selector";
