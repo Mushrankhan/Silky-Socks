@@ -330,9 +330,9 @@ extension SJCollectionViewController: SJCollectionViewDelegate, MFMailComposeVie
     }
     
     // Dismiss the mail compose view controller
-    func mailComposeController(controller: MFMailComposeViewController!, didFinishWithResult result: MFMailComposeResult, error: NSError!) {
-        dismissViewControllerAnimated(true, completion: nil)
-    }
+//    func mailComposeController(controller: MFMailComposeViewController!, didFinishWithResult result: MFMailComposeResult, error: NSError!) {
+//        dismissViewControllerAnimated(true, completion: nil)
+//    }
     
     // Restart
     func collectionView(collectionView: UICollectionView, didPressRestartButton button:UIButton) {

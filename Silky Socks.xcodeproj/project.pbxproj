@@ -484,6 +484,9 @@
 							com.apple.OMC = {
 								enabled = 1;
 							};
+							com.apple.Passbook = {
+								enabled = 0;
+							};
 						};
 					};
 					4F8D38B41AE440DE00F42E23 = {

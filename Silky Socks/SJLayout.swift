@@ -2,7 +2,7 @@
 //  SJLayout.swift
 //  Silky Socks
 //
-//  Created by Kevin Koeller on 4/19/15.
+//  Created by Saurabh Jain on 4/19/15.
 //  Copyright (c) 2015 Full Stak. All rights reserved.
 //
 
