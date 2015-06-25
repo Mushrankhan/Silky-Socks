@@ -8,11 +8,15 @@
 
 import UIKit
 
-class StatesPickerTableViewCell: UITableViewCell, UIPickerViewDataSource, UIPickerViewDelegate{
+// Use of a delegate to provide info for the selected state
+protocol StatesPickerTableViewCellDelegate: class {
+    func statesPickerTableViewCell(cell: StatesPickerTableViewCell, didSelectState state: String)
+}
 
-    struct Nib {
-        static let StatesPickerTag = 99
-    }
+class StatesPickerTableViewCell: UITableViewCell, UIPickerViewDataSource, UIPickerViewDelegate{
+    
+    // Delegate
+    weak var delegate: StatesPickerTableViewCellDelegate?
     
     @IBOutlet weak var statesPicker: UIPickerView! {
         didSet {
@@ -21,13 +25,9 @@ class StatesPickerTableViewCell: UITableViewCell, UIPickerViewDataSource, UIPick
         }
     }
     
-    // Selected state
-    private var selectedState = "Alabama"
-    
-    lazy var states = ["Alabama", "Alaska", "Arizona", "Arkansas", "California", "Colorado", "Connecticut", "Delaware", "Florida", "Georgia", "Hawaii","Idaho","Illinois Indiana","Iowa","Kansas","Kentucky","Louisiana","Maine","Maryland","Massachusetts","Michigan","Minnesota","Mississippi","Missouri","Montana Nebraska","Nevada","New Hampshire","New Jersey","New Mexico","New York","North Carolina","North Dakota",
-        "Ohio","Oklahoma","Oregon","Pennsylvania Rhode Island","South Carolina","South Dakota",
-        "Tennessee","Texas","Utah","Vermont","Virginia","Washington","West Virginia",
-        "Wisconsin","Wyoming"]
+    // All the states
+    private lazy var states = ["AL", "AK", "AZ", "AR", "CA", "CO", "CT", "DE", "FL", "GA", "HI","ID","IL IN","IA","KS","KY","LA","ME","MD","MA","MI","MN","MS","MO","MT, NE","NV","NH","NJ","NM","NY","NC","ND",
+        "OH","OK","OR","PA RI","SC","SD","TN","TX","UT","VT","VA","WA","WV","WI","WY"]
     
     // MARK: UIPicker View Data Source
     
@@ -35,7 +35,6 @@ class StatesPickerTableViewCell: UITableViewCell, UIPickerViewDataSource, UIPick
         return 1
     }
     
-    // returns the # of rows in each component..
     func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         return states.count
     }
@@ -47,7 +46,7 @@ class StatesPickerTableViewCell: UITableViewCell, UIPickerViewDataSource, UIPick
     // MARK: UIPicker View Delegate
 
     func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        selectedState = states[row]
+        delegate?.statesPickerTableViewCell(self, didSelectState: states[row])
     }
     
 }

@@ -8,13 +8,16 @@
 
 import UIKit
 
-class CheckoutViewController: UITableViewController {
+class CheckoutViewController: UITableViewController, StatesPickerTableViewCellDelegate {
 
     // Product
     var product: CartProduct!
     
     // Placeholders
-    lazy var infoToBeAsked = [["First Name", "Last Name"], ["Street Address", "Street Address 2", "City", "State", "Zip" ,"Country"], ["Front and Back", "Size", "Quantity", "Cost"]]
+    lazy var infoToBeAsked = [["First Name", "Last Name", "Email"], ["Street Address", "Street Address 2", "City", "State", "Zip" ,"Country"], ["Front and Back", "Size", "Quantity", "Cost"]]
+    
+    // Segmented Control showing the different sizes
+    private var sizesSegmentedControl: UISegmentedControl!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,37 +34,49 @@ class CheckoutViewController: UITableViewController {
         headerView.productImageView.image = product.productImage
         tableView.tableHeaderView = headerView
         
+        // Next button footer view
         let footerView = NSBundle.mainBundle().loadNibNamed("CheckoutTableFooterView", owner: nil, options: nil).first as! CheckoutTableFooterView
         footerView.delegate = self
         tableView.tableFooterView = footerView
     }
     
-    // Constants
+    // Storyboard Constants
     private struct Storyboard {
         static let InfoCellReuseIdentifier = "Checkout Cell"
         static let StatesPickerReuseIdentifier = "States Cell"
-        static let NormalCellReuseIdentifier = "Normal"
+        static let NormalCellReuseIdentifier = "Normal" // In Storyboard
+        static let FinalTVCSegue = "FinalCheckoutSegue"
+    }
+    
+    // Constants
+    private struct Constants {
+        static let ContactInfo = "Contact Info"
+        static let ShippingInfo = "Shipping Info"
+        static let Details = "Details"
+        static let NumberOfSections = 3
+        static let ContactInfoRows = 3
+        static let ShippingInfoRows = 6
+        static let DetialsRows = 4
     }
     
     // Index path at which we have the Picker View
     private var indexPathForStatesCell = NSIndexPath(forRow: 3, inSection: 1)
     
-    
     // MARK: UITableView Data Source
 
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return 3
+        return Constants.NumberOfSections
     }
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int{
         
         switch section {
             case 0:
-                return 2
+                return Constants.ContactInfoRows
             case 1 :
-                return 6
+                return Constants.ShippingInfoRows
             case 2:
-                return 4
+                return Constants.DetialsRows
             default:
                 return 0
         }
@@ -74,6 +89,7 @@ class CheckoutViewController: UITableViewController {
         if indexPath == indexPathForStatesCell {
             let cell = tableView.dequeueReusableCellWithIdentifier(Storyboard.StatesPickerReuseIdentifier, forIndexPath: indexPath) as! StatesPickerTableViewCell
             cell.selectionStyle = .None
+            cell.delegate = self
             return cell
         }
         
@@ -91,10 +107,10 @@ class CheckoutViewController: UITableViewController {
         cell.textLabel?.text = infoToBeAsked[indexPath.section][indexPath.row]
         cell.detailTextLabel?.text = ""
         if indexPath.row == 1 {
-            let segmentedControl = UISegmentedControl(items: ["S", "M", "L", "XL", "XXL", "XXXL"])
-            segmentedControl.tintColor = UIColor.blackColor()
-            segmentedControl.selectedSegmentIndex = 2
-            cell.accessoryView = segmentedControl
+            sizesSegmentedControl = UISegmentedControl(items: ["S", "M", "L", "XL", "XXL", "XXXL"])
+            sizesSegmentedControl.tintColor = UIColor.blackColor()
+            sizesSegmentedControl.selectedSegmentIndex = 2
+            cell.accessoryView = sizesSegmentedControl
         }
         if indexPath.row == 2 { cell.detailTextLabel?.text = "\(product.quantity)" }
         if indexPath.row == 3 { cell.detailTextLabel?.text = "\(product.price)" }
@@ -111,11 +127,11 @@ class CheckoutViewController: UITableViewController {
         
         switch section {
             case 0:
-                return "Contact Info"
+                return Constants.ContactInfo
             case 1:
-                return "Shipping Info"
+                return Constants.ShippingInfo
             case 2:
-                return "Details"
+                return Constants.Details
             default:
                 return ""
         }
@@ -126,12 +142,39 @@ class CheckoutViewController: UITableViewController {
             tableView.deselectRowAtIndexPath(indexPath, animated: true)
         }
     }
+    
+    // MARK: Navigation
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == Storyboard.FinalTVCSegue {
+            let vc = segue.destinationViewController as! FinalTableViewController
+            vc.checkout = self.checkout
+            vc.shippingRates = self.shippingRates
+        }
+    }
+    
+    // Store the shipping rates
+    private var shippingRates: [BUYShippingRate]!
+    private var checkout: BUYCheckout!
+    
+    // Selected State
+    private var selectedState = "AL"
+}
+
+
+// MARK: StatesPickerTableViewCellDelegate
+
+extension CheckoutViewController: StatesPickerTableViewCellDelegate {
+    func statesPickerTableViewCell(cell: StatesPickerTableViewCell, didSelectState state: String) {
+        selectedState = state
+    }
 }
 
 
 // MARK: Checkout Table Footer View Delegate
 
 extension CheckoutViewController: CheckoutTableFooterViewDelegate {
+    
     func checkOutTableFooterView(view: CheckoutTableFooterView, didPressNextButton sender: UIButton) {
         
         // Shipping address
@@ -141,21 +184,18 @@ extension CheckoutViewController: CheckoutTableFooterViewDelegate {
         address.address1 = "7357 Franklin Avenue"
         address.city = "Los Angeles"
         address.zip = "90046"
-        address.province = "CA"
+        address.province = selectedState
         address.countryCode = "US"
         
-        // Create Client
-        let client = BUYClient(shopDomain: Shopify.ShopDomain, apiKey: Shopify.ApiKey, channelId: Shopify.ChannelId)
-        client.enableApplePayWithMerchantId(Shopify.ApplePayMerchantId)
-        
         // Get the product
-        client.getProductById("1334414273") { (product, error) in
+        let client = BUYClient.sharedClient()
+        client.getProductById("460236989") { (product, _) in
             
+            // If product exists
             if product != nil {
                 let variants = product.variants as! [BUYProductVariant]
-                
                 if variants.count > 0 {
-                    let variant = variants.first!
+                    let variant = variants[0] //[self.sizesSegmentedControl.selectedSegmentIndex]
                     
                     // Create Cart and add product
                     let cart = BUYCart()
@@ -167,19 +207,19 @@ extension CheckoutViewController: CheckoutTableFooterViewDelegate {
                     checkout.billingAddress = address
                     
                     client.createCheckout(checkout) { (checkout, error) in
-                        println(error.userInfo)
                         if error == nil {
                             client.getShippingRatesForCheckout(checkout) { (rates, status, error) in
-                                println(rates)
-                                println(status)
+                                self.shippingRates = rates as! [BUYShippingRate]
+                                self.checkout = checkout
+                                dispatch_async(dispatch_get_main_queue()) {
+                                    self.performSegueWithIdentifier(Storyboard.FinalTVCSegue, sender: nil)
+                                }
                             }
                         }
                     }
-
                 }
             }
         }
         
     }
-    
 }

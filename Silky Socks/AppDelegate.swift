@@ -19,6 +19,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Enable crashlytics
         Fabric.with([Crashlytics()])
+
+        // Enable Apple Pay
+        BUYClient.sharedClient().enableApplePayWithMerchantId(Shopify.ApplePayMerchantId)
         return true
     }
 

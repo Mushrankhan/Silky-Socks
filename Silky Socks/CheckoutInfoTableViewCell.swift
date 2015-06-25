@@ -10,11 +10,10 @@ import UIKit
 
 class CheckoutInfoTableViewCell: UITableViewCell, UITextFieldDelegate {
 
-    @IBOutlet weak var infoTextField: UITextField! {
-        didSet {
-            infoTextField.delegate = self
-        }
-    }
+    // The text field
+    @IBOutlet weak var infoTextField: UITextField! { didSet { infoTextField.delegate = self } }
+    
+    // MARK: UITextField Delegate
     
     func textFieldShouldBeginEditing(textField: UITextField) -> Bool {
         if infoTextField.text == "United States" {
