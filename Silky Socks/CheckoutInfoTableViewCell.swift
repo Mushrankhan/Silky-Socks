@@ -8,8 +8,15 @@
 
 import UIKit
 
+protocol CheckoutInfoTableViewCellDelegate: class {
+    func checkoutInfoTableViewCell(cell: CheckoutInfoTableViewCell, didEnterInfo info: String)
+}
+
 class CheckoutInfoTableViewCell: UITableViewCell, UITextFieldDelegate {
 
+    // Delegate
+    weak var delegate: CheckoutInfoTableViewCellDelegate?
+    
     // The text field
     @IBOutlet weak var infoTextField: UITextField! { didSet { infoTextField.delegate = self } }
     
@@ -25,6 +32,10 @@ class CheckoutInfoTableViewCell: UITableViewCell, UITextFieldDelegate {
     func textFieldShouldReturn(textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         return true
+    }
+    
+    func textFieldDidEndEditing(textField: UITextField) {
+        delegate?.checkoutInfoTableViewCell(self, didEnterInfo: textField.text)
     }
     
 }

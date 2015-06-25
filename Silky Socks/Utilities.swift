@@ -261,3 +261,10 @@ extension NSUserDefaults {
     }
     
 }
+
+// MARK: String
+extension String {
+    func parseString() -> String {
+        return stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
+    }
+}

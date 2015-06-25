@@ -42,3 +42,11 @@ extension BUYClient {
         return Singleton.sharedClient
     }
 }
+
+extension BUYAddress {
+    
+    func isValid() -> Bool {
+        return firstName != nil && count(firstName.parseString()) > 0 && lastName != nil && count(lastName.parseString()) > 0 && address1 != nil && count(address1.parseString()) > 2 && city != nil && count(city.parseString()) > 0 && count(province) == 2 && zip != nil && count(zip) == 5
+    }
+}
+

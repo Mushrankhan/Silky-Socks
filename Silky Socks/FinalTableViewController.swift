@@ -10,9 +10,11 @@ import UIKit
 
 class FinalTableViewController: UITableViewController {
     
+    // Passed on from previous VC
     var checkout: BUYCheckout!
     var shippingRates: [BUYShippingRate]!
     
+    // Constants
     private struct Constants {
         static let CellReuseIdentifier = "Cell"
     }
@@ -24,10 +26,7 @@ class FinalTableViewController: UITableViewController {
     }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int{
-        if section == 0 {
-            return shippingRates.count
-        }
-        return 2
+        return section == 0 ? shippingRates.count : 2
     }
 
     
@@ -59,7 +58,11 @@ class FinalTableViewController: UITableViewController {
     
     // Keep track of shipping
     private var selectedShippingIndexPath: NSIndexPath?
-    private var selectedShipping: BUYShippingRate?
+    private var selectedShipping: BUYShippingRate? {
+        didSet {
+            checkout.shippingRate = selectedShipping
+        }
+    }
     
     
     // MARK: - Table View Delegate

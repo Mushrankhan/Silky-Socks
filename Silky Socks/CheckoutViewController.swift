@@ -98,6 +98,7 @@ class CheckoutViewController: UITableViewController, StatesPickerTableViewCellDe
             let cell = tableView.dequeueReusableCellWithIdentifier(Storyboard.InfoCellReuseIdentifier, forIndexPath: indexPath) as! CheckoutInfoTableViewCell
             cell.infoTextField.placeholder = infoToBeAsked[indexPath.section][indexPath.row]
             if cell.infoTextField.placeholder == "Country" { cell.infoTextField.text = "United States" }
+            cell.delegate = self
             return cell
         }
         
@@ -153,12 +154,15 @@ class CheckoutViewController: UITableViewController, StatesPickerTableViewCellDe
         }
     }
     
+    // Selected State
+    private var selectedState = "AL"
+    
     // Store the shipping rates
     private var shippingRates: [BUYShippingRate]!
     private var checkout: BUYCheckout!
     
-    // Selected State
-    private var selectedState = "AL"
+    private var address = BUYAddress()
+    private var email: String?
 }
 
 
@@ -171,6 +175,44 @@ extension CheckoutViewController: StatesPickerTableViewCellDelegate {
 }
 
 
+// MARK: CheckoutInfoTableViewCellDelegate
+
+extension CheckoutViewController: CheckoutInfoTableViewCellDelegate {
+    func checkoutInfoTableViewCell(cell: CheckoutInfoTableViewCell, didEnterInfo info: String) {
+        let indexPath = tableView.indexPathForCell(cell)
+        if let indexPath = indexPath {
+            switch indexPath.section {
+                case 0 :
+                    switch indexPath.row {
+                        case 0:
+                            address.firstName = info
+                        case 1:
+                            address.lastName = info
+                        case 2:
+                            email = info
+                        default:
+                            break
+                    }
+                case 1:
+                    switch indexPath.row {
+                        case 0:
+                            address.address1 = info
+                        case 1:
+                            address.address2 = info
+                        case 2:
+                            address.city = info
+                        case 4:
+                            address.zip = info
+                        default:
+                            break
+                    }
+                default:
+                    break
+            }
+        }
+    }
+}
+
 // MARK: Checkout Table Footer View Delegate
 
 extension CheckoutViewController: CheckoutTableFooterViewDelegate {
@@ -178,14 +220,20 @@ extension CheckoutViewController: CheckoutTableFooterViewDelegate {
     func checkOutTableFooterView(view: CheckoutTableFooterView, didPressNextButton sender: UIButton) {
         
         // Shipping address
-        let address = BUYAddress()
-        address.firstName = "Saurabh"
-        address.lastName = "Jain"
-        address.address1 = "7357 Franklin Avenue"
-        address.city = "Los Angeles"
-        address.zip = "90046"
         address.province = selectedState
         address.countryCode = "US"
+        
+        // Invalid address
+        if !address.isValid() {
+            println("Address not valid")
+            return
+        }
+        
+        // Invalid error
+        if email == nil || ((email! as NSString).rangeOfString(".com").location == NSNotFound) {
+            println("Enter Email")
+            return
+        }
         
         // Get the product
         let client = BUYClient.sharedClient()
@@ -195,7 +243,7 @@ extension CheckoutViewController: CheckoutTableFooterViewDelegate {
             if product != nil {
                 let variants = product.variants as! [BUYProductVariant]
                 if variants.count > 0 {
-                    let variant = variants[0] //[self.sizesSegmentedControl.selectedSegmentIndex]
+                    let variant = variants[self.sizesSegmentedControl.selectedSegmentIndex]
                     
                     // Create Cart and add product
                     let cart = BUYCart()
@@ -203,14 +251,15 @@ extension CheckoutViewController: CheckoutTableFooterViewDelegate {
                     
                     // Create Checkout
                     let checkout = BUYCheckout(cart: cart)
-                    checkout.shippingAddress = address
-                    checkout.billingAddress = address
+                    checkout.shippingAddress = self.address
+                    checkout.billingAddress = self.address
+                    checkout.email = self.email
                     
                     client.createCheckout(checkout) { (checkout, error) in
                         if error == nil {
                             client.getShippingRatesForCheckout(checkout) { (rates, status, error) in
-                                self.shippingRates = rates as! [BUYShippingRate]
                                 self.checkout = checkout
+                                self.shippingRates = rates as! [BUYShippingRate]
                                 dispatch_async(dispatch_get_main_queue()) {
                                     self.performSegueWithIdentifier(Storyboard.FinalTVCSegue, sender: nil)
                                 }
