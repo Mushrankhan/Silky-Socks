@@ -10,18 +10,19 @@ import UIKit
 
 class CreditCardTableViewCell: UITableViewCell, UITextFieldDelegate {
     
-    @IBOutlet weak var creditCardNumber: UITextField! { didSet { conformToDelegate(creditCardNumber) } }
-    @IBOutlet weak var month: UITextField! { didSet { conformToDelegate(month) } }
-    @IBOutlet weak var year: UITextField! { didSet { conformToDelegate(year) } }
-    @IBOutlet weak var cvv: UITextField! { didSet { conformToDelegate(cvv) } }
+    @IBOutlet weak var creditCardNumber: UITextField!   { didSet { setUp(creditCardNumber) } }
+    @IBOutlet weak var month: UITextField!              { didSet { setUp(month) } }
+    @IBOutlet weak var year: UITextField!               { didSet { setUp(year)  } }
+    @IBOutlet weak var cvv: UITextField!                { didSet { setUp(cvv)   } }
     
-    final private func conformToDelegate(textField: UITextField) {
+    final private func setUp(textField: UITextField) {
         textField.delegate = self
+        textField.keyboardType = .NumberPad
     }
     
     // MARK: - UITextField Delegate
     
-    func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
+    func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String)  -> Bool {
         
         var length = 0
         if textField == creditCardNumber {
@@ -41,4 +42,17 @@ class CreditCardTableViewCell: UITableViewCell, UITextFieldDelegate {
         textField.resignFirstResponder()
         return true
     }
+}
+
+
+class CreditView: UIView {
+    
+    override func drawRect(rect: CGRect) {
+        let context = UIGraphicsGetCurrentContext()
+        CGContextMoveToPoint(context, 0, rect.height/2)
+        CGContextAddLineToPoint(context, rect.width, rect.height/2)
+        UIColor.getColor(red: 240, green: 240, blue: 240, alpha: 1).setStroke()
+        CGContextStrokePath(context)
+    }
+    
 }

@@ -2,6 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
@@ -13,46 +14,58 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="1234 5678 9012 3456" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="QvX-cu-rgz">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="40"/>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8w7-WU-xEs" customClass="CreditView" customModule="Silky_Socks" customModuleProvider="target">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="80"/>
+                        <subviews>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="1234 5678 9012 3456" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="QvX-cu-rgz">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="eQ5-q3-Tay"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="18"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Year" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="guT-rn-ZDG">
+                                <rect key="frame" x="120" y="48" width="81" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="81" id="Ks7-59-bJx"/>
+                                    <constraint firstAttribute="height" constant="21" id="S6x-R2-5s0"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="16"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Month" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="cNX-RH-CTM">
+                                <rect key="frame" x="8" y="49" width="81" height="19"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="16"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="CVV" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="skx-fJ-nHY">
+                                <rect key="frame" x="231" y="49" width="81" height="19"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="16"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="40" id="eQ5-q3-Tay"/>
+                            <constraint firstAttribute="centerX" secondItem="guT-rn-ZDG" secondAttribute="centerX" id="9AE-7i-cVh"/>
+                            <constraint firstItem="QvX-cu-rgz" firstAttribute="leading" secondItem="8w7-WU-xEs" secondAttribute="leading" id="QHW-2r-6Nw"/>
+                            <constraint firstItem="cNX-RH-CTM" firstAttribute="centerY" secondItem="skx-fJ-nHY" secondAttribute="centerY" id="VG4-L5-Zpd"/>
+                            <constraint firstAttribute="trailing" secondItem="QvX-cu-rgz" secondAttribute="trailing" id="ZiD-Ij-tS6"/>
+                            <constraint firstItem="cNX-RH-CTM" firstAttribute="width" secondItem="skx-fJ-nHY" secondAttribute="width" id="dfu-dW-7RA"/>
+                            <constraint firstItem="guT-rn-ZDG" firstAttribute="top" secondItem="QvX-cu-rgz" secondAttribute="bottom" constant="8" id="hvA-bJ-97h"/>
+                            <constraint firstItem="cNX-RH-CTM" firstAttribute="centerY" secondItem="guT-rn-ZDG" secondAttribute="centerY" id="nRW-PG-aad"/>
+                            <constraint firstItem="cNX-RH-CTM" firstAttribute="width" secondItem="guT-rn-ZDG" secondAttribute="width" id="nbL-7N-3jG"/>
+                            <constraint firstItem="QvX-cu-rgz" firstAttribute="top" secondItem="8w7-WU-xEs" secondAttribute="top" id="qcJ-lF-uKZ"/>
+                            <constraint firstItem="cNX-RH-CTM" firstAttribute="leading" secondItem="8w7-WU-xEs" secondAttribute="leading" constant="8" id="s2i-aS-X3p"/>
+                            <constraint firstAttribute="trailing" secondItem="skx-fJ-nHY" secondAttribute="trailing" constant="8" id="y8Y-Zz-6fd"/>
                         </constraints>
-                        <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="18"/>
-                        <textInputTraits key="textInputTraits"/>
-                    </textField>
-                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Year" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="guT-rn-ZDG">
-                        <rect key="frame" x="120" y="48" width="81" height="21"/>
-                        <constraints>
-                            <constraint firstAttribute="width" constant="81" id="Ks7-59-bJx"/>
-                            <constraint firstAttribute="height" constant="21" id="S6x-R2-5s0"/>
-                        </constraints>
-                        <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="16"/>
-                        <textInputTraits key="textInputTraits"/>
-                    </textField>
-                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="CVV" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="skx-fJ-nHY">
-                        <rect key="frame" x="239" y="49" width="81" height="19"/>
-                        <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="16"/>
-                        <textInputTraits key="textInputTraits"/>
-                    </textField>
-                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Month" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="cNX-RH-CTM">
-                        <rect key="frame" x="0.0" y="49" width="81" height="19"/>
-                        <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="16"/>
-                        <textInputTraits key="textInputTraits"/>
-                    </textField>
+                    </view>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="cNX-RH-CTM" firstAttribute="width" secondItem="skx-fJ-nHY" secondAttribute="width" id="0iE-1n-vmx"/>
-                    <constraint firstAttribute="centerX" secondItem="guT-rn-ZDG" secondAttribute="centerX" id="266-zj-aV3"/>
-                    <constraint firstItem="QvX-cu-rgz" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="AKf-9c-WAL"/>
-                    <constraint firstAttribute="trailing" secondItem="skx-fJ-nHY" secondAttribute="trailing" id="HGn-4t-Wby"/>
-                    <constraint firstAttribute="trailing" secondItem="QvX-cu-rgz" secondAttribute="trailing" id="Htf-LN-Sgq"/>
-                    <constraint firstItem="cNX-RH-CTM" firstAttribute="centerY" secondItem="skx-fJ-nHY" secondAttribute="centerY" id="NYD-fF-EBi"/>
-                    <constraint firstItem="cNX-RH-CTM" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="R0x-6p-yUa"/>
-                    <constraint firstItem="guT-rn-ZDG" firstAttribute="top" secondItem="QvX-cu-rgz" secondAttribute="bottom" constant="8" id="VUp-Fz-0eh"/>
-                    <constraint firstItem="cNX-RH-CTM" firstAttribute="centerY" secondItem="guT-rn-ZDG" secondAttribute="centerY" id="bUa-9o-vCy"/>
-                    <constraint firstItem="cNX-RH-CTM" firstAttribute="width" secondItem="guT-rn-ZDG" secondAttribute="width" id="dpf-vs-OjM"/>
-                    <constraint firstItem="QvX-cu-rgz" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="lw5-ca-3Ka"/>
+                    <constraint firstItem="8w7-WU-xEs" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="VVP-Jb-vnU"/>
+                    <constraint firstAttribute="trailing" secondItem="8w7-WU-xEs" secondAttribute="trailing" id="eeF-Bu-yI7"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="8w7-WU-xEs" secondAttribute="bottom" constant="-8.5" id="oO6-BV-uEF"/>
+                    <constraint firstItem="8w7-WU-xEs" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="uZw-4X-BEY"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>

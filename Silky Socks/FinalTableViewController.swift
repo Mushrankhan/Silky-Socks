@@ -24,6 +24,7 @@ class FinalTableViewController: UITableViewController, UIGestureRecognizerDelega
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        navigationItem.title = "Final"
         tableView.registerNib(UINib(nibName: "CreditCardTableViewCell", bundle: nil), forCellReuseIdentifier: Constants.CreditCardCell)
     }
     
@@ -74,7 +75,7 @@ class FinalTableViewController: UITableViewController, UIGestureRecognizerDelega
         if section == 0 {
             return "Select a shipping method"
         }
-        return nil
+        return "Payment Method"
     }
     
     // Keep track of shipping
