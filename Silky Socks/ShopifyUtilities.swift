@@ -50,3 +50,10 @@ extension BUYAddress {
     }
 }
 
+extension BUYCreditCard {
+    
+    func isValid() -> Bool {
+        return number != nil && count(number) == 16 && expiryMonth != nil && count(expiryMonth) == 2 && expiryYear != nil && count(expiryYear) == 4 && cvv != nil && count(cvv) == 3
+    }
+    
+}

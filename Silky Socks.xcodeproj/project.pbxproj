@@ -30,6 +30,8 @@
 		1F58FE6D1B343DA3003E2507 /* Buy.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 1F58FE6B1B343DA3003E2507 /* Buy.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		1F88389C1B0D731200E3BBB6 /* SJTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F88389B1B0D731200E3BBB6 /* SJTextField.swift */; };
 		1F88389E1B0D875D00E3BBB6 /* SJLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F88389D1B0D875D00E3BBB6 /* SJLabel.swift */; };
+		1FA0F9BC1B3DAB9A00480B36 /* FinalTableViewControllerFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FA0F9BB1B3DAB9A00480B36 /* FinalTableViewControllerFooterView.swift */; };
+		1FA0F9BE1B3DABA400480B36 /* FinalTableViewControllerFooterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1FA0F9BD1B3DABA400480B36 /* FinalTableViewControllerFooterView.xib */; };
 		1FC258AB1B14B60700EAEF20 /* UserCart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FC258AA1B14B60700EAEF20 /* UserCart.swift */; };
 		1FC72AD41B3D6C6400D54C1E /* CreditCardTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FC72AD21B3D6C6400D54C1E /* CreditCardTableViewCell.swift */; };
 		1FC72AD51B3D6C6400D54C1E /* CreditCardTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1FC72AD31B3D6C6400D54C1E /* CreditCardTableViewCell.xib */; };
@@ -115,6 +117,8 @@
 		1F58FE6B1B343DA3003E2507 /* Buy.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Buy.framework; path = ../Buy.framework; sourceTree = "<group>"; };
 		1F88389B1B0D731200E3BBB6 /* SJTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SJTextField.swift; sourceTree = "<group>"; };
 		1F88389D1B0D875D00E3BBB6 /* SJLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SJLabel.swift; sourceTree = "<group>"; };
+		1FA0F9BB1B3DAB9A00480B36 /* FinalTableViewControllerFooterView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FinalTableViewControllerFooterView.swift; sourceTree = "<group>"; };
+		1FA0F9BD1B3DABA400480B36 /* FinalTableViewControllerFooterView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FinalTableViewControllerFooterView.xib; sourceTree = "<group>"; };
 		1FC258AA1B14B60700EAEF20 /* UserCart.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserCart.swift; sourceTree = "<group>"; };
 		1FC72AD21B3D6C6400D54C1E /* CreditCardTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreditCardTableViewCell.swift; sourceTree = "<group>"; };
 		1FC72AD31B3D6C6400D54C1E /* CreditCardTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CreditCardTableViewCell.xib; sourceTree = "<group>"; };
@@ -234,6 +238,15 @@
 				1FF543CB1B26259F007B6B19 /* TemplateInfoViewController.xib */,
 			);
 			name = VC;
+			sourceTree = "<group>";
+		};
+		1FA0F9BF1B3DE5A500480B36 /* Final VC Footer View */ = {
+			isa = PBXGroup;
+			children = (
+				1FA0F9BB1B3DAB9A00480B36 /* FinalTableViewControllerFooterView.swift */,
+				1FA0F9BD1B3DABA400480B36 /* FinalTableViewControllerFooterView.xib */,
+			);
+			name = "Final VC Footer View";
 			sourceTree = "<group>";
 		};
 		1FC258A91B14901500EAEF20 /* Bottom View */ = {
@@ -382,6 +395,7 @@
 		4F8D38CF1AE4461700F42E23 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				1FA0F9BF1B3DE5A500480B36 /* Final VC Footer View */,
 				1FFB38711B204F62007E9390 /* Normal */,
 				1F17F2921B36BED200DBFEBC /* Checkout Table Header View */,
 				1F293BF51B382B1E00551A40 /* Checkout Table Footer View */,
@@ -531,6 +545,7 @@
 			files = (
 				1FF7940C1B22DD05000CB14D /* Walkway Black.ttf in Resources */,
 				4FB6C9C31AE4AF7A001A6E50 /* SJBottomView.xib in Resources */,
+				1FA0F9BE1B3DABA400480B36 /* FinalTableViewControllerFooterView.xib in Resources */,
 				1F39440B1B094EA4008E73E0 /* SJCollectionAddToCartReusableView.xib in Resources */,
 				1F58FE671B340F27003E2507 /* CartTableViewCell.xib in Resources */,
 				1FC72AD51B3D6C6400D54C1E /* CreditCardTableViewCell.xib in Resources */,
@@ -647,6 +662,7 @@
 				4F8D38A61AE440DE00F42E23 /* Silky_Socks.xcdatamodeld in Sources */,
 				1FD558001B2086CA003BDE2A /* SJApprovalViewController.swift in Sources */,
 				1FCF50A11B083D70005D8578 /* SJCollectionViewDelegate.swift in Sources */,
+				1FA0F9BC1B3DAB9A00480B36 /* FinalTableViewControllerFooterView.swift in Sources */,
 				1F17F2951B370AB700DBFEBC /* StatesPickerTableViewCell.swift in Sources */,
 				1F17F2881B36AA7200DBFEBC /* CheckoutViewController.swift in Sources */,
 				4F8D38CA1AE4451000F42E23 /* SJCollectionViewController.swift in Sources */,

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class FinalTableViewController: UITableViewController, UIGestureRecognizerDelegate {
+class FinalTableViewController: UITableViewController, CreditCardTableViewCellDelegate, FinalTableViewControllerFooterViewDelegate {
     
     // Passed on from previous VC
     var checkout: BUYCheckout!
@@ -26,6 +26,10 @@ class FinalTableViewController: UITableViewController, UIGestureRecognizerDelega
         
         navigationItem.title = "Final"
         tableView.registerNib(UINib(nibName: "CreditCardTableViewCell", bundle: nil), forCellReuseIdentifier: Constants.CreditCardCell)
+        
+        let footerView = NSBundle.mainBundle().loadNibNamed("FinalTableViewControllerFooterView", owner: nil, options: nil).first as? FinalTableViewControllerFooterView
+        footerView?.delegate = self
+        tableView.tableFooterView = footerView
     }
     
     // MARK: - Table view data source
@@ -60,6 +64,7 @@ class FinalTableViewController: UITableViewController, UIGestureRecognizerDelega
         }
         
         let cell = tableView.dequeueReusableCellWithIdentifier(Constants.CreditCardCell, forIndexPath: indexPath) as! CreditCardTableViewCell
+        cell.delegate = self
         return cell
 
     }
@@ -78,6 +83,8 @@ class FinalTableViewController: UITableViewController, UIGestureRecognizerDelega
         return "Payment Method"
     }
     
+    // MARK: - Table View Delegate
+    
     // Keep track of shipping
     private var selectedShippingIndexPath: NSIndexPath?
     private var selectedShipping: BUYShippingRate? {
@@ -85,9 +92,6 @@ class FinalTableViewController: UITableViewController, UIGestureRecognizerDelega
             checkout.shippingRate = selectedShipping
         }
     }
-    
-    
-    // MARK: - Table View Delegate
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         if indexPath.section == 0 {
@@ -98,4 +102,64 @@ class FinalTableViewController: UITableViewController, UIGestureRecognizerDelega
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
     }
 
+    
+    // MARK: - CreditCardTableViewCell Delegate
+    
+    private lazy var card: BUYCreditCard = {
+        let creditcard = BUYCreditCard()
+        creditcard.nameOnCard = self.checkout.shippingAddress.firstName + " " + self.checkout.shippingAddress.lastName
+        return creditcard
+    }()
+    
+    func creditCardTableViewCell(cell: CreditCardTableViewCell, didEnterCreditCard creditCard: String) {
+        card.number = creditCard
+        println(creditCard)
+    }
+    
+    func creditCardTableViewCell(cell: CreditCardTableViewCell, didEnterExpiryMonth expiryMonth: String) {
+        card.expiryMonth = expiryMonth
+        println(expiryMonth)
+    }
+    
+    func creditCardTableViewCell(cell: CreditCardTableViewCell, didEnterExpiryYear expiryYear: String) {
+        card.expiryYear = expiryYear
+        println(expiryYear)
+    }
+    
+    func creditCardTableViewCell(cell: CreditCardTableViewCell, didEnterCVV cvv: String) {
+        card.cvv = cvv
+        println(cvv)
+    }
+    
+    // MARK: - FinalTableViewControllerFooterViewDelegate
+    
+    func payByCreditCard(creditCard: Bool) {
+        
+        println(self.checkout.subtotalPrice)
+        println(self.checkout.totalTax)
+        println(self.checkout.totalPrice)
+        return
+        
+        // Please select a shipping method
+        if self.checkout.shippingRate == nil {
+            
+        }
+        
+        // Pay by credit card
+        if creditCard {
+            if card.isValid() {
+                BUYClient.sharedClient().storeCreditCard(card, checkout: self.checkout) { (checkout, status, error) in
+                    if error == nil {
+                        self.checkout = checkout
+                        // now show total price
+                    }
+                }
+            }
+        }
+        
+        // Apple Pay
+        else {
+            
+        }
+    }
 }

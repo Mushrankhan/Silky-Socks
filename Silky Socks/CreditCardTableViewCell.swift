@@ -8,7 +8,17 @@
 
 import UIKit
 
+protocol CreditCardTableViewCellDelegate: class {
+    func creditCardTableViewCell(cell: CreditCardTableViewCell, didEnterCreditCard creditCard: String)
+    func creditCardTableViewCell(cell: CreditCardTableViewCell, didEnterExpiryMonth expiryMonth: String)
+    func creditCardTableViewCell(cell: CreditCardTableViewCell, didEnterExpiryYear expiryYear: String)
+    func creditCardTableViewCell(cell: CreditCardTableViewCell, didEnterCVV cvv: String)
+}
+
 class CreditCardTableViewCell: UITableViewCell, UITextFieldDelegate {
+    
+    // Delegate
+    weak var delegate: CreditCardTableViewCellDelegate?
     
     @IBOutlet weak var creditCardNumber: UITextField!   { didSet { setUp(creditCardNumber) } }
     @IBOutlet weak var month: UITextField!              { didSet { setUp(month) } }
@@ -36,6 +46,20 @@ class CreditCardTableViewCell: UITableViewCell, UITextFieldDelegate {
         }
         
         return count(textField.text) + count(string) - range.length <= length
+    }
+    
+    func textFieldDidEndEditing(textField: UITextField) {
+        
+        if textField == creditCardNumber {
+            delegate?.creditCardTableViewCell(self, didEnterCreditCard: textField.text)
+        } else if textField == month {
+            delegate?.creditCardTableViewCell(self, didEnterExpiryMonth: textField.text)
+        } else if textField == year {
+            delegate?.creditCardTableViewCell(self, didEnterExpiryYear: textField.text)
+        } else {
+            delegate?.creditCardTableViewCell(self, didEnterCVV: textField.text)
+        }
+        
     }
     
     func textFieldShouldReturn(textField: UITextField) -> Bool {
