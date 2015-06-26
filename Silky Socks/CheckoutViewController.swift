@@ -23,7 +23,7 @@ class CheckoutViewController: UITableViewController, StatesPickerTableViewCellDe
         super.viewDidLoad()
         
         // Title
-        navigationItem.title = "CheckOut"
+        navigationItem.title = "Checkout"
         
         // Register Cell
         tableView.registerNib(UINib(nibName: "CheckoutInfoTableViewCell", bundle: nil), forCellReuseIdentifier: Storyboard.InfoCellReuseIdentifier)
@@ -223,6 +223,17 @@ extension CheckoutViewController: CheckoutTableFooterViewDelegate {
         address.province = selectedState
         address.countryCode = "US"
         
+        // Testing Purposes
+        let addr = BUYAddress()
+        addr.firstName = "Saurabh"
+        addr.lastName = "Jain"
+        addr.address1 = "7357 Franklin Avenue"
+        addr.city = "Los Angeles"
+        addr.province = "CA"
+        addr.countryCode = "US"
+        addr.zip = "90046"
+        address = addr
+        
         // Invalid address
         if !address.isValid() {
             println("Address not valid")
@@ -230,14 +241,14 @@ extension CheckoutViewController: CheckoutTableFooterViewDelegate {
         }
         
         // Invalid error
-        if email == nil || ((email! as NSString).rangeOfString(".com").location == NSNotFound) {
-            println("Enter Email")
-            return
-        }
+//        if email == nil || ((email! as NSString).rangeOfString(".com").location == NSNotFound) {
+//            println("Enter Email")
+//            return
+//        }
         
         // Get the product
         let client = BUYClient.sharedClient()
-        client.getProductById("460236989") { (product, _) in
+        client.getProductById("1334414273") { (product, _) in
             
             // If product exists
             if product != nil {
@@ -253,14 +264,15 @@ extension CheckoutViewController: CheckoutTableFooterViewDelegate {
                     let checkout = BUYCheckout(cart: cart)
                     checkout.shippingAddress = self.address
                     checkout.billingAddress = self.address
-                    checkout.email = self.email
+                    checkout.email = "saurabhj80@gmail.com"//self.email
                     
                     client.createCheckout(checkout) { (checkout, error) in
+                        println(error)
                         if error == nil {
                             client.getShippingRatesForCheckout(checkout) { (rates, status, error) in
-                                self.checkout = checkout
-                                self.shippingRates = rates as! [BUYShippingRate]
                                 dispatch_async(dispatch_get_main_queue()) {
+                                    self.checkout = checkout
+                                    self.shippingRates = rates as! [BUYShippingRate]
                                     self.performSegueWithIdentifier(Storyboard.FinalTVCSegue, sender: nil)
                                 }
                             }
