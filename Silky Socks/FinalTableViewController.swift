@@ -8,7 +8,7 @@
 
 import UIKit
 
-class FinalTableViewController: UITableViewController {
+class FinalTableViewController: UITableViewController, UIGestureRecognizerDelegate {
     
     // Passed on from previous VC
     var checkout: BUYCheckout!
@@ -17,14 +17,14 @@ class FinalTableViewController: UITableViewController {
     // Constants
     private struct Constants {
         static let CellReuseIdentifier = "Cell"
-        static let CreditCardCell = "Checkout Cell"
+        static let CreditCardCell = "Credit Cell"
         static let NumberOfSections = 2
     }
-    
+        
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        tableView.registerNib(UINib(nibName: "CheckoutInfoTableViewCell", bundle: nil), forCellReuseIdentifier: Constants.CreditCardCell)
+        tableView.registerNib(UINib(nibName: "CreditCardTableViewCell", bundle: nil), forCellReuseIdentifier: Constants.CreditCardCell)
     }
     
     // MARK: - Table view data source
@@ -34,7 +34,7 @@ class FinalTableViewController: UITableViewController {
     }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int{
-        return section == 0 ? shippingRates.count : 2
+        return section == 0 ? shippingRates.count : 1
     }
 
     
@@ -58,10 +58,16 @@ class FinalTableViewController: UITableViewController {
             return cell
         }
         
-        let cell = tableView.dequeueReusableCellWithIdentifier(Constants.CreditCardCell, forIndexPath: indexPath) as! CheckoutInfoTableViewCell
-        cell.infoTextField.placeholder = indexPath.row == 0 ? "1234 5678 9012 3456" : "Hello"
+        let cell = tableView.dequeueReusableCellWithIdentifier(Constants.CreditCardCell, forIndexPath: indexPath) as! CreditCardTableViewCell
         return cell
 
+    }
+    
+    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        if indexPath.section == 1 {
+            return 80
+        }
+        return 44
     }
     
     override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {

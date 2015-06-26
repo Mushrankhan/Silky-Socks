@@ -256,24 +256,27 @@ extension CheckoutViewController: CheckoutTableFooterViewDelegate {
                 if variants.count > 0 {
                     let variant = variants[self.sizesSegmentedControl.selectedSegmentIndex]
                     
-                    // Create Cart and add product
-                    let cart = BUYCart()
-                    cart.addProduct(self.product, withVariant: variant)
-                    
-                    // Create Checkout
-                    let checkout = BUYCheckout(cart: cart)
-                    checkout.shippingAddress = self.address
-                    checkout.billingAddress = self.address
-                    checkout.email = "saurabhj80@gmail.com"//self.email
-                    
-                    client.createCheckout(checkout) { (checkout, error) in
-                        println(error)
-                        if error == nil {
-                            client.getShippingRatesForCheckout(checkout) { (rates, status, error) in
-                                dispatch_async(dispatch_get_main_queue()) {
-                                    self.checkout = checkout
-                                    self.shippingRates = rates as! [BUYShippingRate]
-                                    self.performSegueWithIdentifier(Storyboard.FinalTVCSegue, sender: nil)
+                    dispatch_async(dispatch_get_main_queue()) {
+                        
+                        // Create Cart and add product
+                        let cart = BUYCart()
+                        cart.addProduct(self.product, withVariant: variant)
+                        
+                        // Create Checkout
+                        let checkout = BUYCheckout(cart: cart)
+                        checkout.shippingAddress = self.address
+                        checkout.billingAddress = self.address
+                        checkout.email = "saurabhj80@gmail.com"//self.email
+                        
+                        client.createCheckout(checkout) { (checkout, error) in
+                            println(error)
+                            if error == nil {
+                                client.getShippingRatesForCheckout(checkout) { (rates, status, error) in
+                                    dispatch_async(dispatch_get_main_queue()) {
+                                        self.checkout = checkout
+                                        self.shippingRates = rates as! [BUYShippingRate]
+                                        self.performSegueWithIdentifier(Storyboard.FinalTVCSegue, sender: nil)
+                                    }
                                 }
                             }
                         }

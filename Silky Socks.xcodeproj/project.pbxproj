@@ -31,6 +31,8 @@
 		1F88389C1B0D731200E3BBB6 /* SJTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F88389B1B0D731200E3BBB6 /* SJTextField.swift */; };
 		1F88389E1B0D875D00E3BBB6 /* SJLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F88389D1B0D875D00E3BBB6 /* SJLabel.swift */; };
 		1FC258AB1B14B60700EAEF20 /* UserCart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FC258AA1B14B60700EAEF20 /* UserCart.swift */; };
+		1FC72AD41B3D6C6400D54C1E /* CreditCardTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FC72AD21B3D6C6400D54C1E /* CreditCardTableViewCell.swift */; };
+		1FC72AD51B3D6C6400D54C1E /* CreditCardTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1FC72AD31B3D6C6400D54C1E /* CreditCardTableViewCell.xib */; };
 		1FCF508F1B070F4C005D8578 /* SJCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FCF508E1B070F4C005D8578 /* SJCollectionView.swift */; };
 		1FCF50951B07EBAB005D8578 /* SJCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FCF50941B07EBAB005D8578 /* SJCollectionReusableView.swift */; };
 		1FCF50991B07ECA3005D8578 /* SJCollectionRestartReusableView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1FCF50981B07ECA3005D8578 /* SJCollectionRestartReusableView.xib */; };
@@ -114,6 +116,8 @@
 		1F88389B1B0D731200E3BBB6 /* SJTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SJTextField.swift; sourceTree = "<group>"; };
 		1F88389D1B0D875D00E3BBB6 /* SJLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SJLabel.swift; sourceTree = "<group>"; };
 		1FC258AA1B14B60700EAEF20 /* UserCart.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserCart.swift; sourceTree = "<group>"; };
+		1FC72AD21B3D6C6400D54C1E /* CreditCardTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreditCardTableViewCell.swift; sourceTree = "<group>"; };
+		1FC72AD31B3D6C6400D54C1E /* CreditCardTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CreditCardTableViewCell.xib; sourceTree = "<group>"; };
 		1FCF508E1B070F4C005D8578 /* SJCollectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SJCollectionView.swift; sourceTree = "<group>"; };
 		1FCF50941B07EBAB005D8578 /* SJCollectionReusableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SJCollectionReusableView.swift; sourceTree = "<group>"; };
 		1FCF50981B07ECA3005D8578 /* SJCollectionRestartReusableView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SJCollectionRestartReusableView.xib; sourceTree = "<group>"; };
@@ -179,6 +183,8 @@
 		1F17F28D1B36BE3600DBFEBC /* Table View Cells */ = {
 			isa = PBXGroup;
 			children = (
+				1FC72AD21B3D6C6400D54C1E /* CreditCardTableViewCell.swift */,
+				1FC72AD31B3D6C6400D54C1E /* CreditCardTableViewCell.xib */,
 				1F17F2931B370AB700DBFEBC /* StatesPickerTableViewCell.swift */,
 				1F17F2941B370AB700DBFEBC /* StatesPickerTableViewCell.xib */,
 				1F17F28E1B36BE8A00DBFEBC /* CheckoutInfoTableViewCell.swift */,
@@ -527,6 +533,7 @@
 				4FB6C9C31AE4AF7A001A6E50 /* SJBottomView.xib in Resources */,
 				1F39440B1B094EA4008E73E0 /* SJCollectionAddToCartReusableView.xib in Resources */,
 				1F58FE671B340F27003E2507 /* CartTableViewCell.xib in Resources */,
+				1FC72AD51B3D6C6400D54C1E /* CreditCardTableViewCell.xib in Resources */,
 				1FCF509B1B07ED8A005D8578 /* SJCollectionShareReusableView.xib in Resources */,
 				4F8D38AB1AE440DE00F42E23 /* Main.storyboard in Resources */,
 				1FF7940A1B22DCB2000CB14D /* Maiden.ttf in Resources */,
@@ -622,6 +629,7 @@
 			files = (
 				1FF543CC1B26259F007B6B19 /* TemplateInfoViewController.swift in Sources */,
 				4F55B55D1AE480F400679048 /* SJLayout.swift in Sources */,
+				1FC72AD41B3D6C6400D54C1E /* CreditCardTableViewCell.swift in Sources */,
 				1FCF508F1B070F4C005D8578 /* SJCollectionView.swift in Sources */,
 				1F88389E1B0D875D00E3BBB6 /* SJLabel.swift in Sources */,
 				1F88389C1B0D731200E3BBB6 /* SJTextField.swift in Sources */,
