@@ -246,6 +246,7 @@ extension CheckoutViewController: CheckoutTableFooterViewDelegate {
 //            return
 //        }
         
+        
         // Get the product
         let client = BUYClient.sharedClient()
         client.getProductById("1334414273") { (product, _) in

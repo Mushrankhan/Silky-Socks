@@ -32,6 +32,7 @@
 		1F88389E1B0D875D00E3BBB6 /* SJLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F88389D1B0D875D00E3BBB6 /* SJLabel.swift */; };
 		1FA0F9BC1B3DAB9A00480B36 /* FinalTableViewControllerFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FA0F9BB1B3DAB9A00480B36 /* FinalTableViewControllerFooterView.swift */; };
 		1FA0F9BE1B3DABA400480B36 /* FinalTableViewControllerFooterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1FA0F9BD1B3DABA400480B36 /* FinalTableViewControllerFooterView.xib */; };
+		1FA0F9C11B3DE98B00480B36 /* SweetAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FA0F9C01B3DE98B00480B36 /* SweetAlert.swift */; };
 		1FC258AB1B14B60700EAEF20 /* UserCart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FC258AA1B14B60700EAEF20 /* UserCart.swift */; };
 		1FC72AD41B3D6C6400D54C1E /* CreditCardTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FC72AD21B3D6C6400D54C1E /* CreditCardTableViewCell.swift */; };
 		1FC72AD51B3D6C6400D54C1E /* CreditCardTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1FC72AD31B3D6C6400D54C1E /* CreditCardTableViewCell.xib */; };
@@ -119,6 +120,7 @@
 		1F88389D1B0D875D00E3BBB6 /* SJLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SJLabel.swift; sourceTree = "<group>"; };
 		1FA0F9BB1B3DAB9A00480B36 /* FinalTableViewControllerFooterView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FinalTableViewControllerFooterView.swift; sourceTree = "<group>"; };
 		1FA0F9BD1B3DABA400480B36 /* FinalTableViewControllerFooterView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FinalTableViewControllerFooterView.xib; sourceTree = "<group>"; };
+		1FA0F9C01B3DE98B00480B36 /* SweetAlert.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SweetAlert.swift; sourceTree = "<group>"; };
 		1FC258AA1B14B60700EAEF20 /* UserCart.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserCart.swift; sourceTree = "<group>"; };
 		1FC72AD21B3D6C6400D54C1E /* CreditCardTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreditCardTableViewCell.swift; sourceTree = "<group>"; };
 		1FC72AD31B3D6C6400D54C1E /* CreditCardTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CreditCardTableViewCell.xib; sourceTree = "<group>"; };
@@ -395,6 +397,7 @@
 		4F8D38CF1AE4461700F42E23 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				1FA0F9C01B3DE98B00480B36 /* SweetAlert.swift */,
 				1FA0F9BF1B3DE5A500480B36 /* Final VC Footer View */,
 				1FFB38711B204F62007E9390 /* Normal */,
 				1F17F2921B36BED200DBFEBC /* Checkout Table Header View */,
@@ -647,6 +650,7 @@
 				1FC72AD41B3D6C6400D54C1E /* CreditCardTableViewCell.swift in Sources */,
 				1FCF508F1B070F4C005D8578 /* SJCollectionView.swift in Sources */,
 				1F88389E1B0D875D00E3BBB6 /* SJLabel.swift in Sources */,
+				1FA0F9C11B3DE98B00480B36 /* SweetAlert.swift in Sources */,
 				1F88389C1B0D731200E3BBB6 /* SJTextField.swift in Sources */,
 				1F293BF71B384D1300551A40 /* ShopifyUtilities.swift in Sources */,
 				1F1F77581B3C448700DBD227 /* FinalTableViewController.swift in Sources */,
