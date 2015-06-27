@@ -18,16 +18,26 @@ class FinalTableViewController: UITableViewController, CreditCardTableViewCellDe
     private struct Constants {
         static let CellReuseIdentifier = "Cell"
         static let CreditCardCell = "Credit Cell"
+        static let CreditCardCellNib = "CreditCardTableViewCell"
         static let NumberOfSections = 3
+        static let NumberOfRowsInSectionOne = 2
+        static let NumberOfRowsInSectionTwo = 1
+        static let SectionZeroTitle = "Select a shipping method"
+        static let SectionTwoTitle = "Payment Method"
+        static let FooterViewNibName = "FinalTableViewControllerFooterView"
     }
-        
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // Title
         navigationItem.title = "Final"
-        tableView.registerNib(UINib(nibName: "CreditCardTableViewCell", bundle: nil), forCellReuseIdentifier: Constants.CreditCardCell)
         
-        let footerView = NSBundle.mainBundle().loadNibNamed("FinalTableViewControllerFooterView", owner: nil, options: nil).first as? FinalTableViewControllerFooterView
+        // Register Nib
+        tableView.registerNib(UINib(nibName: Constants.CreditCardCellNib, bundle: nil), forCellReuseIdentifier: Constants.CreditCardCell)
+        
+        // Set up the footer view
+        let footerView = NSBundle.mainBundle().loadNibNamed(Constants.FooterViewNibName, owner: nil, options: nil).first as? FinalTableViewControllerFooterView
         footerView?.delegate = self
         tableView.tableFooterView = footerView
     }
@@ -39,36 +49,46 @@ class FinalTableViewController: UITableViewController, CreditCardTableViewCellDe
     }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int{
-        return section == 0 ? shippingRates.count : 1
+        if section == 0 {
+            return shippingRates.count
+        }
+        return section == 1 ? Constants.NumberOfRowsInSectionOne : Constants.NumberOfRowsInSectionTwo
     }
 
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
 
+        // Section 0 : Show Shipping Information
+        // Section 1 : Show Total Tax and Total Price
         if indexPath.section == 0 || indexPath.section == 1 {
             
             let cell = tableView.dequeueReusableCellWithIdentifier(Constants.CellReuseIdentifier, forIndexPath: indexPath) as! UITableViewCell
             
+            // Section 0
             if indexPath.section == 0 {
-                let rate = shippingRates[indexPath.row]
-                cell.textLabel!.text = rate.title
-                cell.detailTextLabel!.text = "$\(rate.price)"
+                cell.textLabel!.text = shippingRates[indexPath.row].title
+                cell.detailTextLabel!.text = "$\(shippingRates[indexPath.row].price)"
                 
+                // If selected a shipping method then show a check mark
                 if selectedShippingIndexPath != nil {
                     cell.accessoryType = .Checkmark
-                    selectedShipping = shippingRates[selectedShippingIndexPath!.row]
+                    selectedShipping = shippingRates[selectedShippingIndexPath!.row] // Set the selected shipping
                 } else {
                     cell.accessoryType = .None
                 }
-            } else {
-                cell.textLabel?.text = "Tax"
-                cell.detailTextLabel?.text = "$\(checkout.totalTax)"
+            }
+            
+            // Section 1
+            else {
+                cell.textLabel?.text = indexPath.row == 0 ? "Tax" : "Total"
+                cell.detailTextLabel?.text = indexPath.row == 0 ? "$\(checkout.totalTax)" : "$\(checkout.totalPrice)"
                 cell.selectionStyle = .None
             }
             
             return cell
         }
         
+        // Cell to collect credit card details
         let cell = tableView.dequeueReusableCellWithIdentifier(Constants.CreditCardCell, forIndexPath: indexPath) as! CreditCardTableViewCell
         cell.delegate = self
         return cell
@@ -84,9 +104,9 @@ class FinalTableViewController: UITableViewController, CreditCardTableViewCellDe
     
     override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         if section == 0 {
-            return "Select a shipping method"
+            return Constants.SectionZeroTitle
         } else if section == 2 {
-            return "Payment Method"
+            return Constants.SectionTwoTitle
         }
         return nil
     }
@@ -95,18 +115,30 @@ class FinalTableViewController: UITableViewController, CreditCardTableViewCellDe
     
     // Keep track of shipping
     private var selectedShippingIndexPath: NSIndexPath?
+    
+    // When a shipping method is selected, then update the checkout
     private var selectedShipping: BUYShippingRate? {
         didSet {
             checkout.shippingRate = selectedShipping
             SVProgressHUD.showWithStatus("Updating Shipping Method")
-            BUYClient.sharedClient().updateCheckout(checkout, completion: { (checkout, error) -> Void in
-                if error == nil {
-                    self.checkout = checkout
-                }
+            BUYClient.sharedClient().updateCheckout(checkout) { [unowned self] (checkout, error) in
+                
+                // Hide
                 dispatch_async(dispatch_get_main_queue(), { () -> Void in
                     SVProgressHUD.dismiss()
                 })
-            })
+                
+                if error == nil {
+                    dispatch_async(dispatch_get_main_queue()) {
+                        self.checkout = checkout
+                        self.tableView.reloadRowsAtIndexPaths([NSIndexPath(forRow: 1, inSection: 1)], withRowAnimation: .Fade)
+                    }
+                } else {
+                    dispatch_async(dispatch_get_main_queue()) {
+                        SweetAlert().showAlert("Error Updating", subTitle: "Shipping Method", style: .Error)
+                    }
+                }
+            }
         }
     }
     
@@ -114,22 +146,26 @@ class FinalTableViewController: UITableViewController, CreditCardTableViewCellDe
         
         if indexPath.section == 0 {
             
+            // If choose same shipping
             if selectedShippingIndexPath == indexPath {
                 tableView.deselectRowAtIndexPath(indexPath, animated: true)
                 return
             }
             
-            // one shipping method already selected
+            // One Shipping Method already has been selected
             if selectedShippingIndexPath != nil {
                 let cell = tableView.cellForRowAtIndexPath(selectedShippingIndexPath!)
                 cell?.accessoryType = .None
             }
             
+            // Update the indexPath of the new shipping
+            // And then reload the row, which also update the UI and the checkout object
             selectedShippingIndexPath = indexPath
             tableView.reloadRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
             return
         }
         
+        // If any other section is selected, then deselect the row at that indexPath
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
     }
     
@@ -171,22 +207,29 @@ class FinalTableViewController: UITableViewController, CreditCardTableViewCellDe
         
         // Pay by credit card
         if creditCard {
+            
             if card.isValid() {
+                // Show Loading
+                SVProgressHUD.showWithStatus("Sending Credit Card Info")
+                
+                // Associate the card with the checkout
                 BUYClient.sharedClient().storeCreditCard(card, checkout: self.checkout) { (checkout, status, error) in
                     if error == nil {
                         self.checkout = checkout
-                        // now show total price
                         dispatch_async(dispatch_get_main_queue()) {
-                            self.completeCheckout()
+                            self.completeCheckout() // Complete Checkout
                         }
-                        
                     } else {
                         dispatch_async(dispatch_get_main_queue()) {
+                            SVProgressHUD.dismiss()
                             SweetAlert().showAlert("Unable to Process", subTitle: "Please Try Again Later", style: .Error)
                         }
                     }
                 }
-            } else {
+            }
+            
+            // Credit Card Not Valid
+            else {
                 SweetAlert().showAlert("Credit Card Not Valid", subTitle: "", style: .Error)
             }
         }
@@ -202,35 +245,56 @@ class FinalTableViewController: UITableViewController, CreditCardTableViewCellDe
     
     final private func completeCheckout() {
         
+        // Get the client
         let client = BUYClient.sharedClient()
         
-        client.completeCheckout(self.checkout) { (checkout, error) in
+        SVProgressHUD.setStatus("Completing...")
+        client.completeCheckout(checkout) { (checkout, error) in
+            
             if error == nil {
                 self.checkout = checkout
+                dispatch_async(dispatch_get_main_queue()) {
+                    self.getCompletionStatusOfCheckout()
+                }
+                
+            } else {
+                dispatch_async(dispatch_get_main_queue()) {
+                    SVProgressHUD.dismiss()
+                    SweetAlert().showAlert("Unable to Process", subTitle: "Please Try Again Later", style: .Error)
+                }
             }
         }
+    }
+    
+    
+    final private func getCompletionStatusOfCheckout() {
         
+        let client = BUYClient.sharedClient()
         var status = BUYStatus.Unknown
         var completedCheckout = self.checkout
         let semaphore = dispatch_semaphore_create(0)
         
+        SVProgressHUD.setStatus("Checking for Completion")
+        
         do {
-            client.getCompletionStatusOfCheckout(self.checkout, completion: { (checkout, buystatus, error) -> Void in
+            client.getCompletionStatusOfCheckout(self.checkout, completion: { (checkout, buystatus, error)  in
                 completedCheckout = checkout
                 status = buystatus
                 dispatch_semaphore_signal(semaphore)
             })
             
             dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER)
+            
             if (status == .Processing) {
                 NSThread.sleepForTimeInterval(0.5)
             } else {
-                // Handle success/error
                 if status == .Failed {
                     SweetAlert().showAlert("Failed", subTitle: "Try Again", style: .Error)
                 } else if status == .Complete {
                     SweetAlert().showAlert("Success", subTitle: "Congratulations", style: .Success)
-                    // now pop everything
+                    // Remove the first item from the cart
+                    UserCart.sharedCart.cart.removeAtIndex(0)
+                    self.navigationController?.popToRootViewControllerAnimated(true)
                 }
             }
             

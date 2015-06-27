@@ -16,9 +16,6 @@ class CheckoutViewController: UITableViewController, StatesPickerTableViewCellDe
     // Placeholders
     lazy var infoToBeAsked = [["First Name", "Last Name", "Email"], ["Street Address", "Street Address 2", "City", "State", "Zip" ,"Country"], ["Front and Back", "Size", "Quantity", "Cost"]]
     
-    // Segmented Control showing the different sizes
-    private var sizesSegmentedControl: UISegmentedControl!
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -59,11 +56,15 @@ class CheckoutViewController: UITableViewController, StatesPickerTableViewCellDe
         static let DetialsRows = 4
     }
     
-    // Index path at which we have the Picker View
-    private var indexPathForStatesCell = NSIndexPath(forRow: 3, inSection: 1)
     
     // MARK: UITableView Data Source
 
+    // Segmented Control showing the different sizes
+    private var sizesSegmentedControl: UISegmentedControl!
+    
+    // Index path at which we have the Picker View
+    private var indexPathForStatesCell = NSIndexPath(forRow: 3, inSection: 1)
+    
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return Constants.NumberOfSections
     }
@@ -259,7 +260,7 @@ extension CheckoutViewController: CheckoutTableFooterViewDelegate {
         
         // Get the product
         let client = BUYClient.sharedClient()
-        client.getProductById(self.product.productID) { (product, _) in
+        client.getProductById(self.product.productID) { [unowned self] (product, _) in
             
             // If product exists
             if product != nil {
