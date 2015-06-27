@@ -33,7 +33,7 @@ class CreditCardTableViewCell: UITableViewCell, UITextFieldDelegate {
     // MARK: - UITextField Delegate
     
     func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String)  -> Bool {
-        
+
         var length = 0
         if textField == creditCardNumber {
             length = 16
@@ -75,7 +75,8 @@ class CreditView: UIView {
         let context = UIGraphicsGetCurrentContext()
         CGContextMoveToPoint(context, 0, rect.height/2)
         CGContextAddLineToPoint(context, rect.width, rect.height/2)
-        UIColor.getColor(red: 240, green: 240, blue: 240, alpha: 1).setStroke()
+        UIColor(red: 0.783922, green: 0.780392, blue: 0.8, alpha: 1).setStroke()
+        CGContextSetLineWidth(context, 0.5)
         CGContextStrokePath(context)
         
         CGContextMoveToPoint(context, rect.width/3, rect.height/2)
