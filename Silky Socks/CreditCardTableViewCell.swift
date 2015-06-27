@@ -77,6 +77,13 @@ class CreditView: UIView {
         CGContextAddLineToPoint(context, rect.width, rect.height/2)
         UIColor.getColor(red: 240, green: 240, blue: 240, alpha: 1).setStroke()
         CGContextStrokePath(context)
+        
+        CGContextMoveToPoint(context, rect.width/3, rect.height/2)
+        CGContextAddLineToPoint(context, rect.width/3, rect.height)
+        CGContextStrokePath(context)
+        
+        CGContextMoveToPoint(context, 2*rect.width/3, rect.height/2)
+        CGContextAddLineToPoint(context, 2*rect.width/3, rect.height)
+        CGContextStrokePath(context)
     }
-    
 }

@@ -22,6 +22,12 @@ class CartProduct: NSObject, Printable, Equatable {
     // Name
     private(set) var name: String
     
+    // The product id used to grab the product from Shopify
+    private(set) var productID: String
+    
+    // The Type of the product
+    private(set) var productType: TemplateType!
+    
     // The base price changes with the change in quantity
     // Computed property
     var basePrice: Float {
@@ -50,18 +56,20 @@ class CartProduct: NSObject, Printable, Equatable {
     // The current price
     private(set) var price: Float
     
-    init(name: String, productImage: UIImage, prices: [Float]) {
+    init(name: String, productImage: UIImage, prices: [Float], productID: String, type: TemplateType) {
         
         self.name = name
         self.productImage = productImage
         self.prices = prices
         self.quantity = 1
         self.price = prices[0]
+        self.productID = productID
+        self.productType = type
         
     }
     
     convenience init(template: Template, withImage image: UIImage) {
-        self.init(name: template.infoCaption, productImage: image, prices: template.prices)
+        self.init(name: template.infoCaption, productImage: image, prices: template.prices, productID: template.productId, type: template.type)
     }
     
     // Printable

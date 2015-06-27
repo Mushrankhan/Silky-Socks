@@ -37,17 +37,26 @@ class SweetAlert: UIViewController {
     var userAction:((isOtherButton: Bool) -> Void)? = nil
     let kFont = "Helvetica"
 
-    convenience init() {
-        self.init()
+    required init(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+    }
+    
+    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
+        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
         
-        self.view.frame = UIScreen.mainScreen().bounds
-        self.view.autoresizingMask = UIViewAutoresizing.FlexibleHeight | UIViewAutoresizing.FlexibleWidth
-        self.view.backgroundColor = UIColor(red:0, green:0, blue:0, alpha:kBakcgroundTansperancy)
-        self.view.addSubview(contentView)
+    }
+    
+    override func loadView() {
         
-        //Retaining itself strongly so can exist without strong refrence
+        let view = UIView()
+        view.frame = UIScreen.mainScreen().bounds
+        view.autoresizingMask = UIViewAutoresizing.FlexibleHeight | UIViewAutoresizing.FlexibleWidth
+        view.backgroundColor = UIColor(red:0, green:0, blue:0, alpha:kBakcgroundTansperancy)
+        view.addSubview(contentView)
+        
         strongSelf = self
-
+        self.view = view
+        
     }
     
     func setupContentView() {
@@ -170,14 +179,6 @@ class SweetAlert: UIViewController {
     
     func buttonTapped(btn:UIButton) {
     
-    }
-    
-    required init(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
-    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
-        super.init(nibName:nibNameOrNil, bundle:nibBundleOrNil)
     }
 
     func closeAlert(buttonIndex:Int){

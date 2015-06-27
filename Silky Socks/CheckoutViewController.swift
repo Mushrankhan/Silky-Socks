@@ -108,10 +108,15 @@ class CheckoutViewController: UITableViewController, StatesPickerTableViewCellDe
         cell.textLabel?.text = infoToBeAsked[indexPath.section][indexPath.row]
         cell.detailTextLabel?.text = ""
         if indexPath.row == 1 {
-            sizesSegmentedControl = UISegmentedControl(items: ["S", "M", "L", "XL", "XXL", "XXXL"])
-            sizesSegmentedControl.tintColor = UIColor.blackColor()
-            sizesSegmentedControl.selectedSegmentIndex = 2
-            cell.accessoryView = sizesSegmentedControl
+            if self.product.productType != .Socks {
+                sizesSegmentedControl = UISegmentedControl(items: ["S", "M", "L", "XL", "XXL", "XXXL"])
+                sizesSegmentedControl.tintColor = UIColor.blackColor()
+                sizesSegmentedControl.selectedSegmentIndex = 2
+                cell.accessoryView = sizesSegmentedControl
+            } else {
+                cell.detailTextLabel?.text = "Standard Size"
+            }
+
         }
         if indexPath.row == 2 { cell.detailTextLabel?.text = "\(product.quantity)" }
         if indexPath.row == 3 { cell.detailTextLabel?.text = "\(product.price)" }
@@ -236,26 +241,35 @@ extension CheckoutViewController: CheckoutTableFooterViewDelegate {
         
         // Invalid address
         if !address.isValid() {
-            println("Address not valid")
+            SweetAlert().showAlert("Address Not Valid", subTitle: "Enter Again", style: .Error)
             return
         }
         
         // Invalid error
 //        if email == nil || ((email! as NSString).rangeOfString(".com").location == NSNotFound) {
-//            println("Enter Email")
+//            SweetAlert().showAlert("Email Address Not Valid", subTitle: "Enter Again", style: .Error)
 //            return
 //        }
         
+        // Show loading indicator
+        SVProgressHUD.setBackgroundColor(UIColor.blackColor())
+        SVProgressHUD.setForegroundColor(UIColor.whiteColor())
+        SVProgressHUD.setRingThickness(5)
+        SVProgressHUD.showWithStatus("Loading")
         
         // Get the product
         let client = BUYClient.sharedClient()
-        client.getProductById("1334414273") { (product, _) in
+        client.getProductById(self.product.productID) { (product, _) in
             
             // If product exists
             if product != nil {
                 let variants = product.variants as! [BUYProductVariant]
                 if variants.count > 0 {
-                    let variant = variants[self.sizesSegmentedControl.selectedSegmentIndex]
+                    
+                    var variant = variants[0]
+                    if self.product.productType != .Socks {
+                        variant = variants[self.sizesSegmentedControl.selectedSegmentIndex]
+                    }
                     
                     dispatch_async(dispatch_get_main_queue()) {
                         
@@ -270,18 +284,38 @@ extension CheckoutViewController: CheckoutTableFooterViewDelegate {
                         checkout.email = "saurabhj80@gmail.com"//self.email
                         
                         client.createCheckout(checkout) { (checkout, error) in
-                            println(error)
                             if error == nil {
                                 client.getShippingRatesForCheckout(checkout) { (rates, status, error) in
-                                    dispatch_async(dispatch_get_main_queue()) {
-                                        self.checkout = checkout
-                                        self.shippingRates = rates as! [BUYShippingRate]
-                                        self.performSegueWithIdentifier(Storyboard.FinalTVCSegue, sender: nil)
+                                    if error == nil {
+                                        dispatch_async(dispatch_get_main_queue()) {
+                                            SVProgressHUD.dismiss() // Dismiss the loading indicator
+                                            self.checkout = checkout
+                                            self.shippingRates = rates as! [BUYShippingRate]
+                                            self.performSegueWithIdentifier(Storyboard.FinalTVCSegue, sender: nil)
+                                        }
+                                    } else {    // Unable to get shipping rates
+                                        dispatch_async(dispatch_get_main_queue()) {
+                                            SVProgressHUD.dismiss()
+                                            SweetAlert().showAlert("Checkout Error", subTitle: "Please Try Again Later", style: .Error)
+                                        }
                                     }
+                                }
+                            } else {    // Unable to create checkout
+                                dispatch_async(dispatch_get_main_queue()) {
+                                    SVProgressHUD.dismiss()
+                                    SweetAlert().showAlert("Checkout Error", subTitle: "Please Try Again Later", style: .Error)
                                 }
                             }
                         }
                     }
+                }
+            }
+            
+            // If not able to find product, then dismiss the loading indicator
+            else {
+                dispatch_async(dispatch_get_main_queue()) {
+                    SVProgressHUD.dismiss()
+                    SweetAlert().showAlert("Network Error", subTitle: "Please Try Again Later", style: .Error)
                 }
             }
         }

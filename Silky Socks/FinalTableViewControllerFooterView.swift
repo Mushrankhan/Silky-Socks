@@ -17,6 +17,12 @@ class FinalTableViewControllerFooterView: UIView {
     // Delegate
     weak var delegate: FinalTableViewControllerFooterViewDelegate?
     
+    // Hide it for now
+    @IBOutlet weak var firstLine: UIView! { didSet { firstLine.hidden = true } }
+    @IBOutlet weak var secondLine: UIView! { didSet { secondLine.hidden = true } }
+    @IBOutlet weak var orLabel: UILabel! { didSet { orLabel.hidden = true } }
+    @IBOutlet weak var applePayButton: UIButton! { didSet { applePayButton.hidden = true } }
+    
     @IBAction func payByCreditCard(sender: UIButton) {
         delegate?.payByCreditCard(true)
     }

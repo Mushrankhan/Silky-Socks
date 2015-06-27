@@ -210,6 +210,25 @@
 			name = "Checkout Table Header View";
 			sourceTree = "<group>";
 		};
+		1F1914651B3E86FB008837D8 /* Third Party */ = {
+			isa = PBXGroup;
+			children = (
+				1FA0F9C01B3DE98B00480B36 /* SweetAlert.swift */,
+			);
+			name = "Third Party";
+			sourceTree = "<group>";
+		};
+		1F1914661B3E872E008837D8 /* Table View */ = {
+			isa = PBXGroup;
+			children = (
+				1F17F28D1B36BE3600DBFEBC /* Table View Cells */,
+				1FA0F9BF1B3DE5A500480B36 /* Final VC Footer View */,
+				1F17F2921B36BED200DBFEBC /* Checkout Table Header View */,
+				1F293BF51B382B1E00551A40 /* Checkout Table Footer View */,
+			);
+			name = "Table View";
+			sourceTree = "<group>";
+		};
 		1F293BF51B382B1E00551A40 /* Checkout Table Footer View */ = {
 			isa = PBXGroup;
 			children = (
@@ -305,6 +324,8 @@
 		1FFB38701B2042D3007E9390 /* Collection View */ = {
 			isa = PBXGroup;
 			children = (
+				1FCF509E1B07FF06005D8578 /* Collection View Cell */,
+				1FCF509F1B07FF0B005D8578 /* Supplementary Views */,
 				1FCF508E1B070F4C005D8578 /* SJCollectionView.swift */,
 			);
 			name = "Collection View";
@@ -397,14 +418,9 @@
 		4F8D38CF1AE4461700F42E23 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				1FA0F9C01B3DE98B00480B36 /* SweetAlert.swift */,
-				1FA0F9BF1B3DE5A500480B36 /* Final VC Footer View */,
+				1F1914651B3E86FB008837D8 /* Third Party */,
 				1FFB38711B204F62007E9390 /* Normal */,
-				1F17F2921B36BED200DBFEBC /* Checkout Table Header View */,
-				1F293BF51B382B1E00551A40 /* Checkout Table Footer View */,
-				1F17F28D1B36BE3600DBFEBC /* Table View Cells */,
-				1FCF509E1B07FF06005D8578 /* Collection View Cell */,
-				1FCF509F1B07FF0B005D8578 /* Supplementary Views */,
+				1F1914661B3E872E008837D8 /* Table View */,
 				1FFB38701B2042D3007E9390 /* Collection View */,
 			);
 			name = View;
