@@ -217,7 +217,7 @@ class FinalTableViewController: UITableViewController, CreditCardTableViewCellDe
                 SVProgressHUD.showWithStatus("Sending Credit Card Info")
                 
                 // Associate the card with the checkout
-                BUYClient.sharedClient().storeCreditCard(card, checkout: self.checkout) { (checkout, status, error) in
+                BUYClient.sharedClient().storeCreditCard(card, checkout: self.checkout) { [unowned self] (checkout, status, error) in
                     if error == nil {
                         self.checkout = checkout
                         dispatch_async(dispatch_get_main_queue()) {
@@ -227,7 +227,6 @@ class FinalTableViewController: UITableViewController, CreditCardTableViewCellDe
                         dispatch_async(dispatch_get_main_queue()) {
                             SVProgressHUD.dismiss()
                             SweetAlert().showAlert("Unable to Process", subTitle: "Please Try Again Later", style: .Error)
-                            println(error)
                         }
                     }
                 }
@@ -254,7 +253,7 @@ class FinalTableViewController: UITableViewController, CreditCardTableViewCellDe
         let client = BUYClient.sharedClient()
         
         SVProgressHUD.setStatus("Completing...")
-        client.completeCheckout(checkout) { (checkout, error) in
+        client.completeCheckout(checkout) { [unowned self] (checkout, error) in
             
             if error == nil {
                 self.checkout = checkout
@@ -299,7 +298,7 @@ class FinalTableViewController: UITableViewController, CreditCardTableViewCellDe
                 } else if status == .Complete {
                     SweetAlert().showAlert("Success", subTitle: "Congratulations", style: .Success)
                     // Remove the first item from the cart
-                    UserCart.sharedCart.cart.removeAtIndex(0)
+                    UserCart.sharedCart.boughtProduct()
                     self.navigationController?.popToViewController(self.navigationController!.viewControllers[1] as! UIViewController, animated: true)
                 }
             }

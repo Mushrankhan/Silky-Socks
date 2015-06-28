@@ -16,15 +16,17 @@ import UIKit
 */
 class UserCart: NSObject {
    
+    // Notifications, which classes can subscribe to
     struct UserCartNotifications {
         static let AddToCartNotification = "AddToCartNotification"
+        static let BoughtProductNotification = "BoughtProductNotification"
     }
     
     // Singleton support
     static let sharedCart = UserCart()
     
     // User Cart
-    var cart = [CartProduct]()
+    private(set) var cart = [CartProduct]()
     
     var numberOfItems: Int {
         return cart.count
@@ -54,5 +56,10 @@ class UserCart: NSObject {
                 return
             }
         }
+    }
+    
+    func boughtProduct() {
+        cart.removeAtIndex(0)
+        NSNotificationCenter.defaultCenter().postNotificationName(UserCartNotifications.BoughtProductNotification, object: nil)
     }
 }

@@ -45,6 +45,12 @@ class CartTableViewController: UIViewController, UITableViewDataSource, UITableV
         // Hide unwanted cells
         tableView.tableFooterView = UIView(frame: CGRectZero)
         
+        // When a product is bought, then reload the table
+        NSNotificationCenter.defaultCenter().addObserverForName(UserCart.UserCartNotifications.BoughtProductNotification, object: nil, queue: NSOperationQueue.mainQueue()) { [weak self] _ in
+            self?.tableView.reloadData()
+            self?.tableView.tableHeaderView = self?.numberOfItemsInCart == 0 ? self?.cartEmptyLabel : nil
+        }
+        
         // Set up the empty cart label
         cartEmptyLabel = UILabel(frame: tableView.bounds)
         cartEmptyLabel.text = "Cart is Empty"
