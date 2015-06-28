@@ -179,18 +179,22 @@ class FinalTableViewController: UITableViewController, CreditCardTableViewCellDe
     
     func creditCardTableViewCell(cell: CreditCardTableViewCell, didEnterCreditCard creditCard: String) {
         card.number = creditCard
+        println(creditCard)
     }
     
     func creditCardTableViewCell(cell: CreditCardTableViewCell, didEnterExpiryMonth expiryMonth: String) {
         card.expiryMonth = expiryMonth
+        println(expiryMonth)
     }
     
     func creditCardTableViewCell(cell: CreditCardTableViewCell, didEnterExpiryYear expiryYear: String) {
         card.expiryYear = expiryYear
+        println(expiryYear)
     }
     
     func creditCardTableViewCell(cell: CreditCardTableViewCell, didEnterCVV cvv: String) {
         card.cvv = cvv
+        println(cvv)
     }
     
     // MARK: - FinalTableViewControllerFooterViewDelegate
@@ -223,6 +227,7 @@ class FinalTableViewController: UITableViewController, CreditCardTableViewCellDe
                         dispatch_async(dispatch_get_main_queue()) {
                             SVProgressHUD.dismiss()
                             SweetAlert().showAlert("Unable to Process", subTitle: "Please Try Again Later", style: .Error)
+                            println(error)
                         }
                     }
                 }
@@ -260,7 +265,7 @@ class FinalTableViewController: UITableViewController, CreditCardTableViewCellDe
             } else {
                 dispatch_async(dispatch_get_main_queue()) {
                     SVProgressHUD.dismiss()
-                    SweetAlert().showAlert("Unable to Process", subTitle: "Please Try Again Later", style: .Error)
+                    SweetAlert().showAlert("Unable to Process", subTitle: "Please try again", style: .Error)
                 }
             }
         }
@@ -288,13 +293,14 @@ class FinalTableViewController: UITableViewController, CreditCardTableViewCellDe
             if (status == .Processing) {
                 NSThread.sleepForTimeInterval(0.5)
             } else {
+                SVProgressHUD.dismiss()
                 if status == .Failed {
                     SweetAlert().showAlert("Failed", subTitle: "Try Again", style: .Error)
                 } else if status == .Complete {
                     SweetAlert().showAlert("Success", subTitle: "Congratulations", style: .Success)
                     // Remove the first item from the cart
                     UserCart.sharedCart.cart.removeAtIndex(0)
-                    self.navigationController?.popToRootViewControllerAnimated(true)
+                    self.navigationController?.popToViewController(self.navigationController!.viewControllers[1] as! UIViewController, animated: true)
                 }
             }
             

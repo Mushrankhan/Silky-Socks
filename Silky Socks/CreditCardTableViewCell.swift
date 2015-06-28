@@ -28,6 +28,18 @@ class CreditCardTableViewCell: UITableViewCell, UITextFieldDelegate {
     final private func setUp(textField: UITextField) {
         textField.delegate = self
         textField.keyboardType = .NumberPad
+        NSNotificationCenter.defaultCenter().addObserverForName(UITextFieldTextDidChangeNotification, object: textField, queue: NSOperationQueue.mainQueue()) { [unowned self] notification in
+            let text = (notification.object as! UITextField).text
+            if textField == self.creditCardNumber {
+                self.delegate?.creditCardTableViewCell(self, didEnterCreditCard: textField.text)
+            } else if textField == self.month {
+                self.delegate?.creditCardTableViewCell(self, didEnterExpiryMonth: textField.text)
+            } else if textField == self.year {
+                self.delegate?.creditCardTableViewCell(self, didEnterExpiryYear: textField.text)
+            } else {
+                self.delegate?.creditCardTableViewCell(self, didEnterCVV: textField.text)
+            }
+        }
     }
     
     // MARK: - UITextField Delegate
@@ -46,20 +58,6 @@ class CreditCardTableViewCell: UITableViewCell, UITextFieldDelegate {
         }
         
         return count(textField.text) + count(string) - range.length <= length
-    }
-    
-    func textFieldDidEndEditing(textField: UITextField) {
-        
-        if textField == creditCardNumber {
-            delegate?.creditCardTableViewCell(self, didEnterCreditCard: textField.text)
-        } else if textField == month {
-            delegate?.creditCardTableViewCell(self, didEnterExpiryMonth: textField.text)
-        } else if textField == year {
-            delegate?.creditCardTableViewCell(self, didEnterExpiryYear: textField.text)
-        } else {
-            delegate?.creditCardTableViewCell(self, didEnterCVV: textField.text)
-        }
-        
     }
     
     func textFieldShouldReturn(textField: UITextField) -> Bool {
