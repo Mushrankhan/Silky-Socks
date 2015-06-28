@@ -42,6 +42,13 @@ class Template: NSObject, Printable {
     // Product Id: The Id as on Shopify
     var productId: String
     
+    // The size needed to print the t-shirt in right dimensions
+    // If we clicked add to cart
+    // then draw the image in a rect of 36 x 32 inches
+    // 1 inch = 72 points
+    // Dividing by scale is essential in order to get the right dimensions
+    var productSize = CGSize(width: 2592.0 / UIScreen.mainScreen().scale, height: 2304.0 / UIScreen.mainScreen().scale)
+    
     // Init
     init(image: UIImage, type: TemplateType, maskImage: UIImage?, infoCaption: String, info: String, infoImage: UIImage?, price: [Float], productId: String) {
         self.image = image

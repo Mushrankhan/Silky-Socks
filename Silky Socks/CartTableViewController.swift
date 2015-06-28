@@ -62,6 +62,14 @@ class CartTableViewController: UIViewController, UITableViewDataSource, UITableV
         
         // Show the alpha button
         checkOutButton.alpha = 1
+        
+        // Edit Button
+        navigationItem.rightBarButtonItem = self.editButtonItem()
+    }
+    
+    override func setEditing(editing: Bool, animated: Bool) {
+        super.setEditing(editing, animated: animated)
+        tableView.setEditing(editing, animated: animated)
     }
 
     // MARK: - Table view data source

@@ -133,7 +133,7 @@ extension SJCollectionView: ShareViewCollectionReusableViewDelegate {
             // due to the presence of the info button
             let y = cell.infoButton.bounds.size.height
             let rect = CGRect(origin: CGPoint(x: 0, y: y), size: cell.frame.size)
-            let image = cell.clickSnapShot(rect, withLogo: UIImage.SilkySocksLogo(), forBuying: false)
+            let image = cell.clickSnapShot(rect, withLogo: UIImage.SilkySocksLogo())
             myDelegate?.collectionView(self, didPressShareButton: sender, withSnapShotImage: image)
         }
     }
@@ -144,14 +144,14 @@ extension SJCollectionView: CartViewCollectionReusableViewDelegate {
     func cartReusableView(view: CartViewCollectionReusableView, didPressAddToCartButton sender: UIButton) {
         if let cell = visibleCell {
             
-            if cell.shouldPan() {
-                myDelegate?.collectionView(self, didPressAddToCartButton: sender, withSnapShotImage: cell.template!.image, andTemplate: cell.template!)
-                return
-            }
+//            if cell.shouldPan() {
+//                myDelegate?.collectionView(self, didPressAddToCartButton: sender, withSnapShotImage: cell.template!.image, andTemplate: cell.template!)
+//                return
+//            }
             
             let y = cell.infoButton.bounds.size.height
             let rect = CGRect(origin: CGPoint(x: 0, y: y), size: cell.frame.size)
-            let image = cell.clickSnapShot(rect, withLogo: UIImage.SilkySocksLogo(), forBuying: true)
+            let image = cell.clickSnapShotForCart(rect, withLogo: UIImage.SilkySocksLogo(), size:cell.template!.productSize)
             myDelegate?.collectionView(self, didPressAddToCartButton: sender, withSnapShotImage: image, andTemplate: cell.template!)
         }
     }
