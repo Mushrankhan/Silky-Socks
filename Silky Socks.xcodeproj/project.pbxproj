@@ -806,11 +806,7 @@
 				CODE_SIGN_ENTITLEMENTS = "Silky Socks/Silky Socks.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Distribution: KAUSAR INDUSTRIES INC (DYNDWV74W5)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: KAUSAR INDUSTRIES INC (DYNDWV74W5)";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(PROJECT_DIR)",
-					"$(PROJECT_DIR)/Silky",
-					Socks,
-				);
+				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)";
 				GCC_TREAT_INCOMPATIBLE_POINTER_TYPE_WARNINGS_AS_ERRORS = YES;
 				GCC_WARN_NON_VIRTUAL_DESTRUCTOR = YES;
 				INFOPLIST_FILE = "Silky Socks/Info.plist";
@@ -866,11 +862,7 @@
 				CODE_SIGN_ENTITLEMENTS = "Silky Socks/Silky Socks.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Distribution: KAUSAR INDUSTRIES INC (DYNDWV74W5)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: KAUSAR INDUSTRIES INC (DYNDWV74W5)";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(PROJECT_DIR)",
-					"$(PROJECT_DIR)/Silky",
-					Socks,
-				);
+				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)";
 				GCC_TREAT_INCOMPATIBLE_POINTER_TYPE_WARNINGS_AS_ERRORS = YES;
 				GCC_WARN_NON_VIRTUAL_DESTRUCTOR = YES;
 				INFOPLIST_FILE = "Silky Socks/Info.plist";

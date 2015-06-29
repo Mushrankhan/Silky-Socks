@@ -40,28 +40,9 @@ class UserCart: NSObject {
     
     // Add Product
     func addProduct(template: CartProduct) {
-//        for (_, product) in enumerate(cart) {
-//            if product == template {
-//                ++product.quantity
-//                return
-//            }
-//        }
-        
         cart.append(template)
-        
-        // Post notification
         NSNotificationCenter.defaultCenter().postNotificationName(UserCartNotifications.AddToCartNotification, object: nil)
     }
-    
-    // Remove Product
-//    func removeProduct(template: CartProduct) {
-//        for (index , product) in enumerate(cart) {
-//            if product == template {
-//                cart.removeAtIndex(index)
-//                return
-//            }
-//        }
-//    }
     
     // Remove the item at a particular index
     func removeProductAtIndex(index: Int) {
