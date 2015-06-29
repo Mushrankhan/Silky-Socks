@@ -36,7 +36,6 @@ extension BUYCart: Printable {
 }
 
 extension BUYClient {
-    
     class func sharedClient() -> BUYClient {
         struct Singleton {
             static let sharedClient = BUYClient(shopDomain: Shopify.ShopDomain, apiKey: Shopify.ApiKey, channelId: Shopify.ChannelId)
@@ -46,23 +45,17 @@ extension BUYClient {
 }
 
 extension BUYAddress {
-    
     func isValid() -> Bool {
         return firstName != nil && count(firstName.parseString()) > 0 && lastName != nil && count(lastName.parseString()) > 0 && address1 != nil && count(address1.parseString()) > 2 && city != nil && count(city.parseString()) > 0 && count(province) == 2 && zip != nil && count(zip) == 5
     }
     
     func getAddress() -> String {
-        
-        let address = address1 + " " + address2 + " " + city + " " + province + " " + zip + " " + countryCode
-        println(address)
-        return address
+        return address1 + " " + address2 + " " + city + " " + province + " " + zip + " " + countryCode
     }
 }
 
 extension BUYCreditCard {
-    
     func isValid() -> Bool {
         return number != nil && count(number) == 16 && expiryMonth != nil && count(expiryMonth) == 2 && expiryYear != nil && count(expiryYear) == 4 && cvv != nil && count(cvv) == 3
     }
-    
 }

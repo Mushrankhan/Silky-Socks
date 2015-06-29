@@ -133,8 +133,13 @@ extension SJCollectionView: ShareViewCollectionReusableViewDelegate {
             // due to the presence of the info button
             let y = cell.infoButton.bounds.size.height
             let rect = CGRect(origin: CGPoint(x: 0, y: y), size: cell.frame.size)
-            let image = cell.clickSnapShot(rect, withLogo: UIImage.SilkySocksLogo())
-            myDelegate?.collectionView(self, didPressShareButton: sender, withSnapShotImage: image)
+            
+            dispatch_async(dispatch_get_global_queue(QOS_CLASS_USER_INITIATED, 0)) {
+                let image = cell.clickSnapShot(rect, withLogo: UIImage.SilkySocksLogo())
+                dispatch_async(dispatch_get_main_queue()) {
+                    myDelegate?.collectionView(self, didPressShareButton: sender, withSnapShotImage: image)
+                }
+            }
         }
     }
 }
@@ -146,8 +151,13 @@ extension SJCollectionView: CartViewCollectionReusableViewDelegate {
             // due to the presence of the info button
             let y = cell.infoButton.bounds.size.height
             let rect = CGRect(origin: CGPoint(x: 0, y: y), size: cell.frame.size)
-            let image = cell.clickSnapShotForCart(rect, withLogo: UIImage.SilkySocksLogo(), size:cell.template!.productSize)
-            myDelegate?.collectionView(self, didPressAddToCartButton: sender, withSnapShotImage: image, andTemplate: cell.template!)
+            
+            dispatch_async(dispatch_get_global_queue(QOS_CLASS_USER_INITIATED, 0)) {
+                let image = cell.clickSnapShotForCart(rect, withLogo: UIImage.SilkySocksLogo(), size:cell.template!.productSize)
+                dispatch_async(dispatch_get_main_queue()) {
+                    myDelegate?.collectionView(self, didPressAddToCartButton: sender, withSnapShotImage: image, andTemplate: cell.template!)
+                }
+            }
         }
     }
 }

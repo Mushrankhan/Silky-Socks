@@ -26,6 +26,8 @@ enum TemplateType {
 */
 class Template: NSObject, Printable {
     
+    // MARK: - Properties
+    
     // For the main screen
     var image: UIImage
     var maskImage: UIImage?
@@ -36,35 +38,34 @@ class Template: NSObject, Printable {
     var info: String
     var infoImage: UIImage?
     
-    // Price of product
-    var prices: [Float]
+    var prices: [Float] // Price of product
+    var productId: String // Product Id: The Id as on Shopify
     
-    // Product Id: The Id as on Shopify
-    var productId: String
     
-    // The size needed to print the t-shirt in right dimensions
-    // If we clicked add to cart
-    // then draw the image in a rect of 36 x 32 inches
-    // 1 inch = 72 points
-    // Dividing by scale is essential in order to get the right dimensions
+    /*  The size needed to print the t-shirt in right dimensions
+        If we clicked add to cart
+        then draw the image in a rect of 36 x 32 inches
+        1 inch = 72 points
+        Dividing by scale is essential in order to get the right dimensions */
     var productSize = CGSize(width: 2592.0 / UIScreen.mainScreen().scale, height: 2304.0 / UIScreen.mainScreen().scale)
     
-    // Init
+    
+    // MARK: - Init
+    
     init(image: UIImage, type: TemplateType, maskImage: UIImage?, infoCaption: String, info: String, infoImage: UIImage?, price: [Float], productId: String) {
+        
         self.image = image
         self.type = type
         self.maskImage = maskImage
-        
         self.infoCaption = infoCaption
         self.info = info
         self.infoImage = infoImage
-        
         self.prices = price
-        
         self.productId = productId
     }
 
-    // Printable Protocol
+    // MARK: - Printable
+    
     override var description: String {
         get {
             let str = "Caption: \(infoCaption)\n" + "Info : \(info)\n"
