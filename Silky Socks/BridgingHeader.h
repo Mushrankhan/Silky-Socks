@@ -12,5 +12,6 @@
 @import Buy;
 #import "RKNotificationHub.h"
 #import "SVProgressHUD.h"
+#import "Parse.h"
 
 #endif

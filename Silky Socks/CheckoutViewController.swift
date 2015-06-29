@@ -157,6 +157,7 @@ class CheckoutViewController: UITableViewController, StatesPickerTableViewCellDe
             let vc = segue.destinationViewController as! FinalTableViewController
             vc.checkout = self.checkout
             vc.shippingRates = self.shippingRates
+            vc.productImage = self.product.productImage
         }
     }
     

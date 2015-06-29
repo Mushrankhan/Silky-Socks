@@ -13,6 +13,7 @@ class FinalTableViewController: UITableViewController, CreditCardTableViewCellDe
     // Passed on from previous VC
     var checkout: BUYCheckout!
     var shippingRates: [BUYShippingRate]!
+    var productImage: UIImage!
     
     // Constants
     private struct Constants {
@@ -249,22 +250,48 @@ class FinalTableViewController: UITableViewController, CreditCardTableViewCellDe
     
     final private func completeCheckout() {
         
-        // Get the client
-        let client = BUYClient.sharedClient()
+        let order = Order()
+        order.name = checkout.shippingAddress.firstName + " " + checkout.shippingAddress.lastName
+        order.email = checkout.email
+        order.price = checkout.totalPrice
+        order.address = checkout.shippingAddress.getAddress()
+        order.file = PFFile(data: UIImageJPEGRepresentation(self.productImage, 1))
         
-        SVProgressHUD.setStatus("Completing...")
-        client.completeCheckout(checkout) { [unowned self] (checkout, error) in
+        SVProgressHUD.setStatus("Uploading Image")
+        // Save the object to parse
+        order.saveInBackgroundWithBlock { [unowned self] (success, error) -> Void in
             
-            if error == nil {
-                self.checkout = checkout
+            if success {
                 dispatch_async(dispatch_get_main_queue()) {
-                    self.getCompletionStatusOfCheckout()
+                    
+                    // Get the client
+                    let client = BUYClient.sharedClient()
+                    
+                    SVProgressHUD.setStatus("Completing...")
+                    client.completeCheckout(self.checkout) { (checkout, error) in
+                        
+                        if error == nil {
+                            self.checkout = checkout
+                            dispatch_async(dispatch_get_main_queue()) {
+                                self.getCompletionStatusOfCheckout()
+                            }
+                            
+                        } else {
+                            dispatch_async(dispatch_get_main_queue()) {
+                                SVProgressHUD.dismiss()
+                                SweetAlert().showAlert("Unable to Process", subTitle: "Please try again", style: .Error)
+                            }
+                        }
+                    }
+                    
                 }
-                
-            } else {
+            }
+            
+            // Not able to save to Parse
+            else {
                 dispatch_async(dispatch_get_main_queue()) {
                     SVProgressHUD.dismiss()
-                    SweetAlert().showAlert("Unable to Process", subTitle: "Please try again", style: .Error)
+                    SweetAlert().showAlert("Error Uploading Image", subTitle: "Check Internet Connection", style: .Error)
                 }
             }
         }

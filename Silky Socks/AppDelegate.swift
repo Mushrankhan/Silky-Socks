@@ -17,11 +17,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
     
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
+        
+        // Parse
+        Order.registerSubclass()
+        
         // Enable crashlytics
         Fabric.with([Crashlytics()])
 
         // Enable Apple Pay
         BUYClient.sharedClient().enableApplePayWithMerchantId(Shopify.ApplePayMerchantId)
+        
+        // Enable Parse
+        Parse.setApplicationId("sxLW09gACqdlQmxXeKEJxbDfDSIFIG3MYhSZcjzJ", clientKey: "4h5ZzOy31GbrJmep3HYoqC0GTm8Ujxz6AMnMEsTG")
         return true
     }
 

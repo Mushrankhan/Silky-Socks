@@ -49,6 +49,9 @@ class CartTableViewController: UIViewController, UITableViewDataSource, UITableV
         NSNotificationCenter.defaultCenter().addObserverForName(UserCart.UserCartNotifications.BoughtProductNotification, object: nil, queue: NSOperationQueue.mainQueue()) { [weak self] _ in
             self?.tableView.reloadData()
             self?.tableView.tableHeaderView = self?.numberOfItemsInCart == 0 ? self?.cartEmptyLabel : nil
+            UIView.animateWithDuration(0.5) {
+                self?.checkOutButton.alpha = 0
+            }
         }
         
         // Set up the empty cart label

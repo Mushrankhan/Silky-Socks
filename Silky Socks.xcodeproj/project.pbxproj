@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1F1740591B41308400D1CA33 /* Order.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1740581B41308400D1CA33 /* Order.swift */; };
 		1F17F2881B36AA7200DBFEBC /* CheckoutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F17F2871B36AA7200DBFEBC /* CheckoutViewController.swift */; };
 		1F17F28A1B36B11D00DBFEBC /* CheckoutTableHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F17F2891B36B11D00DBFEBC /* CheckoutTableHeaderView.swift */; };
 		1F17F28C1B36BC2000DBFEBC /* CheckoutTableHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1F17F28B1B36BC2000DBFEBC /* CheckoutTableHeaderView.xib */; };
@@ -94,6 +95,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		1F1740581B41308400D1CA33 /* Order.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Order.swift; sourceTree = "<group>"; };
 		1F17F2871B36AA7200DBFEBC /* CheckoutViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckoutViewController.swift; sourceTree = "<group>"; };
 		1F17F2891B36B11D00DBFEBC /* CheckoutTableHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckoutTableHeaderView.swift; sourceTree = "<group>"; };
 		1F17F28B1B36BC2000DBFEBC /* CheckoutTableHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CheckoutTableHeaderView.xib; sourceTree = "<group>"; };
@@ -429,6 +431,7 @@
 		4F8D38D01AE4461C00F42E23 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				1F1740581B41308400D1CA33 /* Order.swift */,
 				1F293BF61B384D1300551A40 /* ShopifyUtilities.swift */,
 				4FB6C9C41AE4B394001A6E50 /* Utilities.swift */,
 				4F8D38CB1AE4457800F42E23 /* TemplateModel.swift */,
@@ -663,6 +666,7 @@
 			files = (
 				1FF543CC1B26259F007B6B19 /* TemplateInfoViewController.swift in Sources */,
 				4F55B55D1AE480F400679048 /* SJLayout.swift in Sources */,
+				1F1740591B41308400D1CA33 /* Order.swift in Sources */,
 				1FC72AD41B3D6C6400D54C1E /* CreditCardTableViewCell.swift in Sources */,
 				1FCF508F1B070F4C005D8578 /* SJCollectionView.swift in Sources */,
 				1F88389E1B0D875D00E3BBB6 /* SJLabel.swift in Sources */,

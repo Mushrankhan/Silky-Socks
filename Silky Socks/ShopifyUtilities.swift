@@ -50,6 +50,13 @@ extension BUYAddress {
     func isValid() -> Bool {
         return firstName != nil && count(firstName.parseString()) > 0 && lastName != nil && count(lastName.parseString()) > 0 && address1 != nil && count(address1.parseString()) > 2 && city != nil && count(city.parseString()) > 0 && count(province) == 2 && zip != nil && count(zip) == 5
     }
+    
+    func getAddress() -> String {
+        
+        let address = address1 + " " + address2 + " " + city + " " + province + " " + zip + " " + countryCode
+        println(address)
+        return address
+    }
 }
 
 extension BUYCreditCard {
