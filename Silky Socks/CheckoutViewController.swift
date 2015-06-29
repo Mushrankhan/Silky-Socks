@@ -226,7 +226,7 @@ extension CheckoutViewController: CheckoutTableFooterViewDelegate {
         address.province = selectedState
         address.countryCode = "US"
         
-//        // Testing Purposes
+        // Testing Purposes
 //        let addr = BUYAddress()
 //        addr.firstName = "Saurabh"
 //        addr.lastName = "Jain"
@@ -248,6 +248,8 @@ extension CheckoutViewController: CheckoutTableFooterViewDelegate {
             SweetAlert().showAlert("Email Address Not Valid", subTitle: "Enter Again", style: .Error)
             return
         }
+        
+        //self.email = "saurabhj80@gmail.com"
         
         // Show loading indicator
         SVProgressHUD.setBackgroundColor(UIColor.blackColor())
@@ -279,7 +281,7 @@ extension CheckoutViewController: CheckoutTableFooterViewDelegate {
                         let checkout = BUYCheckout(cart: cart)
                         checkout.shippingAddress = self.address
                         checkout.billingAddress = self.address
-                        checkout.email = self.email // "saurabhj80@gmail.com"
+                        checkout.email = self.email
                         
                         client.createCheckout(checkout) { (checkout, error) in
                             if error == nil {

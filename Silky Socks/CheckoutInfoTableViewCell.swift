@@ -18,7 +18,15 @@ class CheckoutInfoTableViewCell: UITableViewCell, UITextFieldDelegate {
     weak var delegate: CheckoutInfoTableViewCellDelegate?
     
     // The text field
-    @IBOutlet weak var infoTextField: UITextField! { didSet { infoTextField.delegate = self } }
+    @IBOutlet weak var infoTextField: UITextField! {
+        didSet {
+            infoTextField.delegate = self
+            NSNotificationCenter.defaultCenter().addObserverForName(UITextFieldTextDidChangeNotification, object: infoTextField, queue: NSOperationQueue.mainQueue()) { [unowned self] notification in
+                let text = (notification.object as! UITextField).text
+                self.delegate?.checkoutInfoTableViewCell(self, didEnterInfo: text)
+            }
+        }
+    }
     
     // MARK: UITextField Delegate
     
@@ -32,10 +40,6 @@ class CheckoutInfoTableViewCell: UITableViewCell, UITextFieldDelegate {
     func textFieldShouldReturn(textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         return true
-    }
-    
-    func textFieldDidEndEditing(textField: UITextField) {
-        delegate?.checkoutInfoTableViewCell(self, didEnterInfo: textField.text)
     }
     
 }

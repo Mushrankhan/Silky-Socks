@@ -31,14 +31,15 @@ class CartProduct: NSObject, Printable, Equatable {
     // The base price changes with the change in quantity
     // Computed property
     var basePrice: Float {
-        switch quantity {
-            case 1...11:
-                return prices[0]
-            case 12...23:
-                return prices[1]
-            default:
-                return prices[2]
-        }
+//        switch quantity {
+//            case 1...11:
+//                return prices[0]
+//            case 12...23:
+//                return prices[1]
+//            default:
+//                return prices[2]
+//        }
+        return prices[0]
     }
     
     // Storing all the prices
