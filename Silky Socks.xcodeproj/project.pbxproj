@@ -433,10 +433,10 @@
 			children = (
 				1F1740581B41308400D1CA33 /* Order.swift */,
 				1F293BF61B384D1300551A40 /* ShopifyUtilities.swift */,
-				4FB6C9C41AE4B394001A6E50 /* Utilities.swift */,
 				4F8D38CB1AE4457800F42E23 /* TemplateModel.swift */,
 				1FC258AA1B14B60700EAEF20 /* UserCart.swift */,
 				1F293BF81B38631100551A40 /* CartProduct.swift */,
+				4FB6C9C41AE4B394001A6E50 /* Utilities.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";

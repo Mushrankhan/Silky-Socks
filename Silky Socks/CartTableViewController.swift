@@ -46,7 +46,7 @@ class CartTableViewController: UIViewController, UITableViewDataSource, UITableV
         tableView.tableFooterView = UIView(frame: CGRectZero)
         
         // When a product is bought, then reload the table
-        NSNotificationCenter.defaultCenter().addObserverForName(UserCart.UserCartNotifications.BoughtProductNotification, object: nil, queue: NSOperationQueue.mainQueue()) { [weak self] _ in
+        NSNotificationCenter.defaultCenter().addObserverForName(UserCartNotifications.BoughtProductNotification, object: nil, queue: NSOperationQueue.mainQueue()) { [weak self] _ in
             self?.tableView.reloadData()
             self?.tableView.tableHeaderView = self?.numberOfItemsInCart == 0 ? self?.cartEmptyLabel : nil
             UIView.animateWithDuration(0.5) {
@@ -84,7 +84,7 @@ class CartTableViewController: UIViewController, UITableViewDataSource, UITableV
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier(cartCellReuseIdentifier, forIndexPath: indexPath) as! CartTableViewCell
-        cell.cartProduct = UserCart.sharedCart.cart[indexPath.row]
+        cell.cartProduct = UserCart.sharedCart[indexPath.row]
         return cell
     }
 
@@ -93,14 +93,13 @@ class CartTableViewController: UIViewController, UITableViewDataSource, UITableV
     func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         if editingStyle == .Delete {
             // Delete the row from the data source
-            UserCart.sharedCart.removeProduct(UserCart.sharedCart.cart[indexPath.row])
+            UserCart.sharedCart.removeProductAtIndex(indexPath.row)
             tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
             
             // if the number of items after deletion comes to be 0,
             // then show the label
             if numberOfItemsInCart == 0 {
                 tableView.tableHeaderView = cartEmptyLabel
-                
                 // Hide the check out button
                 UIView.animateWithDuration(0.5) { [unowned self] in
                     self.checkOutButton.alpha = 0
@@ -119,7 +118,7 @@ class CartTableViewController: UIViewController, UITableViewDataSource, UITableV
         if let identifier = segue.identifier {
             if identifier == Storyboard.CheckoutSegue {
                 let vc = segue.destinationViewController as! CheckoutViewController
-                vc.product = UserCart.sharedCart.cart[0]
+                vc.product = UserCart.sharedCart[0]
             }
         }
     }

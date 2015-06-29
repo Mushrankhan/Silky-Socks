@@ -42,6 +42,17 @@ class CartTableViewCell: UITableViewCell {
         }
     }
     
+    deinit {
+        println("Cart Cell Deinit")
+        cartProduct = nil
+        cartImgView = nil
+        productNameLabel = nil
+        quantityLabel = nil
+        quantityStepper = nil
+        priceLabel = nil
+        basePriceLabel = nil
+    }
+    
     // Stepper IBAction
     @IBAction func incrementQuantity(sender: UIStepper) {
         cartProduct!.quantity = Int(sender.value)        // Increase quantity in the model

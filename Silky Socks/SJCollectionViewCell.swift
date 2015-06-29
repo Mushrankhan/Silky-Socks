@@ -148,6 +148,12 @@ class SJCollectionViewCell: UICollectionViewCell {
         cleanUp()
     }
     
+    deinit {
+        cleanUp()
+        nameLabel = nil
+        ss_imgView = nil
+        template = nil
+    }
     
     // Used for cleaning up the cell
     // Not to clear up the color when cleaning up

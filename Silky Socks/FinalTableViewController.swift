@@ -8,7 +8,7 @@
 
 import UIKit
 
-class FinalTableViewController: UITableViewController, CreditCardTableViewCellDelegate, FinalTableViewControllerFooterViewDelegate {
+class FinalTableViewController: UITableViewController, CreditCardTableViewCellDelegate, FinalTableViewControllerFooterViewDelegate, CheckoutInfoTableViewCellDelegate {
     
     // Passed on from previous VC
     var checkout: BUYCheckout!
@@ -19,12 +19,14 @@ class FinalTableViewController: UITableViewController, CreditCardTableViewCellDe
     private struct Constants {
         static let CellReuseIdentifier = "Cell"
         static let CreditCardCell = "Credit Cell"
+        static let CheckoutInfoCell = "Checkout Cell"
         static let CreditCardCellNib = "CreditCardTableViewCell"
-        static let NumberOfSections = 3
-        static let NumberOfRowsInSectionOne = 2
-        static let NumberOfRowsInSectionTwo = 1
+        static let NumberOfSections = 4
+        static let NumberOfRowsInSectionTwo = 2
+        static let NumberOfRowsInSectionThree = 1
         static let SectionZeroTitle = "Select a shipping method"
-        static let SectionTwoTitle = "Payment Method"
+        static let SectionOneTitle = "Discount"
+        static let SectionThreeTitle = "Payment Method"
         static let FooterViewNibName = "FinalTableViewControllerFooterView"
     }
     
@@ -36,6 +38,7 @@ class FinalTableViewController: UITableViewController, CreditCardTableViewCellDe
         
         // Register Nib
         tableView.registerNib(UINib(nibName: Constants.CreditCardCellNib, bundle: nil), forCellReuseIdentifier: Constants.CreditCardCell)
+        tableView.registerNib(UINib(nibName: "CheckoutInfoTableViewCell", bundle: nil), forCellReuseIdentifier: Constants.CheckoutInfoCell)
         
         // Set up the footer view
         let footerView = NSBundle.mainBundle().loadNibNamed(Constants.FooterViewNibName, owner: nil, options: nil).first as? FinalTableViewControllerFooterView
@@ -52,16 +55,18 @@ class FinalTableViewController: UITableViewController, CreditCardTableViewCellDe
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int{
         if section == 0 {
             return shippingRates.count
+        } else if section == 1 {
+            return 1
         }
-        return section == 1 ? Constants.NumberOfRowsInSectionOne : Constants.NumberOfRowsInSectionTwo
+        return section == 2 ? Constants.NumberOfRowsInSectionTwo : Constants.NumberOfRowsInSectionThree
     }
 
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
 
         // Section 0 : Show Shipping Information
-        // Section 1 : Show Total Tax and Total Price
-        if indexPath.section == 0 || indexPath.section == 1 {
+        // Section 2 : Show Total Tax and Total Price
+        if indexPath.section == 0 || indexPath.section == 2 {
             
             let cell = tableView.dequeueReusableCellWithIdentifier(Constants.CellReuseIdentifier, forIndexPath: indexPath) as! UITableViewCell
             
@@ -79,15 +84,28 @@ class FinalTableViewController: UITableViewController, CreditCardTableViewCellDe
                 }
             }
             
-            // Section 1
+            // Section 2
             else {
                 cell.textLabel?.text = indexPath.row == 0 ? "Tax" : "Total"
+                if self.checkout.discount != nil && indexPath.row == 1 {
+                    cell.textLabel?.text = "Tax ($\(self.checkout.discount.amount) off)"
+                }
                 cell.detailTextLabel?.text = indexPath.row == 0 ? "$\(checkout.totalTax)" : "$\(checkout.totalPrice)"
                 cell.selectionStyle = .None
             }
             
             return cell
         }
+        
+        // Section 1 : Show Discount
+        if indexPath.section == 1 {
+            let cell = tableView.dequeueReusableCellWithIdentifier(Constants.CheckoutInfoCell, forIndexPath: indexPath) as! CheckoutInfoTableViewCell
+            cell.infoTextField.placeholder = "Apply a Discount Code"
+            cell.infoTextField.returnKeyType = .Done
+            cell.delegate = self
+            return cell
+        }
+
         
         // Cell to collect credit card details
         let cell = tableView.dequeueReusableCellWithIdentifier(Constants.CreditCardCell, forIndexPath: indexPath) as! CreditCardTableViewCell
@@ -97,7 +115,7 @@ class FinalTableViewController: UITableViewController, CreditCardTableViewCellDe
     }
     
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        if indexPath.section == 2 {
+        if indexPath.section == 3 {
             return 80
         }
         return 44
@@ -106,8 +124,10 @@ class FinalTableViewController: UITableViewController, CreditCardTableViewCellDe
     override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         if section == 0 {
             return Constants.SectionZeroTitle
-        } else if section == 2 {
-            return Constants.SectionTwoTitle
+        } else if section == 1 {
+            return Constants.SectionOneTitle
+        } else if section == 3 {
+            return Constants.SectionThreeTitle
         }
         return nil
     }
@@ -125,18 +145,19 @@ class FinalTableViewController: UITableViewController, CreditCardTableViewCellDe
             BUYClient.sharedClient().updateCheckout(checkout) { [unowned self] (checkout, error) in
                 
                 // Hide
-                dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                dispatch_async(dispatch_get_main_queue()) {
                     SVProgressHUD.dismiss()
-                })
+                }
                 
                 if error == nil {
                     dispatch_async(dispatch_get_main_queue()) {
                         self.checkout = checkout
-                        self.tableView.reloadRowsAtIndexPaths([NSIndexPath(forRow: 1, inSection: 1)], withRowAnimation: .Fade)
+                        self.tableView.reloadRowsAtIndexPaths([NSIndexPath(forRow: 1, inSection: 2)], withRowAnimation: .Fade)
                     }
                 } else {
                     dispatch_async(dispatch_get_main_queue()) {
                         SweetAlert().showAlert("Error Updating", subTitle: "Shipping Method", style: .Error)
+                        checkout.shippingRate = nil
                     }
                 }
             }
@@ -170,6 +191,42 @@ class FinalTableViewController: UITableViewController, CreditCardTableViewCellDe
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
     }
     
+    // MARK: - CheckoutInfoTableViewCell Delegate
+    
+    func checkoutInfoTableViewCell(cell: CheckoutInfoTableViewCell, didEnterInfo info: String){
+        
+        // Show loading indicator
+        SVProgressHUD.showWithStatus("Applying Discount Code")
+        
+        // Apply code
+        let code = BUYDiscount(code: info)
+        self.checkout.discount = code
+        BUYClient.sharedClient().updateCheckout(checkout, completion: { (checkout, error) -> Void in
+            
+            // hide
+            dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                SVProgressHUD.dismiss()
+            })
+            
+            // If success, then update checkout
+            if error == nil {
+                self.checkout = checkout
+                dispatch_async(dispatch_get_main_queue()) {
+                    self.tableView.reloadRowsAtIndexPaths([NSIndexPath(forRow: 1, inSection: 2)], withRowAnimation: .Fade)
+                }
+                
+            } else {
+                dispatch_async(dispatch_get_main_queue()) { // Show error, and nil out discount
+                    SweetAlert().showAlert("Invalid Code", subTitle: "Try another one", style: .Error)
+                    self.checkout.discount = nil
+                }
+            }
+            
+        })
+        
+    }
+    
+    
     // MARK: - CreditCardTableViewCell Delegate
     
     private lazy var card: BUYCreditCard = {
@@ -180,22 +237,18 @@ class FinalTableViewController: UITableViewController, CreditCardTableViewCellDe
     
     func creditCardTableViewCell(cell: CreditCardTableViewCell, didEnterCreditCard creditCard: String) {
         card.number = creditCard
-        println(creditCard)
     }
     
     func creditCardTableViewCell(cell: CreditCardTableViewCell, didEnterExpiryMonth expiryMonth: String) {
         card.expiryMonth = expiryMonth
-        println(expiryMonth)
     }
     
     func creditCardTableViewCell(cell: CreditCardTableViewCell, didEnterExpiryYear expiryYear: String) {
         card.expiryYear = expiryYear
-        println(expiryYear)
     }
     
     func creditCardTableViewCell(cell: CreditCardTableViewCell, didEnterCVV cvv: String) {
         card.cvv = cvv
-        println(cvv)
     }
     
     // MARK: - FinalTableViewControllerFooterViewDelegate

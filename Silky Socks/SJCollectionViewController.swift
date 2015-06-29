@@ -8,24 +8,37 @@
 
 import UIKit
 import MessageUI
+import MobileCoreServices
 
 class SJCollectionViewController: UIViewController {
 
     // the array containing templates
     lazy private var templateArray = Template.allTemplates()
     
-    // Cell Reuse identifier
-    let reuseIdentifier = "Cell"
+    // Constants
+    private struct Constants {
+        static let CellReuseIdentifier = "Cell"
+        static let HeightOfColorVC: CGFloat = 50
+        static let HeightOfApprovalView: CGFloat = 75
+    }
     
     // Collection view
-    @IBOutlet weak var collectionView: SJCollectionView!
+    @IBOutlet weak var collectionView: SJCollectionView! {
+        didSet {
+            collectionView.dataSource = self
+            collectionView.myDelegate = self
+            collectionView.delegate = self
+        }
+    }
     
-    // Image Picker Controller
-    private var picker: UIImagePickerController!
+    // Width of screen
+    private var width: CGFloat {
+        return CGRectGetWidth(UIScreen.mainScreen().bounds)
+    }
     
     // Color Palette Collection View
     private var colorCollectionVC: SJColorCollectionViewController!
-    
+
     // Keep Track of Color Palette
     // Either on clicking text or on clicking color wheel
     private var showingText = false
@@ -35,29 +48,21 @@ class SJCollectionViewController: UIViewController {
     
     // Whether Camera button is clicked or grid button
     private var isGridButtonTapped = false
+
     
-    // Width of screen
-    private var width: CGFloat {
-        return CGRectGetWidth(UIScreen.mainScreen().bounds)
-    }
-    
-    // The height of the color view controller
-    private let heightOfColorVC: CGFloat = 50
+    // MARK: - Approval View Controller
     
     // The x and check view
     private var approvalVC: SJApprovalViewController!
     
-    // Height of the approval view
-    private let heightOfApprovalView: CGFloat = 75
-    
     // the showing rect of the approval vc
     private var showRect: CGRect {
-        return CGRect(x: collectionView.contentOffset.x, y: CGRectGetHeight(UIScreen.mainScreen().bounds) - 64 - heightOfApprovalView , width: width, height: heightOfApprovalView)
+        return CGRect(x: collectionView.contentOffset.x, y: CGRectGetHeight(UIScreen.mainScreen().bounds) - 64 - Constants.HeightOfApprovalView , width: width, height: Constants.HeightOfApprovalView)
     }
     
     // the hiding rect of the approval vc
     private var hideRect: CGRect {
-        return CGRect(x: collectionView.contentOffset.x, y: CGRectGetHeight(UIScreen.mainScreen().bounds) - 64, width: width, height: heightOfApprovalView)
+        return CGRect(x: collectionView.contentOffset.x, y: CGRectGetHeight(UIScreen.mainScreen().bounds) - 64, width: width, height: Constants.HeightOfApprovalView)
     }
     
     override func viewDidLoad() {
@@ -70,33 +75,14 @@ class SJCollectionViewController: UIViewController {
         img_view.contentMode = .ScaleAspectFit
         navigationItem.titleView = img_view
         
-        // Data Source
-        collectionView!.dataSource = self
-        collectionView!.myDelegate = self
-        collectionView!.delegate = self
-        
-        // Create the image picker controller
-        picker = UIImagePickerController()
-        picker.delegate = self
-        picker.allowsEditing = true
-        picker.mediaTypes = ["public.image"]
-        picker.sourceType = .PhotoLibrary
-        
-        // Track changes in the keyboard
-        // Used to display the color VC appropriately
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "handleKeyBoard:", name: UIKeyboardDidShowNotification, object: nil)
-
-        // When an object is added to the cart, then do something
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "incrementCartCount:", name: UserCart.UserCartNotifications.AddToCartNotification, object: nil)
-        
         // Set the layout for the colorVC
-        var frame = CGRect(x: 0, y: 0, width: width, height: heightOfColorVC)
+        var frame = CGRect(x: 0, y: 0, width: width, height: Constants.HeightOfColorVC)
         let layout = SJStickyFontHeaderLayout()
-        layout.itemSize = CGSize(width: heightOfColorVC - 16, height: heightOfColorVC)
+        layout.itemSize = CGSize(width: Constants.HeightOfColorVC - 16, height: Constants.HeightOfColorVC)
         layout.minimumLineSpacing = 0
         layout.minimumInteritemSpacing = 0
         layout.scrollDirection = .Horizontal
-        layout.headerReferenceSize = CGSize(width: heightOfColorVC, height: heightOfColorVC)
+        layout.headerReferenceSize = CGSize(width: Constants.HeightOfColorVC, height: Constants.HeightOfColorVC)
         
         // Set up the color View
         // This VC is added as a child view controller
@@ -117,7 +103,6 @@ class SJCollectionViewController: UIViewController {
         let cartView = UIButton(frame: CGRect(origin: .zeroPoint, size: CGSize(width: 30, height: 30)))
         cartView.setImage(UIImage(named: "cart"), forState: .Normal)
         cartView.addTarget(self, action: "cartButtonPressed:", forControlEvents: .TouchUpInside)
-        
         let cartButton = UIBarButtonItem(customView: cartView)
         navigationItem.rightBarButtonItem = cartButton
         
@@ -129,6 +114,13 @@ class SJCollectionViewController: UIViewController {
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         notificationHub.count = UInt(UserCart.sharedCart.numberOfItems)
+        
+        // Track changes in the keyboard
+        // Used to display the color VC appropriately
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "handleKeyBoard:", name: UIKeyboardDidShowNotification, object: nil)
+        
+        // When an object is added to the cart, then do something
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "incrementCartCount:", name: UserCartNotifications.AddToCartNotification, object: nil)
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -145,15 +137,35 @@ class SJCollectionViewController: UIViewController {
         addChildViewController(approvalVC)
         approvalVC.didMoveToParentViewController(self)
     }
-
+    
+    override func viewDidDisappear(animated: Bool) {
+        super.viewDidDisappear(animated)
+        NSNotificationCenter.defaultCenter().removeObserver(self)
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Clear out the template array
         templateArray = []
-        
-        // Delete the picker
-        picker = nil
     }
+    
+    deinit {
+        // Clear out the template array
+        templateArray = []
+        
+        // Remove color vc
+        colorCollectionVC.willMoveToParentViewController(nil)
+        colorCollectionVC.collectionView?.removeFromSuperview()
+        colorCollectionVC.removeFromParentViewController()
+        
+        // Remove approval vc
+        approvalVC.willMoveToParentViewController(nil)
+        approvalVC.view.removeFromSuperview()
+        approvalVC.removeFromParentViewController()
+    }
+    
+    
+    // MARK: - Cart Button
     
     // Used to increment the badge count on the cart bar button item
     private var notificationHub: RKNotificationHub!
@@ -188,7 +200,7 @@ extension SJCollectionViewController: UICollectionViewDataSource {
 
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(reuseIdentifier, forIndexPath: indexPath) as! SJCollectionViewCell
+        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(Constants.CellReuseIdentifier, forIndexPath: indexPath) as! SJCollectionViewCell
         cell.template = templateArray[indexPath.row]
         cell.delegate = self.collectionView // Very Essential
         return cell
@@ -225,7 +237,6 @@ extension SJCollectionViewController {
         // then display color VC on top of keyboard
         if showingText {
             
-            // Want font
             // Tells the color collection vc that we want to give users the option to switch to fonts
             colorCollectionVC.wantFont = true
             
@@ -235,7 +246,7 @@ extension SJCollectionViewController {
             colorCollectionVC.collectionView?.alpha = 0
             
             // New Frame
-            let frame = CGRectMake(collectionView.contentOffset.x, end.origin.y - heightOfColorVC - 64, width, heightOfColorVC)
+            let frame = CGRectMake(collectionView.contentOffset.x, end.origin.y - Constants.HeightOfColorVC - 64, width, Constants.HeightOfColorVC)
             
             UIView.animateWithDuration(0.3) { [unowned self] in
                 self.colorCollectionVC.collectionView?.frame = frame
@@ -290,8 +301,8 @@ extension SJCollectionViewController: SJCollectionViewDelegate, MFMailComposeVie
         collectionView.panGestureRecognizer.enabled = false
         
         // 64 : height of nav bar + status bar
-        let height = CGRectGetHeight(UIScreen.mainScreen().bounds) - heightOfApprovalView - heightOfColorVC - 64
-        let frame = CGRectMake(collectionView.contentOffset.x, height, width , heightOfColorVC)
+        let height = CGRectGetHeight(UIScreen.mainScreen().bounds) - Constants.HeightOfApprovalView - Constants.HeightOfColorVC - 64
+        let frame = CGRectMake(collectionView.contentOffset.x, height, width , Constants.HeightOfColorVC)
         
         // Tells the color collection vc that we dont want to 
         // give people the option to switch to fonts
@@ -382,7 +393,7 @@ extension SJCollectionViewController: SJCollectionViewDelegate, MFMailComposeVie
         
         // Create Activity Controller on Demand
         var items = ["Check out the design I created on the silky socks app. http://www.silkysocks.com/app", snapshot]
-        let activity = UIActivityViewController(activityItems: items, applicationActivities: nil)
+        var activity = UIActivityViewController(activityItems: items, applicationActivities: nil)
         activity.excludedActivityTypes = [UIActivityTypeAddToReadingList, UIActivityTypeAssignToContact, UIActivityTypePrint, UIActivityTypeSaveToCameraRoll]
         presentViewController(activity, animated: true, completion: nil)
 
@@ -465,31 +476,38 @@ extension SJCollectionViewController: UIImagePickerControllerDelegate, UINavigat
         colorCollectionVC.collectionView!.hidden = true
         collectionView.panGestureRecognizer.enabled = false
         
+        let picker = UIImagePickerController()
+        picker.delegate = self
+        picker.allowsEditing = true
+        picker.mediaTypes = [kUTTypeImage]
+        picker.sourceType = .PhotoLibrary
+        
         // Create On Demand
         let sheet = UIAlertController(title: "Import Photo", message: nil, preferredStyle: .ActionSheet)
         
-        // Take photo
-        sheet.addAction(UIAlertAction(title: "Take Photo", style: .Default) { action in
+        let takePhotoAction = UIAlertAction(title: "Take Photo", style: .Default) { [unowned self] _ in
             if UIImagePickerController.isSourceTypeAvailable(.Camera) {
-                self.picker.sourceType = .Camera
+                picker.sourceType = .Camera
             }
-            self.presentViewController(self.picker, animated: true, completion: nil)
-        })
+            self.presentViewController(picker, animated: true, completion: nil)
+        }
         
-        // Choose Photo
-        sheet.addAction(UIAlertAction(title: "Choose Photo", style: .Default) { action in
+        let choosePhotoAction = UIAlertAction(title: "Choose Photo", style: .Default) { [unowned self] _ in
             if UIImagePickerController.isSourceTypeAvailable(.PhotoLibrary) {
-                self.picker.sourceType = .PhotoLibrary
+                picker.sourceType = .PhotoLibrary
             }
-            self.presentViewController(self.picker, animated: true, completion: nil)
-        })
+            self.presentViewController(picker, animated: true, completion: nil)
+        }
         
-        // Cancel
-        sheet.addAction(UIAlertAction(title: "Cancel", style: .Cancel) { action in
+        let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel) { [unowned self] _ in
             self.dismissViewControllerAnimated(true, completion: nil)
-            // If nothing was added to the cell, then enable the pan gesture
             self.shouldPan()
-        })
+        }
+        
+        // Add Actions
+        sheet.addAction(takePhotoAction)
+        sheet.addAction(choosePhotoAction)
+        sheet.addAction(cancelAction)
         
         presentViewController(sheet, animated: true, completion: nil)
     }
@@ -503,11 +521,9 @@ extension SJCollectionViewController: UIImagePickerControllerDelegate, UINavigat
     // Did Pick Image
     func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [NSObject : AnyObject]) {
         
-        var image: UIImage!
+        var image = info[UIImagePickerControllerOriginalImage] as! UIImage
         if let editedImage = info[UIImagePickerControllerEditedImage] as? UIImage {
             image = editedImage
-        } else {
-            image = info[UIImagePickerControllerOriginalImage] as! UIImage
         }
         
         dismissViewControllerAnimated(true, completion: nil)
@@ -522,27 +538,20 @@ extension SJCollectionViewController: UIImagePickerControllerDelegate, UINavigat
 
 // MARK: Color Collection View Delegate
 extension SJCollectionViewController: SJColorCollectionViewControllerDelegate {
-    
-    // Color
     func colorCollectionView(collectionView: UICollectionView, didSelectColor color: UIColor) {
         
         // If pressed text button, then change color of label
         if showingText {
-            sj_textField!.textColor = color
-            return
+            sj_textField?.textColor = color
+        } else {
+            // other change color of product
+            self.collectionView.sj_addColor(color)
         }
-        
-        // other change color of product
-        self.collectionView.sj_addColor(color)
     }
     
-    // Font
     func colorCollectionView(collectionView: UICollectionView, didSelectFont font: UIFont) {
-        if showingText {
-            sj_textField!.font = font
-        }
+        sj_textField?.font = font
     }
-
 }
 
 // MARK: Approval View Controller Delegate
@@ -552,7 +561,7 @@ extension SJCollectionViewController: SJApprovalViewControllerDelegate {
     func showApprovalVC(tag: Int?, forView view: UIView?) {
         
         // Animate from bottom
-        UIView.animateWithDuration(0.3) {
+        UIView.animateWithDuration(0.3) { [unowned self] in
             self.approvalVC.view.frame = self.showRect
         }
         
@@ -621,7 +630,7 @@ extension SJCollectionViewController: SJApprovalViewControllerDelegate {
         shouldPan()
         
         // Hide
-        UIView.animateWithDuration(0.3) {
+        UIView.animateWithDuration(0.3) { [unowned self] in
             self.approvalVC.view.frame = self.hideRect
         }
         
@@ -642,7 +651,6 @@ extension SJCollectionViewController {
     
     // Asks the cell, if we should pan
     private func shouldPan() {
-        
         // Get the currently visible cell
         if let cell = collectionView.visibleCell {
             if cell.shouldPan() {

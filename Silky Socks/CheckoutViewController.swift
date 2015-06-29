@@ -172,18 +172,14 @@ class CheckoutViewController: UITableViewController, StatesPickerTableViewCellDe
     private var email: String?
 }
 
-
 // MARK: StatesPickerTableViewCellDelegate
-
 extension CheckoutViewController: StatesPickerTableViewCellDelegate {
     func statesPickerTableViewCell(cell: StatesPickerTableViewCell, didSelectState state: String) {
         selectedState = state
     }
 }
 
-
 // MARK: CheckoutInfoTableViewCellDelegate
-
 extension CheckoutViewController: CheckoutInfoTableViewCellDelegate {
     func checkoutInfoTableViewCell(cell: CheckoutInfoTableViewCell, didEnterInfo info: String) {
         let indexPath = tableView.indexPathForCell(cell)
@@ -230,16 +226,16 @@ extension CheckoutViewController: CheckoutTableFooterViewDelegate {
         address.province = selectedState
         address.countryCode = "US"
         
-        // Testing Purposes
-        let addr = BUYAddress()
-        addr.firstName = "Saurabh"
-        addr.lastName = "Jain"
-        addr.address1 = "7357 Franklin Avenue"
-        addr.city = "Los Angeles"
-        addr.province = "CA"
-        addr.countryCode = "US"
-        addr.zip = "90046"
-        address = addr
+//        // Testing Purposes
+//        let addr = BUYAddress()
+//        addr.firstName = "Saurabh"
+//        addr.lastName = "Jain"
+//        addr.address1 = "7357 Franklin Avenue"
+//        addr.city = "Los Angeles"
+//        addr.province = "CA"
+//        addr.countryCode = "US"
+//        addr.zip = "90046"
+//        address = addr
         
         // Invalid address
         if !address.isValid() {
@@ -248,10 +244,10 @@ extension CheckoutViewController: CheckoutTableFooterViewDelegate {
         }
         
         // Invalid error
-//        if email == nil || ((email! as NSString).rangeOfString(".com").location == NSNotFound) {
-//            SweetAlert().showAlert("Email Address Not Valid", subTitle: "Enter Again", style: .Error)
-//            return
-//        }
+        if email == nil || ((email! as NSString).rangeOfString(".com").location == NSNotFound) {
+            SweetAlert().showAlert("Email Address Not Valid", subTitle: "Enter Again", style: .Error)
+            return
+        }
         
         // Show loading indicator
         SVProgressHUD.setBackgroundColor(UIColor.blackColor())
@@ -283,7 +279,7 @@ extension CheckoutViewController: CheckoutTableFooterViewDelegate {
                         let checkout = BUYCheckout(cart: cart)
                         checkout.shippingAddress = self.address
                         checkout.billingAddress = self.address
-                        checkout.email = "saurabhj80@gmail.com"//self.email
+                        checkout.email = self.email // "saurabhj80@gmail.com"
                         
                         client.createCheckout(checkout) { (checkout, error) in
                             if error == nil {

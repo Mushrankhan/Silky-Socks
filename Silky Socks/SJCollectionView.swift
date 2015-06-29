@@ -143,12 +143,7 @@ extension SJCollectionView: ShareViewCollectionReusableViewDelegate {
 extension SJCollectionView: CartViewCollectionReusableViewDelegate {
     func cartReusableView(view: CartViewCollectionReusableView, didPressAddToCartButton sender: UIButton) {
         if let cell = visibleCell {
-            
-//            if cell.shouldPan() {
-//                myDelegate?.collectionView(self, didPressAddToCartButton: sender, withSnapShotImage: cell.template!.image, andTemplate: cell.template!)
-//                return
-//            }
-            
+            // due to the presence of the info button
             let y = cell.infoButton.bounds.size.height
             let rect = CGRect(origin: CGPoint(x: 0, y: y), size: cell.frame.size)
             let image = cell.clickSnapShotForCart(rect, withLogo: UIImage.SilkySocksLogo(), size:cell.template!.productSize)

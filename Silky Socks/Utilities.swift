@@ -61,7 +61,6 @@ extension UIView {
     
     func clickSnapShotForCart(area: CGRect, withLogo logo: UIImage?, size: CGSize) -> UIImage {
         let image = clickSnapShot(area, withLogo: logo)
-        
         let rect = CGRect(origin: .zeroPoint, size: size)
         UIGraphicsBeginImageContextWithOptions(rect.size, opaque, 0)
         image.drawInRect(rect)

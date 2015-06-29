@@ -22,15 +22,14 @@ class SJApprovalViewController: UIViewController {
     var approvalViewForView: UIView?
     
     // IBAction
-    @IBAction func approvalButtonPressed(sender: UIButton) {
-        
+    @IBAction func approvalButtonPressed(sender: UIButton) {        
         switch sender.tag {
-        case 1:
-            delegate?.approvalView(self, didPressXButton: sender, forView: approvalViewForView, withTag: buttonPressedTag)
-        case 2:
-            delegate?.approvalView(self, didPressCheckButton: sender, forView: approvalViewForView, withTag: buttonPressedTag)
-        default:
-            break
+            case 1:
+                delegate?.approvalView(self, didPressXButton: sender, forView: approvalViewForView, withTag: buttonPressedTag)
+            case 2:
+                delegate?.approvalView(self, didPressCheckButton: sender, forView: approvalViewForView, withTag: buttonPressedTag)
+            default:
+                break
         }
     }
 

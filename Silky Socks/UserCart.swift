@@ -8,6 +8,13 @@
 
 import UIKit
 
+
+// Notifications, which classes can subscribe to
+struct UserCartNotifications {
+    static let AddToCartNotification = "AddToCartNotification"
+    static let BoughtProductNotification = "BoughtProductNotification"
+}
+
 /*! 
     @class          User Cart Class
     @abstract       Used to encapsulate the cart system
@@ -15,18 +22,17 @@ import UIKit
 
 */
 class UserCart: NSObject {
-   
-    // Notifications, which classes can subscribe to
-    struct UserCartNotifications {
-        static let AddToCartNotification = "AddToCartNotification"
-        static let BoughtProductNotification = "BoughtProductNotification"
-    }
     
     // Singleton support
     static let sharedCart = UserCart()
     
     // User Cart
-    private(set) var cart = [CartProduct]()
+    private var cart = [CartProduct]()
+    
+    // Override the subscript operator: []
+    subscript(index: Int) -> CartProduct? {
+        return cart[index]
+    }
     
     var numberOfItems: Int {
         return cart.count
@@ -34,13 +40,12 @@ class UserCart: NSObject {
     
     // Add Product
     func addProduct(template: CartProduct) {
-
-        for (_, product) in enumerate(cart) {
-            if product == template {
-                ++product.quantity
-                return
-            }
-        }
+//        for (_, product) in enumerate(cart) {
+//            if product == template {
+//                ++product.quantity
+//                return
+//            }
+//        }
         
         cart.append(template)
         
@@ -49,13 +54,18 @@ class UserCart: NSObject {
     }
     
     // Remove Product
-    func removeProduct(template: CartProduct) {
-        for (index , product) in enumerate(cart) {
-            if product == template {
-                cart.removeAtIndex(index)
-                return
-            }
-        }
+//    func removeProduct(template: CartProduct) {
+//        for (index , product) in enumerate(cart) {
+//            if product == template {
+//                cart.removeAtIndex(index)
+//                return
+//            }
+//        }
+//    }
+    
+    // Remove the item at a particular index
+    func removeProductAtIndex(index: Int) {
+        cart.removeAtIndex(index)
     }
     
     // When a product is bought

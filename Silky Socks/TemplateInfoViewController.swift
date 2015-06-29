@@ -47,6 +47,6 @@ class TemplateInfoViewController: UIViewController {
     }
     
     @objc private func dismiss() {
-        dismissViewControllerAnimated(true, completion: nil)
+        presentingViewController?.dismissViewControllerAnimated(true, completion: nil)
     }
 }

@@ -22,7 +22,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         Order.registerSubclass()
         
         // Enable crashlytics
-        Fabric.with([Crashlytics()])
+        //Fabric.with([Crashlytics()])
 
         // Enable Apple Pay
         BUYClient.sharedClient().enableApplePayWithMerchantId(Shopify.ApplePayMerchantId)
