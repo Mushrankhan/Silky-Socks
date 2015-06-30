@@ -23,7 +23,6 @@
 		1F293BF71B384D1300551A40 /* ShopifyUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F293BF61B384D1300551A40 /* ShopifyUtilities.swift */; };
 		1F293BF91B38631100551A40 /* CartProduct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F293BF81B38631100551A40 /* CartProduct.swift */; };
 		1F39440B1B094EA4008E73E0 /* SJCollectionAddToCartReusableView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1F39440A1B094EA4008E73E0 /* SJCollectionAddToCartReusableView.xib */; };
-		1F4D93821B419D63008EAD74 /* libc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F4D93811B419D63008EAD74 /* libc++.dylib */; };
 		1F535DED1B242084008663DF /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F535DEB1B242084008663DF /* Fabric.framework */; };
 		1F535DEE1B242084008663DF /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F535DEC1B242084008663DF /* Crashlytics.framework */; };
 		1F58FE621B340ED6003E2507 /* CartTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F58FE611B340ED6003E2507 /* CartTableViewController.swift */; };
@@ -43,6 +42,7 @@
 		1FCF509B1B07ED8A005D8578 /* SJCollectionShareReusableView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1FCF509A1B07ED8A005D8578 /* SJCollectionShareReusableView.xib */; };
 		1FCF509D1B07F0C7005D8578 /* SJCollectionDecorationSilkySocksLogoReusableView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1FCF509C1B07F0C7005D8578 /* SJCollectionDecorationSilkySocksLogoReusableView.xib */; };
 		1FCF50A11B083D70005D8578 /* SJCollectionViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FCF50A01B083D70005D8578 /* SJCollectionViewDelegate.swift */; };
+		1FD244321B429AD300D9182A /* DiscountTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD244311B429AD300D9182A /* DiscountTableViewCell.swift */; };
 		1FD558001B2086CA003BDE2A /* SJApprovalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD557FE1B2086CA003BDE2A /* SJApprovalViewController.swift */; };
 		1FD558011B2086CA003BDE2A /* SJApprovalViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1FD557FF1B2086CA003BDE2A /* SJApprovalViewController.xib */; };
 		1FECA5841B3019EB009CC8AF /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1FECA5831B3019EB009CC8AF /* MessageUI.framework */; };
@@ -119,6 +119,7 @@
 		1FCF509A1B07ED8A005D8578 /* SJCollectionShareReusableView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SJCollectionShareReusableView.xib; sourceTree = "<group>"; };
 		1FCF509C1B07F0C7005D8578 /* SJCollectionDecorationSilkySocksLogoReusableView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SJCollectionDecorationSilkySocksLogoReusableView.xib; sourceTree = "<group>"; };
 		1FCF50A01B083D70005D8578 /* SJCollectionViewDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SJCollectionViewDelegate.swift; sourceTree = "<group>"; };
+		1FD244311B429AD300D9182A /* DiscountTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiscountTableViewCell.swift; sourceTree = "<group>"; };
 		1FD557FE1B2086CA003BDE2A /* SJApprovalViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SJApprovalViewController.swift; sourceTree = "<group>"; };
 		1FD557FF1B2086CA003BDE2A /* SJApprovalViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SJApprovalViewController.xib; sourceTree = "<group>"; };
 		1FECA5831B3019EB009CC8AF /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
@@ -157,7 +158,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1F4D93821B419D63008EAD74 /* libc++.dylib in Frameworks */,
 				1FECA5841B3019EB009CC8AF /* MessageUI.framework in Frameworks */,
 				1F535DEE1B242084008663DF /* Crashlytics.framework in Frameworks */,
 				1F535DED1B242084008663DF /* Fabric.framework in Frameworks */,
@@ -179,14 +179,15 @@
 		1F17F28D1B36BE3600DBFEBC /* Table View Cells */ = {
 			isa = PBXGroup;
 			children = (
-				1FC72AD21B3D6C6400D54C1E /* CreditCardTableViewCell.swift */,
-				1FC72AD31B3D6C6400D54C1E /* CreditCardTableViewCell.xib */,
-				1F17F2931B370AB700DBFEBC /* StatesPickerTableViewCell.swift */,
-				1F17F2941B370AB700DBFEBC /* StatesPickerTableViewCell.xib */,
-				1F17F28E1B36BE8A00DBFEBC /* CheckoutInfoTableViewCell.swift */,
-				1F17F28F1B36BE8A00DBFEBC /* CheckoutInfoTableViewCell.xib */,
 				1F58FE641B340F27003E2507 /* CartTableViewCell.swift */,
 				1F58FE651B340F27003E2507 /* CartTableViewCell.xib */,
+				1F17F28E1B36BE8A00DBFEBC /* CheckoutInfoTableViewCell.swift */,
+				1F17F28F1B36BE8A00DBFEBC /* CheckoutInfoTableViewCell.xib */,
+				1FC72AD21B3D6C6400D54C1E /* CreditCardTableViewCell.swift */,
+				1FC72AD31B3D6C6400D54C1E /* CreditCardTableViewCell.xib */,
+				1FD244311B429AD300D9182A /* DiscountTableViewCell.swift */,
+				1F17F2931B370AB700DBFEBC /* StatesPickerTableViewCell.swift */,
+				1F17F2941B370AB700DBFEBC /* StatesPickerTableViewCell.xib */,
 			);
 			name = "Table View Cells";
 			sourceTree = "<group>";
@@ -662,6 +663,7 @@
 				1FCF50A11B083D70005D8578 /* SJCollectionViewDelegate.swift in Sources */,
 				1FA0F9BC1B3DAB9A00480B36 /* FinalTableViewControllerFooterView.swift in Sources */,
 				1F17F2951B370AB700DBFEBC /* StatesPickerTableViewCell.swift in Sources */,
+				1FD244321B429AD300D9182A /* DiscountTableViewCell.swift in Sources */,
 				1F17F2881B36AA7200DBFEBC /* CheckoutViewController.swift in Sources */,
 				4F8D38CA1AE4451000F42E23 /* SJCollectionViewController.swift in Sources */,
 				4FB6C9C11AE4AF70001A6E50 /* SJBottomView.swift in Sources */,

@@ -20,6 +20,7 @@ class SJCollectionViewController: UIViewController {
         static let CellReuseIdentifier = "Cell"
         static let HeightOfColorVC: CGFloat = 50
         static let HeightOfApprovalView: CGFloat = 75
+        static var width: CGFloat { return CGRectGetWidth(UIScreen.mainScreen().bounds) }
     }
     
     // Collection view
@@ -27,13 +28,7 @@ class SJCollectionViewController: UIViewController {
         didSet {
             collectionView.dataSource = self
             collectionView.myDelegate = self
-            collectionView.delegate = self
         }
-    }
-    
-    // Width of screen
-    private var width: CGFloat {
-        return CGRectGetWidth(UIScreen.mainScreen().bounds)
     }
     
     // Color Palette Collection View
@@ -57,12 +52,12 @@ class SJCollectionViewController: UIViewController {
     
     // the showing rect of the approval vc
     private var showRect: CGRect {
-        return CGRect(x: collectionView.contentOffset.x, y: CGRectGetHeight(UIScreen.mainScreen().bounds) - 64 - Constants.HeightOfApprovalView , width: width, height: Constants.HeightOfApprovalView)
+        return CGRect(x: collectionView.contentOffset.x, y: CGRectGetHeight(UIScreen.mainScreen().bounds) - 64 - Constants.HeightOfApprovalView , width: Constants.width, height: Constants.HeightOfApprovalView)
     }
     
     // the hiding rect of the approval vc
     private var hideRect: CGRect {
-        return CGRect(x: collectionView.contentOffset.x, y: CGRectGetHeight(UIScreen.mainScreen().bounds) - 64, width: width, height: Constants.HeightOfApprovalView)
+        return CGRect(x: collectionView.contentOffset.x, y: CGRectGetHeight(UIScreen.mainScreen().bounds) - 64, width: Constants.width, height: Constants.HeightOfApprovalView)
     }
     
     override func viewDidLoad() {
@@ -76,7 +71,7 @@ class SJCollectionViewController: UIViewController {
         navigationItem.titleView = img_view
         
         // Set the layout for the colorVC
-        var frame = CGRect(x: 0, y: 0, width: width, height: Constants.HeightOfColorVC)
+        var frame = CGRect(x: 0, y: 0, width: Constants.width, height: Constants.HeightOfColorVC)
         let layout = SJStickyFontHeaderLayout()
         layout.itemSize = CGSize(width: Constants.HeightOfColorVC - 16, height: Constants.HeightOfColorVC)
         layout.minimumLineSpacing = 0
@@ -143,28 +138,6 @@ class SJCollectionViewController: UIViewController {
         NSNotificationCenter.defaultCenter().removeObserver(self)
     }
     
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Clear out the template array
-        templateArray = []
-    }
-    
-    deinit {
-        // Clear out the template array
-        templateArray = []
-        
-        // Remove color vc
-        colorCollectionVC.willMoveToParentViewController(nil)
-        colorCollectionVC.collectionView?.removeFromSuperview()
-        colorCollectionVC.removeFromParentViewController()
-        
-        // Remove approval vc
-        approvalVC.willMoveToParentViewController(nil)
-        approvalVC.view.removeFromSuperview()
-        approvalVC.removeFromParentViewController()
-    }
-    
-    
     // MARK: - Cart Button
     
     // Used to increment the badge count on the cart bar button item
@@ -202,7 +175,6 @@ extension SJCollectionViewController: UICollectionViewDataSource {
         
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier(Constants.CellReuseIdentifier, forIndexPath: indexPath) as! SJCollectionViewCell
         cell.template = templateArray[indexPath.row]
-        cell.delegate = self.collectionView // Very Essential
         return cell
     }
     
@@ -246,7 +218,7 @@ extension SJCollectionViewController {
             colorCollectionVC.collectionView?.alpha = 0
             
             // New Frame
-            let frame = CGRectMake(collectionView.contentOffset.x, end.origin.y - Constants.HeightOfColorVC - 64, width, Constants.HeightOfColorVC)
+            let frame = CGRectMake(collectionView.contentOffset.x, end.origin.y - Constants.HeightOfColorVC - 64, Constants.width, Constants.HeightOfColorVC)
             
             UIView.animateWithDuration(0.3) { [unowned self] in
                 self.colorCollectionVC.collectionView?.frame = frame
@@ -272,7 +244,7 @@ extension SJCollectionViewController: SJCollectionViewDelegate, MFMailComposeVie
         let height: CGFloat = 60
         
         // Create an instance of Text Field
-        let frame = CGRect(x: collectionView.contentOffset.x, y: midY - 50, width: width, height: height)
+        let frame = CGRect(x: collectionView.contentOffset.x, y: midY - 50, width: Constants.width, height: height)
         let textField = SJTextField(frame: frame)
         textField.delegate = self
         textField.becomeFirstResponder()
@@ -302,7 +274,7 @@ extension SJCollectionViewController: SJCollectionViewDelegate, MFMailComposeVie
         
         // 64 : height of nav bar + status bar
         let height = CGRectGetHeight(UIScreen.mainScreen().bounds) - Constants.HeightOfApprovalView - Constants.HeightOfColorVC - 64
-        let frame = CGRectMake(collectionView.contentOffset.x, height, width , Constants.HeightOfColorVC)
+        let frame = CGRectMake(collectionView.contentOffset.x, height, Constants.width , Constants.HeightOfColorVC)
         
         // Tells the color collection vc that we dont want to 
         // give people the option to switch to fonts
@@ -330,20 +302,20 @@ extension SJCollectionViewController: SJCollectionViewDelegate, MFMailComposeVie
     // Right now send a mail to check for correct size
     func collectionView(collectionView: UICollectionView, didPressAddToCartButton button:UIButton, withSnapShotImage snapshot: UIImage, andTemplate template: Template) {
         
-//        let mail = MFMailComposeViewController()
-//        mail.addAttachmentData(UIImageJPEGRepresentation(snapshot, 0.7), mimeType: "image/jpeg", fileName: "Design")
-//        mail.mailComposeDelegate = self
-//        presentViewController(mail, animated: true, completion: nil)
+        let image = snapshot.renderImageIntoSize(template.productSizes[0])
+        let mail = MFMailComposeViewController()
+        mail.addAttachmentData(UIImageJPEGRepresentation(image, 0.7), mimeType: "image/jpeg", fileName: "Design")
+        mail.mailComposeDelegate = self
+        presentViewController(mail, animated: true, completion: nil)
         
         // Create a cart Product
-        let product = CartProduct(template: template, withImage: snapshot)
-        UserCart.sharedCart.addProduct(product)
+        //UserCart.sharedCart.addProduct(CartProduct(template: template, withImage: snapshot))
     }
     
     // Dismiss the mail compose view controller
-//    func mailComposeController(controller: MFMailComposeViewController!, didFinishWithResult result: MFMailComposeResult, error: NSError!) {
-//        dismissViewControllerAnimated(true, completion: nil)
-//    }
+    func mailComposeController(controller: MFMailComposeViewController!, didFinishWithResult result: MFMailComposeResult, error: NSError!) {
+        dismissViewControllerAnimated(true, completion: nil)
+    }
     
     // Restart
     func collectionView(collectionView: UICollectionView, didPressRestartButton button:UIButton) {
@@ -355,7 +327,7 @@ extension SJCollectionViewController: SJCollectionViewDelegate, MFMailComposeVie
         let alert = UIAlertController(title: title, message: message, preferredStyle: .Alert)
         
         // Okay - Restart
-        alert.addAction(UIAlertAction(title: "Continue", style: .Default) { action in
+        alert.addAction(UIAlertAction(title: "Continue", style: .Default) { [unowned self] action in
             
             // Re enable collection view pan gesture
             self.collectionView.panGestureRecognizer.enabled = true
@@ -379,7 +351,7 @@ extension SJCollectionViewController: SJCollectionViewDelegate, MFMailComposeVie
         })
         
         // Cancel - Do Nothing
-        alert.addAction(UIAlertAction(title: "Cancel", style: .Cancel) { action in
+        alert.addAction(UIAlertAction(title: "Cancel", style: .Cancel) { [unowned self] action in
             self.dismissViewControllerAnimated(true, completion: nil)
         })
         

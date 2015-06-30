@@ -84,6 +84,15 @@ class SJCollectionView: UICollectionView {
             }
         }
     }
+    
+    override func dequeueReusableCellWithReuseIdentifier(identifier: String, forIndexPath indexPath: NSIndexPath!) -> AnyObject {
+        // Essential to conform to cell delegate
+        if let object = super.dequeueReusableCellWithReuseIdentifier(identifier, forIndexPath: indexPath) as? SJCollectionViewCell {
+            object.delegate = self
+            return object
+        }
+        return super.dequeueReusableCellWithReuseIdentifier(identifier, forIndexPath: indexPath)
+    }
 }
 
 // MARK: Dequeuing the various supplementary views
@@ -153,7 +162,8 @@ extension SJCollectionView: CartViewCollectionReusableViewDelegate {
             let rect = CGRect(origin: CGPoint(x: 0, y: y), size: cell.frame.size)
             
             dispatch_async(dispatch_get_global_queue(QOS_CLASS_USER_INITIATED, 0)) {
-                let image = cell.clickSnapShotForCart(rect, withLogo: UIImage.SilkySocksLogo(), size:cell.template!.productSize)
+                //let image = cell.clickSnapShotForCart(rect, withLogo: UIImage.SilkySocksLogo(), size:cell.template!.productSize)
+                let image = cell.clickSnapShot(rect, withLogo: UIImage.SilkySocksLogo())
                 dispatch_async(dispatch_get_main_queue()) {
                     myDelegate?.collectionView(self, didPressAddToCartButton: sender, withSnapShotImage: image, andTemplate: cell.template!)
                 }

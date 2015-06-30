@@ -14,10 +14,15 @@ import UIKit
     @description    An instance of the CartProduct Class is used to be stored
                     in the UserCart
 */
-class CartProduct: NSObject, Printable, Equatable {
+class CartProduct: NSObject, Printable {
+    
+    // MARK: - Properties
     
     // Image
     private(set) var productImage: UIImage
+    
+    // Image sent to Parse when the user checks out
+    var checkoutImage: UIImage?
     
     // Name
     private(set) var name: String
@@ -27,6 +32,8 @@ class CartProduct: NSObject, Printable, Equatable {
     
     // The Type of the product
     private(set) var productType: TemplateType!
+    
+    private(set) var productSizes: [CGSize]
     
     // The base price changes with the change in quantity
     // Computed property
@@ -57,7 +64,10 @@ class CartProduct: NSObject, Printable, Equatable {
     // The current price
     private(set) var price: Float
     
-    init(name: String, productImage: UIImage, prices: [Float], productID: String, type: TemplateType) {
+    
+    // MARK: - Init
+    
+    init(name: String, productImage: UIImage, prices: [Float], productID: String, type: TemplateType, sizes: [CGSize]) {
         
         self.name = name
         self.productImage = productImage
@@ -66,22 +76,18 @@ class CartProduct: NSObject, Printable, Equatable {
         self.price = prices[0]
         self.productID = productID
         self.productType = type
-        
+        self.productSizes = sizes
     }
     
     convenience init(template: Template, withImage image: UIImage) {
-        self.init(name: template.infoCaption, productImage: image, prices: template.prices, productID: template.productId, type: template.type)
+        self.init(name: template.infoCaption, productImage: image, prices: template.prices, productID: template.productId, type: template.type, sizes: template.productSizes)
     }
     
-    // Printable
+    
+    // MARK: - Printable
+    
     override var description: String {
         return "Name: " + name + "\n" + "Price: \(prices)\n" + "Quantity: \(quantity)\n"
     }
     
 }
-
-// MARK: Equatable
-func ==(lhs: CartProduct, rhs: CartProduct) -> Bool {
-    return (lhs.name == rhs.name && lhs.productImage == rhs.productImage)
-}
-

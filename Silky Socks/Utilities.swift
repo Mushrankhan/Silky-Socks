@@ -69,7 +69,6 @@ extension UIView {
         return newImage
     }
     
-    
     // Print the view heirarchy
     func logSubViews() {
         println(self)
@@ -169,6 +168,16 @@ extension UIImage {
         }
         
         return boundingSize
+    }
+    
+    func renderImageIntoSize(size: CGSize) -> UIImage {
+        
+        UIGraphicsBeginImageContextWithOptions(size, false , 0)
+        let context = UIGraphicsGetCurrentContext()
+        drawInRect(CGRect(origin: .zeroPoint, size: size))
+        let image = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        return image
     }
     
     // Tint the image

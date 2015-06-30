@@ -197,6 +197,29 @@
                                     </subviews>
                                 </tableViewCellContentView>
                             </tableViewCell>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="Discount Cell" id="P5W-Mb-yUM" customClass="DiscountTableViewCell" customModule="Silky_Socks" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="P5W-Mb-yUM" id="hO6-fG-dQ4">
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Apply Discount Code" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="QOQ-76-VWQ">
+                                            <rect key="frame" x="8" y="8" width="584" height="27.5"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                            <textInputTraits key="textInputTraits"/>
+                                        </textField>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="QOQ-76-VWQ" firstAttribute="top" secondItem="hO6-fG-dQ4" secondAttribute="top" constant="8" id="ZPD-2o-oUc"/>
+                                        <constraint firstItem="QOQ-76-VWQ" firstAttribute="leading" secondItem="hO6-fG-dQ4" secondAttribute="leading" constant="8" id="bHg-il-m4c"/>
+                                        <constraint firstAttribute="bottom" secondItem="QOQ-76-VWQ" secondAttribute="bottom" constant="8" id="dZY-PG-N58"/>
+                                        <constraint firstAttribute="trailing" secondItem="QOQ-76-VWQ" secondAttribute="trailing" constant="8" id="lLh-z4-U5F"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="discountTextField" destination="QOQ-76-VWQ" id="DxM-Aq-QrY"/>
+                                </connections>
+                            </tableViewCell>
                         </prototypes>
                         <connections>
                             <outlet property="dataSource" destination="Z3A-EB-xlU" id="Siw-WN-qXD"/>

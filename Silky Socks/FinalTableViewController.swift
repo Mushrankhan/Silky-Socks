@@ -8,7 +8,7 @@
 
 import UIKit
 
-class FinalTableViewController: UITableViewController, CreditCardTableViewCellDelegate, FinalTableViewControllerFooterViewDelegate, CheckoutInfoTableViewCellDelegate {
+class FinalTableViewController: UITableViewController, CreditCardTableViewCellDelegate, FinalTableViewControllerFooterViewDelegate, DiscountTableViewCellDelegate {
     
     // Passed on from previous VC
     var checkout: BUYCheckout!
@@ -19,7 +19,7 @@ class FinalTableViewController: UITableViewController, CreditCardTableViewCellDe
     private struct Constants {
         static let CellReuseIdentifier = "Cell"
         static let CreditCardCell = "Credit Cell"
-        static let CheckoutInfoCell = "Checkout Cell"
+        static let DiscountCellReuseIdentifier = "Discount Cell"
         static let CreditCardCellNib = "CreditCardTableViewCell"
         static let NumberOfSections = 4
         static let NumberOfRowsInSectionTwo = 2
@@ -38,7 +38,6 @@ class FinalTableViewController: UITableViewController, CreditCardTableViewCellDe
         
         // Register Nib
         tableView.registerNib(UINib(nibName: Constants.CreditCardCellNib, bundle: nil), forCellReuseIdentifier: Constants.CreditCardCell)
-        tableView.registerNib(UINib(nibName: "CheckoutInfoTableViewCell", bundle: nil), forCellReuseIdentifier: Constants.CheckoutInfoCell)
         
         // Set up the footer view
         let footerView = NSBundle.mainBundle().loadNibNamed(Constants.FooterViewNibName, owner: nil, options: nil).first as? FinalTableViewControllerFooterView
@@ -99,9 +98,7 @@ class FinalTableViewController: UITableViewController, CreditCardTableViewCellDe
         
         // Section 1 : Show Discount
         if indexPath.section == 1 {
-            let cell = tableView.dequeueReusableCellWithIdentifier(Constants.CheckoutInfoCell, forIndexPath: indexPath) as! CheckoutInfoTableViewCell
-            cell.infoTextField.placeholder = "Apply a Discount Code"
-            cell.infoTextField.returnKeyType = .Done
+            let cell = tableView.dequeueReusableCellWithIdentifier(Constants.DiscountCellReuseIdentifier, forIndexPath: indexPath) as! DiscountTableViewCell
             cell.delegate = self
             return cell
         }
@@ -191,22 +188,22 @@ class FinalTableViewController: UITableViewController, CreditCardTableViewCellDe
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
     }
     
-    // MARK: - CheckoutInfoTableViewCell Delegate
+    // MARK: - DiscountTableViewCell Delegate
     
-    func checkoutInfoTableViewCell(cell: CheckoutInfoTableViewCell, didEnterInfo info: String){
+    func discountTableViewCell(cell: DiscountTableViewCell, didEnterDiscountCode code: String){
         
         // Show loading indicator
         SVProgressHUD.showWithStatus("Applying Discount Code")
         
         // Apply code
-        let code = BUYDiscount(code: info)
+        let code = BUYDiscount(code: code)
         self.checkout.discount = code
         BUYClient.sharedClient().updateCheckout(checkout, completion: { (checkout, error) -> Void in
             
             // hide
-            dispatch_async(dispatch_get_main_queue(), { () -> Void in
+            dispatch_async(dispatch_get_main_queue()) {
                 SVProgressHUD.dismiss()
-            })
+            }
             
             // If success, then update checkout
             if error == nil {
@@ -223,9 +220,7 @@ class FinalTableViewController: UITableViewController, CreditCardTableViewCellDe
             }
             
         })
-        
     }
-    
     
     // MARK: - CreditCardTableViewCell Delegate
     
@@ -255,7 +250,7 @@ class FinalTableViewController: UITableViewController, CreditCardTableViewCellDe
     
     func payByCreditCard(creditCard: Bool) {
         
-        // @warning Have to solve the 2 issues posted on Shopify
+        // @warning Have to solve the 1 issue posted on Shopify
         
         // Please select a shipping method
         if self.checkout.shippingRate == nil {

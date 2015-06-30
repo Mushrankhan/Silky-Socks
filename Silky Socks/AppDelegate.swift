@@ -21,14 +21,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Parse
         Order.registerSubclass()
         
-        // Enable crashlytics
-        //Fabric.with([Crashlytics()])
-
-        // Enable Apple Pay
-        BUYClient.sharedClient().enableApplePayWithMerchantId(Shopify.ApplePayMerchantId)
-        
         // Enable Parse
         Parse.setApplicationId("sxLW09gACqdlQmxXeKEJxbDfDSIFIG3MYhSZcjzJ", clientKey: "4h5ZzOy31GbrJmep3HYoqC0GTm8Ujxz6AMnMEsTG")
+        
+        // Set loading indicator properties
+        SVProgressHUD.setBackgroundColor(UIColor.blackColor())
+        SVProgressHUD.setForegroundColor(UIColor.whiteColor())
+        SVProgressHUD.setRingThickness(5)
+        
+        // Enable crashlytics
+        //Fabric.with([Crashlytics()])
+        // Enable Apple Pay
+        //BUYClient.sharedClient().enableApplePayWithMerchantId(Shopify.ApplePayMerchantId)
+        
         return true
     }
 
