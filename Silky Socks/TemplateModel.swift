@@ -38,7 +38,7 @@ class Template: NSObject, Printable {
     var info: String
     var infoImage: UIImage?
     
-    var prices: [Float]   // Price of product
+    var prices: [NSDecimalNumber]   // Price of product
     var productId: String // Product Id: The Id as on Shopify
     
     /*  The size needed to print the product in right dimensions
@@ -49,7 +49,7 @@ class Template: NSObject, Printable {
     
     // MARK: - Init
     
-    init(image: UIImage, type: TemplateType, maskImage: UIImage?, infoCaption: String, info: String, infoImage: UIImage?, price: [Float], productId: String, productSizes: [CGSize]) {
+    init(image: UIImage, type: TemplateType, maskImage: UIImage?, infoCaption: String, info: String, infoImage: UIImage?, price: [NSDecimalNumber], productId: String, productSizes: [CGSize]) {
         
         self.image = image
         self.type = type
@@ -76,7 +76,7 @@ class Template: NSObject, Printable {
         
         typealias Img = UIImage
         
-        let IS_IPHONE = (UI_USER_INTERFACE_IDIOM() == .Phone) ? true : false
+        let IS_IPHONE = (UIDevice.currentDevice().userInterfaceIdiom == .Phone) ? true : false
         let SCREEN_WIDTH = UIScreen.mainScreen().bounds.size.width
         let SCREEN_HEIGHT = UIScreen.mainScreen().bounds.size.height
         let SCREEN_MAX_LENGTH = max(SCREEN_HEIGHT, SCREEN_WIDTH)
@@ -85,7 +85,7 @@ class Template: NSObject, Printable {
         let scale = UIScreen.mainScreen().scale
         let inch: CGFloat = IS_IPHONE_6P ? 401 : 326
         
-        let sock = Template(image: Img(named: "socks")!, type: .Socks, maskImage: nil, infoCaption: "Streetwear Fullprint Socks", info: "This style has a Polyester, Rubber and Spandex Blend with breath-ability and superb all over print. Along with a thick ribbing for a secure, comfort fit. Quality Guaranteed!", infoImage: Img(named: "WhiteSocksProduct")!, price: [18, 14, 12], productId: "1334414273", productSizes: [CGSize(width: 10 * inch / scale, height: 20 * inch / scale)])
+        let sock = Template(image: Img(named: "socks")!, type: .Socks, maskImage: nil, infoCaption: "Streetwear Fullprint Socks", info: "This style has a Polyester, Rubber and Spandex Blend with breath-ability and superb all over print. Along with a thick ribbing for a secure, comfort fit. Quality Guaranteed!", infoImage: Img(named: "WhiteSocksProduct")!, price: [18.00, 14.00, 12.00], productId: "1334414273", productSizes: [CGSize(width: 10 * inch / scale, height: 20 * inch / scale)])
         
         let blackSock = Template(image: Img(named: "blackfootnew")!, type: .Socks, maskImage: Img(named: "blackfootnew_noblack"), infoCaption: "Athletic Black Foot Socks", info: "This style has a Solid Cotton foot for ultimate comfort + a Polyester, Rubber and Spandex Blend. The Leg holds the incredibly vibrant print. The foot carries extra padding and cushion for increased support along with thick ribbing for a secure, tight fit. Quality Guaranteed!", infoImage: Img(named: "BlackFootProduct")!, price: [18, 14, 12], productId: "1359200001", productSizes: [CGSize(width: 10 * inch / scale, height: 9 * inch / scale)])
         

@@ -37,7 +37,7 @@ class CartProduct: NSObject, Printable {
     
     // The base price changes with the change in quantity
     // Computed property
-    var basePrice: Float {
+    var basePrice: NSDecimalNumber {
 //        switch quantity {
 //            case 1...11:
 //                return prices[0]
@@ -51,23 +51,23 @@ class CartProduct: NSObject, Printable {
     
     // Storing all the prices
     // The base price consisit of prices in the array
-    private var prices: [Float]
+    private var prices: [NSDecimalNumber]
     
     // The current quantity
     // If quantity changes, then change the price
     var quantity: Int {
         didSet {
-            price = Float(quantity) * basePrice
+            price = NSDecimalNumber(integer: quantity).decimalNumberByMultiplyingBy(basePrice)
         }
     }
     
     // The current price
-    private(set) var price: Float
+    private(set) var price: NSDecimalNumber
     
     
     // MARK: - Init
     
-    init(name: String, productImage: UIImage, prices: [Float], productID: String, type: TemplateType, sizes: [CGSize]) {
+    init(name: String, productImage: UIImage, prices: [NSDecimalNumber], productID: String, type: TemplateType, sizes: [CGSize]) {
         
         self.name = name
         self.productImage = productImage

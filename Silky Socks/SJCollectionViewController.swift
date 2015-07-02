@@ -147,6 +147,8 @@ class SJCollectionViewController: UIViewController {
     @objc private func incrementCartCount(notification: NSNotification) {
         notificationHub.increment()
         notificationHub.pop()
+        notificationHub.bump()
+        notificationHub.bump()
     }
     
     // Storing Constants from the Storyboard
@@ -302,14 +304,14 @@ extension SJCollectionViewController: SJCollectionViewDelegate, MFMailComposeVie
     // Right now send a mail to check for correct size
     func collectionView(collectionView: UICollectionView, didPressAddToCartButton button:UIButton, withSnapShotImage snapshot: UIImage, andTemplate template: Template) {
         
-        let image = snapshot.renderImageIntoSize(template.productSizes[0])
-        let mail = MFMailComposeViewController()
-        mail.addAttachmentData(UIImageJPEGRepresentation(image, 0.7), mimeType: "image/jpeg", fileName: "Design")
-        mail.mailComposeDelegate = self
-        presentViewController(mail, animated: true, completion: nil)
+//        let image = snapshot.renderImageIntoSize(template.productSizes[0])
+//        let mail = MFMailComposeViewController()
+//        mail.addAttachmentData(UIImageJPEGRepresentation(image, 0.7), mimeType: "image/jpeg", fileName: "Design")
+//        mail.mailComposeDelegate = self
+//        presentViewController(mail, animated: true, completion: nil)
         
         // Create a cart Product
-        //UserCart.sharedCart.addProduct(CartProduct(template: template, withImage: snapshot))
+        UserCart.sharedCart.addProduct(CartProduct(template: template, withImage: snapshot))
     }
     
     // Dismiss the mail compose view controller

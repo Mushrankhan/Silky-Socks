@@ -28,7 +28,7 @@ class CartTableViewCell: UITableViewCell {
     @IBOutlet private weak var quantityLabel: UILabel!
     @IBOutlet private weak var quantityStepper: UIStepper!
     @IBOutlet private weak var priceLabel: UILabel!
-    @IBOutlet weak var basePriceLabel: UILabel!
+    @IBOutlet weak var basePriceLabel: UILabel! { didSet { basePriceLabel.hidden = true } }
     
     // Object passed to init self
     var cartProduct: CartProduct? {
@@ -43,7 +43,6 @@ class CartTableViewCell: UITableViewCell {
     }
     
     deinit {
-        println("Cart Cell Deinit")
         cartProduct = nil
         cartImgView = nil
         productNameLabel = nil
@@ -62,7 +61,7 @@ class CartTableViewCell: UITableViewCell {
     private func updateUI() {
         quantityLabel?.text = "\(cartProduct!.quantity)"
         quantityStepper?.value = Double(cartProduct!.quantity)
-        priceLabel?.text = "$ \(cartProduct!.price)"
-        basePriceLabel?.text = "$ \(cartProduct!.basePrice)/pc"
+        priceLabel?.text = "$ \(cartProduct!.price).00"
+        basePriceLabel?.text = "$ \(cartProduct!.basePrice).00/pc"
     }
 }

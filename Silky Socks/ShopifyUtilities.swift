@@ -25,7 +25,7 @@ extension BUYCart: Printable {
         let buyProduct = BUYLineItem(variant: variant)
         buyProduct.title = product.name
         buyProduct.quantity = NSDecimalNumber(integer: product.quantity)
-        buyProduct.price = NSDecimalNumber(float: product.basePrice)
+        buyProduct.price = product.basePrice
         buyProduct.requiresShipping = variant.requiresShipping
         addLineItemsObject(buyProduct)
     }

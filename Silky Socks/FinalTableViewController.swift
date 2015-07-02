@@ -71,8 +71,9 @@ class FinalTableViewController: UITableViewController, CreditCardTableViewCellDe
             
             // Section 0
             if indexPath.section == 0 {
-                cell.textLabel!.text = shippingRates[indexPath.row].title
-                cell.detailTextLabel!.text = "$\(shippingRates[indexPath.row].price)"
+                let rate = shippingRates[indexPath.row]
+                cell.textLabel!.text = rate.title == "FREE SHIPPING" ? "\(rate.title) (Over $30)" : rate.title
+                cell.detailTextLabel!.text = "$\(rate.price)"
                 
                 // If selected a shipping method then show a check mark
                 if selectedShippingIndexPath != nil {
@@ -125,6 +126,13 @@ class FinalTableViewController: UITableViewController, CreditCardTableViewCellDe
             return Constants.SectionOneTitle
         } else if section == 3 {
             return Constants.SectionThreeTitle
+        }
+        return nil
+    }
+    
+    override func tableView(tableView: UITableView, titleForFooterInSection section: Int) -> String? {
+        if section == 1 {
+            return "Use save24 when ordering 24 or more. OR use save12 when ordering 12...23."
         }
         return nil
     }
