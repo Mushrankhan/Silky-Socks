@@ -226,17 +226,17 @@ extension CheckoutViewController: CheckoutTableFooterViewDelegate {
         address.countryCode = "US"
         
         // Testing Purposes
-        let addr = BUYAddress()
-        addr.firstName = "Saurabh"
-        addr.lastName = "Jain"
-        addr.address1 = "7357 Franklin Avenue"
-        addr.city = "Los Angeles"
-        addr.province = "CA"
-        addr.countryCode = "US"
-        addr.zip = "90046"
-        address = addr
-
-        self.email = "saurabhj80@gmail.com"
+//        let addr = BUYAddress()
+//        addr.firstName = "Saurabh"
+//        addr.lastName = "Jain"
+//        addr.address1 = "7357 Franklin Avenue"
+//        addr.city = "Los Angeles"
+//        addr.province = "CA"
+//        addr.countryCode = "US"
+//        addr.zip = "90046"
+//        address = addr
+//
+//        self.email = "saurabhj80@gmail.com"
 
         // Invalid address
         if !address.isValid() {
