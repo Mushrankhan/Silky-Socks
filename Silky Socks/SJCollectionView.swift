@@ -66,23 +66,6 @@ class SJCollectionView: UICollectionView {
         // Decoration views are owned by the layout object
         let layout = collectionViewLayout as! SJLayout
         layout.registerNib(UINib(nibName: "SJCollectionDecorationSilkySocksLogoReusableView", bundle: nil), forDecorationViewOfKind: logoElementKind)
-        
-        // KVO
-        addObserver(self, forKeyPath: "contentOffset", options: .New, context: nil)
-    }
-    
-    // Using KVO to keep track of the content offset of the collection view
-    // Done to prevent navigation when the content offset is already being changed
-    var changingOffset = false
-    override func observeValueForKeyPath(keyPath: String, ofObject object: AnyObject, change: [NSObject : AnyObject], context: UnsafeMutablePointer<Void>) {
-        if keyPath == "contentOffset" {
-            changingOffset = true
-            if let new = change["new"]?.CGPointValue() {
-                if new.x % width == 0 {
-                    changingOffset = false
-                }
-            }
-        }
     }
     
     override func dequeueReusableCellWithReuseIdentifier(identifier: String, forIndexPath indexPath: NSIndexPath!) -> AnyObject {
@@ -135,38 +118,33 @@ extension SJCollectionView: RestartViewCollectionReusableViewDelegate {
     }
 }
 
-// MARK: Share
-extension SJCollectionView: ShareViewCollectionReusableViewDelegate {
+// MARK: Share / Add To Cart
+extension SJCollectionView: ShareViewCollectionReusableViewDelegate, CartViewCollectionReusableViewDelegate {
     func shareReusableView(view: ShareViewCollectionReusableView, didPressShareButton sender: UIButton) {
         if let cell = visibleCell {
-            // due to the presence of the info button
-            let y = cell.infoButton.bounds.size.height
-            let rect = CGRect(origin: CGPoint(x: 0, y: y), size: cell.frame.size)
-            
-            dispatch_async(dispatch_get_global_queue(QOS_CLASS_USER_INITIATED, 0)) {
-                let image = cell.clickSnapShot(rect, withLogo: UIImage.SilkySocksLogo())
-                dispatch_async(dispatch_get_main_queue()) {
-                    myDelegate?.collectionView(self, didPressShareButton: sender, withSnapShotImage: image)
-                }
+            clickSnapShot(cell) { image in
+                myDelegate?.collectionView(self, didPressShareButton: sender, withSnapShotImage: image)
             }
         }
     }
-}
 
-// MARK: Add To Cart
-extension SJCollectionView: CartViewCollectionReusableViewDelegate {
     func cartReusableView(view: CartViewCollectionReusableView, didPressAddToCartButton sender: UIButton) {
         if let cell = visibleCell {
-            // due to the presence of the info button
-            let y = cell.infoButton.bounds.size.height
-            let rect = CGRect(origin: CGPoint(x: 0, y: y), size: cell.frame.size)
-            
-            dispatch_async(dispatch_get_global_queue(QOS_CLASS_USER_INITIATED, 0)) {
-                //let image = cell.clickSnapShotForCart(rect, withLogo: UIImage.SilkySocksLogo(), size:cell.template!.productSize)
-                let image = cell.clickSnapShot(rect, withLogo: UIImage.SilkySocksLogo())
-                dispatch_async(dispatch_get_main_queue()) {
-                    myDelegate?.collectionView(self, didPressAddToCartButton: sender, withSnapShotImage: image, andTemplate: cell.template!)
-                }
+            clickSnapShot(cell) { image in
+                myDelegate?.collectionView(self, didPressAddToCartButton: sender, withSnapShotImage: image, andTemplate: cell.template!)
+            }
+        }
+    }
+    
+    private func clickSnapShot(cell: SJCollectionViewCell, block: (image: UIImage) -> Void) {
+        // due to the presence of the info button
+        let y = cell.infoButton.bounds.size.height
+        let rect = CGRect(origin: CGPoint(x: 0, y: y), size: cell.frame.size)
+        
+        dispatch_async(dispatch_get_global_queue(QOS_CLASS_USER_INITIATED, 0)) {
+            let image = cell.clickSnapShot(rect, withLogo: UIImage.SilkySocksLogo())
+            dispatch_async(dispatch_get_main_queue()) {
+                block(image: image)
             }
         }
     }
@@ -180,22 +158,14 @@ extension SJCollectionView: SJBottomViewDelegate {
     
     // Navigate Right
     func sj_bottomView(view: SJBottomView, didPressRightButton button: UIButton) {
-        // Make sure that the content offset is not being changed
-        // when the right button is clicked
-        //if !changingOffset {
-            let xOffset = min(contentSize.width - width, contentOffset.x + width)
-            setContentOffset(CGPoint(x: xOffset, y: contentOffset.y), animated: true)
-        //}
+        let xOffset = min(contentSize.width - width, contentOffset.x + width)
+        setContentOffset(CGPoint(x: xOffset, y: contentOffset.y), animated: true)
     }
     
     // Navigate Left
     func sj_bottomView(view: SJBottomView, didPressLeftButton button: UIButton) {
-        // Make sure that the content offset is not being changed
-        // when the left button is clicked
-        //if !changingOffset {
-            let xOffset = max(0, contentOffset.x - width)
-            setContentOffset(CGPoint(x: xOffset, y: contentOffset.y), animated: true)
-        //}
+        let xOffset = max(0, contentOffset.x - width)
+        setContentOffset(CGPoint(x: xOffset, y: contentOffset.y), animated: true)
     }
     
     // Text button clicked

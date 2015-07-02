@@ -159,10 +159,12 @@ class SJCollectionViewCell: UICollectionViewCell {
     // Not to clear up the color when cleaning up
     private func cleanUp() {
         // Clear the subviews added to the cell
-        for view in sj_subViews {
-            view.removeFromSuperview()
-        }
+        for view in sj_subViews { view.removeFromSuperview() }
         sj_subViews.removeAll(keepCapacity: true)
+        
+        // Mask image view
+        maskImageView?.removeFromSuperview()
+        maskImageView = nil
         
         // Bounding view
         boundingRectView?.removeFromSuperview()
@@ -203,7 +205,6 @@ class SJCollectionViewCell: UICollectionViewCell {
 
 // MARK: IBAction
 extension SJCollectionViewCell {
-    
     @IBAction func infoButtonPressed(sender: UIButton) {
         delegate?.collectionViewCell(self, didTapInfoButton: sender)
     }

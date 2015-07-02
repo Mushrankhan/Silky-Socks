@@ -68,17 +68,20 @@ class FinalTableViewController: UITableViewController, CreditCardTableViewCellDe
         if indexPath.section == 0 || indexPath.section == 2 {
             
             let cell = tableView.dequeueReusableCellWithIdentifier(Constants.CellReuseIdentifier, forIndexPath: indexPath) as! UITableViewCell
+            cell.accessoryType = .None
             
             // Section 0
             if indexPath.section == 0 {
                 let rate = shippingRates[indexPath.row]
                 cell.textLabel!.text = rate.title == "FREE SHIPPING" ? "\(rate.title) (Over $30)" : rate.title
-                cell.detailTextLabel!.text = "$\(rate.price)"
+                cell.detailTextLabel!.text = rate.price == NSDecimalNumber(integer: 0) ? "$\(rate.price)" : "$\(rate.price)0"
                 
                 // If selected a shipping method then show a check mark
-                if selectedShippingIndexPath != nil {
+                if selectedShippingIndexPath != nil && selectedShippingIndexPath == indexPath {
                     cell.accessoryType = .Checkmark
-                    selectedShipping = shippingRates[selectedShippingIndexPath!.row] // Set the selected shipping
+                    if selectedShipping != shippingRates[selectedShippingIndexPath!.row] {
+                        selectedShipping = shippingRates[selectedShippingIndexPath!.row]
+                    }
                 } else {
                     cell.accessoryType = .None
                 }
@@ -90,6 +93,7 @@ class FinalTableViewController: UITableViewController, CreditCardTableViewCellDe
                 if self.checkout.discount != nil && indexPath.row == 1 {
                     cell.textLabel?.text = "Tax ($\(self.checkout.discount.amount) off)"
                 }
+                
                 cell.detailTextLabel?.text = indexPath.row == 0 ? "$\(checkout.totalTax)" : "$\(checkout.totalPrice)"
                 cell.selectionStyle = .None
             }
@@ -271,6 +275,8 @@ class FinalTableViewController: UITableViewController, CreditCardTableViewCellDe
             
             if card.isValid() {
                 // Show Loading
+                
+                UIApplication.sharedApplication().beginIgnoringInteractionEvents()
                 SVProgressHUD.showWithStatus("Sending Credit Card Info")
                 
                 // Associate the card with the checkout
@@ -282,6 +288,7 @@ class FinalTableViewController: UITableViewController, CreditCardTableViewCellDe
                         }
                     } else {
                         dispatch_async(dispatch_get_main_queue()) {
+                            UIApplication.sharedApplication().endIgnoringInteractionEvents()
                             SVProgressHUD.dismiss()
                             SweetAlert().showAlert("Unable to Process", subTitle: "Please Try Again Later", style: .Error)
                         }
@@ -334,6 +341,7 @@ class FinalTableViewController: UITableViewController, CreditCardTableViewCellDe
                             
                         } else {
                             dispatch_async(dispatch_get_main_queue()) {
+                                UIApplication.sharedApplication().endIgnoringInteractionEvents()
                                 SVProgressHUD.dismiss()
                                 SweetAlert().showAlert("Unable to Process", subTitle: "Please try again", style: .Error)
                             }
@@ -346,6 +354,7 @@ class FinalTableViewController: UITableViewController, CreditCardTableViewCellDe
             // Not able to save to Parse
             else {
                 dispatch_async(dispatch_get_main_queue()) {
+                    UIApplication.sharedApplication().endIgnoringInteractionEvents()
                     SVProgressHUD.dismiss()
                     SweetAlert().showAlert("Error Uploading Image", subTitle: "Check Internet Connection", style: .Error)
                 }
@@ -376,6 +385,7 @@ class FinalTableViewController: UITableViewController, CreditCardTableViewCellDe
                 NSThread.sleepForTimeInterval(0.5)
             } else {
                 SVProgressHUD.dismiss()
+                UIApplication.sharedApplication().endIgnoringInteractionEvents()
                 if status == .Failed {
                     SweetAlert().showAlert("Failed", subTitle: "Try Again", style: .Error)
                 } else if status == .Complete {
