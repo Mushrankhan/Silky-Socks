@@ -136,7 +136,7 @@ class FinalTableViewController: UITableViewController, CreditCardTableViewCellDe
     
     override func tableView(tableView: UITableView, titleForFooterInSection section: Int) -> String? {
         if section == 1 {
-            return "Use save24 when ordering 24 or more. OR use save12 when ordering 12...23."
+            return "Use 'save24' when ordering 24 or more quantities.\nOR use save12 when ordering 12...23 quantities."
         }
         return nil
     }
@@ -204,6 +204,28 @@ class FinalTableViewController: UITableViewController, CreditCardTableViewCellDe
     
     func discountTableViewCell(cell: DiscountTableViewCell, didEnterDiscountCode code: String){
         
+        if count(code) == 0 {
+            return
+        }
+        
+        if code.lowercaseString == "save24" || code.lowercaseString == "save12" {
+            var quantity = 0
+            for item in self.checkout.lineItems as! [BUYLineItem] {
+                quantity += Int(item.quantity)
+            }
+            
+            if code.lowercaseString == "save12" && (quantity < 12 || quantity > 23) {
+                SweetAlert().showAlert("Quantity", subTitle: "Discount code cannot be applied", style: .Error)
+                return
+            }
+            
+            if quantity < 24 {
+                SweetAlert().showAlert("Quantity", subTitle: "Less than 24", style: .Error)
+                return
+            }
+            
+        }
+        
         // Show loading indicator
         SVProgressHUD.showWithStatus("Applying Discount Code")
         
@@ -261,9 +283,7 @@ class FinalTableViewController: UITableViewController, CreditCardTableViewCellDe
     // MARK: - FinalTableViewControllerFooterViewDelegate
     
     func payByCreditCard(creditCard: Bool) {
-        
-        // @warning Have to solve the 1 issue posted on Shopify
-        
+                
         // Please select a shipping method
         if self.checkout.shippingRate == nil {
             SweetAlert().showAlert("Select a Shipping", subTitle: "", style: .Error)
@@ -313,12 +333,12 @@ class FinalTableViewController: UITableViewController, CreditCardTableViewCellDe
     
     final private func completeCheckout() {
         
-        let order = Order()
+        var order = Order()
         order.name = checkout.shippingAddress.firstName + " " + checkout.shippingAddress.lastName
         order.email = checkout.email
         order.price = checkout.totalPrice
         order.address = checkout.shippingAddress.getAddress()
-        order.file = PFFile(data: UIImageJPEGRepresentation(self.productImage, 1))
+        order.file = PFFile(data: UIImageJPEGRepresentation(self.productImage, 0.7))
         
         SVProgressHUD.setStatus("Uploading Image")
         // Save the object to parse
@@ -342,6 +362,7 @@ class FinalTableViewController: UITableViewController, CreditCardTableViewCellDe
                         } else {
                             dispatch_async(dispatch_get_main_queue()) {
                                 UIApplication.sharedApplication().endIgnoringInteractionEvents()
+                                order.file = nil
                                 SVProgressHUD.dismiss()
                                 SweetAlert().showAlert("Unable to Process", subTitle: "Please try again", style: .Error)
                             }
