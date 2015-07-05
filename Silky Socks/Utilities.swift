@@ -34,8 +34,7 @@ extension UIView {
         
         // Essential to get rid of the black screen
         // when saving to photos and opening it
-        UIColor.whiteColor().setFill()
-        CGContextFillRect(context, bounds)
+        CGContextClearRect(context, area)
         
         // Render before flipping
         CGContextTranslateCTM(context, -area.origin.x, -area.origin.y);
@@ -48,25 +47,13 @@ extension UIView {
         // Draw
         if let logo = logo {
             let rect = CGRect(x: 0, y: 0, width: 60, height: 50)
-            CGContextDrawImage(UIGraphicsGetCurrentContext(), rect, logo.CGImage)
+            CGContextDrawImage(context, rect, logo.CGImage)
         }
         
         // New Image
         let image = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
-        
-        // If we are sharing then return the normal size image
         return image
-    }
-    
-    func clickSnapShotForCart(area: CGRect, withLogo logo: UIImage?, size: CGSize) -> UIImage {
-        let image = clickSnapShot(area, withLogo: logo)
-        let rect = CGRect(origin: .zeroPoint, size: size)
-        UIGraphicsBeginImageContextWithOptions(rect.size, opaque, 0)
-        image.drawInRect(rect)
-        let newImage = UIGraphicsGetImageFromCurrentImageContext()
-        UIGraphicsEndImageContext()
-        return newImage
     }
     
     // Print the view heirarchy
@@ -171,10 +158,10 @@ extension UIImage {
     }
     
     func renderImageIntoSize(size: CGSize) -> UIImage {
-        
-        UIGraphicsBeginImageContextWithOptions(size, false , 0)
-        let context = UIGraphicsGetCurrentContext()
-        drawInRect(CGRect(origin: .zeroPoint, size: size))
+        UIGraphicsBeginImageContextWithOptions(size, false, 0)
+        let rect = CGRect(origin: .zeroPoint, size: size)
+        CGContextClearRect(UIGraphicsGetCurrentContext(), rect)
+        drawInRect(rect)
         let image = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
         return image

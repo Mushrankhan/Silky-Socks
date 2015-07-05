@@ -21,15 +21,15 @@ protocol SJCollectionViewCellDelegate: class {
 class SJCollectionViewCell: UICollectionViewCell {
 
     // IBOutlets
-    @IBOutlet private weak var ss_imgView: UIImageView! {
+    @IBOutlet private(set) weak var ss_imgView: UIImageView! {
         didSet {
-            ss_imgView!.layer.shadowColor = UIColor.blackColor().CGColor
-            ss_imgView!.layer.shadowOpacity = 1
-            ss_imgView!.layer.shadowOffset = CGSize(width: 0, height: 1)
+            ss_imgView?.layer.shadowColor = UIColor.blackColor().CGColor
+            ss_imgView?.layer.shadowOpacity = 1
+            ss_imgView?.layer.shadowOffset = CGSize(width: 0, height: 1)
         }
     }
-    @IBOutlet private weak var nameLabel: UILabel!
-    @IBOutlet weak var infoButton: UIButton!
+    @IBOutlet private(set) weak var nameLabel: UILabel!
+    @IBOutlet private(set) weak var infoButton: UIButton!
     
     // Delegate
     weak var delegate: SJCollectionViewCellDelegate?

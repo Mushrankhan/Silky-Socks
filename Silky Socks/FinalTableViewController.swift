@@ -136,7 +136,7 @@ class FinalTableViewController: UITableViewController, CreditCardTableViewCellDe
     
     override func tableView(tableView: UITableView, titleForFooterInSection section: Int) -> String? {
         if section == 1 {
-            return "Use 'save24' when ordering 24 or more quantities.\nOR use save12 when ordering 12...23 quantities."
+            return "Please use 'save20' when ordering 12 or more quantities.\nOR use 'save30' when ordering 24 or more quantities."
         }
         return nil
     }
@@ -220,7 +220,7 @@ class FinalTableViewController: UITableViewController, CreditCardTableViewCellDe
             }
             
             if quantity < 24 {
-                SweetAlert().showAlert("Quantity", subTitle: "Less than 24", style: .Error)
+                SweetAlert().showAlert("Quantity", subTitle: "Discount code cannot be applied", style: .Error)
                 return
             }
             

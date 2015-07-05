@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
     </dependencies>
@@ -14,12 +14,13 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="8HJ-dd-euu">
-                        <rect key="frame" x="0.0" y="43" width="240" height="169"/>
+                        <rect key="frame" x="0.0" y="44" width="240" height="168"/>
                     </imageView>
-                    <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="k9N-Jp-M0o">
-                        <rect key="frame" x="0.0" y="0.0" width="240" height="22"/>
+                    <button contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="k9N-Jp-M0o">
+                        <rect key="frame" x="106" y="0.0" width="28" height="20"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="22" id="Yjl-DW-lxK"/>
+                            <constraint firstAttribute="width" constant="28" id="JIe-gh-Buy"/>
+                            <constraint firstAttribute="height" constant="20" id="Yjl-DW-lxK"/>
                         </constraints>
                         <state key="normal" image="information">
                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -29,9 +30,9 @@
                         </connections>
                     </button>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eNn-7y-7NY">
-                        <rect key="frame" x="0.0" y="22" width="240" height="21"/>
+                        <rect key="frame" x="0.0" y="20" width="240" height="20"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="21" id="SQL-H5-stf"/>
+                            <constraint firstAttribute="height" constant="20" id="SQL-H5-stf"/>
                         </constraints>
                         <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="12"/>
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -42,8 +43,9 @@
             </view>
             <constraints>
                 <constraint firstItem="eNn-7y-7NY" firstAttribute="leading" secondItem="CEv-10-1vb" secondAttribute="leading" id="0iO-mY-N0b"/>
+                <constraint firstAttribute="centerX" secondItem="k9N-Jp-M0o" secondAttribute="centerX" id="CRM-bZ-xRs"/>
                 <constraint firstItem="8HJ-dd-euu" firstAttribute="leading" secondItem="CEv-10-1vb" secondAttribute="leading" id="Fxn-RB-0Yn"/>
-                <constraint firstItem="8HJ-dd-euu" firstAttribute="top" secondItem="eNn-7y-7NY" secondAttribute="bottom" id="InJ-lC-Z9B"/>
+                <constraint firstItem="8HJ-dd-euu" firstAttribute="top" secondItem="eNn-7y-7NY" secondAttribute="bottom" constant="4" id="InJ-lC-Z9B"/>
                 <constraint firstAttribute="trailing" secondItem="eNn-7y-7NY" secondAttribute="trailing" id="S76-eb-KXd"/>
                 <constraint firstItem="k9N-Jp-M0o" firstAttribute="top" secondItem="CEv-10-1vb" secondAttribute="top" id="Tdf-om-5o5"/>
                 <constraint firstAttribute="trailing" secondItem="8HJ-dd-euu" secondAttribute="trailing" id="cUO-KZ-u3A"/>
@@ -53,12 +55,18 @@
                 <constraint firstAttribute="trailing" secondItem="k9N-Jp-M0o" secondAttribute="trailing" id="xOR-7j-w9E"/>
             </constraints>
             <size key="customSize" width="240" height="212"/>
+            <variation key="default">
+                <mask key="constraints">
+                    <exclude reference="vug-5e-Rz8"/>
+                    <exclude reference="xOR-7j-w9E"/>
+                </mask>
+            </variation>
             <connections>
                 <outlet property="infoButton" destination="k9N-Jp-M0o" id="sYM-uN-qKY"/>
                 <outlet property="nameLabel" destination="eNn-7y-7NY" id="rMZ-u6-Qz9"/>
                 <outlet property="ss_imgView" destination="8HJ-dd-euu" id="Ep9-dc-0UJ"/>
             </connections>
-            <point key="canvasLocation" x="476" y="235"/>
+            <point key="canvasLocation" x="361" y="259"/>
         </collectionViewCell>
     </objects>
     <resources>
