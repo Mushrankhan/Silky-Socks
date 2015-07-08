@@ -131,10 +131,10 @@ extension SJCollectionView: ShareViewCollectionReusableViewDelegate, CartViewCol
     func cartReusableView(view: CartViewCollectionReusableView, didPressAddToCartButton sender: UIButton) {
         if let cell = visibleCell {
             let y = cell.infoButton.bounds.size.height + cell.nameLabel.bounds.size.height
-            let x: CGFloat = 20
+            //let x: CGFloat = 20
             let height = cell.frame.size.height - y
-            let size = CGSize(width: cell.frame.size.width - 20, height: height)
-            let rect = CGRect(origin: CGPoint(x: x, y: y), size: size)
+            let size = CGSize(width: cell.frame.size.width, height: height)
+            let rect = CGRect(origin: CGPoint(x: 0, y: y), size: size)
             
             dispatch_async(dispatch_get_global_queue(QOS_CLASS_USER_INITIATED, 0)) {
                 let image = cell.clickSnapShot(rect, withLogo: nil)
