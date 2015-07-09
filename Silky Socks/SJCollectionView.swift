@@ -130,17 +130,30 @@ extension SJCollectionView: ShareViewCollectionReusableViewDelegate, CartViewCol
 
     func cartReusableView(view: CartViewCollectionReusableView, didPressAddToCartButton sender: UIButton) {
         if let cell = visibleCell {
-            let y = cell.infoButton.bounds.size.height + cell.nameLabel.bounds.size.height
-            //let x: CGFloat = 20
-            let height = cell.frame.size.height - y
-            let size = CGSize(width: cell.frame.size.width, height: height)
-            let rect = CGRect(origin: CGPoint(x: 0, y: y), size: size)
             
-            dispatch_async(dispatch_get_global_queue(QOS_CLASS_USER_INITIATED, 0)) {
-                let image = cell.clickSnapShot(rect, withLogo: nil)
-                dispatch_async(dispatch_get_main_queue()) {
-                    myDelegate?.collectionView(self, didPressAddToCartButton: sender, withSnapShotImage: image, andTemplate: cell.template!)
-                }
+            if cell.snapshotview != nil {
+                
+                SVProgressHUD.show()
+                let size = cell.snapshotview!.bounds.size
+                let rect = CGRect(origin: CGPoint(x: 0, y: 0), size: size)
+                cell.snapshotview!.hidden = false
+                
+                dispatch_async(dispatch_get_global_queue(QOS_CLASS_USER_INITIATED, 0), { () -> Void in
+                    
+                    UIGraphicsBeginImageContextWithOptions(size, false, 0)
+                    //cell.snapshotview?.drawViewHierarchyInRect(rect, afterScreenUpdates: true)
+                    cell.snapshotview?.layer.renderInContext(UIGraphicsGetCurrentContext())
+                    let image = UIGraphicsGetImageFromCurrentImageContext()
+                    UIGraphicsEndImageContext()
+                    
+                    dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                        cell.snapshotview!.hidden = true
+                        SVProgressHUD.dismiss()
+                        self.myDelegate?.collectionView(self, didPressAddToCartButton: sender, withSnapShotImage: image, andTemplate: cell.template!)
+                    })
+                    
+                })
+
             }
         }
     }

@@ -306,7 +306,8 @@ extension SJCollectionViewController: SJCollectionViewDelegate, MFMailComposeVie
         
         let image = snapshot.renderImageIntoSize(template.productSizes[0])
         let mail = MFMailComposeViewController()
-        mail.addAttachmentData(UIImagePNGRepresentation(snapshot), mimeType: "image/png", fileName: "Design")
+        //mail.addAttachmentData(UIImagePNGRepresentation(image), mimeType: "image/png", fileName: "Design")
+        mail.addAttachmentData(UIImageJPEGRepresentation(image, 0.7), mimeType: "image/jpeg", fileName: "Design")
         mail.mailComposeDelegate = self
         presentViewController(mail, animated: true, completion: nil)
         
@@ -336,7 +337,7 @@ extension SJCollectionViewController: SJCollectionViewDelegate, MFMailComposeVie
             
             // Hide the color view
             self.colorCollectionVC.collectionView!.hidden = true
-            
+
             // Text Field
             if let sj_textField = self.sj_textField {
                 sj_textField.resignFirstResponder()
@@ -344,7 +345,7 @@ extension SJCollectionViewController: SJCollectionViewDelegate, MFMailComposeVie
                 self.sj_textField = nil
                 self.showingText = false
             }
-            
+
             // Tell the cell to clean Up
             if let cell = collectionView.visibleCell {
                 cell.performCleanUp()
