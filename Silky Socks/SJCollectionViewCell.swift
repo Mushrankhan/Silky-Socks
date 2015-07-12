@@ -93,18 +93,9 @@ class SJCollectionViewCell: UICollectionViewCell {
         
     // Add the label as a subview of boundingRectView
     // Is a view around the image because the image is smaller than the image view
-    private(set) var boundingRectView: UIView? {
-        didSet {
-            // ? coz it might be set to nil
-            boundingRectView?.alpha = 0.9
-        }
-    }
+    private(set) var boundingRectView: UIView? { didSet { boundingRectView?.alpha = 0.9 } }
     
-    var snapshotview: UIView? {
-        didSet {
-            snapshotview?.hidden = true
-        }
-    }
+    var snapshotview: UIView? { didSet { snapshotview?.hidden = true } }
     
     // Masking that is applied to the boundingRectView
     private var maskImageView: UIImageView?
@@ -170,8 +161,11 @@ class SJCollectionViewCell: UICollectionViewCell {
         for view in sj_subviews_snap { view.removeFromSuperview() }
         sj_subViews.removeAll(keepCapacity: true)
         sj_subviews_snap.removeAll(keepCapacity: true)
+                
+        if boundingRectView?.superview != nil { boundingRectView!.removeFromSuperview() }
+        if maskImageView?.superview    != nil { maskImageView!.removeFromSuperview()    }
+        if snapshotview?.superview     != nil { snapshotview!.removeFromSuperview()     }
         
-        // Mask image view
         maskImageView = nil
         boundingRectView = nil
         snapshotview = nil
@@ -228,14 +222,30 @@ extension SJCollectionViewCell {
             boundingRectView = nil
         }
         
+        var size = UIImage.getBoundingSizeForAspectFit(template!.image.size, imageViewSize: ss_imgView.bounds.size)
+        var point = CGPoint(x: CGRectGetMidX(ss_imgView.frame) - size.width/2, y: ss_imgView.frame.origin.y)
+        var frame = CGRect(origin: point, size: size)
+        
         // Alloc the bounding View
-        boundingRectView = UIView(frame: ss_imgView.frame)
-        snapshotview = UIView(frame: ss_imgView.frame)
+        boundingRectView = UIView(frame: frame)
+        
+        size.width = floor(size.width) + 20; size.height = floor(size.height) + 10
+        point.y -= 5; point.x -= 10
+        frame = CGRect(origin: point, size: size)
+        
+        if template?.maskImage != nil && template!.type == .Socks {
+            size.height -= 120
+            frame.size = size
+        }
+        
+        // Alloc snapshot view
+        snapshotview = UIView(frame: frame)
+        snapshotview?.clipsToBounds = true
         
         // Masking
         maskImageView = UIImageView(frame: boundingRectView!.bounds)
         maskImageView!.contentMode = .ScaleAspectFit
-        maskImageView!.image = template?.maskImage != nil ? template?.maskImage : template?.image
+        maskImageView!.image = template?.maskImage ?? template?.image
         
         // Mask it
         boundingRectView!.maskView = maskImageView
