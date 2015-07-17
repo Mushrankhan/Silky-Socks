@@ -8,7 +8,7 @@
 
 import UIKit
 
-let cartCellReuseIdentifier = "Cart Cell"
+internal let cartCellReuseIdentifier = "Cart Cell"
 
 class CartTableViewCell: UITableViewCell {
 
@@ -54,14 +54,15 @@ class CartTableViewCell: UITableViewCell {
     
     // Stepper IBAction
     @IBAction func incrementQuantity(sender: UIStepper) {
-        cartProduct!.quantity = Int(sender.value)        // Increase quantity in the model
+        cartProduct!.quantity = Int(sender.value)  // Increase quantity in the model
         updateUI()
     }
     
+    /* Updates the UI based on the model */
     private func updateUI() {
-        quantityLabel?.text = "\(cartProduct!.quantity)"
-        quantityStepper?.value = Double(cartProduct!.quantity)
-        priceLabel?.text = "$ \(cartProduct!.price).00"
-        basePriceLabel?.text = "$ \(cartProduct!.basePrice).00/pc"
+        quantityLabel?.text     = "\(cartProduct!.quantity)"
+        quantityStepper?.value  = Double(cartProduct!.quantity)
+        priceLabel?.text        = "$ \(cartProduct!.price).00"
+        basePriceLabel?.text    = "$ \(cartProduct!.basePrice).00/pc"
     }
 }

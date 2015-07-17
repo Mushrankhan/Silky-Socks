@@ -47,15 +47,18 @@ class CreditCardTableViewCell: UITableViewCell, UITextFieldDelegate {
     
     func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String)  -> Bool {
 
-        var length = 0
-        if textField == creditCardNumber {
-            length = 16
-        } else if textField == month {
-            length = 2
-        } else if textField == year {
-            length = 4
-        } else {
-            length = 3
+        var length = 0        
+        switch textField {
+            case creditCardNumber:
+                length = 16
+            case month:
+                length = 2
+            case year:
+                length = 4
+            case cvv:
+                length = 3
+            default:
+                break
         }
         
         return textField.text!.characters.count + string.characters.count - range.length <= length

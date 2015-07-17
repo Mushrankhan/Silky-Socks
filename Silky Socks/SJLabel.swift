@@ -27,8 +27,7 @@ class SJLabel: UILabel {
     // Basic Set Up
     private func initialSetUp() {
         numberOfLines = 1
-        backgroundColor = UIColor.clearColor()
-        contentMode = .Redraw
+        backgroundColor = UIColor.whiteColor()
         textAlignment = .Center
         adjustsFontSizeToFitWidth = true
     }

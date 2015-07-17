@@ -9,17 +9,16 @@
 import UIKit
 
 protocol CheckoutTableFooterViewDelegate: class {
-    
     func checkOutTableFooterView(view: CheckoutTableFooterView, didPressNextButton sender: UIButton)
 }
 
 class CheckoutTableFooterView: UIView {
 
+    // Delegate
     weak var delegate: CheckoutTableFooterViewDelegate?
     
     @IBAction func nextButtonClecked(sender: UIButton) {
         delegate?.checkOutTableFooterView(self, didPressNextButton: sender)
     }
-
 }
 

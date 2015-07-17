@@ -9,15 +9,15 @@
 import UIKit
 
 // Element Kind
-public let restartElementkind = "Restart"
-public let shareElementKind = "Share"
+public let restartElementkind   = "Restart"
+public let shareElementKind     = "Share"
 public let addToCartElementKind = "AddToCart"
-public let logoElementKind = "Logo"
+public let logoElementKind      = "Logo"
 
 // Reuse identifier - Supplementary views
-public let restartIdentifier = "RestartReusableView"
-public let shareIdentifier = "ShareReusableView"
-public let addToCartIdentifier = "AddToCartReusableView"
+public let restartIdentifier    = "RestartReusableView"
+public let shareIdentifier      = "ShareReusableView"
+public let addToCartIdentifier  = "AddToCartReusableView"
 
 protocol RestartViewCollectionReusableViewDelegate: NSObjectProtocol {
     func restartReusableView(view: RestartViewCollectionReusableView, didPressRestartButton sender: UIButton)

@@ -8,12 +8,9 @@
 
 import UIKit
 
-
 // Notifications, which classes can subscribe to
-struct UserCartNotifications {
-    static let AddToCartNotification = "AddToCartNotification"
-    static let BoughtProductNotification = "BoughtProductNotification"
-}
+internal let kAddToCartNotification = "AddToCartNotification"
+internal let kBoughtProductNotification = "BoughtProductNotification"
 
 /*! 
     @class          User Cart Class
@@ -41,7 +38,7 @@ class UserCart: NSObject {
     // Add Product
     func addProduct(template: CartProduct) {
         cart.append(template)
-        NSNotificationCenter.defaultCenter().postNotificationName(UserCartNotifications.AddToCartNotification, object: nil)
+        NSNotificationCenter.defaultCenter().postNotificationName(kAddToCartNotification, object: nil)
     }
     
     // Remove the item at a particular index
@@ -52,6 +49,6 @@ class UserCart: NSObject {
     // When a product is bought
     func boughtProduct() {
         cart.removeAtIndex(0)
-        NSNotificationCenter.defaultCenter().postNotificationName(UserCartNotifications.BoughtProductNotification, object: nil)
+        NSNotificationCenter.defaultCenter().postNotificationName(kBoughtProductNotification, object: nil)
     }
 }

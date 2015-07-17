@@ -22,10 +22,7 @@ class SJLayout: UICollectionViewLayout {
     // Content Size
     private var contentWidth: CGFloat = 0
     private var contentHeight :CGFloat {
-        get {
-            let inset = collectionView!.contentInset
-            return width - inset.top - inset.bottom
-        }
+        return width - collectionView!.contentInset.top - collectionView!.contentInset.bottom
     }
     
     // Width of the screen

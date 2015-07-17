@@ -121,48 +121,53 @@ extension SJCollectionView: RestartViewCollectionReusableViewDelegate {
 // MARK: Share / Add To Cart
 extension SJCollectionView: ShareViewCollectionReusableViewDelegate, CartViewCollectionReusableViewDelegate {
     func shareReusableView(view: ShareViewCollectionReusableView, didPressShareButton sender: UIButton) {
-        if let cell = visibleCell {
-            clickSnapShot(cell) { image in
-                myDelegate?.collectionView(self, didPressShareButton: sender, withSnapShotImage: image)
-            }
+        guard let cell = visibleCell else {
+            return
         }
+        
+        clickSnapShot(cell) { image in
+            myDelegate?.collectionView(self, didPressShareButton: sender, withSnapShotImage: image)
+        }
+
     }
 
     func cartReusableView(view: CartViewCollectionReusableView, didPressAddToCartButton sender: UIButton) {
-        if let cell = visibleCell {
-            
-            if cell.snapshotview != nil {
-                
-                SVProgressHUD.show()
-                let size = cell.snapshotview!.bounds.size
-                let rect = CGRect(origin: CGPoint(x: 0, y: 0), size: size)
-                cell.snapshotview!.hidden = false
-                
-                dispatch_async(dispatch_get_global_queue(QOS_CLASS_USER_INITIATED, 0), { () -> Void in
-                    
-                    UIGraphicsBeginImageContextWithOptions(size, false, 0)
-                    let context = UIGraphicsGetCurrentContext()
-                    if cell.template?.index == 3 || cell.template?.index == 4 { // White Tee || Tank
-                        CGContextTranslateCTM(context, 0, rect.size.height)
-                        CGContextScaleCTM(context, 1, -1)
-                        CGContextClipToMask(UIGraphicsGetCurrentContext(), rect, cell.template!.image.CGImage)
-                        CGContextScaleCTM(context, 1, -1)
-                        CGContextTranslateCTM(context, 0, -rect.size.height)
-                    }
-                    cell.snapshotview?.layer.renderInContext(UIGraphicsGetCurrentContext())
-                    let image = UIGraphicsGetImageFromCurrentImageContext()
-                    UIGraphicsEndImageContext()
-                    
-                    dispatch_async(dispatch_get_main_queue(), { () -> Void in
-                        cell.snapshotview!.hidden = true
-                        SVProgressHUD.dismiss()
-                        self.myDelegate?.collectionView(self, didPressAddToCartButton: sender, withSnapShotImage: image, andTemplate: cell.template!)
-                    })
-                    
-                })
-
-            }
+        guard let cell = visibleCell else {
+            return
         }
+        
+        if cell.snapshotview != nil {
+            
+            SVProgressHUD.show()
+            let size = cell.snapshotview!.bounds.size
+            let rect = CGRect(origin: CGPoint(x: 0, y: 0), size: size)
+            cell.snapshotview!.hidden = false
+            
+            dispatch_async(dispatch_get_global_queue(QOS_CLASS_USER_INITIATED, 0), { () -> Void in
+                
+                UIGraphicsBeginImageContextWithOptions(size, false, 0)
+                let context = UIGraphicsGetCurrentContext()
+                if cell.template?.index == 3 || cell.template?.index == 4 { // White Tee || Tank
+                    CGContextTranslateCTM(context, 0, rect.size.height)
+                    CGContextScaleCTM(context, 1, -1)
+                    CGContextClipToMask(UIGraphicsGetCurrentContext(), rect, cell.template!.image.CGImage)
+                    CGContextScaleCTM(context, 1, -1)
+                    CGContextTranslateCTM(context, 0, -rect.size.height)
+                }
+                cell.snapshotview?.layer.renderInContext(UIGraphicsGetCurrentContext())
+                let image = UIGraphicsGetImageFromCurrentImageContext()
+                UIGraphicsEndImageContext()
+                
+                dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                    cell.snapshotview!.hidden = true
+                    SVProgressHUD.dismiss()
+                    self.myDelegate?.collectionView(self, didPressAddToCartButton: sender, withSnapShotImage: image, andTemplate: cell.template!)
+                })
+                
+            })
+            
+        }
+
     }
     
     private func clickSnapShot(cell: SJCollectionViewCell, block: (image: UIImage) -> Void) {

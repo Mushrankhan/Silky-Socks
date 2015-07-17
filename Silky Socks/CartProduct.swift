@@ -33,7 +33,7 @@ class CartProduct: NSObject {
     // The Type of the product
     private(set) var productType: TemplateType!
     
-    private(set) var productSizes: [CGSize]
+    private(set) var productSize: CGSize
     
     // The base price changes with the change in quantity
     // Computed property
@@ -67,7 +67,7 @@ class CartProduct: NSObject {
     
     // MARK: - Init
     
-    init(name: String, productImage: UIImage, prices: [NSDecimalNumber], productID: String, type: TemplateType, sizes: [CGSize]) {
+    init(name: String, productImage: UIImage, prices: [NSDecimalNumber], productID: String, type: TemplateType, size: CGSize){
         
         self.name = name
         self.productImage = productImage
@@ -76,15 +76,12 @@ class CartProduct: NSObject {
         self.price = prices[0]
         self.productID = productID
         self.productType = type
-        self.productSizes = sizes
+        self.productSize = size
     }
     
     convenience init(template: Template, withImage image: UIImage) {
-        self.init(name: template.infoCaption, productImage: image, prices: template.prices, productID: template.productId, type: template.type, sizes: template.productSizes)
+        self.init(name: template.infoCaption, productImage: image, prices: template.prices, productID: template.productId, type: template.type, size: template.productSize)
     }
-    
-    
-    // MARK: - Printable
     
     override var description: String {
         return "Name: " + name + "\n" + "Price: \(prices)\n" + "Quantity: \(quantity)\n"

@@ -46,7 +46,7 @@ class CartTableViewController: UIViewController, UITableViewDataSource, UITableV
         tableView.tableFooterView = UIView(frame: CGRectZero)
         
         // When a product is bought, then reload the table
-        NSNotificationCenter.defaultCenter().addObserverForName(UserCartNotifications.BoughtProductNotification, object: nil, queue: NSOperationQueue.mainQueue()) { [weak self] _ in
+        NSNotificationCenter.defaultCenter().addObserverForName(kBoughtProductNotification, object: nil, queue: NSOperationQueue.mainQueue()) { [weak self] _ in
             self?.tableView.reloadData()
             self?.tableView.tableHeaderView = self?.numberOfItemsInCart == 0 ? self?.cartEmptyLabel : nil
             UIView.animateWithDuration(0.5) {

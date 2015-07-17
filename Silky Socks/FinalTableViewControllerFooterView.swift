@@ -18,6 +18,7 @@ class FinalTableViewControllerFooterView: UIView {
     weak var delegate: FinalTableViewControllerFooterViewDelegate?
     
     // Hide it for now
+    // Apple Pay UI
     @IBOutlet weak var firstLine: UIView! { didSet { firstLine.hidden = true } }
     @IBOutlet weak var secondLine: UIView! { didSet { secondLine.hidden = true } }
     @IBOutlet weak var orLabel: UILabel! { didSet { orLabel.hidden = true } }

@@ -125,7 +125,7 @@ extension UIFont {
     
     // Size of fonts
     class func AppFontSize() -> CGFloat {
-        return 60
+        return 80
     }
     
     // Helper to print all font names
@@ -229,27 +229,6 @@ extension UIImage {
     class func SilkySocksLogo() -> UIImage? {
         return UIImage(named: "logo_left_of_template")
     }
-}
-
-// MARK: NSUserDefaults
-extension NSUserDefaults {
-    
-    func colorForKey(key: String) -> UIColor? {
-        var color: UIColor?
-        if let colorData = dataForKey(key) {
-            color = NSKeyedUnarchiver.unarchiveObjectWithData(colorData) as? UIColor
-        }
-        return color
-    }
-    
-    func setColor(color: UIColor?, forKey key: String) {
-        var colorData: NSData?
-        if let color = color {
-            colorData = NSKeyedArchiver.archivedDataWithRootObject(color)
-        }
-        setObject(colorData, forKey: key)
-    }
-    
 }
 
 // MARK: String

@@ -256,7 +256,7 @@ extension CheckoutViewController: CheckoutTableFooterViewDelegate {
         
         dispatch_async(dispatch_get_global_queue(QOS_CLASS_USER_INITIATED, 0)) { [unowned self] in
             
-            let size = self.product.productType == TemplateType.Socks ? self.product.productSizes[0] : self.product.productSizes[self.sizesSegmentedControl.selectedSegmentIndex]
+            let size = self.product.productSize
             self.product.checkoutImage = self.product.productImage.renderImageIntoSize(size)
             
             dispatch_async(dispatch_get_main_queue()) {

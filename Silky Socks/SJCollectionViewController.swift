@@ -115,7 +115,7 @@ class SJCollectionViewController: UIViewController {
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "handleKeyBoard:", name: UIKeyboardDidShowNotification, object: nil)
         
         // When an object is added to the cart, then do something
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "incrementCartCount:", name: UserCartNotifications.AddToCartNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "incrementCartCount:", name: kAddToCartNotification, object: nil)
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -304,7 +304,7 @@ extension SJCollectionViewController: SJCollectionViewDelegate, MFMailComposeVie
     // Right now send a mail to check for correct size
     func collectionView(collectionView: UICollectionView, didPressAddToCartButton button:UIButton, withSnapShotImage snapshot: UIImage, andTemplate template: Template) {
         
-        let image = snapshot.renderImageIntoSize(template.productSizes[0])
+        let image = snapshot.renderImageIntoSize(template.productSize)
         let mail = MFMailComposeViewController()
         //mail.addAttachmentData(UIImagePNGRepresentation(image), mimeType: "image/png", fileName: "Design")
         mail.addAttachmentData(UIImageJPEGRepresentation(image, 0.7)!, mimeType: "image/jpeg", fileName: "Design")
