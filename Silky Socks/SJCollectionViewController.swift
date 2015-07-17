@@ -3,7 +3,7 @@
 //  Silky Socks
 //
 //  Created by Saurabh Jain on 4/19/15.
-//  Copyright (c) 2015 Full Stak. All rights reserved.
+//  Copyright (c) 2015 Saurabh Jain. All rights reserved.
 //
 
 import UIKit
@@ -71,7 +71,7 @@ class SJCollectionViewController: UIViewController {
         navigationItem.titleView = img_view
         
         // Set the layout for the colorVC
-        var frame = CGRect(x: 0, y: 0, width: Constants.width, height: Constants.HeightOfColorVC)
+        let frame = CGRect(x: 0, y: 0, width: Constants.width, height: Constants.HeightOfColorVC)
         let layout = SJStickyFontHeaderLayout()
         layout.itemSize = CGSize(width: Constants.HeightOfColorVC - 16, height: Constants.HeightOfColorVC)
         layout.minimumLineSpacing = 0
@@ -122,7 +122,7 @@ class SJCollectionViewController: UIViewController {
         super.viewDidAppear(animated)
         
         // Doing this in view did appear
-        // In view did load leads to frame issues
+        //  In view did load leads to frame issues
         collectionView.addSubview(colorCollectionVC.collectionView!)
         addChildViewController(colorCollectionVC)
         colorCollectionVC.didMoveToParentViewController(self)
@@ -205,7 +205,7 @@ extension SJCollectionViewController {
     func handleKeyBoard(notification: NSNotification) {
         
         // the end y coordinate
-        let end = (notification.userInfo![UIKeyboardFrameEndUserInfoKey]!).CGRectValue()
+        let end = (notification.userInfo![UIKeyboardFrameEndUserInfoKey]!).CGRectValue
         
         // if text button clicked
         // then display color VC on top of keyboard
@@ -307,7 +307,7 @@ extension SJCollectionViewController: SJCollectionViewDelegate, MFMailComposeVie
         let image = snapshot.renderImageIntoSize(template.productSizes[0])
         let mail = MFMailComposeViewController()
         //mail.addAttachmentData(UIImagePNGRepresentation(image), mimeType: "image/png", fileName: "Design")
-        mail.addAttachmentData(UIImageJPEGRepresentation(image, 0.7), mimeType: "image/jpeg", fileName: "Design")
+        mail.addAttachmentData(UIImageJPEGRepresentation(image, 0.7)!, mimeType: "image/jpeg", fileName: "Design")
         mail.mailComposeDelegate = self
         presentViewController(mail, animated: true, completion: nil)
         
@@ -316,7 +316,7 @@ extension SJCollectionViewController: SJCollectionViewDelegate, MFMailComposeVie
     }
     
     // Dismiss the mail compose view controller
-    func mailComposeController(controller: MFMailComposeViewController!, didFinishWithResult result: MFMailComposeResult, error: NSError!) {
+    func mailComposeController(controller: MFMailComposeViewController, didFinishWithResult result: MFMailComposeResult, error: NSError?) {
         dismissViewControllerAnimated(true, completion: nil)
     }
     
@@ -367,8 +367,8 @@ extension SJCollectionViewController: SJCollectionViewDelegate, MFMailComposeVie
     func collectionView(collectionView: UICollectionView, didPressShareButton button: UIButton, withSnapShotImage snapshot: UIImage) {
         
         // Create Activity Controller on Demand
-        var items = ["Check out the design I created on the silky socks app. http://www.silkysocks.com/app", snapshot]
-        var activity = UIActivityViewController(activityItems: items, applicationActivities: nil)
+        let items = ["Check out the design I created on the silky socks app. http://www.silkysocks.com/app", snapshot]
+        let activity = UIActivityViewController(activityItems: items, applicationActivities: nil)
         activity.excludedActivityTypes = [UIActivityTypeAddToReadingList, UIActivityTypeAssignToContact, UIActivityTypePrint, UIActivityTypeSaveToCameraRoll]
         presentViewController(activity, animated: true, completion: nil)
 
@@ -413,14 +413,14 @@ extension SJCollectionViewController: UITextFieldDelegate {
     func textFieldShouldReturn(textField: UITextField) -> Bool {
         
         // If text field has some text
-        if count(textField.text) > 0 {
+        if textField.text?.characters.count > 0 {
             if textField.canResignFirstResponder() {
                 textField.resignFirstResponder()
                 textField.removeFromSuperview()
                 colorCollectionVC.collectionView?.hidden = true
                 showingText = false
                 // Create The label
-                collectionView.sj_createTextLabel(textField.text, afont: textField.font, acolor: textField.textColor)
+                collectionView.sj_createTextLabel(textField.text!, afont: textField.font!, acolor: textField.textColor!)
                 showApprovalVC(SJBottomViewConstants.Text, forView: nil)
                 return false
             }
@@ -442,7 +442,7 @@ extension SJCollectionViewController: UITextFieldDelegate {
 extension SJCollectionViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     // Camera and Grid
-    func commonCodeForPhotos(#forGrid: Bool, sender: UIButton) {
+    func commonCodeForPhotos(forGrid forGrid: Bool, sender: UIButton) {
         
         // If grid button was pressed
         isGridButtonTapped = forGrid
@@ -454,7 +454,7 @@ extension SJCollectionViewController: UIImagePickerControllerDelegate, UINavigat
         let picker = UIImagePickerController()
         picker.delegate = self
         picker.allowsEditing = true
-        picker.mediaTypes = [kUTTypeImage]
+        picker.mediaTypes = [kUTTypeImage as String]
         picker.sourceType = .PhotoLibrary
         
         // Create On Demand
@@ -494,7 +494,7 @@ extension SJCollectionViewController: UIImagePickerControllerDelegate, UINavigat
     }
     
     // Did Pick Image
-    func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [NSObject : AnyObject]) {
+    func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
         
         var image = info[UIImagePickerControllerOriginalImage] as! UIImage
         if let editedImage = info[UIImagePickerControllerEditedImage] as? UIImage {

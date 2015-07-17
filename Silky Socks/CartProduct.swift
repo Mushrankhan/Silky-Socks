@@ -3,7 +3,7 @@
 //  Silky Socks
 //
 //  Created by Saurabh Jain on 6/22/15.
-//  Copyright (c) 2015 Full Stak. All rights reserved.
+//  Copyright (c) 2015 Saurabh Jain. All rights reserved.
 //
 
 import UIKit
@@ -14,7 +14,7 @@ import UIKit
     @description    An instance of the CartProduct Class is used to be stored
                     in the UserCart
 */
-class CartProduct: NSObject, Printable {
+class CartProduct: NSObject {
     
     // MARK: - Properties
     

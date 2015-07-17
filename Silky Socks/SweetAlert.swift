@@ -37,20 +37,12 @@ class SweetAlert: UIViewController {
     var userAction:((isOtherButton: Bool) -> Void)? = nil
     let kFont = "Helvetica"
 
-    required init(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-    }
-    
-    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
-        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
-        
-    }
     
     override func loadView() {
         
         let view = UIView()
         view.frame = UIScreen.mainScreen().bounds
-        view.autoresizingMask = UIViewAutoresizing.FlexibleHeight | UIViewAutoresizing.FlexibleWidth
+        view.autoresizingMask = [UIViewAutoresizing.FlexibleHeight, UIViewAutoresizing.FlexibleWidth]
         view.backgroundColor = UIColor(red:0, green:0, blue:0, alpha:kBakcgroundTansperancy)
         view.addSubview(contentView)
         
@@ -90,11 +82,11 @@ class SweetAlert: UIViewController {
     
     func resizeAndRelayout() {
         
-        var mainScreenBounds = UIScreen.mainScreen().bounds
+        let mainScreenBounds = UIScreen.mainScreen().bounds
         self.view.frame.size = mainScreenBounds.size
-        var x: CGFloat = kWidthMargin
+        let x: CGFloat = kWidthMargin
         var y: CGFloat = KTopMargin
-        var width: CGFloat = kContentWidth - (kWidthMargin*2)
+        let width: CGFloat = kContentWidth - (kWidthMargin*2)
         
         if animatedView != nil {
              (animatedView! as! UIView).frame = CGRect(x: (kContentWidth - kAnimatedViewHeight) / 2.0, y: y, width: kAnimatedViewHeight, height: kAnimatedViewHeight)
@@ -119,7 +111,7 @@ class SweetAlert: UIViewController {
         // Subtitle
         if self.subTitleTextView.text.isEmpty == false {
             let subtitleString = subTitleTextView.text! as NSString
-            let rect = subtitleString.boundingRectWithSize(CGSize(width: width, height:0.0), options: NSStringDrawingOptions.UsesLineFragmentOrigin, attributes:[NSFontAttributeName:subTitleTextView.font], context:nil)
+            let rect = subtitleString.boundingRectWithSize(CGSize(width: width, height:0.0), options: NSStringDrawingOptions.UsesLineFragmentOrigin, attributes:[NSFontAttributeName:subTitleTextView.font!], context:nil)
             textViewHeight = ceil(rect.size.height) + 10.0
             subTitleTextView.frame = CGRect(x: x, y: y, width: width, height: textViewHeight)
             contentView.addSubview(subTitleTextView)
@@ -185,7 +177,7 @@ class SweetAlert: UIViewController {
     
         if userAction !=  nil {
             
-            var isOtherButton = buttonIndex == 0 ? true: false
+            let isOtherButton = buttonIndex == 0 ? true: false
             SweetAlertContext.shouldNotAnimate = true
             userAction!(isOtherButton: isOtherButton)
             SweetAlertContext.shouldNotAnimate = false
@@ -251,9 +243,9 @@ class SweetAlert: UIViewController {
     func showAlert(title: String, subTitle: String?, style: AlertStyle,buttonTitle: String,buttonColor: UIColor,otherButtonTitle:
         String?, otherButtonColor: UIColor?,action: ((isOtherButton: Bool) -> Void)? = nil) {
             userAction = action
-            let window = UIApplication.sharedApplication().keyWindow?.subviews.first as! UIView
-            window.addSubview(view)
-            view.frame = window.bounds
+            let window = UIApplication.sharedApplication().keyWindow?.subviews.first!
+            window!.addSubview(view)
+            view.frame = window!.bounds
             self.setupContentView()
             self.setupTitleLabel()
             self.setupSubtitleTextView()
@@ -287,7 +279,7 @@ class SweetAlert: UIViewController {
             buttons = []
             if buttonTitle.isEmpty == false {
             
-                var button: UIButton = UIButton.buttonWithType(UIButtonType.Custom) as! UIButton
+                let button: UIButton = UIButton(type: UIButtonType.Custom)
                 button.setTitle(buttonTitle, forState: UIControlState.Normal)
                 button.backgroundColor = buttonColor
                 button.userInteractionEnabled = true
@@ -299,7 +291,7 @@ class SweetAlert: UIViewController {
             
             if otherButtonTitle != nil && otherButtonTitle!.isEmpty == false {
                 
-                var button: UIButton = UIButton.buttonWithType(UIButtonType.Custom) as! UIButton
+                let button: UIButton = UIButton(type: UIButtonType.Custom)
                 button.setTitle(otherButtonTitle, forState: UIControlState.Normal)
                 button.backgroundColor = otherButtonColor
                 button.addTarget(self, action: "pressed:", forControlEvents: UIControlEvents.TouchUpInside)
@@ -330,7 +322,7 @@ class SweetAlert: UIViewController {
             self.view.alpha = 1.0;
         })
 
-        var previousTransform = self.contentView.transform
+        let previousTransform = self.contentView.transform
         self.contentView.layer.transform = CATransform3DMakeScale(0.9, 0.9, 0.0);
 
         UIView.animateWithDuration(0.2, animations: { () -> Void in
@@ -398,7 +390,7 @@ class CancelAnimatedView: UIView, AnimatableView {
     }
     
      var outlineCircle: CGPath  {
-        var path = UIBezierPath()
+        let path = UIBezierPath()
         let startAngle: CGFloat = CGFloat((0) / 180.0 * M_PI)  //0
         let endAngle: CGFloat = CGFloat((360) / 180.0 * M_PI)   //360
         path.addArcWithCenter(CGPointMake(self.frame.size.width/2.0, self.frame.size.width/2.0), radius: self.frame.size.width/2.0, startAngle: startAngle, endAngle: endAngle, clockwise: false)
@@ -407,8 +399,8 @@ class CancelAnimatedView: UIView, AnimatableView {
         }
     
     var crossPath: CGPath  {
-        var path = UIBezierPath()
-        var factor:CGFloat = self.frame.size.width / 5.0
+        let path = UIBezierPath()
+        let factor:CGFloat = self.frame.size.width / 5.0
         path.moveToPoint(CGPoint(x: self.frame.size.height/2.0-factor,y: self.frame.size.height/2.0-factor))
         path.addLineToPoint(CGPoint(x: self.frame.size.height/2.0+factor,y: self.frame.size.height/2.0+factor))
         path.moveToPoint(CGPoint(x: self.frame.size.height/2.0+factor,y: self.frame.size.height/2.0-factor))
@@ -450,7 +442,7 @@ class CancelAnimatedView: UIView, AnimatableView {
         t2 = CATransform3DRotate(t2, CGFloat(-M_PI), 1, 0, 0);
 
         let animation = CABasicAnimation(keyPath: "transform")
-        var time = 0.3
+        let time = 0.3
         animation.duration = time;
         animation.fromValue = NSValue(CATransform3D: t)
         animation.toValue = NSValue(CATransform3D:t2)
@@ -471,7 +463,7 @@ class CancelAnimatedView: UIView, AnimatableView {
         crossAnimation.toValue = NSValue(CATransform3D:CATransform3DIdentity)
         self.crossPathLayer.addAnimation(crossAnimation, forKey: "scale")
         
-        var fadeInAnimation = CABasicAnimation(keyPath: "opacity")
+        let fadeInAnimation = CABasicAnimation(keyPath: "opacity")
         fadeInAnimation.duration = 0.3;
         fadeInAnimation.beginTime = CACurrentMediaTime() + time
         fadeInAnimation.fromValue = 0.3
@@ -502,12 +494,12 @@ class InfoAnimatedView: UIView, AnimatableView {
     }
     
     var outlineCircle: CGPath  {
-        var path = UIBezierPath()
+        let path = UIBezierPath()
         let startAngle: CGFloat = CGFloat((0) / 180.0 * M_PI)  //0
         let endAngle: CGFloat = CGFloat((360) / 180.0 * M_PI)   //360
         path.addArcWithCenter(CGPointMake(self.frame.size.width/2.0, self.frame.size.width/2.0), radius: self.frame.size.width/2.0, startAngle: startAngle, endAngle: endAngle, clockwise: false)
         
-        var factor:CGFloat = self.frame.size.width / 1.5
+        let factor:CGFloat = self.frame.size.width / 1.5
         path.moveToPoint(CGPoint(x: self.frame.size.width/2.0 , y: 15.0))
         path.addLineToPoint(CGPoint(x: self.frame.size.width/2.0,y: factor))
         path.moveToPoint(CGPoint(x: self.frame.size.width/2.0,y: factor + 10.0))
@@ -530,7 +522,7 @@ class InfoAnimatedView: UIView, AnimatableView {
     
     func animate() {
         
-        var colorAnimation = CABasicAnimation(keyPath:"strokeColor")
+        let colorAnimation = CABasicAnimation(keyPath:"strokeColor")
         colorAnimation.duration = 1.0;
         colorAnimation.repeatCount = HUGE
         colorAnimation.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
@@ -564,7 +556,7 @@ class SuccessAnimatedView: UIView, AnimatableView {
 
     
     var outlineCircle: CGPath {
-        var path = UIBezierPath()
+        let path = UIBezierPath()
         let startAngle: CGFloat = CGFloat((0) / 180.0 * M_PI)  //0
         let endAngle: CGFloat = CGFloat((360) / 180.0 * M_PI)   //360
         path.addArcWithCenter(CGPointMake(self.frame.size.width/2.0, self.frame.size.height/2.0), radius: self.frame.size.width/2.0, startAngle: startAngle, endAngle: endAngle, clockwise: false)
@@ -573,9 +565,9 @@ class SuccessAnimatedView: UIView, AnimatableView {
     }
     
     var path: CGPath {
-        var path = UIBezierPath()
-        var startAngle:CGFloat = CGFloat((60) / 180.0 * M_PI) //60
-        var endAngle:CGFloat = CGFloat((200) / 180.0 * M_PI)  //190
+        let path = UIBezierPath()
+        let startAngle:CGFloat = CGFloat((60) / 180.0 * M_PI) //60
+        let endAngle:CGFloat = CGFloat((200) / 180.0 * M_PI)  //190
         path.addArcWithCenter(CGPointMake(self.frame.size.width/2.0, self.frame.size.height/2.0), radius: self.frame.size.width/2.0, startAngle: startAngle, endAngle: endAngle, clockwise: false)
         path.addLineToPoint(CGPoint(x: 36.0 - 10.0 ,y: 60.0 - 10.0))
         path.addLineToPoint(CGPoint(x: 85.0 - 20.0, y: 30.0 - 20.0))
@@ -614,11 +606,11 @@ class SuccessAnimatedView: UIView, AnimatableView {
     func animate() {
         let strokeStart = CABasicAnimation(keyPath: "strokeStart")
         let strokeEnd = CABasicAnimation(keyPath: "strokeEnd")
-        var factor = 0.045
+        let factor = 0.045
         strokeEnd.fromValue = 0.00
         strokeEnd.toValue = 0.93
         strokeEnd.duration = 10.0*factor
-        var timing = CAMediaTimingFunction(controlPoints: 0.3, 0.6, 0.8, 1.2)
+        let timing = CAMediaTimingFunction(controlPoints: 0.3, 0.6, 0.8, 1.2)
         strokeEnd.timingFunction = timing
         
         strokeStart.fromValue = 0.0

@@ -23,8 +23,6 @@
 		1F293BF71B384D1300551A40 /* ShopifyUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F293BF61B384D1300551A40 /* ShopifyUtilities.swift */; };
 		1F293BF91B38631100551A40 /* CartProduct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F293BF81B38631100551A40 /* CartProduct.swift */; };
 		1F39440B1B094EA4008E73E0 /* SJCollectionAddToCartReusableView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1F39440A1B094EA4008E73E0 /* SJCollectionAddToCartReusableView.xib */; };
-		1F535DED1B242084008663DF /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F535DEB1B242084008663DF /* Fabric.framework */; };
-		1F535DEE1B242084008663DF /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F535DEC1B242084008663DF /* Crashlytics.framework */; };
 		1F58FE621B340ED6003E2507 /* CartTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F58FE611B340ED6003E2507 /* CartTableViewController.swift */; };
 		1F58FE661B340F27003E2507 /* CartTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F58FE641B340F27003E2507 /* CartTableViewCell.swift */; };
 		1F58FE671B340F27003E2507 /* CartTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1F58FE651B340F27003E2507 /* CartTableViewCell.xib */; };
@@ -99,8 +97,6 @@
 		1F293BF81B38631100551A40 /* CartProduct.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CartProduct.swift; sourceTree = "<group>"; };
 		1F39440A1B094EA4008E73E0 /* SJCollectionAddToCartReusableView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SJCollectionAddToCartReusableView.xib; sourceTree = "<group>"; };
 		1F4D93811B419D63008EAD74 /* libc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libc++.dylib"; path = "usr/lib/libc++.dylib"; sourceTree = SDKROOT; };
-		1F535DEB1B242084008663DF /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Fabric.framework; sourceTree = SOURCE_ROOT; };
-		1F535DEC1B242084008663DF /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = SOURCE_ROOT; };
 		1F54AD201B1602D6007E9E48 /* BridgingHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BridgingHeader.h; sourceTree = "<group>"; };
 		1F58FE611B340ED6003E2507 /* CartTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CartTableViewController.swift; sourceTree = "<group>"; };
 		1F58FE641B340F27003E2507 /* CartTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CartTableViewCell.swift; sourceTree = "<group>"; };
@@ -159,8 +155,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				1FECA5841B3019EB009CC8AF /* MessageUI.framework in Frameworks */,
-				1F535DEE1B242084008663DF /* Crashlytics.framework in Frameworks */,
-				1F535DED1B242084008663DF /* Fabric.framework in Frameworks */,
 				DCE5E79073B5F6D74B71392E /* libPods.a in Frameworks */,
 				1F1B6EA61B41A2960042D1CE /* Buy.framework in Frameworks */,
 			);
@@ -234,8 +228,6 @@
 			children = (
 				1F1B6EA51B41A2960042D1CE /* Buy.framework */,
 				1FECA5831B3019EB009CC8AF /* MessageUI.framework */,
-				1F535DEB1B242084008663DF /* Fabric.framework */,
-				1F535DEC1B242084008663DF /* Crashlytics.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -471,7 +463,6 @@
 				4F8D38991AE440DE00F42E23 /* Sources */,
 				4F8D389A1AE440DE00F42E23 /* Frameworks */,
 				4F8D389B1AE440DE00F42E23 /* Resources */,
-				1F535DEA1B242057008663DF /* ShellScript */,
 				20F629CA8399A212F90F7A37 /* Copy Pods Resources */,
 			);
 			buildRules = (
@@ -507,7 +498,9 @@
 		4F8D38951AE440DE00F42E23 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0630;
+				LastSwiftMigration = 0700;
+				LastSwiftUpdateCheck = 0700;
+				LastUpgradeCheck = 0700;
 				ORGANIZATIONNAME = "Full Stak";
 				TargetAttributes = {
 					4F8D389C1AE440DE00F42E23 = {
@@ -601,20 +594,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
-			showEnvVarsInLog = 0;
-		};
-		1F535DEA1B242057008663DF /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "./Fabric.framework/run b3b1168b6205c64c88b1da59643b6a6d7deb7415 88d810b27f890b6a069b6a50c6fea5e8c31c1f724449146876a299e04f78dc25";
 			showEnvVarsInLog = 0;
 		};
 		20F629CA8399A212F90F7A37 /* Copy Pods Resources */ = {
@@ -734,6 +713,7 @@
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -807,6 +787,7 @@
 				CLANG_WARN_OBJC_REPEATED_USE_OF_WEAK = YES;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: KAUSAR INDUSTRIES INC (DYNDWV74W5)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: KAUSAR INDUSTRIES INC (DYNDWV74W5)";
+				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)";
 				GCC_TREAT_INCOMPATIBLE_POINTER_TYPE_WARNINGS_AS_ERRORS = YES;
 				GCC_WARN_NON_VIRTUAL_DESTRUCTOR = YES;
@@ -842,7 +823,10 @@
 					"-weak_framework",
 					"\"Social\"",
 					"-all_load",
+					"$(inherited)",
+					"-lstdc++",
 				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.fullstak.www.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "15b90164-f0d5-4c63-8e33-72600167c824";
 				SWIFT_OBJC_BRIDGING_HEADER = "$(PROJECT_DIR)/Silky Socks/BridgingHeader.h";
@@ -862,6 +846,7 @@
 				CLANG_WARN_OBJC_REPEATED_USE_OF_WEAK = YES;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: KAUSAR INDUSTRIES INC (DYNDWV74W5)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: KAUSAR INDUSTRIES INC (DYNDWV74W5)";
+				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)";
 				GCC_TREAT_INCOMPATIBLE_POINTER_TYPE_WARNINGS_AS_ERRORS = YES;
 				GCC_WARN_NON_VIRTUAL_DESTRUCTOR = YES;
@@ -897,7 +882,10 @@
 					"-weak_framework",
 					"\"Social\"",
 					"-all_load",
+					"$(inherited)",
+					"-lstdc++",
 				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.fullstak.www.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "15b90164-f0d5-4c63-8e33-72600167c824";
 				SWIFT_OBJC_BRIDGING_HEADER = "$(PROJECT_DIR)/Silky Socks/BridgingHeader.h";
@@ -912,16 +900,14 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-				);
+				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
 				);
 				INFOPLIST_FILE = "Silky SocksTests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.fullstak.www.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Silky Socks.app/Silky Socks";
@@ -934,12 +920,10 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-				);
+				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = "Silky SocksTests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.fullstak.www.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Silky Socks.app/Silky Socks";

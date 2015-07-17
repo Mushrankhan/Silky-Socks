@@ -3,7 +3,7 @@
 //  Silky Socks
 //
 //  Created by Saurabh Jain on 4/19/15.
-//  Copyright (c) 2015 Full Stak. All rights reserved.
+//  Copyright (c) 2015 Saurabh Jain. All rights reserved.
 //
 
 import UIKit
@@ -12,14 +12,14 @@ import UIKit
 extension UIView {
     
     // Pin a subview to the edges of the superview
-    func pinSubviewToView(#subView: UIView) {
+    func pinSubviewToView(subView subView: UIView) {
         
         addAttributeToView(NSLayoutAttribute.Top, subview: subView)
         addAttributeToView(NSLayoutAttribute.Leading, subview: subView)
         addAttributeToView(NSLayoutAttribute.Bottom, subview: subView)
         addAttributeToView(NSLayoutAttribute.Trailing, subview: subView)
         
-        self.setNeedsUpdateConstraints()
+        setNeedsUpdateConstraints()
     }
     
     private func addAttributeToView(attribute: NSLayoutAttribute, subview: UIView) {
@@ -58,8 +58,8 @@ extension UIView {
     
     // Print the view heirarchy
     func logSubViews() {
-        println(self)
-        for view in subviews as! [UIView]{
+        print(self)
+        for view in subviews as [UIView]{
             view.logSubViews()
         }
     }
@@ -69,7 +69,7 @@ extension UIView {
 extension UIColor {
     
     // Helper Function
-    class func getColor(#red: Int, green: Int, blue: Int, alpha: CGFloat) -> UIColor {
+    class func getColor(red red: Int, green: Int, blue: Int, alpha: CGFloat) -> UIColor {
         let divisor: CGFloat = 255
         return UIColor(red: CGFloat(red)/divisor, green: CGFloat(green)/divisor, blue: CGFloat(blue)/divisor, alpha: alpha)
     }
@@ -131,9 +131,9 @@ extension UIFont {
     // Helper to print all font names
     class func printFontNames() {
         for family in UIFont.familyNames() {
-            println("Font :\(family)")
-            for name in UIFont.fontNamesForFamilyName(family as! String) {
-                println("  \(name)")
+            print("Font :\(family)")
+            for name in UIFont.fontNamesForFamilyName(family as String) {
+                print("  \(name)")
             }
         }
     }
@@ -178,7 +178,7 @@ extension UIImage {
         CGContextScaleCTM(context, 1, -1)
         
         // set the blend mode to color burn, and the original image
-        CGContextSetBlendMode(context, kCGBlendModeDarken)
+        CGContextSetBlendMode(context, CGBlendMode.Darken)
         let rect = CGRectMake(0, 0, size.width, size.height)
         CGContextDrawImage(context, rect, CGImage)
         
@@ -186,7 +186,7 @@ extension UIImage {
         CGContextClipToMask(context, rect, CGImage)
         CGContextAddRect(context, rect)
         color.setFill()
-        CGContextDrawPath(context,kCGPathFill)
+        CGContextDrawPath(context,CGPathDrawingMode.Fill)
         
         // new image
         let coloredImage = UIGraphicsGetImageFromCurrentImageContext()
@@ -207,7 +207,7 @@ extension UIImage {
         CGContextScaleCTM(context, 1, -1)
 
         // set the blend mode to color burn, and the original image
-        CGContextSetBlendMode(context, kCGBlendModeMultiply)
+        CGContextSetBlendMode(context, CGBlendMode.Multiply)
         let rect = CGRect(origin: .zeroPoint, size: size)
         CGContextDrawImage(context, rect, CGImage)
         

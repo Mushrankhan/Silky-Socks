@@ -3,7 +3,7 @@
 //  Silky Socks
 //
 //  Created by Saurabh Jain on 6/21/15.
-//  Copyright (c) 2015 Full Stak. All rights reserved.
+//  Copyright (c) 2015 Saurabh Jain. All rights reserved.
 //
 
 import UIKit
@@ -22,8 +22,9 @@ class CheckoutInfoTableViewCell: UITableViewCell, UITextFieldDelegate {
         didSet {
             infoTextField.delegate = self
             NSNotificationCenter.defaultCenter().addObserverForName(UITextFieldTextDidChangeNotification, object: infoTextField, queue: NSOperationQueue.mainQueue()) { [unowned self] notification in
-                let text = (notification.object as! UITextField).text
-                self.delegate?.checkoutInfoTableViewCell(self, didEnterInfo: text)
+                if let text = (notification.object as! UITextField).text {
+                    self.delegate?.checkoutInfoTableViewCell(self, didEnterInfo: text)
+                }
             }
         }
     }

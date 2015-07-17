@@ -3,11 +3,10 @@
 //  Silky Socks
 //
 //  Created by Saurabh Jain on 6/22/15.
-//  Copyright (c) 2015 Full Stak. All rights reserved.
+//  Copyright (c) 2015 Saurabh Jain. All rights reserved.
 //
 
 import Foundation
-
 
 // Shopify Details
 struct Shopify {
@@ -18,7 +17,7 @@ struct Shopify {
 }
 
 
-extension BUYCart: Printable {
+extension BUYCart {
     
     func addProduct(product: CartProduct, withVariant variant: BUYProductVariant) {
         
@@ -46,7 +45,7 @@ extension BUYClient {
 
 extension BUYAddress {
     func isValid() -> Bool {
-        return firstName != nil && count(firstName.parseString()) > 0 && lastName != nil && count(lastName.parseString()) > 0 && address1 != nil && count(address1.parseString()) > 2 && city != nil && count(city.parseString()) > 0 && count(province) == 2 && zip != nil && count(zip) == 5
+        return firstName != nil && firstName.parseString().characters.count > 0 && lastName != nil && lastName.parseString().characters.count > 0 && address1 != nil && address1.parseString().characters.count > 2 && city != nil && city.parseString().characters.count > 0 && province.characters.count == 2 && zip != nil && zip.characters.count == 5
     }
     
     func getAddress() -> String {
@@ -56,6 +55,6 @@ extension BUYAddress {
 
 extension BUYCreditCard {
     func isValid() -> Bool {
-        return number != nil && count(number) == 16 && expiryMonth != nil && count(expiryMonth) == 2 && expiryYear != nil && count(expiryYear) == 4 && cvv != nil && count(cvv) == 3
+        return number != nil && number.characters.count == 16 && expiryMonth != nil && expiryMonth.characters.count == 2 && expiryYear != nil && expiryYear.characters.count == 4 && cvv != nil && cvv.characters.count == 3
     }
 }

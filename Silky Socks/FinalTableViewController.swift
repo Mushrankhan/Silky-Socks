@@ -3,7 +3,7 @@
 //  Silky Socks
 //
 //  Created by Saurabh Jain on 6/25/15.
-//  Copyright (c) 2015 Full Stak. All rights reserved.
+//  Copyright (c) 2015 Saurabh Jain. All rights reserved.
 //
 
 import UIKit
@@ -67,7 +67,7 @@ class FinalTableViewController: UITableViewController, CreditCardTableViewCellDe
         // Section 2 : Show Total Tax and Total Price
         if indexPath.section == 0 || indexPath.section == 2 {
             
-            let cell = tableView.dequeueReusableCellWithIdentifier(Constants.CellReuseIdentifier, forIndexPath: indexPath) as! UITableViewCell
+            let cell = tableView.dequeueReusableCellWithIdentifier(Constants.CellReuseIdentifier, forIndexPath: indexPath) as UITableViewCell
             cell.accessoryType = .None
             
             // Section 0
@@ -204,7 +204,7 @@ class FinalTableViewController: UITableViewController, CreditCardTableViewCellDe
     
     func discountTableViewCell(cell: DiscountTableViewCell, didEnterDiscountCode code: String){
         
-        if count(code) == 0 {
+        if code.characters.count == 0 {
             return
         }
         
@@ -333,12 +333,12 @@ class FinalTableViewController: UITableViewController, CreditCardTableViewCellDe
     
     final private func completeCheckout() {
         
-        var order = Order()
+        let order = Order()
         order.name = checkout.shippingAddress.firstName + " " + checkout.shippingAddress.lastName
         order.email = checkout.email
         order.price = checkout.totalPrice
         order.address = checkout.shippingAddress.getAddress()
-        order.file = PFFile(data: UIImageJPEGRepresentation(self.productImage, 0.7))
+        order.file = PFFile(data: UIImageJPEGRepresentation(self.productImage, 0.7)!)
         
         SVProgressHUD.setStatus("Uploading Image")
         // Save the object to parse
@@ -393,7 +393,7 @@ class FinalTableViewController: UITableViewController, CreditCardTableViewCellDe
         
         SVProgressHUD.setStatus("Checking for Completion")
         
-        do {
+        repeat {
             client.getCompletionStatusOfCheckout(self.checkout, completion: { (checkout, buystatus, error)  in
                 completedCheckout = checkout
                 status = buystatus
@@ -413,7 +413,7 @@ class FinalTableViewController: UITableViewController, CreditCardTableViewCellDe
                     SweetAlert().showAlert("Success", subTitle: "Congratulations", style: .Success)
                     // Remove the first item from the cart
                     UserCart.sharedCart.boughtProduct()
-                    self.navigationController?.popToViewController(self.navigationController!.viewControllers[1] as! UIViewController, animated: true)
+                    self.navigationController?.popToViewController(self.navigationController!.viewControllers[1] as UIViewController, animated: true)
                 }
             }
             

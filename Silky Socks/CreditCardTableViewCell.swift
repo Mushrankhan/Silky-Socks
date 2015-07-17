@@ -3,7 +3,7 @@
 //  Silky Socks
 //
 //  Created by Saurabh Jain on 6/26/15.
-//  Copyright (c) 2015 Full Stak. All rights reserved.
+//  Copyright (c) 2015 Saurabh Jain. All rights reserved.
 //
 
 import UIKit
@@ -29,15 +29,16 @@ class CreditCardTableViewCell: UITableViewCell, UITextFieldDelegate {
         textField.delegate = self
         textField.keyboardType = .NumberPad
         NSNotificationCenter.defaultCenter().addObserverForName(UITextFieldTextDidChangeNotification, object: textField, queue: NSOperationQueue.mainQueue()) { [unowned self] notification in
-            let text = (notification.object as! UITextField).text
-            if textField == self.creditCardNumber {
-                self.delegate?.creditCardTableViewCell(self, didEnterCreditCard: textField.text)
-            } else if textField == self.month {
-                self.delegate?.creditCardTableViewCell(self, didEnterExpiryMonth: textField.text)
-            } else if textField == self.year {
-                self.delegate?.creditCardTableViewCell(self, didEnterExpiryYear: textField.text)
-            } else {
-                self.delegate?.creditCardTableViewCell(self, didEnterCVV: textField.text)
+            if let text = (notification.object as! UITextField).text {
+                if textField == self.creditCardNumber {
+                    self.delegate?.creditCardTableViewCell(self, didEnterCreditCard: text)
+                } else if textField == self.month {
+                    self.delegate?.creditCardTableViewCell(self, didEnterExpiryMonth: text)
+                } else if textField == self.year {
+                    self.delegate?.creditCardTableViewCell(self, didEnterExpiryYear: text)
+                } else {
+                    self.delegate?.creditCardTableViewCell(self, didEnterCVV: text)
+                }
             }
         }
     }
@@ -57,7 +58,7 @@ class CreditCardTableViewCell: UITableViewCell, UITextFieldDelegate {
             length = 3
         }
         
-        return count(textField.text) + count(string) - range.length <= length
+        return textField.text!.characters.count + string.characters.count - range.length <= length
     }
     
     func textFieldShouldReturn(textField: UITextField) -> Bool {

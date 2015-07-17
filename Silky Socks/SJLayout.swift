@@ -3,7 +3,7 @@
 //  Silky Socks
 //
 //  Created by Saurabh Jain on 4/19/15.
-//  Copyright (c) 2015 Full Stak. All rights reserved.
+//  Copyright (c) 2015 Saurabh Jain. All rights reserved.
 //
 
 import UIKit
@@ -16,9 +16,7 @@ class SJLayout: UICollectionViewLayout {
     
     // Number of items
     var numberOfItems:Int {
-        get {
-            return collectionView!.numberOfItemsInSection(0)
-        }
+        return collectionView!.numberOfItemsInSection(0)
     }
     
     // Content Size
@@ -32,23 +30,17 @@ class SJLayout: UICollectionViewLayout {
     
     // Width of the screen
     private var width: CGFloat {
-        get {
-            return CGRectGetWidth(UIScreen.mainScreen().bounds)
-        }
+        return CGRectGetWidth(UIScreen.mainScreen().bounds)
     }
     
     // Height of the screen
     private var height: CGFloat {
-        get {
-           return CGRectGetHeight(UIScreen.mainScreen().bounds)
-        }
+        return CGRectGetHeight(UIScreen.mainScreen().bounds)
     }
     
     // The Height of the bottom utilities area
     private var heightOfUtilView: CGFloat {
-        get {
-            return 150
-        }
+        return 150
     }
     
     /* The content size of the collection view */
@@ -82,7 +74,7 @@ class SJLayout: UICollectionViewLayout {
     }
     
     /* The Supplementary View */
-    override func layoutAttributesForSupplementaryViewOfKind(elementKind: String, atIndexPath indexPath: NSIndexPath) -> UICollectionViewLayoutAttributes! {
+    override func layoutAttributesForSupplementaryViewOfKind(elementKind: String, atIndexPath indexPath: NSIndexPath) -> UICollectionViewLayoutAttributes? {
         
         // Restart button
         if elementKind == restartElementkind {
@@ -115,7 +107,7 @@ class SJLayout: UICollectionViewLayout {
             return attributes
         }
         // Bottom Utilities View
-        else {
+        else if elementKind == utilitiesElementkind {
             let attributes = UICollectionViewLayoutAttributes(forSupplementaryViewOfKind: elementKind, withIndexPath: indexPath)
             var frame = CGRectMake(0, CGRectGetMaxY(collectionView!.bounds) - heightOfUtilView, width, heightOfUtilView)
             frame.origin.x += collectionView!.contentOffset.x
@@ -123,10 +115,12 @@ class SJLayout: UICollectionViewLayout {
             attributes.zIndex = 99
             return attributes
         }
+        
+        return nil
     }
     
     /* The Decoration View */
-    override func layoutAttributesForDecorationViewOfKind(elementKind: String, atIndexPath indexPath: NSIndexPath) -> UICollectionViewLayoutAttributes! {
+    override func layoutAttributesForDecorationViewOfKind(elementKind: String, atIndexPath indexPath: NSIndexPath) -> UICollectionViewLayoutAttributes? {
         let attributes = UICollectionViewLayoutAttributes(forDecorationViewOfKind: elementKind, withIndexPath: indexPath)
         let widthOfLogo: CGFloat = 80 // is equal to the height of the logo
         var frame = CGRectMake(10, CGRectGetMaxY(collectionView!.bounds) - heightOfUtilView - widthOfLogo + 32, widthOfLogo, widthOfLogo) // 32 is half the height of the next and previous buttons. Have to do this because the height of the bottom view is bigger than it actually appears. So have to add half the width of the next button to make the decoration silky socks logo near the bottom view that appears on the screen
@@ -137,7 +131,7 @@ class SJLayout: UICollectionViewLayout {
     }
     
     /* The layout attributes for element in rect */
-    override func layoutAttributesForElementsInRect(rect: CGRect) -> [AnyObject]? {
+    override func layoutAttributesForElementsInRect(rect: CGRect) -> [UICollectionViewLayoutAttributes]? {
         var layoutAttributes: [UICollectionViewLayoutAttributes] = []
         for attributes in cache {
             if CGRectIntersectsRect(attributes.frame, rect){
@@ -153,13 +147,15 @@ class SJLayout: UICollectionViewLayout {
         
         // Loop through and add the supplementary views
         for kind in elementKinds {
-            let attributes = layoutAttributesForSupplementaryViewOfKind(kind, atIndexPath: indexPath)
-            layoutAttributes.append(attributes)
+            if let attributes = layoutAttributesForSupplementaryViewOfKind(kind, atIndexPath: indexPath) {
+                layoutAttributes.append(attributes)
+            }
         }
         
         // Add the decoration view
-        let logoAttr = layoutAttributesForDecorationViewOfKind(logoElementKind, atIndexPath: indexPath)
-        layoutAttributes.append(logoAttr)
+        if let decorationLogo = layoutAttributesForDecorationViewOfKind(logoElementKind, atIndexPath: indexPath) {
+            layoutAttributes.append(decorationLogo)
+        }
         
         return layoutAttributes
     }
@@ -180,13 +176,13 @@ class SJStickyFontHeaderLayout: UICollectionViewFlowLayout {
         return true
     }
     
-    override func layoutAttributesForElementsInRect(rect: CGRect) -> [AnyObject]? {
+    override func layoutAttributesForElementsInRect(rect: CGRect) -> [UICollectionViewLayoutAttributes]? {
         
         // Super
-        var layoutAttributes = super.layoutAttributesForElementsInRect(rect) as! [UICollectionViewLayoutAttributes]
+        var layoutAttributes = super.layoutAttributesForElementsInRect(rect)!
         
         // Keep track of header
-        var headerNeedingLayout = NSMutableIndexSet()
+        let headerNeedingLayout = NSMutableIndexSet()
         
         // Register the index path section for the current cells
         for attr in layoutAttributes {
@@ -206,7 +202,7 @@ class SJStickyFontHeaderLayout: UICollectionViewFlowLayout {
         
         // Append the attributes of the header
         headerNeedingLayout.enumerateIndexesUsingBlock { (index, stop) -> Void in
-            layoutAttributes.append(self.layoutAttributesForSupplementaryViewOfKind(UICollectionElementKindSectionHeader, atIndexPath: NSIndexPath(forItem: 0, inSection: index)))
+            layoutAttributes.append(self.layoutAttributesForSupplementaryViewOfKind(UICollectionElementKindSectionHeader, atIndexPath: NSIndexPath(forItem: 0, inSection: index))!)
         }
         
         // Get the attributes for the header
@@ -220,20 +216,14 @@ class SJStickyFontHeaderLayout: UICollectionViewFlowLayout {
                     // Index path for first cell
                     let indexPath = NSIndexPath(forItem: 0, inSection: section)
                     
-                    // Index Path for last cell
-                    let lastIndexPath = NSIndexPath(forItem: collectionView!.numberOfItemsInSection(section) - 1, inSection: section)
-                    
                     // Attributes for first cell
                     let attrForFirstElement = layoutAttributesForItemAtIndexPath(indexPath)
-                    // Attributes for last cell
-                    let attrForLastElement = layoutAttributesForItemAtIndexPath(lastIndexPath)
                     
                     // Frame for header
                     var frame = attributes.frame
                     
                     let width = CGRectGetWidth(UIScreen.mainScreen().bounds)
-                    let minX = CGRectGetMinX(attrForFirstElement.frame) - (2 * frame.width) + width
-                    let maxX = CGRectGetMaxX(attrForLastElement.frame) - (2 * frame.width) + width
+                    let minX = CGRectGetMinX(attrForFirstElement!.frame) - (2 * frame.width) + width
                     let offset = collectionView!.contentOffset.x
                     let x = max(minX, minX + offset)
                     frame.origin.x = x

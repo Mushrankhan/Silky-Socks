@@ -3,7 +3,7 @@
 //  Silky Socks
 //
 //  Created by Saurabh Jain on 5/15/15.
-//  Copyright (c) 2015 Full Stak. All rights reserved.
+//  Copyright (c) 2015 Saurabh Jain. All rights reserved.
 //
 
 import UIKit
@@ -34,7 +34,7 @@ class SJCollectionView: UICollectionView {
     }
     
     // Initialization
-    required init(coder aDecoder: NSCoder) {
+    required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         initialSetUp()
     }
@@ -46,7 +46,7 @@ class SJCollectionView: UICollectionView {
     
     private func initialSetUp() {
         // Basic
-        setTranslatesAutoresizingMaskIntoConstraints(false)
+        translatesAutoresizingMaskIntoConstraints = false
         backgroundColor = UIColor.whiteColor()
         keyboardDismissMode = .Interactive
         bounces = true
@@ -68,7 +68,7 @@ class SJCollectionView: UICollectionView {
         layout.registerNib(UINib(nibName: "SJCollectionDecorationSilkySocksLogoReusableView", bundle: nil), forDecorationViewOfKind: logoElementKind)
     }
     
-    override func dequeueReusableCellWithReuseIdentifier(identifier: String, forIndexPath indexPath: NSIndexPath!) -> AnyObject {
+    override func dequeueReusableCellWithReuseIdentifier(identifier: String, forIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         // Essential to conform to cell delegate
         if let object = super.dequeueReusableCellWithReuseIdentifier(identifier, forIndexPath: indexPath) as? SJCollectionViewCell {
             object.delegate = self
@@ -82,7 +82,7 @@ class SJCollectionView: UICollectionView {
 extension SJCollectionView {
     
     // Dequeue the bottom utilities view
-    func dequeueReusableBottomUtilitiesView(#indexPath: NSIndexPath) -> SJBottomView {
+    func dequeueReusableBottomUtilitiesView(indexPath indexPath: NSIndexPath) -> SJBottomView {
         let view = super.dequeueReusableSupplementaryViewOfKind(utilitiesElementkind, withReuseIdentifier: utilitiesReuseIdentifier, forIndexPath: indexPath) as! SJBottomView
         view.delegate = self // important
         sj_bottomView = view
@@ -90,21 +90,21 @@ extension SJCollectionView {
     }
 
     // Dequeue the restart buttom
-    func dequeueReusableRestartView(#indexPath: NSIndexPath) -> RestartViewCollectionReusableView {
+    func dequeueReusableRestartView(indexPath indexPath: NSIndexPath) -> RestartViewCollectionReusableView {
         let view = super.dequeueReusableSupplementaryViewOfKind(restartElementkind, withReuseIdentifier: restartIdentifier, forIndexPath: indexPath) as! RestartViewCollectionReusableView
         view.delegate = self // important
         return view
     }
     
     // Dequeue the share button
-    func dequeueReusableShareView(#indexPath: NSIndexPath) -> ShareViewCollectionReusableView {
+    func dequeueReusableShareView(indexPath indexPath: NSIndexPath) -> ShareViewCollectionReusableView {
         let view = super.dequeueReusableSupplementaryViewOfKind(shareElementKind, withReuseIdentifier: shareIdentifier, forIndexPath: indexPath) as! ShareViewCollectionReusableView
         view.delegate = self // important
         return view
     }
     
     // Dequeue the add to cart button
-    func dequeueReusableAddToCartView(#indexPath: NSIndexPath) -> CartViewCollectionReusableView {
+    func dequeueReusableAddToCartView(indexPath indexPath: NSIndexPath) -> CartViewCollectionReusableView {
         let view = super.dequeueReusableSupplementaryViewOfKind(addToCartElementKind, withReuseIdentifier: addToCartIdentifier, forIndexPath: indexPath) as! CartViewCollectionReusableView
         view.delegate = self // important
         return view
@@ -141,7 +141,14 @@ extension SJCollectionView: ShareViewCollectionReusableViewDelegate, CartViewCol
                 dispatch_async(dispatch_get_global_queue(QOS_CLASS_USER_INITIATED, 0), { () -> Void in
                     
                     UIGraphicsBeginImageContextWithOptions(size, false, 0)
-                    //cell.snapshotview?.drawViewHierarchyInRect(rect, afterScreenUpdates: true)
+                    let context = UIGraphicsGetCurrentContext()
+                    if cell.template?.index == 3 || cell.template?.index == 4 { // White Tee || Tank
+                        CGContextTranslateCTM(context, 0, rect.size.height)
+                        CGContextScaleCTM(context, 1, -1)
+                        CGContextClipToMask(UIGraphicsGetCurrentContext(), rect, cell.template!.image.CGImage)
+                        CGContextScaleCTM(context, 1, -1)
+                        CGContextTranslateCTM(context, 0, -rect.size.height)
+                    }
                     cell.snapshotview?.layer.renderInContext(UIGraphicsGetCurrentContext())
                     let image = UIGraphicsGetImageFromCurrentImageContext()
                     UIGraphicsEndImageContext()
@@ -268,11 +275,12 @@ extension SJCollectionView {
 extension SJCollectionView : SJCollectionViewCellDelegate {
     
     func collectionViewCell(cell: UICollectionViewCell, didSelectView view: UIView?, atPoint point: CGPoint) {
-        if let view = view {
-            myDelegate?.collectionView(self, didTapSubview: view)
-        } else {
+        guard let view = view else {
             myDelegate?.collectionView(self, touchesBegan: point)
+            return
         }
+        
+        myDelegate?.collectionView(self, didTapSubview: view)
     }
     
     func collectionViewCell(cell: UICollectionViewCell, didTapInfoButton button: UIButton) {

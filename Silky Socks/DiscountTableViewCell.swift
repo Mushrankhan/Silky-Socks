@@ -3,7 +3,7 @@
 //  Silky Socks
 //
 //  Created by Saurabh Jain on 6/30/15.
-//  Copyright (c) 2015 Full Stak. All rights reserved.
+//  Copyright (c) 2015 Saurabh Jain. All rights reserved.
 //
 
 import UIKit
@@ -31,7 +31,7 @@ class DiscountTableViewCell: UITableViewCell, UITextFieldDelegate {
     }
     
     func textFieldDidEndEditing(textField: UITextField) {
-        delegate?.discountTableViewCell(self, didEnterDiscountCode: textField.text)
+        delegate?.discountTableViewCell(self, didEnterDiscountCode: textField.text ?? "")
     }
     
 }

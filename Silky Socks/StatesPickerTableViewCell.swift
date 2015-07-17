@@ -3,13 +3,13 @@
 //  Silky Socks
 //
 //  Created by Saurabh Jain on 6/21/15.
-//  Copyright (c) 2015 Full Stak. All rights reserved.
+//  Copyright (c) 2015 Saurabh Jain. All rights reserved.
 //
 
 import UIKit
 
 // Use of a delegate to provide info for the selected state
-protocol StatesPickerTableViewCellDelegate: class {
+protocol StatesPickerTableViewCellDelegate: NSObjectProtocol {
     func statesPickerTableViewCell(cell: StatesPickerTableViewCell, didSelectState state: String)
 }
 
@@ -26,7 +26,7 @@ class StatesPickerTableViewCell: UITableViewCell, UIPickerViewDataSource, UIPick
     }
     
     // All the states
-    private lazy var states = ["AL", "AK", "AZ", "AR", "CA", "CO", "CT", "DE", "FL", "GA", "HI","ID","IL IN","IA","KS","KY","LA","ME","MD","MA","MI","MN","MS","MO","MT, NE","NV","NH","NJ","NM","NY","NC","ND",
+    private let states = ["AL", "AK", "AZ", "AR", "CA", "CO", "CT", "DE", "FL", "GA", "HI","ID","IL IN","IA","KS","KY","LA","ME","MD","MA","MI","MN","MS","MO","MT, NE","NV","NH","NJ","NM","NY","NC","ND",
         "OH","OK","OR","PA RI","SC","SD","TN","TX","UT","VT","VA","WA","WV","WI","WY"]
     
     // MARK: UIPicker View Data Source
@@ -39,7 +39,7 @@ class StatesPickerTableViewCell: UITableViewCell, UIPickerViewDataSource, UIPick
         return states.count
     }
     
-    func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String! {
+    func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         return states[row]
     }
     

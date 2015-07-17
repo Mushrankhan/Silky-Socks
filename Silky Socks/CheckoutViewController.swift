@@ -3,7 +3,7 @@
 //  Silky Socks
 //
 //  Created by Saurabh Jain on 6/21/15.
-//  Copyright (c) 2015 Full Stak. All rights reserved.
+//  Copyright (c) 2015 Saurabh Jain. All rights reserved.
 //
 
 import UIKit
@@ -14,7 +14,7 @@ class CheckoutViewController: UITableViewController, StatesPickerTableViewCellDe
     var product: CartProduct!
     
     // Placeholders
-    lazy var infoToBeAsked = [["First Name", "Last Name", "Email"], ["Street Address", "Street Address 2", "City", "State", "Zip" ,"Country"], ["Front and Back", "Size", "Quantity", "Cost"]]
+    let infoToBeAsked = [["First Name", "Last Name", "Email"], ["Street Address", "Street Address 2", "City", "State", "Zip" ,"Country"], ["Front and Back", "Size", "Quantity", "Cost"]]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -103,7 +103,7 @@ class CheckoutViewController: UITableViewController, StatesPickerTableViewCellDe
         }
         
         // Show Info Cell: UITableViewCell
-        let cell = tableView.dequeueReusableCellWithIdentifier(Storyboard.NormalCellReuseIdentifier, forIndexPath: indexPath) as! UITableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier(Storyboard.NormalCellReuseIdentifier, forIndexPath: indexPath) as UITableViewCell
         cell.textLabel?.font = UIFont.preferredFontForTextStyle(UIFontTextStyleFootnote)
         cell.textLabel?.text = infoToBeAsked[indexPath.section][indexPath.row]
         cell.detailTextLabel?.text = ""
@@ -172,8 +172,9 @@ class CheckoutViewController: UITableViewController, StatesPickerTableViewCellDe
 }
 
 // MARK: StatesPickerTableViewCellDelegate
-extension CheckoutViewController: StatesPickerTableViewCellDelegate {
+extension CheckoutViewController {
     func statesPickerTableViewCell(cell: StatesPickerTableViewCell, didSelectState state: String) {
+        print(state)
         selectedState = state
     }
 }
@@ -255,7 +256,7 @@ extension CheckoutViewController: CheckoutTableFooterViewDelegate {
         
         dispatch_async(dispatch_get_global_queue(QOS_CLASS_USER_INITIATED, 0)) { [unowned self] in
             
-            let size = self.product.productType == .Socks ? self.product.productSizes[0] : self.product.productSizes[self.sizesSegmentedControl.selectedSegmentIndex]
+            let size = self.product.productType == TemplateType.Socks ? self.product.productSizes[0] : self.product.productSizes[self.sizesSegmentedControl.selectedSegmentIndex]
             self.product.checkoutImage = self.product.productImage.renderImageIntoSize(size)
             
             dispatch_async(dispatch_get_main_queue()) {

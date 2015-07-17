@@ -3,7 +3,7 @@
 //  Silky Socks
 //
 //  Created by Saurabh Jain on 5/16/15.
-//  Copyright (c) 2015 Full Stak. All rights reserved.
+//  Copyright (c) 2015 Saurabh Jain. All rights reserved.
 //
 
 import UIKit
@@ -33,7 +33,7 @@ class RestartViewCollectionReusableView: UICollectionReusableView {
         delegate?.restartReusableView(self, didPressRestartButton: sender)
     }
     
-    override func applyLayoutAttributes(layoutAttributes: UICollectionViewLayoutAttributes!) {
+    override func applyLayoutAttributes(layoutAttributes: UICollectionViewLayoutAttributes) {
         if layoutAttributes.representedElementCategory == .SupplementaryView {
             if layoutAttributes.representedElementKind == restartElementkind {
                 frame = layoutAttributes.frame
@@ -62,7 +62,7 @@ class ShareViewCollectionReusableView: UICollectionReusableView {
         delegate?.shareReusableView(self, didPressShareButton: sender)
     }
     
-    override func applyLayoutAttributes(layoutAttributes: UICollectionViewLayoutAttributes!) {
+    override func applyLayoutAttributes(layoutAttributes: UICollectionViewLayoutAttributes) {
         if layoutAttributes.representedElementCategory == .SupplementaryView {
             if layoutAttributes.representedElementKind == shareElementKind {
                 frame = layoutAttributes.frame
@@ -89,7 +89,7 @@ class CartViewCollectionReusableView: UICollectionReusableView {
         delegate?.cartReusableView(self, didPressAddToCartButton: sender)
     }
     
-    override func applyLayoutAttributes(layoutAttributes: UICollectionViewLayoutAttributes!) {
+    override func applyLayoutAttributes(layoutAttributes: UICollectionViewLayoutAttributes) {
         if layoutAttributes.representedElementCategory == .SupplementaryView {
             if layoutAttributes.representedElementKind == addToCartElementKind {
                 frame = layoutAttributes.frame
@@ -116,7 +116,7 @@ protocol FontCollectionReusableViewDelegate: class {
 class FontCollectionReusableView: UICollectionReusableView {
     
     // Init
-    required init(coder aDecoder: NSCoder) {
+    required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         initialSetUp()
     }

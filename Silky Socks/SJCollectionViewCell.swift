@@ -3,7 +3,7 @@
 //  Silky Socks
 //
 //  Created by Saurabh Jain on 4/19/15.
-//  Copyright (c) 2015 Full Stak. All rights reserved.
+//  Copyright (c) 2015 Saurabh Jain. All rights reserved.
 //
 
 import UIKit
@@ -103,8 +103,8 @@ class SJCollectionViewCell: UICollectionViewCell {
     // Initialization
     override func awakeFromNib() {
         super.awakeFromNib()
-        autoresizingMask = UIViewAutoresizing.FlexibleHeight | .FlexibleWidth
-        setTranslatesAutoresizingMaskIntoConstraints(false)
+        autoresizingMask = [UIViewAutoresizing.FlexibleHeight, .FlexibleWidth]
+        translatesAutoresizingMaskIntoConstraints = false
         clipsToBounds = true
         
         // Pan
@@ -184,10 +184,8 @@ class SJCollectionViewCell: UICollectionViewCell {
     }
     
     // Apply Layout Attributes
-    override func applyLayoutAttributes(layoutAttributes: UICollectionViewLayoutAttributes!) {
-        if let attr = layoutAttributes {
-            frame = attr.frame
-        }
+    override func applyLayoutAttributes(layoutAttributes: UICollectionViewLayoutAttributes) {
+        frame = layoutAttributes.frame
     }
     
     // Returns the nib associated with the cell
@@ -233,9 +231,19 @@ extension SJCollectionViewCell {
         point.y -= 5; point.x -= 10
         frame = CGRect(origin: point, size: size)
         
-        if template?.maskImage != nil && template!.type == .Socks {
+        // Black Normal
+        if template?.index == 1 {
             size.height -= 120
             frame.size = size
+        } else if template?.index == 2 { // Knee high
+            size.height -= 50
+            frame.size = size
+        } else if template?.index == 5 { // Black tee
+            size.height += 10
+            size.width -= 100
+            point.x += 50
+            frame.size = size
+            frame.origin = point
         }
         
         // Alloc snapshot view
@@ -303,6 +311,33 @@ extension SJCollectionViewCell {
     // Create Image
     func createImage(image: UIImage, forGrid: Bool) {
         
+        // If grid then add image on the image
+        if forGrid {
+            let finishedImage = template!.image.drawImage(image, forTiling: true)
+            ss_imgView.image = finishedImage
+            
+            // Create and add the bounding rect
+            if boundingRectView == nil {
+                addClipRect()
+            }
+            
+            let sj_imgView_snap = UIImageView(frame: snapshotview!.bounds)
+            sj_imgView_snap.contentMode = .ScaleAspectFill
+            sj_imgView_snap.image = finishedImage
+            
+            // Add it to the array of subviews
+            sj_subviews_snap.insert(sj_imgView_snap, atIndex: 0)
+            
+            // Make sure that the last selected view
+            // has a value
+            lastSelectedSnapshotView = sj_imgView_snap
+            
+            // Add subview
+            snapshotview?.addSubview(sj_imgView_snap)
+
+            return
+        }
+        
         func normalImage(image: UIImage) {
             
             // Create and add the bounding rect
@@ -335,7 +370,6 @@ extension SJCollectionViewCell {
             boundingRectView?.addSubview(sj_imgView)
             
             
-            
             // Create the image
             let sj_imgView_snap = UIImageView(frame: .zeroRect)
             sj_imgView_snap.frame.size = CGSize(width: width, height: width)
@@ -353,13 +387,6 @@ extension SJCollectionViewCell {
             // Add subview
             snapshotview?.addSubview(sj_imgView_snap)
             
-        }
-        
-        // If grid then add image on the image
-        if forGrid {
-            let finishedImage = template!.image.drawImage(image, forTiling: true)
-            ss_imgView.image = finishedImage
-            return
         }
         
         // add image on bounding view
@@ -428,7 +455,7 @@ extension SJCollectionViewCell {
     
     // Delete a view
     func undo(view: UIView) {
-        for (index,subview) in enumerate(sj_subViews) {
+        for (index,subview) in sj_subViews.enumerate() {
             if subview == view {
                 subview.removeFromSuperview()
                 sj_subViews.removeAtIndex(index)
@@ -451,7 +478,7 @@ extension SJCollectionViewCell: UIGestureRecognizerDelegate {
     func handleTap(recognizer: UITapGestureRecognizer) {
         let location = recognizer.locationInView(self)
         var selectedView: UIView?
-        for (index, view) in enumerate(sj_subViews) {
+        for (index, view) in sj_subViews.enumerate() {
             // Converting the sub view into the coordinate space of the cell from the bounding view
             let rect = convertRect(view.frame, fromView: boundingRectView)
             if CGRectContainsPoint(rect, location) {
@@ -471,8 +498,8 @@ extension SJCollectionViewCell: UIGestureRecognizerDelegate {
         if let boundingRectView = boundingRectView {
             
             // Find the location
-            var location = recognizer.locationInView(self)
-            var translatedpoint = recognizer.translationInView(self)
+            let location = recognizer.locationInView(self)
+            let translatedpoint = recognizer.translationInView(self)
             
             switch recognizer.state {
                 
@@ -480,7 +507,7 @@ extension SJCollectionViewCell: UIGestureRecognizerDelegate {
                     if recognizer.state == .Began {
                         
                         // Loop through the sub views array
-                        loop: for (index, view) in enumerate(sj_subViews) {
+                        loop: for (index, view) in sj_subViews.enumerate() {
                             
                             // If one subview contains the point
                             let rect = convertRect(view.frame, fromView: boundingRectView)
@@ -504,10 +531,8 @@ extension SJCollectionViewCell: UIGestureRecognizerDelegate {
                     }
                 
                 case .Ended:
-                    if let view = selectedView {
                         lastSelectedView = selectedView
                         lastSelectedSnapshotView = selectedSnapshotView
-                    }
                 
                 default:
                     break
@@ -519,7 +544,7 @@ extension SJCollectionViewCell: UIGestureRecognizerDelegate {
     @objc private func handleGesture(recognizer: UIGestureRecognizer) {
         
         // Make sure that the bounding view exists
-        if let boundingRectView = boundingRectView {
+        if let _ = boundingRectView {
             
             switch recognizer.state {
                 case .Began:
