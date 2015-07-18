@@ -150,7 +150,7 @@ extension SJCollectionView: ShareViewCollectionReusableViewDelegate, CartViewCol
                 if cell.template?.index == 3 || cell.template?.index == 4 { // White Tee || Tank
                     CGContextTranslateCTM(context, 0, rect.size.height)
                     CGContextScaleCTM(context, 1, -1)
-                    CGContextClipToMask(UIGraphicsGetCurrentContext(), rect, (cell.template?.index == 3 ? UIImage(named: "tee")?.CGImage : cell.template!.image.CGImage))
+                    CGContextClipToMask(UIGraphicsGetCurrentContext(), rect, (cell.template?.index == 3 ? UIImage(named: "tee")?.CGImage : UIImage(named: "tanktee")?.CGImage))
                     CGContextScaleCTM(context, 1, -1)
                     CGContextTranslateCTM(context, 0, -rect.size.height)
                 }

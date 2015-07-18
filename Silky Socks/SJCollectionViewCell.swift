@@ -261,8 +261,6 @@ extension SJCollectionViewCell {
         snapshotview = UIView(frame: frame)
         snapshotview?.hidden = true
         snapshotview?.clipsToBounds = true
-        snapshotview?.backgroundColor = UIColor.grayColor()
-        snapshotview?.alpha = 0.5
         
         // Masking
         maskImageView = UIImageView(frame: boundingRectView!.bounds)
