@@ -306,8 +306,7 @@ extension SJCollectionViewController: SJCollectionViewDelegate, MFMailComposeVie
         
         let image = snapshot.renderImageIntoSize(template.productSize)
         let mail = MFMailComposeViewController()
-        //mail.addAttachmentData(UIImagePNGRepresentation(image), mimeType: "image/png", fileName: "Design")
-        mail.addAttachmentData(UIImageJPEGRepresentation(image, 0.7)!, mimeType: "image/jpeg", fileName: "Design")
+        mail.addAttachmentData(UIImageJPEGRepresentation(image, 0.5)!, mimeType: "image/jpeg", fileName: "Design")
         mail.mailComposeDelegate = self
         presentViewController(mail, animated: true, completion: nil)
         
@@ -324,7 +323,6 @@ extension SJCollectionViewController: SJCollectionViewDelegate, MFMailComposeVie
     func collectionView(collectionView: UICollectionView, didPressRestartButton button:UIButton) {
         
         // Show an alert
-        let collectionView = collectionView as! SJCollectionView
         let title = "Warning"
         let message = "Are you sure you want to delete your current design and start over?"
         let alert = UIAlertController(title: title, message: message, preferredStyle: .Alert)
@@ -336,7 +334,7 @@ extension SJCollectionViewController: SJCollectionViewDelegate, MFMailComposeVie
             self.collectionView.panGestureRecognizer.enabled = true
             
             // Hide the color view
-            self.colorCollectionVC.collectionView!.hidden = true
+            self.hideColorCollectionVC()
 
             // Text Field
             if let sj_textField = self.sj_textField {
@@ -347,7 +345,7 @@ extension SJCollectionViewController: SJCollectionViewDelegate, MFMailComposeVie
             }
 
             // Tell the cell to clean Up
-            if let cell = collectionView.visibleCell {
+            if let cell = self.collectionView.visibleCell {
                 cell.performCleanUp()
             }
             

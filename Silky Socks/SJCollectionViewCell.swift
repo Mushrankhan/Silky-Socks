@@ -21,20 +21,16 @@ protocol SJCollectionViewCellDelegate: class {
 class SJCollectionViewCell: UICollectionViewCell {
 
     // IBOutlets
-    @IBOutlet private(set) weak var ss_imgView: UIImageView! {
-        didSet {
-            ss_imgView?.backgroundColor = UIColor.whiteColor()
-        }
-    }
-    @IBOutlet private(set) weak var nameLabel: UILabel!
+    @IBOutlet private weak var ss_imgView: UIImageView! { didSet { ss_imgView?.backgroundColor = UIColor.whiteColor() } }
+    @IBOutlet private weak var nameLabel: UILabel!
     @IBOutlet private(set) weak var infoButton: UIButton!
     
     // Delegate
     weak var delegate: SJCollectionViewCellDelegate?
     
-    // Array containing all the views added to the template
-    private var sj_subViews = [UIView]()
-    var sj_subviews_snap = [UIView]()
+    // Array containing all the views added to the template & snapshot view
+    private var sj_subViews      = [UIView]()
+    private var sj_subviews_snap = [UIView]()
     
     // The number of the elements in the array
     var sj_subViews_count: Int {
@@ -45,16 +41,10 @@ class SJCollectionViewCell: UICollectionViewCell {
     private var lastSelectedView: UIView?
     private var lastSelectedSnapshotView: UIView?
     
-    // The pan gesture recognizer
+    /* Gestures */
     private var panGestureRecognizer: UIPanGestureRecognizer!
-    
-    // The pinch gesture recognizer
     private var pinchGestureRecognizer: UIPinchGestureRecognizer!
-    
-    // The rotation gesture
     private var rotateGestureRecognizer: UIRotationGestureRecognizer!
-
-    // The tap gesture
     private var tapGestureRecognizer: UITapGestureRecognizer!
     
     // Used in pan calculations
@@ -93,9 +83,8 @@ class SJCollectionViewCell: UICollectionViewCell {
         
     // Add the label as a subview of boundingRectView
     // Is a view around the image because the image is smaller than the image view
-    private(set) var boundingRectView: UIView? { didSet { boundingRectView?.alpha = 0.9 } }
-    
-    var snapshotview: UIView? { didSet { snapshotview?.hidden = true } }
+    private(set) var boundingRectView: UIView?
+    private(set) var snapshotview: UIView?
     
     // Masking that is applied to the boundingRectView
     private var maskImageView: UIImageView?
@@ -161,9 +150,11 @@ class SJCollectionViewCell: UICollectionViewCell {
         for view in sj_subviews_snap { view.removeFromSuperview() }
         sj_subViews.removeAll(keepCapacity: true)
         sj_subviews_snap.removeAll(keepCapacity: true)
-                
-        if boundingRectView?.superview != nil { boundingRectView!.removeFromSuperview() }
+        
+        // Very essential to release mask view before boundingView
+        // Spent hours trying to debug it with Zombie Instruments
         if maskImageView?.superview    != nil { maskImageView!.removeFromSuperview()    }
+        if boundingRectView?.superview != nil { boundingRectView!.removeFromSuperview() }
         if snapshotview?.superview     != nil { snapshotview!.removeFromSuperview()     }
         
         maskImageView = nil
@@ -176,11 +167,6 @@ class SJCollectionViewCell: UICollectionViewCell {
         activeRecognizers.removeAllObjects()
         referenceTransform = nil
         firstX = 0; firstY = 0
-        
-        // Gestures
-        panGestureRecognizer = nil
-        pinchGestureRecognizer = nil
-        rotateGestureRecognizer = nil
     }
     
     // Apply Layout Attributes
@@ -226,29 +212,57 @@ extension SJCollectionViewCell {
         
         // Alloc the bounding View
         boundingRectView = UIView(frame: frame)
+        boundingRectView?.alpha = 0.9
         
         size.width = floor(size.width) + 20; size.height = floor(size.height) + 10
         point.y -= 5; point.x -= 10
         frame = CGRect(origin: point, size: size)
-        
+
         // Black Normal
         if template?.index == 1 {
-            size.height -= 120
+            let device = UIDevice.currentDevice().modelName
+            if  device == "iPhone 6" {
+                size.height -= 110
+            } else if device == "iPhone 6 Plus" {
+                size.height -= 120
+            } else if device == "iPhone 5" || device == "iPhone 5C" || device == "iPhone 5S" {
+                size.height -= 60
+            }
             frame.size = size
         } else if template?.index == 2 { // Knee high
-            size.height -= 50
+            let device = UIDevice.currentDevice().modelName
+            if  device == "iPhone 6" {
+                size.height -= 40
+            } else if device == "iPhone 6 Plus" {
+                size.height -= 40
+            } else if device == "iPhone 5" || device == "iPhone 5C" || device == "iPhone 5S" {
+                size.height -= 20
+            }
             frame.size = size
         } else if template?.index == 5 { // Black tee
-            size.height += 10
-            size.width -= 100
-            point.x += 50
+            size.height += 15
+
+            let device = UIDevice.currentDevice().modelName
+            if  device == "iPhone 6" {
+                size.width -= 100
+                point.x += 50
+            } else if device == "iPhone 6 Plus" {
+                size.width -= 100
+                point.x += 50
+            } else if device == "iPhone 5" || device == "iPhone 5C" || device == "iPhone 5S" {
+                size.width -= 80
+                point.x += 40
+            }
             frame.size = size
             frame.origin = point
         }
         
         // Alloc snapshot view
         snapshotview = UIView(frame: frame)
+        snapshotview?.hidden = true
         snapshotview?.clipsToBounds = true
+        snapshotview?.backgroundColor = UIColor.grayColor()
+        snapshotview?.alpha = 0.5
         
         // Masking
         maskImageView = UIImageView(frame: boundingRectView!.bounds)
