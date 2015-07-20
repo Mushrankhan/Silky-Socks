@@ -402,10 +402,12 @@ extension SJCollectionViewController: SJCollectionViewDelegate, MFMailComposeVie
         let navController = UINavigationController(rootViewController: infoVC)
         presentViewController(navController, animated: true, completion: nil)
     }
+
 }
 
 // MARK: Text Button
 extension SJCollectionViewController: UITextFieldDelegate {
+    
     
     // When Done button is pressed
     func textFieldShouldReturn(textField: UITextField) -> Bool {

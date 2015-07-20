@@ -8,7 +8,7 @@
 
 import UIKit
 
-class FinalTableViewController: UITableViewController, CreditCardTableViewCellDelegate, FinalTableViewControllerFooterViewDelegate, DiscountTableViewCellDelegate {
+class FinalTableViewController: UITableViewController, CreditCardTableViewCellDelegate, FinalTableViewControllerFooterViewDelegate, DiscountTableViewCellDelegate, UIViewControllerTransitioningDelegate {
     
     // Passed on from previous VC
     var checkout: BUYCheckout!
@@ -321,12 +321,24 @@ class FinalTableViewController: UITableViewController, CreditCardTableViewCellDe
                 SweetAlert().showAlert("Credit Card Not Valid", subTitle: "", style: .Error)
             }
         }
-        
-        // Apple Pay
-        // Hidden for now
-        else {
-            
-        }
+
+    }
+    
+    // Show terms and conditions
+    func agreeToTermsAndConditions() {
+        let vc = TermsAndConditionsViewController()
+        vc.transitioningDelegate = self
+        presentViewController(vc, animated: true, completion: nil)
+    }
+    
+    // MARK: UIViewController Transitioning Delegate
+    
+    func animationControllerForPresentedController(presented: UIViewController, presentingController presenting: UIViewController, sourceController source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        return SJAlphaAnimator()
+    }
+    
+    func animationControllerForDismissedController(dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        return nil
     }
     
     // MARK: - Checkout

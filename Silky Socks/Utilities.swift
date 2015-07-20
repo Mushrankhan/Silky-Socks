@@ -242,6 +242,49 @@ extension String {
     }
 }
 
+
+extension NSLayoutConstraint {
+    class func applyAutoLayout(superview: UIView, target: UIView, index: Int?, top: Float?, left: Float?, right: Float?, bottom: Float?, height: Float?, width: Float?) {
+        
+        target.translatesAutoresizingMaskIntoConstraints = false
+        if let index = index {
+            superview.insertSubview(target, atIndex: index)
+        } else {
+            superview.addSubview(target)
+        }
+        var verticalFormat = "V:"
+        if let top = top {
+            verticalFormat += "|-(\(top))-"
+        }
+        verticalFormat += "[target"
+        if let height = height {
+            verticalFormat += "(\(height))"
+        }
+        verticalFormat += "]"
+        if let bottom = bottom {
+            verticalFormat += "-(\(bottom))-|"
+        }
+        let verticalConstrains = NSLayoutConstraint.constraintsWithVisualFormat(verticalFormat, options: [], metrics: nil, views: [ "target" : target ])
+        superview.addConstraints(verticalConstrains)
+        
+        var horizonFormat = "H:"
+        if let left = left {
+            horizonFormat += "|-(\(left))-"
+        }
+        horizonFormat += "[target"
+        if let width = width {
+            horizonFormat += "(\(width))"
+        }
+        horizonFormat += "]"
+        if let right = right {
+            horizonFormat += "-(\(right))-|"
+        }
+        let horizonConstrains = NSLayoutConstraint.constraintsWithVisualFormat(horizonFormat, options: [], metrics: nil, views: [ "target" : target ])
+        superview.addConstraints(horizonConstrains)
+    }
+}
+
+
 private let DeviceList = [
     /* iPod 5 */          "iPod5,1": "iPod Touch 5",
     /* iPhone 4 */        "iPhone3,1":  "iPhone 4", "iPhone3,2": "iPhone 4", "iPhone3,3": "iPhone 4",
