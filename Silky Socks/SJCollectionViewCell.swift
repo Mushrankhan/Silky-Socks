@@ -288,6 +288,7 @@ extension SJCollectionViewCell {
         let sj_label = SJLabel(frame: .zeroRect, text: text, font: font)
         sj_label.frame.size.width = CGRectGetWidth(boundingRectView!.frame)
         sj_label.textColor = color
+        sj_label.backgroundColor = UIColor.clearColor()
         sj_label.sizeToFit()
         sj_label.center = CGPoint(x: boundingRectView!.center.x, y: boundingRectView!.center.y)
         
@@ -306,6 +307,7 @@ extension SJCollectionViewCell {
         let sj_label_snap = SJLabel(frame: .zeroRect, text: text, font: font)
         sj_label_snap.frame.size.width = CGRectGetWidth(boundingRectView!.frame)
         sj_label_snap.textColor = color
+        sj_label_snap.backgroundColor = UIColor.clearColor()
         sj_label_snap.sizeToFit()
         sj_label_snap.center = CGPoint(x: boundingRectView!.center.x, y: boundingRectView!.center.y)
         

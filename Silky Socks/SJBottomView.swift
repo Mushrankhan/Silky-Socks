@@ -19,7 +19,7 @@ protocol SJBottomViewDelegate: NSObjectProtocol {
     func sj_bottomView(view: SJBottomView, didPressTextButton button:UIButton)
     func sj_bottomView(view: SJBottomView, didPressColorWheelButton button:UIButton)
     func sj_bottomView(view: SJBottomView, didPressGridButton button:UIButton)
-    func sj_bottomView(view: SJBottomView, didPressSmileyButton button:UIButton)
+    func sj_bottomView(view: SJBottomView, didPressQuestionButton button:UIButton)
 }
 
 // Bottom View Reuse Identifier
@@ -30,20 +30,20 @@ internal let utilitiesElementkind = "Utilities"
 // for customization is a subclass of a UICollectionReusableView
 class SJBottomView: UICollectionReusableView {
     
-//    // Grid Camera (4th button) constraints
-//    @IBOutlet weak var gridCameraButtonTrailingConstraint: NSLayoutConstraint!
-//    @IBOutlet weak var gridCameraButtonLeadingConstraint: NSLayoutConstraint!
-//    
-//    // Text button (2nd Button) constraints
-//    @IBOutlet weak var textButtonLeadingConstraint: NSLayoutConstraint!
-//    @IBOutlet weak var textButtonTrailingConstraint: NSLayoutConstraint!
+    // Grid Camera (4th button) constraints
+    @IBOutlet weak var gridCameraButtonTrailingConstraint: NSLayoutConstraint!
+    @IBOutlet weak var gridCameraButtonLeadingConstraint: NSLayoutConstraint!
+
+    // Text button (2nd Button) constraints
+    @IBOutlet weak var textButtonLeadingConstraint: NSLayoutConstraint!
+    @IBOutlet weak var textButtonTrailingConstraint: NSLayoutConstraint!
     
     // Buttons
     @IBOutlet weak var cameraButton: UIButton!
     @IBOutlet weak var textButton: UIButton!
     @IBOutlet weak var colorWheelButton: UIButton!
     @IBOutlet weak var gridButton: UIButton!
-    //@IBOutlet weak var simleyButton: UIButton!
+    @IBOutlet weak var questionButton: UIButton!
     
     // Navigation
     @IBOutlet weak var preButton: UIButton!
@@ -96,21 +96,21 @@ class SJBottomView: UICollectionReusableView {
         
         // Used when having the emoji button
         
-        //        // Calculate the distance between the surrounding buttons
-        //        var distance = fabs(cameraButton.frame.maxX - colorWheelButton.frame.minX)
-        //
-        //        // Subtract the width of the button
-        //        distance -= cameraButton.frame.width
-        //
-        //        // Set the trailing and the leading constraint to be half of the distance
-        //        textButtonLeadingConstraint.constant = distance/2
-        //        textButtonTrailingConstraint.constant = distance/2
-        //
-        //        // Same for the grid camera button
-        //        distance = fabs(colorWheelButton.frame.maxX - simleyButton.frame.minX)
-        //        distance -= colorWheelButton.frame.width
-        //        gridCameraButtonLeadingConstraint.constant = distance/2
-        //        gridCameraButtonTrailingConstraint.constant = distance/2
+        // Calculate the distance between the surrounding buttons
+        var distance = fabs(cameraButton.frame.maxX - colorWheelButton.frame.minX)
+
+        // Subtract the width of the button
+        distance -= cameraButton.frame.width
+
+        // Set the trailing and the leading constraint to be half of the distance
+        textButtonLeadingConstraint.constant = distance/2
+        textButtonTrailingConstraint.constant = distance/2
+
+        // Same for the grid camera button
+        distance = fabs(colorWheelButton.frame.maxX - questionButton.frame.minX)
+        distance -= colorWheelButton.frame.width
+        gridCameraButtonLeadingConstraint.constant = distance/2
+        gridCameraButtonTrailingConstraint.constant = distance/2
     }
 }
 
@@ -144,8 +144,8 @@ extension SJBottomView {
                 delegate?.sj_bottomView(self, didPressColorWheelButton: sender)
             case SJBottomViewConstants.Grid:
                 delegate?.sj_bottomView(self, didPressGridButton: sender)
-            case SJBottomViewConstants.Smiley:
-                delegate?.sj_bottomView(self, didPressSmileyButton: sender)
+            case SJBottomViewConstants.Question:
+                delegate?.sj_bottomView(self, didPressQuestionButton: sender)
             default:
                 break
         }
@@ -154,12 +154,12 @@ extension SJBottomView {
 }
 
 // Storing the tags for the buttons
-struct SJBottomViewConstants {
+internal struct SJBottomViewConstants {
     static let Image = 1
     static let Text = 2
     static let Color = 3
     static let Grid = 4
-    static let Smiley = 5
+    static let Question = 5
 }
 
 

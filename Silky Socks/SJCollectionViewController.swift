@@ -292,12 +292,12 @@ extension SJCollectionViewController: SJCollectionViewDelegate, MFMailComposeVie
         showApprovalVC(SJBottomViewConstants.Color, forView: nil)
     }
     
-    // Smiley Button
-    // Not Supported Right Now
-    func collectionView(collectionView: UICollectionView, bottomView: UIView , didPressSmileyButton button:UIButton) {
-        //showingText = true
-        //colorCollectionVC.collectionView!.hidden = true
-        //self.collectionView.panGestureRecognizer.enabled = false
+    /* Show FAQ */
+    func collectionView(collectionView: UICollectionView, bottomView: UIView , didPressQuestionButton button:UIButton) {
+        let vc = SupportViewController()
+        vc.path = NSBundle.mainBundle().pathForResource("FAQ", ofType: "pdf")
+        let nav = UINavigationController(rootViewController: vc)
+        presentViewController(nav, animated: true, completion: nil)
     }
     
     // Add To Cart

@@ -321,24 +321,13 @@ class FinalTableViewController: UITableViewController, CreditCardTableViewCellDe
                 SweetAlert().showAlert("Credit Card Not Valid", subTitle: "", style: .Error)
             }
         }
-
     }
     
     // Show terms and conditions
     func agreeToTermsAndConditions() {
-        let vc = TermsAndConditionsViewController()
-        vc.transitioningDelegate = self
+        let vc = SupportViewController()
+        vc.path = NSBundle.mainBundle().pathForResource("Terms_and_conditions", ofType: "pdf")
         presentViewController(vc, animated: true, completion: nil)
-    }
-    
-    // MARK: UIViewController Transitioning Delegate
-    
-    func animationControllerForPresentedController(presented: UIViewController, presentingController presenting: UIViewController, sourceController source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-        return SJAlphaAnimator()
-    }
-    
-    func animationControllerForDismissedController(dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-        return nil
     }
     
     // MARK: - Checkout

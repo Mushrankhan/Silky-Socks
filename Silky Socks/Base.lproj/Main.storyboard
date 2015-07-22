@@ -265,24 +265,5 @@
             </objects>
             <point key="canvasLocation" x="4218" y="412"/>
         </scene>
-        <!--Terms And Conditions View Controller-->
-        <scene sceneID="uAn-zg-vOh">
-            <objects>
-                <viewController id="mbV-wz-NkZ" customClass="TermsAndConditionsViewController" customModule="Silky_Socks" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="XF3-WF-mI5"/>
-                        <viewControllerLayoutGuide type="bottom" id="zgz-vg-rzo"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="IAg-ey-FZy">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <animations/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="zX2-ve-zf0" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="4218" y="1065"/>
-        </scene>
     </scenes>
 </document>

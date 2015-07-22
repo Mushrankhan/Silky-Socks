@@ -15,7 +15,7 @@ protocol SJCollectionViewDelegate: UICollectionViewDelegate {
     func collectionView(collectionView: UICollectionView, bottomView: UIView , didPressTextButton button:UIButton)
     func collectionView(collectionView: UICollectionView, bottomView: UIView , didPressColorWheelButton button:UIButton)
     func collectionView(collectionView: UICollectionView, bottomView: UIView , didPressGridButton button:UIButton)
-    func collectionView(collectionView: UICollectionView, bottomView: UIView , didPressSmileyButton button:UIButton)
+    func collectionView(collectionView: UICollectionView, bottomView: UIView , didPressQuestionButton button:UIButton)
 
     // Add To Cart
     func collectionView(collectionView: UICollectionView, didPressAddToCartButton button:UIButton, withSnapShotImage snapshot: UIImage, andTemplate template: Template)

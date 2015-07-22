@@ -23,12 +23,15 @@
 		1F293BF71B384D1300551A40 /* ShopifyUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F293BF61B384D1300551A40 /* ShopifyUtilities.swift */; };
 		1F293BF91B38631100551A40 /* CartProduct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F293BF81B38631100551A40 /* CartProduct.swift */; };
 		1F39440B1B094EA4008E73E0 /* SJCollectionAddToCartReusableView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1F39440A1B094EA4008E73E0 /* SJCollectionAddToCartReusableView.xib */; };
+		1F470C281B5FA4E400CECC2C /* SJTextStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F470C271B5FA4E400CECC2C /* SJTextStorage.swift */; };
+		1F470C2C1B5FAC6000CECC2C /* FAQ.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 1F470C2B1B5FAC6000CECC2C /* FAQ.pdf */; };
+		1F470C2E1B5FAD4D00CECC2C /* Terms_and_conditions.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 1F470C2D1B5FAD4D00CECC2C /* Terms_and_conditions.pdf */; };
+		1F470C301B5FADDF00CECC2C /* SupportViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F470C2F1B5FADDF00CECC2C /* SupportViewController.swift */; };
 		1F58FE621B340ED6003E2507 /* CartTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F58FE611B340ED6003E2507 /* CartTableViewController.swift */; };
 		1F58FE661B340F27003E2507 /* CartTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F58FE641B340F27003E2507 /* CartTableViewCell.swift */; };
 		1F58FE671B340F27003E2507 /* CartTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1F58FE651B340F27003E2507 /* CartTableViewCell.xib */; };
 		1F88389C1B0D731200E3BBB6 /* SJTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F88389B1B0D731200E3BBB6 /* SJTextField.swift */; };
 		1F88389E1B0D875D00E3BBB6 /* SJLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F88389D1B0D875D00E3BBB6 /* SJLabel.swift */; };
-		1F9182631B5D0913002C5134 /* SJAlphaAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F9182621B5D0913002C5134 /* SJAlphaAnimator.swift */; };
 		1FA0F9BC1B3DAB9A00480B36 /* FinalTableViewControllerFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FA0F9BB1B3DAB9A00480B36 /* FinalTableViewControllerFooterView.swift */; };
 		1FA0F9BE1B3DABA400480B36 /* FinalTableViewControllerFooterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1FA0F9BD1B3DABA400480B36 /* FinalTableViewControllerFooterView.xib */; };
 		1FA0F9C11B3DE98B00480B36 /* SweetAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FA0F9C01B3DE98B00480B36 /* SweetAlert.swift */; };
@@ -98,6 +101,10 @@
 		1F293BF61B384D1300551A40 /* ShopifyUtilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShopifyUtilities.swift; sourceTree = "<group>"; };
 		1F293BF81B38631100551A40 /* CartProduct.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CartProduct.swift; sourceTree = "<group>"; };
 		1F39440A1B094EA4008E73E0 /* SJCollectionAddToCartReusableView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SJCollectionAddToCartReusableView.xib; sourceTree = "<group>"; };
+		1F470C271B5FA4E400CECC2C /* SJTextStorage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SJTextStorage.swift; sourceTree = "<group>"; };
+		1F470C2B1B5FAC6000CECC2C /* FAQ.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = FAQ.pdf; sourceTree = "<group>"; };
+		1F470C2D1B5FAD4D00CECC2C /* Terms_and_conditions.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = Terms_and_conditions.pdf; sourceTree = "<group>"; };
+		1F470C2F1B5FADDF00CECC2C /* SupportViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SupportViewController.swift; sourceTree = "<group>"; };
 		1F4D93811B419D63008EAD74 /* libc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libc++.dylib"; path = "usr/lib/libc++.dylib"; sourceTree = SDKROOT; };
 		1F54AD201B1602D6007E9E48 /* BridgingHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BridgingHeader.h; sourceTree = "<group>"; };
 		1F58FE611B340ED6003E2507 /* CartTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CartTableViewController.swift; sourceTree = "<group>"; };
@@ -105,7 +112,6 @@
 		1F58FE651B340F27003E2507 /* CartTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CartTableViewCell.xib; sourceTree = "<group>"; };
 		1F88389B1B0D731200E3BBB6 /* SJTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SJTextField.swift; sourceTree = "<group>"; };
 		1F88389D1B0D875D00E3BBB6 /* SJLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SJLabel.swift; sourceTree = "<group>"; };
-		1F9182621B5D0913002C5134 /* SJAlphaAnimator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SJAlphaAnimator.swift; sourceTree = "<group>"; };
 		1FA0F9BB1B3DAB9A00480B36 /* FinalTableViewControllerFooterView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FinalTableViewControllerFooterView.swift; sourceTree = "<group>"; };
 		1FA0F9BD1B3DABA400480B36 /* FinalTableViewControllerFooterView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FinalTableViewControllerFooterView.xib; sourceTree = "<group>"; };
 		1FA0F9C01B3DE98B00480B36 /* SweetAlert.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SweetAlert.swift; sourceTree = "<group>"; };
@@ -380,6 +386,8 @@
 				1F293BF01B38240000551A40 /* Silky Socks.entitlements */,
 				4F8D38A11AE440DE00F42E23 /* Info.plist */,
 				4F8D38AC1AE440DE00F42E23 /* Images.xcassets */,
+				1F470C2D1B5FAD4D00CECC2C /* Terms_and_conditions.pdf */,
+				1F470C2B1B5FAC6000CECC2C /* FAQ.pdf */,
 				1FF7940F1B22DE9D000CB14D /* Fonts */,
 			);
 			name = "Supporting Files";
@@ -405,6 +413,7 @@
 		4F8D38CF1AE4461700F42E23 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				1F470C271B5FA4E400CECC2C /* SJTextStorage.swift */,
 				1F1914651B3E86FB008837D8 /* Third Party */,
 				1FFB38711B204F62007E9390 /* Normal */,
 				1F1914661B3E872E008837D8 /* Table View */,
@@ -416,7 +425,6 @@
 		4F8D38D01AE4461C00F42E23 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				1F9182621B5D0913002C5134 /* SJAlphaAnimator.swift */,
 				1F1740581B41308400D1CA33 /* Order.swift */,
 				1F293BF61B384D1300551A40 /* ShopifyUtilities.swift */,
 				4F8D38CB1AE4457800F42E23 /* TemplateModel.swift */,
@@ -434,6 +442,7 @@
 				1F58FE611B340ED6003E2507 /* CartTableViewController.swift */,
 				1F17F2871B36AA7200DBFEBC /* CheckoutViewController.swift */,
 				1F1F77571B3C448700DBD227 /* FinalTableViewController.swift */,
+				1F470C2F1B5FADDF00CECC2C /* SupportViewController.swift */,
 				1FA8DC4D1B5CF14B00576175 /* TermsAndConditionsViewController.swift */,
 				1F58FE631B340EDE003E2507 /* VC */,
 			);
@@ -552,11 +561,13 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1F470C2C1B5FAC6000CECC2C /* FAQ.pdf in Resources */,
 				1FF7940C1B22DD05000CB14D /* Walkway Black.ttf in Resources */,
 				4FB6C9C31AE4AF7A001A6E50 /* SJBottomView.xib in Resources */,
 				1FA0F9BE1B3DABA400480B36 /* FinalTableViewControllerFooterView.xib in Resources */,
 				1F39440B1B094EA4008E73E0 /* SJCollectionAddToCartReusableView.xib in Resources */,
 				1F58FE671B340F27003E2507 /* CartTableViewCell.xib in Resources */,
+				1F470C2E1B5FAD4D00CECC2C /* Terms_and_conditions.pdf in Resources */,
 				1FC72AD51B3D6C6400D54C1E /* CreditCardTableViewCell.xib in Resources */,
 				1FCF509B1B07ED8A005D8578 /* SJCollectionShareReusableView.xib in Resources */,
 				4F8D38AB1AE440DE00F42E23 /* Main.storyboard in Resources */,
@@ -626,6 +637,7 @@
 			files = (
 				1FF543CC1B26259F007B6B19 /* TemplateInfoViewController.swift in Sources */,
 				4F55B55D1AE480F400679048 /* SJLayout.swift in Sources */,
+				1F470C281B5FA4E400CECC2C /* SJTextStorage.swift in Sources */,
 				1F1740591B41308400D1CA33 /* Order.swift in Sources */,
 				1FC72AD41B3D6C6400D54C1E /* CreditCardTableViewCell.swift in Sources */,
 				1FCF508F1B070F4C005D8578 /* SJCollectionView.swift in Sources */,
@@ -633,7 +645,6 @@
 				1FA0F9C11B3DE98B00480B36 /* SweetAlert.swift in Sources */,
 				1F88389C1B0D731200E3BBB6 /* SJTextField.swift in Sources */,
 				1F293BF71B384D1300551A40 /* ShopifyUtilities.swift in Sources */,
-				1F9182631B5D0913002C5134 /* SJAlphaAnimator.swift in Sources */,
 				1F1F77581B3C448700DBD227 /* FinalTableViewController.swift in Sources */,
 				4F8D38CC1AE4457800F42E23 /* TemplateModel.swift in Sources */,
 				4F8D38C61AE441F700F42E23 /* SJCollectionViewCell.swift in Sources */,
@@ -658,6 +669,7 @@
 				1FCF50951B07EBAB005D8578 /* SJCollectionReusableView.swift in Sources */,
 				4FB6C9C51AE4B394001A6E50 /* Utilities.swift in Sources */,
 				1FC258AB1B14B60700EAEF20 /* UserCart.swift in Sources */,
+				1F470C301B5FADDF00CECC2C /* SupportViewController.swift in Sources */,
 				4F8D38A31AE440DE00F42E23 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -836,7 +848,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.fullstak.www.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "15b90164-f0d5-4c63-8e33-72600167c824";
+				PROVISIONING_PROFILE = "ef683a31-3341-4bea-ada6-6f703de239e6";
 				SWIFT_OBJC_BRIDGING_HEADER = "$(PROJECT_DIR)/Silky Socks/BridgingHeader.h";
 				TARGETED_DEVICE_FAMILY = 1;
 				WARNING_CFLAGS = "-Wundeclared-selector";
@@ -895,7 +907,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.fullstak.www.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "15b90164-f0d5-4c63-8e33-72600167c824";
+				PROVISIONING_PROFILE = "ef683a31-3341-4bea-ada6-6f703de239e6";
 				SWIFT_OBJC_BRIDGING_HEADER = "$(PROJECT_DIR)/Silky Socks/BridgingHeader.h";
 				TARGETED_DEVICE_FAMILY = 1;
 				WARNING_CFLAGS = "-Wundeclared-selector";
