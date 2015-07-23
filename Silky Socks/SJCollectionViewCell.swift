@@ -50,6 +50,8 @@ class SJCollectionViewCell: UICollectionViewCell {
     // Used in pan calculations
     private var firstX: CGFloat = 0
     private var firstY: CGFloat = 0
+    private var snapFirstX: CGFloat = 0
+    private var snapFirstY: CGFloat = 0
     
     // Used for keeping track of views in pan gesture
     private var selectedView: UIView?
@@ -211,8 +213,10 @@ extension SJCollectionViewCell {
         var frame = CGRect(origin: point, size: size)
         
         // Alloc the bounding View
-        boundingRectView = UIView(frame: frame)
+        boundingRectView = UIView(frame: ss_imgView.frame)
         boundingRectView?.alpha = 0.9
+        boundingRectView?.hidden = false
+        boundingRectView?.backgroundColor = UIColor.grayColor()
         
         size.width = floor(size.width) + 20; size.height = floor(size.height) + 10
         point.y -= 5; point.x -= 10
@@ -309,7 +313,7 @@ extension SJCollectionViewCell {
         sj_label_snap.textColor = color
         sj_label_snap.backgroundColor = UIColor.clearColor()
         sj_label_snap.sizeToFit()
-        sj_label_snap.center = CGPoint(x: boundingRectView!.center.x, y: boundingRectView!.center.y)
+        sj_label_snap.center = CGPoint(x: CGRectGetMidX(snapshotview!.bounds), y: CGRectGetMidY(snapshotview!.bounds) + snapshotview!.frame.origin.y)
         
         // Add the label to the array of sub views
         sj_subviews_snap.insert(sj_label_snap, atIndex: 0)
@@ -387,7 +391,7 @@ extension SJCollectionViewCell {
             // Create the image
             let sj_imgView_snap = UIImageView(frame: .zeroRect)
             sj_imgView_snap.frame.size = CGSize(width: width, height: width)
-            sj_imgView_snap.center = CGPoint(x: boundingRectView!.center.x, y: boundingRectView!.center.y)
+            sj_imgView_snap.center = CGPoint(x: CGRectGetMidX(snapshotview!.bounds), y: CGRectGetMidY(snapshotview!.bounds) + snapshotview!.frame.origin.y)
             sj_imgView_snap.contentMode = .ScaleAspectFill
             sj_imgView_snap.image = image
             
@@ -532,16 +536,18 @@ extension SJCollectionViewCell: UIGestureRecognizerDelegate {
                             }
                         }
                         
-                        if selectedView != nil {
+                        if selectedView != nil && selectedSnapshotView != nil {
                             firstX = selectedView!.center.x
                             firstY = selectedView!.center.y
+                            snapFirstX = selectedSnapshotView!.center.x
+                            snapFirstY = selectedSnapshotView!.center.y
                         }
                     }
                     
                 case .Changed:
                     if let view = selectedView {
                         view.center = CGPointMake(firstX + translatedpoint.x, firstY + translatedpoint.y)
-                        selectedSnapshotView?.center = view.center
+                        selectedSnapshotView?.center = CGPointMake(snapFirstX + translatedpoint.x, snapFirstY + translatedpoint.y)
                     }
                 
                 case .Ended:
