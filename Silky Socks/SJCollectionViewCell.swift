@@ -215,8 +215,6 @@ extension SJCollectionViewCell {
         // Alloc the bounding View
         boundingRectView = UIView(frame: ss_imgView.frame)
         boundingRectView?.alpha = 0.9
-        boundingRectView?.hidden = false
-        boundingRectView?.backgroundColor = UIColor.grayColor()
         
         size.width = floor(size.width) + 20; size.height = floor(size.height) + 10
         point.y -= 5; point.x -= 10
