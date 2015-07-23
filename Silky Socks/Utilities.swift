@@ -229,6 +229,17 @@ extension UIImage {
         return image;
     }
     
+    func drawTiledImage() -> UIImage {
+        UIGraphicsBeginImageContextWithOptions(size, false, 0)
+        let rect = CGRect(origin: .zeroPoint, size: CGSize(width: 125, height: 125))
+        CGContextTranslateCTM(UIGraphicsGetCurrentContext(), 0, rect.size.height)
+        CGContextScaleCTM(UIGraphicsGetCurrentContext(), 1, -1)
+        CGContextDrawTiledImage(UIGraphicsGetCurrentContext(), rect , CGImage)
+        let image = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        return image
+    }
+    
     // Return the logo
     class func SilkySocksLogo() -> UIImage? {
         return UIImage(named: "logo_left_of_template")

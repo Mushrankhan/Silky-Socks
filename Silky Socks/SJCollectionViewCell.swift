@@ -337,9 +337,11 @@ extension SJCollectionViewCell {
                 addClipRect()
             }
             
+            // Tiled image
+            let image = template!.image.drawTiledImage()
             let sj_imgView_snap = UIImageView(frame: snapshotview!.bounds)
             sj_imgView_snap.contentMode = .ScaleAspectFill
-            sj_imgView_snap.image = finishedImage
+            sj_imgView_snap.image = image
             
             // Add it to the array of subviews
             sj_subviews_snap.insert(sj_imgView_snap, atIndex: 0)
