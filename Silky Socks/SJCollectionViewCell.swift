@@ -126,19 +126,15 @@ class SJCollectionViewCell: UICollectionViewCell {
     
     // Can be called by instances to clean up
     func performCleanUp() {
-        
-        // No Color
         addColor(UIColor.clearColor())
-        
-        // Clean up
         cleanUp()
     }
     
     
     // Prepare for reuse
     override func prepareForReuse() {
-        super.prepareForReuse()
         cleanUp()
+        super.prepareForReuse()
     }
     
     deinit {
