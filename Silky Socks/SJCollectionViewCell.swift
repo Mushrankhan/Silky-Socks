@@ -20,6 +20,8 @@ protocol SJCollectionViewCellDelegate: class {
 // MARK: SJCollectionViewCell Class
 class SJCollectionViewCell: UICollectionViewCell {
 
+    // MARK: - Properties
+    
     // IBOutlets
     @IBOutlet private weak var ss_imgView: UIImageView! { didSet { ss_imgView?.backgroundColor = UIColor.whiteColor() } }
     @IBOutlet private weak var nameLabel: UILabel!
@@ -120,6 +122,8 @@ class SJCollectionViewCell: UICollectionViewCell {
         addGestureRecognizer(tapGestureRecognizer)
     }
     
+    // MARK: - Clean Up
+    
     // Can be called by instances to clean up
     func performCleanUp() {
         
@@ -170,6 +174,8 @@ class SJCollectionViewCell: UICollectionViewCell {
         referenceTransform = nil
         firstX = 0; firstY = 0
     }
+    
+    // MARK: - Layout
     
     // Apply Layout Attributes
     override func applyLayoutAttributes(layoutAttributes: UICollectionViewLayoutAttributes) {
@@ -275,7 +281,7 @@ extension SJCollectionViewCell {
         // Add Subview
         addSubview(boundingRectView!)
         addSubview(snapshotview!)
-        sendSubviewToBack(snapshotview!)
+        //sendSubviewToBack(snapshotview!)
     }
     
     // Create the text label
@@ -305,13 +311,13 @@ extension SJCollectionViewCell {
         boundingRectView?.addSubview(sj_label)
         
         
-        
+        let point = snapshotview?.convertPoint(sj_label.center, fromView: boundingRectView)
         let sj_label_snap = SJLabel(frame: .zeroRect, text: text, font: font)
         sj_label_snap.frame.size.width = CGRectGetWidth(boundingRectView!.frame)
         sj_label_snap.textColor = color
         sj_label_snap.backgroundColor = UIColor.clearColor()
         sj_label_snap.sizeToFit()
-        sj_label_snap.center = CGPoint(x: CGRectGetMidX(snapshotview!.bounds), y: CGRectGetMidY(snapshotview!.bounds) + snapshotview!.frame.origin.y)
+        sj_label_snap.center = point! // CGPoint(x: CGRectGetMidX(snapshotview!.bounds), y: CGRectGetMidY(snapshotview!.bounds) + snapshotview!.frame.origin.y + 8)
         
         // Add the label to the array of sub views
         sj_subviews_snap.insert(sj_label_snap, atIndex: 0)
@@ -388,10 +394,11 @@ extension SJCollectionViewCell {
             boundingRectView?.addSubview(sj_imgView)
             
             
+            let point = snapshotview?.convertPoint(sj_imgView.center, fromView: boundingRectView)
             // Create the image
             let sj_imgView_snap = UIImageView(frame: .zeroRect)
             sj_imgView_snap.frame.size = CGSize(width: width, height: width)
-            sj_imgView_snap.center = CGPoint(x: CGRectGetMidX(snapshotview!.bounds), y: CGRectGetMidY(snapshotview!.bounds) + snapshotview!.frame.origin.y)
+            sj_imgView_snap.center = point! //CGPoint(x: CGRectGetMidX(snapshotview!.bounds), y: CGRectGetMidY(snapshotview!.bounds) + snapshotview!.frame.origin.y)
             sj_imgView_snap.contentMode = .ScaleAspectFill
             sj_imgView_snap.image = image
             
