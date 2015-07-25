@@ -30,6 +30,7 @@ class SupportViewController: UIViewController {
         if let path = path {
             let frame = CGRect(origin: CGPointZero, size: CGSize(width: width, height: height))
             let webView = UIWebView(frame: frame)
+            webView.scalesPageToFit = true
             view.addSubview(webView)
             view.pinSubviewToView(subView: webView)
 

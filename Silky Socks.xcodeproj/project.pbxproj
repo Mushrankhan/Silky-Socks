@@ -848,7 +848,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.fullstak.www.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "ef683a31-3341-4bea-ada6-6f703de239e6";
+				PROVISIONING_PROFILE = "15b90164-f0d5-4c63-8e33-72600167c824";
 				SWIFT_OBJC_BRIDGING_HEADER = "$(PROJECT_DIR)/Silky Socks/BridgingHeader.h";
 				TARGETED_DEVICE_FAMILY = 1;
 				WARNING_CFLAGS = "-Wundeclared-selector";
@@ -907,7 +907,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.fullstak.www.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "ef683a31-3341-4bea-ada6-6f703de239e6";
+				PROVISIONING_PROFILE = "15b90164-f0d5-4c63-8e33-72600167c824";
 				SWIFT_OBJC_BRIDGING_HEADER = "$(PROJECT_DIR)/Silky Socks/BridgingHeader.h";
 				TARGETED_DEVICE_FAMILY = 1;
 				WARNING_CFLAGS = "-Wundeclared-selector";
