@@ -143,7 +143,7 @@ extension SJCollectionView: ShareViewCollectionReusableViewDelegate, CartViewCol
             let rect = CGRect(origin: CGPoint(x: 0, y: 0), size: size)
             cell.snapshotview!.hidden = false
             
-            dispatch_async(dispatch_get_global_queue(QOS_CLASS_USER_INITIATED, 0), { () -> Void in
+            dispatch_async(dispatch_get_global_queue(QOS_CLASS_USER_INITIATED, 0)) {
                 
                 UIGraphicsBeginImageContextWithOptions(size, false, 0)
                 let context = UIGraphicsGetCurrentContext()
@@ -158,13 +158,13 @@ extension SJCollectionView: ShareViewCollectionReusableViewDelegate, CartViewCol
                 let image = UIGraphicsGetImageFromCurrentImageContext()
                 UIGraphicsEndImageContext()
                 
-                dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                dispatch_async(dispatch_get_main_queue()) {
                     cell.snapshotview!.hidden = true
                     SVProgressHUD.dismiss()
                     self.myDelegate?.collectionView(self, didPressAddToCartButton: sender, withSnapShotImage: image, andTemplate: cell.template!)
-                })
+                }
                 
-            })
+            }
             
         }
 

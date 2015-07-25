@@ -9,7 +9,7 @@
 import UIKit
 
 // Cell Reuse identifier
-public let reuseIdentifier = "Cell"
+let reuseIdentifier = "Cell"
 
 // MARK: SJCollectionViewCellDelegate
 protocol SJCollectionViewCellDelegate: class {
@@ -30,18 +30,20 @@ class SJCollectionViewCell: UICollectionViewCell {
     // Delegate
     weak var delegate: SJCollectionViewCellDelegate?
     
-    // Array containing all the views added to the template & snapshot view
-    //private var sj_subViews      = [UIView]()
+    // Used so that we can transfer
+    // the design from product to product
+    private struct Constants {
+        static var Color = UIColor.clearColor()
+        static var subViews = [UIView]()
+    }
+
+    // Array containing all the views added to the snapshot view
     private var sj_subviews_snap = [UIView]()
     
     // The number of the elements in the array
     var sj_subViews_count: Int {
-        return Constants.sj_subViews.count
+        return Constants.subViews.count
     }
-    
-    // Last selected view - Used in gestures
-    private var lastSelectedView: UIView?
-    private var lastSelectedSnapshotView: UIView?
     
     /* Gestures */
     private var panGestureRecognizer: UIPanGestureRecognizer!
@@ -49,6 +51,10 @@ class SJCollectionViewCell: UICollectionViewCell {
     private var rotateGestureRecognizer: UIRotationGestureRecognizer!
     private var tapGestureRecognizer: UITapGestureRecognizer!
     
+    // Last selected view - Used in gestures
+    private var lastSelectedView: UIView?
+    private var lastSelectedSnapshotView: UIView?
+
     // Used in pan calculations
     private var firstX: CGFloat = 0
     private var firstY: CGFloat = 0
@@ -69,38 +75,42 @@ class SJCollectionViewCell: UICollectionViewCell {
     var template:Template? {
         didSet {
             if let template = template {
-                ss_imgView?.image = template.image
-                nameLabel.text = template.infoCaption
+                ss_imgView?.image = template.image      // Image
+                nameLabel.text = template.infoCaption   // Caption
                 
-                // Set color
-                if Constants.sj_color != UIColor.clearColor() {
-                    addColor(Constants.sj_color)
-                }
-                
+                // If can pass on subviews, then create bounding rect
                 if sj_subViews_count > 0 {
                     if boundingRectView == nil {
                         addClipRect()
                     }
                 }
+
+                // Pass on Color
+                if Constants.Color != UIColor.clearColor() {
+                    addColor(Constants.Color)
+                }
                 
-                for (index, view) in Constants.sj_subViews.reverse().enumerate() {
+                // Pass on image/label
+                for (index, view) in Constants.subViews.reverse().enumerate() {
                     if let image = view as? UIImageView {
 
+                        // Bounding View
                         lastSelectedView = image
                         boundingRectView?.addSubview(image)
                         
+                        // Snapshot view
                         let point = snapshotview?.convertPoint(image.center, fromView: boundingRectView)
-
                         let sj_imgView_snap = UIImageView()
                         sj_imgView_snap.bounds.size = image.bounds.size
-                        sj_imgView_snap.center = point!  //CGPoint(x: CGRectGetMidX(snapshotview!.bounds), y: CGRectGetMidY(snapshotview!.bounds) + snapshotview!.frame.origin.y)
+                        sj_imgView_snap.center = point!
                         sj_imgView_snap.contentMode = .ScaleAspectFill
                         sj_imgView_snap.image = image.image
                         sj_imgView_snap.transform = image.transform
                         
-                        // Add it to the array of subviews
+                        // Add it to the array of snapshot subviews
                         sj_subviews_snap.insert(sj_imgView_snap, atIndex: index)
                         
+                        // Gesture
                         lastSelectedSnapshotView = sj_imgView_snap
                         
                         // Add subview
@@ -110,26 +120,27 @@ class SJCollectionViewCell: UICollectionViewCell {
                     }
                     if let label = view as? UILabel {
 
+                        // Bounding view
                         lastSelectedView = label
                         boundingRectView?.addSubview(label)
                         
+                        // Snapshot view
                         let point = snapshotview?.convertPoint(label.center, fromView: boundingRectView)
                         let sj_label_snap = SJLabel(frame: .zeroRect, text: label.text!, font: label.font)
                         sj_label_snap.bounds.size = label.bounds.size
                         sj_label_snap.textColor = label.textColor
                         sj_label_snap.backgroundColor = UIColor.clearColor()
-                        sj_label_snap.center = point! // CGPoint(x: CGRectGetMidX(snapshotview!.bounds), y: CGRectGetMidY(snapshotview!.bounds) + snapshotview!.frame.origin.y + 8)
+                        sj_label_snap.center = point!
                         sj_label_snap.transform = label.transform
                         
                         // Add the label to the array of sub views
                         sj_subviews_snap.insert(sj_label_snap, atIndex: index)
                         
+                        // Gesture
                         lastSelectedSnapshotView = sj_label_snap
                         
                         // Add subview
                         snapshotview?.addSubview(sj_label_snap)
-
-                        
                     }
                 }
 
@@ -137,14 +148,7 @@ class SJCollectionViewCell: UICollectionViewCell {
         }
     }
     
-    // static variable
-    private struct Constants {
-        static var sj_color = UIColor.clearColor()
-        static var sj_subViews = [UIView]()
-    }
-        
-    // Add the label as a subview of boundingRectView
-    // Is a view around the image because the image is smaller than the image view
+    // Add the label/image as a subview of boundingRectView
     private(set) var boundingRectView: UIView?
     private(set) var snapshotview: UIView?
     
@@ -185,9 +189,12 @@ class SJCollectionViewCell: UICollectionViewCell {
     
     // Can be called by instances to clean up
     func performCleanUp() {
+        // Clean up static variables
         addColor(UIColor.clearColor())
-        for view in Constants.sj_subViews { view.removeFromSuperview() }
-        Constants.sj_subViews.removeAll(keepCapacity: true)
+        for view in Constants.subViews { view.removeFromSuperview() }
+        Constants.subViews.removeAll(keepCapacity: true)
+        
+        // Clean up normal variables
         cleanUp()
     }
     
@@ -196,13 +203,6 @@ class SJCollectionViewCell: UICollectionViewCell {
     override func prepareForReuse() {
         cleanUp()
         super.prepareForReuse()
-    }
-    
-    deinit {
-        cleanUp()
-        nameLabel = nil
-        ss_imgView = nil
-        template = nil
     }
     
     // Used for cleaning up the cell
@@ -230,6 +230,13 @@ class SJCollectionViewCell: UICollectionViewCell {
         firstX = 0; firstY = 0
     }
     
+    deinit {
+        cleanUp()
+        nameLabel = nil
+        ss_imgView = nil
+        template = nil
+    }
+    
     // MARK: - Layout
     
     // Apply Layout Attributes
@@ -250,13 +257,11 @@ class SJCollectionViewCell: UICollectionViewCell {
         return true
     }
     
-}
-
-// MARK: IBAction
-extension SJCollectionViewCell {
+    // MARK: - IBAction
     @IBAction func infoButtonPressed(sender: UIButton) {
         delegate?.collectionViewCell(self, didTapInfoButton: sender)
     }
+
 }
 
 // MARK: Customized Look
@@ -337,7 +342,7 @@ extension SJCollectionViewCell {
         // Add Subview
         addSubview(boundingRectView!)
         addSubview(snapshotview!)
-        //sendSubviewToBack(snapshotview!)
+        sendSubviewToBack(snapshotview!)
     }
     
     // Create the text label
@@ -357,7 +362,7 @@ extension SJCollectionViewCell {
         sj_label.center = CGPoint(x: boundingRectView!.center.x, y: boundingRectView!.center.y)
         
         // Add the label to the array of sub views
-        Constants.sj_subViews.insert(sj_label, atIndex: 0)
+        Constants.subViews.insert(sj_label, atIndex: 0)
         
         // Make sure that the last selected view
         // has a value
@@ -440,7 +445,7 @@ extension SJCollectionViewCell {
             sj_imgView.image = image
             
             // Add it to the array of subviews
-            Constants.sj_subViews.insert(sj_imgView, atIndex: 0)
+            Constants.subViews.insert(sj_imgView, atIndex: 0)
             
             // Make sure that the last selected view
             // has a value
@@ -480,7 +485,7 @@ extension SJCollectionViewCell {
         
         // Static Variable
         // Lot Better than saving in NSUserDefaults
-        Constants.sj_color = color
+        Constants.Color = color
         
         if color == UIColor.clearColor() {
             ss_imgView.image = template?.image
@@ -514,21 +519,21 @@ extension SJCollectionViewCell {
         ss_imgView.image = template?.image
         
         // If nothing exists, then
-        if Constants.sj_subViews.count == 0 {
+        if Constants.subViews.count == 0 {
             cleanUp()
         }
     }
     
     // Undo - Label/Image
     func undo() {
-        if Constants.sj_subViews.count > 0 {
-            Constants.sj_subViews[0].removeFromSuperview()
-            Constants.sj_subViews.removeAtIndex(0)
+        if Constants.subViews.count > 0 {
+            Constants.subViews[0].removeFromSuperview()
+            Constants.subViews.removeAtIndex(0)
             sj_subviews_snap[0].removeFromSuperview()
             sj_subviews_snap.removeAtIndex(0)
             
             // If nothing exists, then
-            if Constants.sj_subViews.count == 0 {
+            if Constants.subViews.count == 0 {
                 cleanUp()
             }
         }
@@ -536,17 +541,17 @@ extension SJCollectionViewCell {
     
     // Delete a view
     func undo(view: UIView) {
-        for (index,subview) in Constants.sj_subViews.enumerate() {
+        for (index,subview) in Constants.subViews.enumerate() {
             if subview == view {
                 subview.removeFromSuperview()
-                Constants.sj_subViews.removeAtIndex(index)
+                Constants.subViews.removeAtIndex(index)
                 sj_subviews_snap[index].removeFromSuperview()
                 sj_subviews_snap.removeAtIndex(index)
             }
         }
         
         // If nothing exists, then
-        if Constants.sj_subViews.count == 0 {
+        if Constants.subViews.count == 0 {
             cleanUp()
         }
     }
@@ -559,7 +564,7 @@ extension SJCollectionViewCell: UIGestureRecognizerDelegate {
     func handleTap(recognizer: UITapGestureRecognizer) {
         let location = recognizer.locationInView(self)
         var selectedView: UIView?
-        for (index, view) in Constants.sj_subViews.enumerate() {
+        for (index, view) in Constants.subViews.enumerate() {
             // Converting the sub view into the coordinate space of the cell from the bounding view
             let rect = convertRect(view.frame, fromView: boundingRectView)
             if CGRectContainsPoint(rect, location) {
@@ -588,7 +593,7 @@ extension SJCollectionViewCell: UIGestureRecognizerDelegate {
                     if recognizer.state == .Began {
                         
                         // Loop through the sub views array
-                        loop: for (index, view) in Constants.sj_subViews.enumerate() {
+                        loop: for (index, view) in Constants.subViews.enumerate() {
                             
                             // If one subview contains the point
                             let rect = convertRect(view.frame, fromView: boundingRectView)
