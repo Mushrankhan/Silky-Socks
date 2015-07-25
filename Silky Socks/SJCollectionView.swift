@@ -155,7 +155,6 @@ extension SJCollectionView: ShareViewCollectionReusableViewDelegate, CartViewCol
                     CGContextTranslateCTM(context, 0, -rect.size.height)
                 }
                 cell.snapshotview?.drawViewHierarchyInRect(rect, afterScreenUpdates: false)
-                //cell.snapshotview?.layer.renderInContext(UIGraphicsGetCurrentContext())
                 let image = UIGraphicsGetImageFromCurrentImageContext()
                 UIGraphicsEndImageContext()
                 
@@ -227,7 +226,6 @@ extension SJCollectionView: SJBottomViewDelegate {
     func sj_bottomView(view: SJBottomView, didPressQuestionButton button:UIButton) {
         myDelegate?.collectionView(self, bottomView: view, didPressQuestionButton: button)
     }
-    
 }
 
 // MARK: Messages from the VC

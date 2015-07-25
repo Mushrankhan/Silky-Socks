@@ -196,6 +196,7 @@ extension SJCollectionViewController: UICollectionViewDataSource {
                 return collView.dequeueReusableBottomUtilitiesView(indexPath: indexPath)
         }
     }
+        
 }
 
 // MARK: Keyboard Support
