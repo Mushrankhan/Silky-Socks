@@ -72,7 +72,7 @@ class SJCollectionViewController: UIViewController {
         
         // Set the layout for the colorVC
         let frame = CGRect(x: 0, y: 0, width: Constants.width, height: Constants.HeightOfColorVC)
-        let layout = SJStickyFontHeaderLayout()
+        let layout =  SJStickyFontColorHeaderLayout()
         layout.itemSize = CGSize(width: Constants.HeightOfColorVC - 16, height: Constants.HeightOfColorVC)
         layout.minimumLineSpacing = 0
         layout.minimumInteritemSpacing = 0

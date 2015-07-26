@@ -192,13 +192,13 @@ extension SJCollectionView: SJBottomViewDelegate {
     
     // Navigate Right
     func sj_bottomView(view: SJBottomView, didPressRightButton button: UIButton) {
-        let xOffset = min(contentSize.width - width, contentOffset.x + width)
+        let xOffset = min(contentSize.width - width, CGFloat(Int(contentOffset.x / width)) * width + width)
         setContentOffset(CGPoint(x: xOffset, y: contentOffset.y), animated: true)
     }
     
     // Navigate Left
     func sj_bottomView(view: SJBottomView, didPressLeftButton button: UIButton) {
-        let xOffset = max(0, contentOffset.x - width)
+        let xOffset = max(0, CGFloat(Int(contentOffset.x / width)) * width - width)
         setContentOffset(CGPoint(x: xOffset, y: contentOffset.y), animated: true)
     }
     

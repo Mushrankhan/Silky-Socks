@@ -166,7 +166,7 @@ class SJLayout: UICollectionViewLayout {
 
 // MARK: Font Header View - SJColorCollectionViewController
 // Layout used for the font reusable view
-class SJStickyFontHeaderLayout: UICollectionViewFlowLayout {
+class SJStickyFontColorHeaderLayout: UICollectionViewFlowLayout {
     
     // Essential
     override func shouldInvalidateLayoutForBoundsChange(newBounds: CGRect) -> Bool {
@@ -208,22 +208,22 @@ class SJStickyFontHeaderLayout: UICollectionViewFlowLayout {
                 if element == UICollectionElementKindSectionHeader {
                     
                     // Section in which the header belongs
-                    let section = attributes.indexPath.section
+                    //let section = attributes.indexPath.section
                     
                     // Index path for first cell
-                    let indexPath = NSIndexPath(forItem: 0, inSection: section)
+                    //let indexPath = NSIndexPath(forItem: 0, inSection: section)
                     
                     // Attributes for first cell
-                    let attrForFirstElement = layoutAttributesForItemAtIndexPath(indexPath)
+                    //let attrForFirstElement = layoutAttributesForItemAtIndexPath(indexPath)
                     
                     // Frame for header
                     var frame = attributes.frame
                     
-                    let width = CGRectGetWidth(UIScreen.mainScreen().bounds)
-                    let minX = CGRectGetMinX(attrForFirstElement!.frame) - (2 * frame.width) + width
-                    let offset = collectionView!.contentOffset.x
-                    let x = max(minX, minX + offset)
-                    frame.origin.x = x
+//                    let width = CGRectGetWidth(UIScreen.mainScreen().bounds)
+//                    let minX = CGRectGetMinX(attrForFirstElement!.frame) - (2 * frame.width) + width
+//                    let offset = collectionView!.contentOffset.x
+//                    let x = max(minX, minX + offset)
+                    frame.origin.x = collectionView!.contentOffset.x //x
                     
                     attributes.frame = frame
                     attributes.zIndex = 100

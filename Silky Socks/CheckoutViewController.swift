@@ -14,7 +14,7 @@ class CheckoutViewController: UITableViewController, StatesPickerTableViewCellDe
     var product: CartProduct!
     
     // Placeholders
-    let infoToBeAsked = [["First Name", "Last Name", "Email"], ["Street Address", "Street Address 2", "City", "State", "Zip" ,"Country"], ["Front and Back", "Size", "Quantity", "Cost"]]
+    let infoToBeAsked = [["First Name", "Last Name", "Email"], ["Street Address", "Street Address 2", "City", "State", "Zip" ,"Country"], ["Front Only", "Size", "Quantity", "Cost"]]
     
     override func viewDidLoad() {
         super.viewDidLoad()

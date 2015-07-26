@@ -54,9 +54,7 @@ class SJColorCollectionViewController: UICollectionViewController {
 extension SJColorCollectionViewController {
     
     override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        // If font button toggled
-        if showFont { return fonts.count }
-        return colors.count
+        return showFont ? fonts.count : colors.count
     }
 
     override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
@@ -78,10 +76,10 @@ extension SJColorCollectionViewController {
     override func collectionView(collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, atIndexPath indexPath: NSIndexPath) -> UICollectionReusableView {
         let fontHeader = collectionView.dequeueReusableSupplementaryViewOfKind(kind, withReuseIdentifier: fontReuseIdentifier, forIndexPath: indexPath) as! FontCollectionReusableView
         fontHeader.delegate = self // Essential to detect touches on this view
-        fontHeader.title = showFont ? "C" : "T" // Set title based on the state of showFont
+        fontHeader.choice = showFont ? .Color : .Font
         
         // If user does not want the option to switch to fonts, then hide the header view
-        if !wantFont { fontHeader.hidden = true } else { fontHeader.hidden = false }
+        fontHeader.hidden = !wantFont ? true : false
         return fontHeader
     }
     

@@ -242,7 +242,7 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		1F58FE631B340EDE003E2507 /* VC */ = {
+		1F58FE631B340EDE003E2507 /* Additional VC */ = {
 			isa = PBXGroup;
 			children = (
 				1F232D2E1B196CB200ECD753 /* SJColorCollectionViewController.swift */,
@@ -251,7 +251,7 @@
 				1FF543CA1B26259F007B6B19 /* TemplateInfoViewController.swift */,
 				1FF543CB1B26259F007B6B19 /* TemplateInfoViewController.xib */,
 			);
-			name = VC;
+			name = "Additional VC";
 			sourceTree = "<group>";
 		};
 		1FA0F9BF1B3DE5A500480B36 /* Final VC Footer View */ = {
@@ -444,7 +444,7 @@
 				1F1F77571B3C448700DBD227 /* FinalTableViewController.swift */,
 				1F470C2F1B5FADDF00CECC2C /* SupportViewController.swift */,
 				1FA8DC4D1B5CF14B00576175 /* TermsAndConditionsViewController.swift */,
-				1F58FE631B340EDE003E2507 /* VC */,
+				1F58FE631B340EDE003E2507 /* Additional VC */,
 			);
 			name = Controller;
 			sourceTree = "<group>";

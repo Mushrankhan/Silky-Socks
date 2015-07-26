@@ -113,6 +113,11 @@ protocol FontCollectionReusableViewDelegate: class {
     func fontColorHeaderReusableView(headerView: UICollectionReusableView, didTapHeaderButton sender: UIButton)
 }
 
+enum Switch {
+    case Color
+    case Font
+}
+
 class FontCollectionReusableView: UICollectionReusableView {
     
     // Init
@@ -132,22 +137,23 @@ class FontCollectionReusableView: UICollectionReusableView {
     // UIButton
     private var textButton: UIButton!
     
-    // Title displayed on the button
-    var title: String = "T" {
+    // Choice
+    var choice: Switch = .Color {
         didSet {
-            textButton?.setTitle(title, forState: .Normal)
+            switch choice {
+                case .Color:
+                    textButton?.setImage(UIImage(named: "switch_color"), forState: .Normal)
+                case .Font:
+                    textButton?.setImage(UIImage(named: "switch_text"), forState: .Normal)
+            }
         }
     }
     
     private func initialSetUp() {
-        
         // Add a UIButton
         textButton = UIButton(frame: bounds)
-        textButton.backgroundColor = UIColor.blackColor()
-        textButton.setTitle(title, forState: .Normal)
-        textButton.setTitleColor(UIColor.whiteColor(), forState: .Normal)
-        textButton.titleLabel?.font = UIFont.preferredFontForTextStyle(UIFontTextStyleHeadline)
-        textButton.backgroundColor = UIColor.blackColor()
+        textButton?.backgroundColor = UIColor.whiteColor()
+        textButton?.setImage(UIImage(named: "switch_text"), forState: .Normal)
         textButton.addTarget(self, action: "handleButtonTap:", forControlEvents: .TouchUpInside)
         
         // Add and Pin SubView
@@ -159,5 +165,4 @@ class FontCollectionReusableView: UICollectionReusableView {
     @objc private func handleButtonTap(sender: UIButton) {
         delegate?.fontColorHeaderReusableView(self, didTapHeaderButton: sender)
     }
-    
 }

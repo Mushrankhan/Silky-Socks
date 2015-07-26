@@ -26,6 +26,7 @@ class SJCollectionViewCell: UICollectionViewCell {
     @IBOutlet private weak var ss_imgView: UIImageView! { didSet { ss_imgView?.backgroundColor = UIColor.whiteColor() } }
     @IBOutlet private weak var nameLabel: UILabel!
     @IBOutlet private(set) weak var infoButton: UIButton!
+    @IBOutlet weak var priceLabel: UILabel!
     
     // Delegate
     weak var delegate: SJCollectionViewCellDelegate?
@@ -75,8 +76,9 @@ class SJCollectionViewCell: UICollectionViewCell {
     var template:Template? {
         didSet {
             if let template = template {
-                ss_imgView?.image = template.image      // Image
-                nameLabel.text = template.infoCaption   // Caption
+                ss_imgView?.image = template.image          // Image
+                nameLabel.text = template.infoCaption       // Caption
+                priceLabel?.text = "$\(template.prices[0])"  // Price
                 
                 // If can pass on subviews, then create bounding rect
                 if sj_subViews_count > 0 {
@@ -632,7 +634,7 @@ extension SJCollectionViewCell: UIGestureRecognizerDelegate {
     @objc private func handleGesture(recognizer: UIGestureRecognizer) {
         
         // Make sure that the bounding view exists
-        if let _ = boundingRectView {
+        if boundingRectView != nil {
             
             switch recognizer.state {
                 case .Began:
@@ -642,17 +644,19 @@ extension SJCollectionViewCell: UIGestureRecognizerDelegate {
                     activeRecognizers.addObject(recognizer)
                     
                 case .Ended:
-                    referenceTransform = applyRecognizer(recognizer, toTransform: referenceTransform!)
+                    referenceTransform = applyRecognizer(recognizer, toTransform: referenceTransform)
                     activeRecognizers.removeObject(recognizer)
                     
                 case .Changed:
-                    var transform = referenceTransform
-                    for gesture in activeRecognizers {
-                        transform = applyRecognizer(gesture as! UIGestureRecognizer, toTransform: transform!)
+                    if referenceTransform != nil {
+                        var transform = referenceTransform!
+                        for gesture in activeRecognizers {
+                            transform = applyRecognizer(gesture as! UIGestureRecognizer, toTransform: transform)!
+                        }
+                        lastSelectedView?.transform = transform
+                        lastSelectedSnapshotView?.transform = transform
                     }
-                    lastSelectedView?.transform = transform!
-                    lastSelectedSnapshotView?.transform = transform!
-                    
+
                 default:
                     break
             }
@@ -660,7 +664,11 @@ extension SJCollectionViewCell: UIGestureRecognizerDelegate {
     }
     
     // Helper Function
-    private func applyRecognizer(recognizer: UIGestureRecognizer, toTransform transform:CGAffineTransform) -> CGAffineTransform {
+    private func applyRecognizer(recognizer: UIGestureRecognizer, toTransform transform:CGAffineTransform?) -> CGAffineTransform? {
+        
+        guard let transform = transform else {
+            return nil
+        }
         
         if recognizer.respondsToSelector("rotation") {
             return CGAffineTransformRotate(transform, (recognizer as! UIRotationGestureRecognizer).rotation)
@@ -669,7 +677,7 @@ extension SJCollectionViewCell: UIGestureRecognizerDelegate {
             return CGAffineTransformScale(transform, scale, scale)
         }
         
-        return transform
+        return nil
         
     }
     

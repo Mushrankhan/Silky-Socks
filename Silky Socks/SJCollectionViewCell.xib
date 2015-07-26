@@ -48,6 +48,13 @@
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hNZ-So-bo3">
+                        <rect key="frame" x="198" y="191.5" width="42" height="20.5"/>
+                        <animations/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
                 </subviews>
                 <animations/>
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -60,6 +67,8 @@
                 <constraint firstItem="8HJ-dd-euu" firstAttribute="top" secondItem="eNn-7y-7NY" secondAttribute="bottom" id="InJ-lC-Z9B"/>
                 <constraint firstAttribute="trailing" secondItem="eNn-7y-7NY" secondAttribute="trailing" id="S76-eb-KXd"/>
                 <constraint firstItem="k9N-Jp-M0o" firstAttribute="top" secondItem="CEv-10-1vb" secondAttribute="top" id="Tdf-om-5o5"/>
+                <constraint firstAttribute="trailing" secondItem="hNZ-So-bo3" secondAttribute="trailing" id="b0k-Ed-BIa"/>
+                <constraint firstAttribute="bottom" secondItem="hNZ-So-bo3" secondAttribute="bottom" id="bFA-Ne-ehO"/>
                 <constraint firstAttribute="trailing" secondItem="8HJ-dd-euu" secondAttribute="trailing" id="cUO-KZ-u3A"/>
                 <constraint firstItem="eNn-7y-7NY" firstAttribute="top" secondItem="k9N-Jp-M0o" secondAttribute="bottom" id="cz7-Vf-Imh"/>
                 <constraint firstAttribute="bottom" secondItem="8HJ-dd-euu" secondAttribute="bottom" id="evZ-MB-reJ"/>
@@ -76,6 +85,7 @@
             <connections>
                 <outlet property="infoButton" destination="k9N-Jp-M0o" id="sYM-uN-qKY"/>
                 <outlet property="nameLabel" destination="eNn-7y-7NY" id="rMZ-u6-Qz9"/>
+                <outlet property="priceLabel" destination="hNZ-So-bo3" id="3rf-uT-usV"/>
                 <outlet property="ss_imgView" destination="8HJ-dd-euu" id="Ep9-dc-0UJ"/>
             </connections>
             <point key="canvasLocation" x="361" y="259"/>
