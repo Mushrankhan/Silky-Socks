@@ -335,3 +335,10 @@ public extension UIDevice {
     }
     
 }
+
+
+func delay(time: Double, block : () -> ()) {
+    let after = dispatch_time(DISPATCH_TIME_NOW, Int64(time * Double(NSEC_PER_SEC)))
+    dispatch_after(after, dispatch_get_main_queue(), block)
+}
+    

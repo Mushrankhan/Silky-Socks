@@ -76,9 +76,9 @@ class SJCollectionViewCell: UICollectionViewCell {
     var template:Template? {
         didSet {
             if let template = template {
-                ss_imgView?.image = template.image          // Image
-                nameLabel.text = template.infoCaption       // Caption
-                priceLabel?.text = "$\(template.prices[0])"  // Price
+                ss_imgView.image   = template.image           // Image
+                nameLabel.text     = template.infoCaption     // Caption
+                priceLabel.text    = "$\(template.prices[0])" // Price
                 
                 // If can pass on subviews, then create bounding rect
                 if sj_subViews_count > 0 {
@@ -92,60 +92,63 @@ class SJCollectionViewCell: UICollectionViewCell {
                     addColor(Constants.Color)
                 }
                 
-                // Pass on image/label
-                for (index, view) in Constants.subViews.reverse().enumerate() {
-                    if let image = view as? UIImageView {
-
-                        // Bounding View
-                        lastSelectedView = image
-                        boundingRectView?.addSubview(image)
-                        
-                        // Snapshot view
-                        let point = snapshotview?.convertPoint(image.center, fromView: boundingRectView)
-                        let sj_imgView_snap = UIImageView()
-                        sj_imgView_snap.bounds.size = image.bounds.size
-                        sj_imgView_snap.center = point!
-                        sj_imgView_snap.contentMode = .ScaleAspectFill
-                        sj_imgView_snap.image = image.image
-                        sj_imgView_snap.transform = image.transform
-                        
-                        // Add it to the array of snapshot subviews
-                        sj_subviews_snap.insert(sj_imgView_snap, atIndex: index)
-                        
-                        // Gesture
-                        lastSelectedSnapshotView = sj_imgView_snap
-                        
-                        // Add subview
-                        snapshotview?.addSubview(sj_imgView_snap)
-
-                        
+                
+                delay(0.5, block: { () -> () in
+                    // Pass on image/label
+                    for (index, view) in Constants.subViews.reverse().enumerate() {
+                        if let image = view as? UIImageView {
+                            
+                            // Bounding View
+                            self.lastSelectedView = image
+                            self.boundingRectView?.addSubview(image)
+                            
+                            // Snapshot view
+                            let point = self.snapshotview?.convertPoint(image.center, fromView: self.boundingRectView)
+                            let sj_imgView_snap = UIImageView()
+                            sj_imgView_snap.bounds.size = image.bounds.size
+                            sj_imgView_snap.center = point!
+                            sj_imgView_snap.contentMode = .ScaleAspectFill
+                            sj_imgView_snap.image = image.image
+                            sj_imgView_snap.transform = image.transform
+                            
+                            // Add it to the array of snapshot subviews
+                            self.sj_subviews_snap.insert(sj_imgView_snap, atIndex: index)
+                            
+                            // Gesture
+                            self.lastSelectedSnapshotView = sj_imgView_snap
+                            
+                            // Add subview
+                            self.snapshotview?.addSubview(sj_imgView_snap)
+                            
+                            
+                        }
+                        if let label = view as? UILabel {
+                            
+                            // Bounding view
+                            self.lastSelectedView = label
+                            self.boundingRectView?.addSubview(label)
+                            
+                            // Snapshot view
+                            let point = self.snapshotview?.convertPoint(label.center, fromView: self.boundingRectView)
+                            let sj_label_snap = SJLabel(frame: .zeroRect, text: label.text!, font: label.font)
+                            sj_label_snap.bounds.size = label.bounds.size
+                            sj_label_snap.textColor = label.textColor
+                            sj_label_snap.backgroundColor = UIColor.clearColor()
+                            sj_label_snap.center = point!
+                            sj_label_snap.transform = label.transform
+                            
+                            // Add the label to the array of sub views
+                            self.sj_subviews_snap.insert(sj_label_snap, atIndex: index)
+                            
+                            // Gesture
+                            self.lastSelectedSnapshotView = sj_label_snap
+                            
+                            // Add subview
+                            self.snapshotview?.addSubview(sj_label_snap)
+                        }
                     }
-                    if let label = view as? UILabel {
 
-                        // Bounding view
-                        lastSelectedView = label
-                        boundingRectView?.addSubview(label)
-                        
-                        // Snapshot view
-                        let point = snapshotview?.convertPoint(label.center, fromView: boundingRectView)
-                        let sj_label_snap = SJLabel(frame: .zeroRect, text: label.text!, font: label.font)
-                        sj_label_snap.bounds.size = label.bounds.size
-                        sj_label_snap.textColor = label.textColor
-                        sj_label_snap.backgroundColor = UIColor.clearColor()
-                        sj_label_snap.center = point!
-                        sj_label_snap.transform = label.transform
-                        
-                        // Add the label to the array of sub views
-                        sj_subviews_snap.insert(sj_label_snap, atIndex: index)
-                        
-                        // Gesture
-                        lastSelectedSnapshotView = sj_label_snap
-                        
-                        // Add subview
-                        snapshotview?.addSubview(sj_label_snap)
-                    }
-                }
-
+                })
             }
         }
     }
