@@ -116,6 +116,20 @@ class SJCollectionViewController: UIViewController {
         
         // When an object is added to the cart, then do something
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "incrementCartCount:", name: kAddToCartNotification, object: nil)
+        
+        // When the Approval VC did show
+        // Then disable the pan of collection view
+        NSNotificationCenter.defaultCenter().addObserverForName(kSJApprovalViewControllerDidShow, object: nil, queue: NSOperationQueue.mainQueue()) { notification in
+            self.collectionView.panGestureRecognizer.enabled = false
+            self.collectionView.visibleCell?.shouldDisableEditMode(false)
+        }
+        
+        // When the Approval VC did hide
+        // Then disable the gestures in the cell
+        NSNotificationCenter.defaultCenter().addObserverForName(kSJApprovalViewControllerDidHide, object: nil, queue: NSOperationQueue.mainQueue()) { notification in
+            self.collectionView.visibleCell?.shouldDisableEditMode(true)
+            self.collectionView.panGestureRecognizer.enabled = true
+        }
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -127,10 +141,6 @@ class SJCollectionViewController: UIViewController {
         addChildViewController(colorCollectionVC)
         colorCollectionVC.didMoveToParentViewController(self)
         
-        // Add approval VC as a child view controller
-        collectionView.addSubview(approvalVC.view)
-        addChildViewController(approvalVC)
-        approvalVC.didMoveToParentViewController(self)
     }
     
     override func viewDidDisappear(animated: Bool) {
@@ -174,7 +184,6 @@ extension SJCollectionViewController: UICollectionViewDataSource {
      }
 
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier(Constants.CellReuseIdentifier, forIndexPath: indexPath) as! SJCollectionViewCell
         cell.template = templateArray[indexPath.row]
         return cell
@@ -182,18 +191,15 @@ extension SJCollectionViewController: UICollectionViewDataSource {
     
     // Dequeue the various supplementary view
     func collectionView(collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, atIndexPath indexPath: NSIndexPath) -> UICollectionReusableView {
-        
-        let collView = collectionView as! SJCollectionView
-        
         switch kind {
             case restartElementkind:
-                return collView.dequeueReusableRestartView(indexPath: indexPath)
+                return self.collectionView.dequeueReusableRestartView(indexPath: indexPath)
             case shareElementKind:
-                return collView.dequeueReusableShareView(indexPath: indexPath)
+                return self.collectionView.dequeueReusableShareView(indexPath: indexPath)
             case addToCartElementKind:
-                return collView.dequeueReusableAddToCartView(indexPath: indexPath)
+                return self.collectionView.dequeueReusableAddToCartView(indexPath: indexPath)
             default:
-                return collView.dequeueReusableBottomUtilitiesView(indexPath: indexPath)
+                return self.collectionView.dequeueReusableBottomUtilitiesView(indexPath: indexPath)
         }
     }
         
@@ -240,7 +246,6 @@ extension SJCollectionViewController: SJCollectionViewDelegate, MFMailComposeVie
         // Basic
         showingText = true
         colorCollectionVC.collectionView!.hidden = true
-        collectionView.panGestureRecognizer.enabled = false
 
         let collectionView = collectionView as! SJCollectionView
         let midY = CGRectGetMidY(collectionView.bounds)
@@ -271,9 +276,6 @@ extension SJCollectionViewController: SJCollectionViewDelegate, MFMailComposeVie
     
     // Color Wheel
     func collectionView(collectionView: UICollectionView, bottomView: UIView , didPressColorWheelButton button:UIButton){
-        
-        // Dis-able pan gesture
-        collectionView.panGestureRecognizer.enabled = false
         
         // 64 : height of nav bar + status bar
         let height = CGRectGetHeight(UIScreen.mainScreen().bounds) - Constants.HeightOfApprovalView - Constants.HeightOfColorVC - 64
@@ -330,9 +332,6 @@ extension SJCollectionViewController: SJCollectionViewDelegate, MFMailComposeVie
         
         // Okay - Restart
         alert.addAction(UIAlertAction(title: "Continue", style: .Default) { [unowned self] action in
-            
-            // Re enable collection view pan gesture
-            self.collectionView.panGestureRecognizer.enabled = true
             
             // Hide the color view
             self.hideColorCollectionVC()
@@ -450,7 +449,6 @@ extension SJCollectionViewController: UIImagePickerControllerDelegate, UINavigat
         
         // Initial
         colorCollectionVC.collectionView!.hidden = true
-        collectionView.panGestureRecognizer.enabled = false
         
         let picker = UIImagePickerController()
         picker.delegate = self
@@ -536,16 +534,24 @@ extension SJCollectionViewController: SJApprovalViewControllerDelegate {
     // Show the Approval VC
     func showApprovalVC(tag: Int?, forView view: UIView?) {
         
-        // Animate from bottom
-        UIView.animateWithDuration(0.3) { [unowned self] in
-            self.approvalVC.view.frame = self.showRect
+        guard let _ = approvalVC.parentViewController else {
+            // Add approval VC as a child view controller
+            collectionView.addSubview(approvalVC.view)
+            addChildViewController(approvalVC)
+            approvalVC.didMoveToParentViewController(self)
+            
+            // Animate from bottom
+            UIView.animateWithDuration(0.3) { [unowned self] in
+                self.approvalVC.view.frame = self.showRect
+            }
+            
+            approvalVC.buttonPressedTag = tag
+            approvalVC.approvalViewForView = view
+            
+            // Hide the bottom view
+            collectionView.sj_bottomView?.hidden = true
+            return
         }
-        
-        approvalVC.buttonPressedTag = tag
-        approvalVC.approvalViewForView = view
-        
-        // Hide the bottom view
-        collectionView.sj_bottomView?.hidden = true
     }
     
     // Pressed check button
@@ -606,9 +612,13 @@ extension SJCollectionViewController: SJApprovalViewControllerDelegate {
         shouldPan()
         
         // Hide
-        UIView.animateWithDuration(0.3) { [unowned self] in
+        UIView.animateWithDuration(0.3, animations: { [unowned self] in
             self.approvalVC.view.frame = self.hideRect
-        }
+        }, completion : { success in
+            self.approvalVC.willMoveToParentViewController(self)
+            self.approvalVC.view.removeFromSuperview()
+            self.approvalVC.removeFromParentViewController()
+        })
         
         // Show the bottom view
         collectionView.sj_bottomView?.hidden = false

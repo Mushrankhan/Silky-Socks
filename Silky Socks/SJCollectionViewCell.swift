@@ -154,7 +154,7 @@ class SJCollectionViewCell: UICollectionViewCell {
     }
     
     // Add the label/image as a subview of boundingRectView
-    private(set) var boundingRectView: UIView?
+    private var boundingRectView: SJView?
     private(set) var snapshotview: UIView?
     
     // Masking that is applied to the boundingRectView
@@ -163,13 +163,12 @@ class SJCollectionViewCell: UICollectionViewCell {
     // Initialization
     override func awakeFromNib() {
         super.awakeFromNib()
-        autoresizingMask = [UIViewAutoresizing.FlexibleHeight, .FlexibleWidth]
+        autoresizingMask = [.FlexibleHeight, .FlexibleWidth]
         translatesAutoresizingMaskIntoConstraints = false
         clipsToBounds = true
         
         // Pan
         panGestureRecognizer = UIPanGestureRecognizer(target: self, action: "handlePan:")
-        panGestureRecognizer.delaysTouchesBegan = true
         addGestureRecognizer(panGestureRecognizer)
         
         // Pinch
@@ -189,6 +188,14 @@ class SJCollectionViewCell: UICollectionViewCell {
         addGestureRecognizer(tapGestureRecognizer)
     }
     
+    private var editMode = false
+    
+    func shouldDisableEditMode(edit: Bool) {
+        panGestureRecognizer.enabled = !edit
+        pinchGestureRecognizer.enabled = !edit
+        rotateGestureRecognizer.enabled = !edit
+        self.editMode = !edit
+    }
     
     // MARK: - Clean Up
     
@@ -285,7 +292,7 @@ extension SJCollectionViewCell {
         var frame = CGRect(origin: point, size: size)
         
         // Alloc the bounding View
-        boundingRectView = UIView(frame: ss_imgView.frame)
+        boundingRectView = SJView(frame: ss_imgView.frame)
         boundingRectView?.alpha = 0.9
         
         size.width = floor(size.width) + 20; size.height = floor(size.height) + 10
@@ -584,9 +591,9 @@ extension SJCollectionViewCell: UIGestureRecognizerDelegate {
     
     // Handle Pan Gesture
     @objc private func handlePan(recognizer: UIPanGestureRecognizer) {
-        
+
         // Make sure that the bounding view exists
-        if let boundingRectView = boundingRectView {
+        if let boundingRectView = boundingRectView where editMode {
             
             // Find the location
             let location = recognizer.locationInView(self)
@@ -637,7 +644,7 @@ extension SJCollectionViewCell: UIGestureRecognizerDelegate {
     @objc private func handleGesture(recognizer: UIGestureRecognizer) {
         
         // Make sure that the bounding view exists
-        if boundingRectView != nil {
+        if boundingRectView != nil && editMode {
             
             switch recognizer.state {
                 case .Began:
@@ -689,3 +696,16 @@ extension SJCollectionViewCell: UIGestureRecognizerDelegate {
         return true
     }
 }
+
+
+private class SJView: UIView {
+    
+    private override func actionForLayer(layer: CALayer, forKey event: String) -> CAAction? {
+        if event == "sublayers" {
+            return CATransition()
+        }
+        return nil
+    }
+    
+}
+

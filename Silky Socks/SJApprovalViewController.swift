@@ -8,6 +8,9 @@
 
 import UIKit
 
+let kSJApprovalViewControllerDidShow = "kSJApprovalViewControllerDidShow"
+let kSJApprovalViewControllerDidHide = "kSJApprovalViewControllerDidHide"
+
 protocol SJApprovalViewControllerDelegate: class {
     
     func approvalView(viewController: SJApprovalViewController, didPressXButton button: UIButton, forView view: UIView?, withTag tag: Int?)
@@ -16,6 +19,7 @@ protocol SJApprovalViewControllerDelegate: class {
 
 class SJApprovalViewController: UIViewController {
 
+    // Delegate
     weak var delegate: SJApprovalViewControllerDelegate?
     
     var buttonPressedTag: Int?
@@ -33,4 +37,10 @@ class SJApprovalViewController: UIViewController {
         }
     }
 
+    override func didMoveToParentViewController(parent: UIViewController?) {
+        let name = parent != nil ? kSJApprovalViewControllerDidShow : kSJApprovalViewControllerDidHide
+        NSNotificationCenter.defaultCenter().postNotificationName(name, object: nil)
+        super.didMoveToParentViewController(parent)
+    }
+    
 }
