@@ -64,7 +64,7 @@ class SJCollectionViewController: UIViewController {
         super.viewDidLoad()
         
         // Setting the Top Silcy Socks Logo
-        let nav_barHeight = CGRectGetHeight(navigationController!.navigationBar.bounds)
+        let nav_barHeight = floor(CGRectGetHeight(navigationController!.navigationBar.bounds))
         let img_view = UIImageView(image: UIImage(named: "topbar_logo"))
         img_view.frame = CGRectMake(0, 0, 150, nav_barHeight - 10)
         img_view.contentMode = .ScaleAspectFit

@@ -176,6 +176,7 @@ class SJCollectionViewCell: UICollectionViewCell {
         autoresizingMask = [.FlexibleHeight, .FlexibleWidth]
         translatesAutoresizingMaskIntoConstraints = false
         clipsToBounds = true
+        opaque = true
         
         // Pan
         panGestureRecognizer = UIPanGestureRecognizer(target: self, action: "handlePan:")
@@ -302,7 +303,7 @@ extension SJCollectionViewCell {
         var frame = CGRect(origin: point, size: size)
         
         // Alloc the bounding View
-        boundingRectView = SJView(frame: ss_imgView.frame)
+        boundingRectView = SJView(frame: CGRectIntegral(ss_imgView.frame))
         boundingRectView?.alpha = 0.9
         
         size.width = floor(size.width) + 20; size.height = floor(size.height) + 10
@@ -346,7 +347,7 @@ extension SJCollectionViewCell {
         }
         
         // Alloc snapshot view
-        snapshotview = UIView(frame: frame)
+        snapshotview = UIView(frame: CGRectIntegral(frame))
         snapshotview?.hidden = true
         snapshotview?.clipsToBounds = true
         
@@ -705,7 +706,7 @@ extension SJCollectionViewCell: UIGestureRecognizerDelegate {
 
 
 private class SJView: UIView {
-    
+        
     private override func actionForLayer(layer: CALayer, forKey event: String) -> CAAction? {
         if event == "sublayers" {
             return CATransition()

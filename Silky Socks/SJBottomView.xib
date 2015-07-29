@@ -53,9 +53,10 @@
                         <constraint firstAttribute="height" constant="20" id="hVv-iR-Kos"/>
                     </constraints>
                 </view>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="PREVIOUS PRODUCT" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ASg-xb-AMY">
+                <label userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="PREVIOUS PRODUCT" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ASg-xb-AMY">
                     <rect key="frame" x="88" y="73" width="103" height="11"/>
                     <animations/>
+                    <color key="backgroundColor" red="0.89803921568627454" green="0.89803921568627454" blue="0.89803921568627454" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="103" id="evE-BF-kIb"/>
                         <constraint firstAttribute="height" constant="11" id="y4H-aQ-9HV"/>
@@ -64,9 +65,10 @@
                     <color key="textColor" red="0.76078431372549016" green="0.75686274509803919" blue="0.75686274509803919" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="NEXT PRODUCT" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kyW-IX-Yvx">
+                <label userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="NEXT PRODUCT" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kyW-IX-Yvx">
                     <rect key="frame" x="188" y="73" width="103" height="11"/>
                     <animations/>
+                    <color key="backgroundColor" red="0.89803921568627454" green="0.89803921568627454" blue="0.89803921568627454" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="103" id="1BS-R1-0FO"/>
                         <constraint firstAttribute="height" constant="11" id="bqy-j1-Jio"/>
@@ -75,17 +77,19 @@
                     <color key="textColor" red="0.76078431369999999" green="0.75686274509999996" blue="0.75686274509999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <button opaque="NO" tag="5" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GRn-5V-3Ow">
-                    <rect key="frame" x="263.5" y="142" width="50" height="50"/>
+                <button tag="5" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GRn-5V-3Ow">
+                    <rect key="frame" x="263" y="142" width="50" height="50"/>
                     <animations/>
+                    <color key="backgroundColor" red="0.89803921568627454" green="0.89803921568627454" blue="0.89803921568627454" alpha="1" colorSpace="calibratedRGB"/>
                     <state key="normal" image="Question"/>
                     <connections>
                         <action selector="didPressUtilityButton:" destination="yIO-0v-rYv" eventType="touchUpInside" id="sgv-ZQ-DTm"/>
                     </connections>
                 </button>
-                <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iKa-KL-wmf">
-                    <rect key="frame" x="197.5" y="142" width="50" height="50"/>
+                <button tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iKa-KL-wmf">
+                    <rect key="frame" x="197" y="142" width="50" height="50"/>
                     <animations/>
+                    <color key="backgroundColor" red="0.89803921568627454" green="0.89803921568627454" blue="0.89803921568627454" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="50" id="5D2-bv-vLZ"/>
                         <constraint firstAttribute="width" constant="50" id="Qig-Kz-jCH"/>
@@ -97,9 +101,10 @@
                         <action selector="didPressUtilityButton:" destination="yIO-0v-rYv" eventType="touchUpInside" id="QgV-29-tLX"/>
                     </connections>
                 </button>
-                <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6h1-2a-XKM">
-                    <rect key="frame" x="130.5" y="142" width="50" height="50"/>
+                <button tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6h1-2a-XKM">
+                    <rect key="frame" x="130" y="142" width="50" height="50"/>
                     <animations/>
+                    <color key="backgroundColor" red="0.89803921568627454" green="0.89803921568627454" blue="0.89803921568627454" alpha="1" colorSpace="calibratedRGB"/>
                     <state key="normal" image="text">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
@@ -108,16 +113,17 @@
                     </connections>
                 </button>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nwq-HG-kMD">
-                    <rect key="frame" x="188.5" y="191" width="1" height="1"/>
+                    <rect key="frame" x="188" y="191" width="1" height="1"/>
                     <animations/>
                     <constraints>
                         <constraint firstAttribute="width" constant="1" id="4b2-Fm-9cn"/>
                         <constraint firstAttribute="height" constant="1" id="juM-Ne-hZn"/>
                     </constraints>
                 </view>
-                <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tSr-vL-GXy">
-                    <rect key="frame" x="64.5" y="142" width="50" height="50"/>
+                <button tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tSr-vL-GXy">
+                    <rect key="frame" x="64" y="142" width="50" height="50"/>
                     <animations/>
+                    <color key="backgroundColor" red="0.89803921568627454" green="0.89803921568627454" blue="0.89803921568627454" alpha="1" colorSpace="calibratedRGB"/>
                     <state key="normal" image="camera">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
