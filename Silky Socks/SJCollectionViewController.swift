@@ -122,13 +122,18 @@ class SJCollectionViewController: UIViewController {
         NSNotificationCenter.defaultCenter().addObserverForName(kSJApprovalViewControllerDidShow, object: nil, queue: NSOperationQueue.mainQueue()) { notification in
             self.collectionView.panGestureRecognizer.enabled = false
             self.collectionView.visibleCell?.shouldDisableEditMode(false)
+            self.collectionView.sj_bottomView?.alpha = 0
         }
         
         // When the Approval VC did hide
         // Then disable the gestures in the cell
         NSNotificationCenter.defaultCenter().addObserverForName(kSJApprovalViewControllerDidHide, object: nil, queue: NSOperationQueue.mainQueue()) { notification in
-            self.collectionView.visibleCell?.shouldDisableEditMode(true)
+            self.hideColorCollectionVC()
             self.collectionView.panGestureRecognizer.enabled = true
+            UIView.animateWithDuration(0.3) {
+                self.collectionView.sj_bottomView?.alpha = 1
+            }
+            self.collectionView.visibleCell?.shouldDisableEditMode(true)
         }
     }
     
@@ -377,8 +382,6 @@ extension SJCollectionViewController: SJCollectionViewDelegate, MFMailComposeVie
     func collectionView(collectionView: UICollectionView, touchesBegan point: CGPoint) {
         // Hide the color VC
         hideColorCollectionVC()
-        // Check if we should pan
-        shouldPan()
     }
     
     // Tapped on a subview inside the cell
@@ -430,8 +433,7 @@ extension SJCollectionViewController: UITextFieldDelegate {
         textField.removeFromSuperview()
         showingText = false
 
-        // Check if we should pan && hide the coloe collection vc
-        shouldPan()
+        // hide the coloe collection vc
         hideColorCollectionVC()
         
         return true
@@ -475,7 +477,6 @@ extension SJCollectionViewController: UIImagePickerControllerDelegate, UINavigat
         
         let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel) { [unowned self] _ in
             self.dismissViewControllerAnimated(true, completion: nil)
-            self.shouldPan()
         }
         
         // Add Actions
@@ -489,7 +490,6 @@ extension SJCollectionViewController: UIImagePickerControllerDelegate, UINavigat
     // Did Cancel
     func imagePickerControllerDidCancel(picker: UIImagePickerController) {
         dismissViewControllerAnimated(true, completion: nil)
-        shouldPan()
     }
     
     // Did Pick Image
@@ -532,7 +532,7 @@ extension SJCollectionViewController: SJColorCollectionViewControllerDelegate {
 extension SJCollectionViewController: SJApprovalViewControllerDelegate {
     
     // Show the Approval VC
-    func showApprovalVC(tag: Int?, forView view: UIView?) {
+    private func showApprovalVC(tag: Int?, forView view: UIView?) {
         
         guard let _ = approvalVC.parentViewController else {
             // Add approval VC as a child view controller
@@ -547,26 +547,12 @@ extension SJCollectionViewController: SJApprovalViewControllerDelegate {
             
             approvalVC.buttonPressedTag = tag
             approvalVC.approvalViewForView = view
-            
-            // Hide the bottom view
-            collectionView.sj_bottomView?.hidden = true
             return
         }
     }
     
     // Pressed check button
     func approvalView(viewController: SJApprovalViewController, didPressCheckButton button: UIButton, forView view: UIView?, withTag tag: Int?) {
-
-        if let tag = tag {
-            switch tag {
-                case SJBottomViewConstants.Color:
-                    hideColorCollectionVC()
-                default:
-                    break
-            }
-        }
-
-        // Hide
         hideApprovalVC()
     }
     
@@ -582,21 +568,20 @@ extension SJCollectionViewController: SJApprovalViewControllerDelegate {
         else {
             if let tag = tag {
                 switch tag {
-                    // Image
-                case SJBottomViewConstants.Image:
-                    fallthrough
-                    // Text
-                case SJBottomViewConstants.Text:
-                    collectionView.sj_undo()
-                    // Color
-                case SJBottomViewConstants.Color:
-                    hideColorCollectionVC()
-                    collectionView.sj_addColor(UIColor.clearColor())
-                    // Grid
-                case SJBottomViewConstants.Grid:
-                    collectionView.sj_undoGrid()
-                default:
-                    break
+                        // Image
+                    case SJBottomViewConstants.Image:
+                        fallthrough
+                        // Text
+                    case SJBottomViewConstants.Text:
+                        collectionView.sj_undo()
+                        // Color
+                    case SJBottomViewConstants.Color:
+                        collectionView.sj_addColor(UIColor.clearColor())
+                        // Grid
+                    case SJBottomViewConstants.Grid:
+                        collectionView.sj_undoGrid()
+                    default:
+                        break
                 }
             }
         }
@@ -606,22 +591,16 @@ extension SJCollectionViewController: SJApprovalViewControllerDelegate {
     }
     
     // Dismiss the Approval VC
-    func hideApprovalVC() {
-        
-        // Check if should pan
-        shouldPan()
+    private func hideApprovalVC() {
         
         // Hide
-        UIView.animateWithDuration(0.3, animations: { [unowned self] in
+        UIView.animateWithDuration(0.1, animations: { [unowned self] in
             self.approvalVC.view.frame = self.hideRect
-        }, completion : { success in
+        }) { success in
             self.approvalVC.willMoveToParentViewController(self)
             self.approvalVC.view.removeFromSuperview()
             self.approvalVC.removeFromParentViewController()
-        })
-        
-        // Show the bottom view
-        collectionView.sj_bottomView?.hidden = false
+        }
     }
 }
 
@@ -632,16 +611,6 @@ extension SJCollectionViewController {
     private func hideColorCollectionVC() {
         if !colorCollectionVC.collectionView!.hidden  {
             colorCollectionVC.collectionView!.hidden = true
-        }
-    }
-    
-    // Asks the cell, if we should pan
-    private func shouldPan() {
-        // Get the currently visible cell
-        if let cell = collectionView.visibleCell {
-            if cell.shouldPan() {
-                collectionView!.panGestureRecognizer.enabled = true
-            }
         }
     }
 }

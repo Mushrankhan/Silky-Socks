@@ -316,7 +316,7 @@ private let DeviceList = [
     /* Simulator */       "x86_64": "Simulator", "i386": "Simulator"
 ]
 
-public extension UIDevice {
+extension UIDevice {
     
     var modelName: String {
         var systemInfo = utsname()
@@ -336,9 +336,13 @@ public extension UIDevice {
     
 }
 
-
+/*!
+    @abstract: Performs block after certain time on a different thread
+    @param: time
+    @param: () -> ()
+*/
 func delay(time: Double, block : () -> ()) {
     let after = dispatch_time(DISPATCH_TIME_NOW, Int64(time * Double(NSEC_PER_SEC)))
-    dispatch_after(after, dispatch_get_main_queue(), block)
+    dispatch_after(after, dispatch_get_global_queue(QOS_CLASS_USER_INITIATED, 0), block)
 }
     
