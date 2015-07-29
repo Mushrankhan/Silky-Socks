@@ -337,12 +337,12 @@ extension UIDevice {
 }
 
 /*!
-    @abstract: Performs block after certain time on a different thread
+    @abstract: Performs block after certain time on the main thread
     @param: time
     @param: () -> ()
 */
 func delay(time: Double, block : () -> ()) {
     let after = dispatch_time(DISPATCH_TIME_NOW, Int64(time * Double(NSEC_PER_SEC)))
-    dispatch_after(after, dispatch_get_global_queue(QOS_CLASS_USER_INITIATED, 0), block)
+    dispatch_after(after, dispatch_get_main_queue(), block)
 }
     

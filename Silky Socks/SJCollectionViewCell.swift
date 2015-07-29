@@ -103,7 +103,6 @@ class SJCollectionViewCell: UICollectionViewCell {
                         addClipRect()
                     }
                     
-                    // Is called from a global queue
                     delay(0.5) {
                         // Pass on image/label
                         for view in SJCollectionViewCell.subViews {
@@ -112,9 +111,7 @@ class SJCollectionViewCell: UICollectionViewCell {
                                 // Bounding View
                                 self.lastSelectedView = image
                                 
-                                dispatch_async(dispatch_get_main_queue(), { () -> Void in
-                                    self.boundingRectView?.addSubview(image)
-                                })
+                                self.boundingRectView?.addSubview(image)
                                 
                                 // Snapshot view
                                 let point = self.snapshotview?.convertPoint(image.center, fromView: self.boundingRectView)
@@ -130,19 +127,14 @@ class SJCollectionViewCell: UICollectionViewCell {
                                 
                                 // Gesture
                                 self.lastSelectedSnapshotView = sj_imgView_snap
-                                
-                                dispatch_async(dispatch_get_main_queue(), { () -> Void in
-                                    self.snapshotview?.addSubview(sj_imgView_snap)
-                                })
+                                self.snapshotview?.addSubview(sj_imgView_snap)
                                 
                             }
                             if let label = view as? UILabel {
                                 
                                 // Bounding view
                                 self.lastSelectedView = label
-                                dispatch_async(dispatch_get_main_queue(), { () -> Void in
-                                    self.boundingRectView?.addSubview(label)
-                                })
+                                self.boundingRectView?.addSubview(label)
                                 
                                 // Snapshot view
                                 let point = self.snapshotview?.convertPoint(label.center, fromView: self.boundingRectView)
@@ -160,17 +152,13 @@ class SJCollectionViewCell: UICollectionViewCell {
                                 self.lastSelectedSnapshotView = sj_label_snap
                                 
                                 // Add subview
-                                dispatch_async(dispatch_get_main_queue(), { () -> Void in
-                                    self.snapshotview?.addSubview(sj_label_snap)
-                                })
+                                self.snapshotview?.addSubview(sj_label_snap)
                             }
                         }
                         
                     }
 
                 }
-
-                
             }
         }
     }
