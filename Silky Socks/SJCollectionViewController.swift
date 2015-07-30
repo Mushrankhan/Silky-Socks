@@ -247,26 +247,7 @@ extension SJCollectionViewController: SJCollectionViewDelegate, MFMailComposeVie
     
     // Text Button
     func collectionView(collectionView: UICollectionView, bottomView: UIView , didPressTextButton button:UIButton) {
-        
-        // Basic
-        showingText = true
-        colorCollectionVC.collectionView!.hidden = true
-
-        let collectionView = collectionView as! SJCollectionView
-        let midY = CGRectGetMidY(collectionView.bounds)
-        let height: CGFloat = 60
-        
-        // Create an instance of Text Field
-        let frame = CGRect(x: collectionView.contentOffset.x, y: midY - 50, width: Constants.width, height: height)
-        let textField = SJTextField(frame: frame)
-        textField.delegate = self
-        textField.becomeFirstResponder()
-        
-        // Add Text Field to collection view
-        collectionView.addSubview(textField)
-        
-        // Make the private var point to this text field
-        sj_textField = textField
+        showText(self.collectionView, withText: nil, withColor: UIColor.blackColor(), andFont: UIFont(name: "Helvetica Neue", size: UIFont.AppFontSize()))
     }
 
     // Camera Button
@@ -290,9 +271,9 @@ extension SJCollectionViewController: SJCollectionViewDelegate, MFMailComposeVie
         // give people the option to switch to fonts
         colorCollectionVC.wantFont = false
         colorCollectionVC.collectionView?.reloadData()
-        colorCollectionVC.collectionView!.hidden = false
+        colorCollectionVC.collectionView?.hidden = false
         
-        UIView.animateWithDuration(0.3) {
+        UIView.animateWithDuration(0.3) { [unowned self] in
             self.colorCollectionVC.collectionView?.frame = frame
         }
         
@@ -367,8 +348,7 @@ extension SJCollectionViewController: SJCollectionViewDelegate, MFMailComposeVie
     
     
     // Share
-    func collectionView(collectionView: UICollectionView, didPressShareButton button: UIButton, withSnapShotImage snapshot: UIImage) {
-        
+    func collectionView(collectionView: UICollectionView, didPressShareButton button: UIButton, withSnapShotImage snapshot: UIImage){
         // Create Activity Controller on Demand
         let items = ["Check out the design I created on the silky socks app. http://www.silkysocks.com/app", snapshot]
         let activity = UIActivityViewController(activityItems: items, applicationActivities: nil)
@@ -387,9 +367,17 @@ extension SJCollectionViewController: SJCollectionViewDelegate, MFMailComposeVie
     // Tapped on a subview inside the cell
     func collectionView(collectionView: UICollectionView, didTapSubview view: UIView) {
         
-        // If approval VC is not already present then show it
-        if !CGRectEqualToRect(approvalVC.view.frame, showRect) {
-            showApprovalVC(nil, forView: view)
+        if !approvalVC.shown {
+            if let label = view as? UILabel {
+                let text = label.text
+                let color = label.textColor
+                let font = label.font
+                
+                self.collectionView.sj_undo(label)
+                showText(self.collectionView, withText: text, withColor: color, andFont: font)
+            } else {
+                showApprovalVC(nil, forView: view)
+            }
         }
     }
     
@@ -411,6 +399,32 @@ extension SJCollectionViewController: SJCollectionViewDelegate, MFMailComposeVie
 // MARK: Text Button
 extension SJCollectionViewController: UITextFieldDelegate {
     
+    private func showText(collectionView: SJCollectionView, withText text: String?, withColor color: UIColor?, andFont font: UIFont?) {
+        // Basic
+        showingText = true
+        colorCollectionVC.collectionView!.hidden = true
+        collectionView.panGestureRecognizer.enabled = false
+        
+        let midY = CGRectGetMidY(collectionView.bounds)
+        let height: CGFloat = 60
+        
+        // Create an instance of Text Field
+        let frame = CGRect(x: collectionView.contentOffset.x, y: midY - 50, width: Constants.width, height: height)
+        let textField = SJTextField(frame: frame)
+        textField.text = text
+        textField.textColor = color
+        textField.font = font
+        
+        textField.delegate = self
+        textField.becomeFirstResponder()
+        
+        // Add Text Field to collection view
+        collectionView.addSubview(textField)
+        
+        // Make the private var point to this text field
+        sj_textField = textField
+    }
+
     
     // When Done button is pressed
     func textFieldShouldReturn(textField: UITextField) -> Bool {
@@ -420,6 +434,7 @@ extension SJCollectionViewController: UITextFieldDelegate {
             if textField.canResignFirstResponder() {
                 textField.resignFirstResponder()
                 textField.removeFromSuperview()
+                sj_textField = nil
                 colorCollectionVC.collectionView?.hidden = true
                 showingText = false
                 // Create The label
@@ -432,6 +447,7 @@ extension SJCollectionViewController: UITextFieldDelegate {
         textField.resignFirstResponder()
         textField.removeFromSuperview()
         showingText = false
+        sj_textField = nil
 
         // hide the coloe collection vc
         hideColorCollectionVC()

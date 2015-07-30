@@ -26,9 +26,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         SVProgressHUD.setBackgroundColor(UIColor.blackColor())
         SVProgressHUD.setForegroundColor(UIColor.whiteColor())
         SVProgressHUD.setRingThickness(5)
-        
-        // Save the device model
-        NSUserDefaults.standardUserDefaults().setValue(UIDevice.currentDevice().modelName, forKey: "Model")
+
+        #if RELEASE
+            // Save the device model
+            NSUserDefaults.standardUserDefaults().setValue(UIDevice.currentDevice().modelName, forKey: "Model")
+        #endif
         
         // Enable Apple Pay
         //BUYClient.sharedClient().enableApplePayWithMerchantId(Shopify.ApplePayMerchantId)

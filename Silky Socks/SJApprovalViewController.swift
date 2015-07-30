@@ -24,6 +24,7 @@ class SJApprovalViewController: UIViewController {
     
     var buttonPressedTag: Int?
     var approvalViewForView: UIView?
+    var shown = false
     
     // IBAction
     @IBAction func approvalButtonPressed(sender: UIButton) {        
@@ -39,6 +40,7 @@ class SJApprovalViewController: UIViewController {
 
     override func didMoveToParentViewController(parent: UIViewController?) {
         let name = parent != nil ? kSJApprovalViewControllerDidShow : kSJApprovalViewControllerDidHide
+        shown = parent != nil ? true : false
         NSNotificationCenter.defaultCenter().postNotificationName(name, object: nil)
         super.didMoveToParentViewController(parent)
     }
