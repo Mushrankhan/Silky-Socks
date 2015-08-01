@@ -39,7 +39,7 @@ extension UIView {
         // Render before flipping
         CGContextTranslateCTM(context, -area.origin.x, -area.origin.y);
         layer.renderInContext(context)
-
+        
         // Flip
         CGContextTranslateCTM(context, 0, area.size.height)
         CGContextScaleCTM(context, 1, -1)
@@ -298,7 +298,7 @@ extension NSLayoutConstraint {
 
 private let DeviceList = [
     /* iPod 5 */          "iPod5,1": "iPod Touch 5",
-    /* iPhone 4 */        "iPhone3,1":  "iPhone 4", "iPhone3,2": "iPhone 4", "iPhone3,3": "iPhone 4",
+    /* iPhone 4 */        "iPhone3,1": "iPhone 4", "iPhone3,2": "iPhone 4", "iPhone3,3": "iPhone 4",
     /* iPhone 4S */       "iPhone4,1": "iPhone 4S",
     /* iPhone 5 */        "iPhone5,1": "iPhone 5", "iPhone5,2": "iPhone 5",
     /* iPhone 5C */       "iPhone5,3": "iPhone 5C", "iPhone5,4": "iPhone 5C",
@@ -319,6 +319,7 @@ private let DeviceList = [
 extension UIDevice {
     
     var modelName: String {
+
         var systemInfo = utsname()
         uname(&systemInfo)
         
@@ -333,7 +334,6 @@ extension UIDevice {
         }
         return DeviceList[identifier] ?? identifier
     }
-    
 }
 
 /*!

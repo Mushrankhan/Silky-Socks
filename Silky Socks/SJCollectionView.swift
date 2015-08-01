@@ -52,6 +52,7 @@ class SJCollectionView: UICollectionView {
         bounces = true
         indicatorStyle = .Black
         pagingEnabled = true
+        panGestureRecognizer.delegate = self
 
         // Register the Cell
         registerNib(SJCollectionViewCell.nib(), forCellWithReuseIdentifier: reuseIdentifier)
@@ -136,13 +137,13 @@ extension SJCollectionView: ShareViewCollectionReusableViewDelegate, CartViewCol
             return
         }
         
+        // Snapshot view of the cell containing all the customizations
         if cell.snapshotview != nil {
             
-            SVProgressHUD.show()
             let size = cell.snapshotview!.bounds.size
             let rect = CGRect(origin: CGPoint(x: 0, y: 0), size: size)
-            cell.snapshotview!.hidden = false
             
+            // Used for generating the image which is sent for printing
             dispatch_async(dispatch_get_global_queue(QOS_CLASS_USER_INITIATED, 0)) {
                 
                 UIGraphicsBeginImageContextWithOptions(size, false, 0)
@@ -155,13 +156,15 @@ extension SJCollectionView: ShareViewCollectionReusableViewDelegate, CartViewCol
                     CGContextTranslateCTM(context, 0, -rect.size.height)
                 }
                 cell.snapshotview?.drawViewHierarchyInRect(rect, afterScreenUpdates: false)
-                let image = UIGraphicsGetImageFromCurrentImageContext()
+                let generatedImage = UIGraphicsGetImageFromCurrentImageContext()
                 UIGraphicsEndImageContext()
                 
-                dispatch_async(dispatch_get_main_queue()) {
-                    cell.snapshotview!.hidden = true
-                    SVProgressHUD.dismiss()
-                    self.myDelegate?.collectionView(self, didPressAddToCartButton: sender, withSnapShotImage: image, andTemplate: cell.template!)
+                dispatch_async(dispatch_get_main_queue()) { [unowned self] in
+                    
+                    // Used for generating the image which is shown in the app
+                    self.clickSnapShot(cell) { (image) in
+                        self.myDelegate?.collectionView(self, didPressAddToCartButton: sender, withCartImage: image, generatedImage: generatedImage, andTemplate: cell.template!)
+                    }
                 }
                 
             }
@@ -173,7 +176,8 @@ extension SJCollectionView: ShareViewCollectionReusableViewDelegate, CartViewCol
     private func clickSnapShot(cell: SJCollectionViewCell, block: (image: UIImage) -> Void) {
         // due to the presence of the info button
         let y = cell.infoButton.bounds.size.height
-        let rect = CGRect(origin: CGPoint(x: 0, y: y), size: cell.frame.size)
+        var size = cell.frame.size; size.height -= y
+        let rect = CGRect(origin: CGPoint(x: 0, y: y), size: size)
         
         dispatch_async(dispatch_get_global_queue(QOS_CLASS_USER_INITIATED, 0)) {
             let image = cell.clickSnapShot(rect, withLogo: UIImage.SilkySocksLogo())
@@ -295,6 +299,14 @@ extension SJCollectionView : SJCollectionViewCellDelegate {
 
 // MARK: Gesture Handling
 extension SJCollectionView: UIGestureRecognizerDelegate {
+    
+    // Disable pan gesture
+    override func gestureRecognizerShouldBegin(gestureRecognizer: UIGestureRecognizer) -> Bool {
+        if gestureRecognizer is UIPanGestureRecognizer {
+            return false
+        }
+        return true
+    }
     
     // Essential
     func gestureRecognizer(gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWithGestureRecognizer otherGestureRecognizer: UIGestureRecognizer) -> Bool {

@@ -339,7 +339,7 @@ class FinalTableViewController: UITableViewController, CreditCardTableViewCellDe
         order.email = checkout.email
         order.price = checkout.totalPrice
         order.address = checkout.shippingAddress.getAddress()
-        order.file = PFFile(data: UIImageJPEGRepresentation(self.productImage, 0.7)!)
+        order.file = PFFile(data: UIImageJPEGRepresentation(self.productImage, 0.5)!)
         
         SVProgressHUD.setStatus("Uploading Image")
         // Save the object to parse

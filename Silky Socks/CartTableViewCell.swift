@@ -34,7 +34,7 @@ class CartTableViewCell: UITableViewCell {
     var cartProduct: CartProduct? {
         didSet {
             // Set image and product name once
-            cartImgView?.image = cartProduct?.productImage
+            cartImgView?.image = cartProduct?.cartImage
             productNameLabel?.text = cartProduct?.name
             
             // Update UI

@@ -120,32 +120,28 @@ class SJCollectionViewController: UIViewController {
         // When the Approval VC did show
         // Then disable the pan of collection view
         NSNotificationCenter.defaultCenter().addObserverForName(kSJApprovalViewControllerDidShow, object: nil, queue: NSOperationQueue.mainQueue()) { notification in
-            self.collectionView.panGestureRecognizer.enabled = false
-            self.collectionView.visibleCell?.shouldDisableEditMode(false)
-            self.collectionView.sj_bottomView?.alpha = 0
+            self.collectionView.sj_bottomView!.alpha = 0
+            self.collectionView.sj_bottomView?.hidden = true
         }
         
         // When the Approval VC did hide
         // Then disable the gestures in the cell
         NSNotificationCenter.defaultCenter().addObserverForName(kSJApprovalViewControllerDidHide, object: nil, queue: NSOperationQueue.mainQueue()) { notification in
             self.hideColorCollectionVC()
-            self.collectionView.panGestureRecognizer.enabled = true
+            self.collectionView.sj_bottomView?.hidden = false
             UIView.animateWithDuration(0.3) {
-                self.collectionView.sj_bottomView?.alpha = 1
+                self.collectionView.sj_bottomView!.alpha = 1
             }
-            self.collectionView.visibleCell?.shouldDisableEditMode(true)
         }
     }
     
-    override func viewDidAppear(animated: Bool) {
-        super.viewDidAppear(animated)
-        
-        // Doing this in view did appear
-        //  In view did load leads to frame issues
-        collectionView.addSubview(colorCollectionVC.collectionView!)
-        addChildViewController(colorCollectionVC)
-        colorCollectionVC.didMoveToParentViewController(self)
-        
+    override func viewDidLayoutSubviews() {
+        if colorCollectionVC.parentViewController == nil {
+            collectionView.addSubview(colorCollectionVC.collectionView!)
+            addChildViewController(colorCollectionVC)
+            colorCollectionVC.didMoveToParentViewController(self)
+        }
+        super.viewDidLayoutSubviews()
     }
     
     override func viewDidDisappear(animated: Bool) {
@@ -291,22 +287,29 @@ extension SJCollectionViewController: SJCollectionViewDelegate, MFMailComposeVie
     
     // Add To Cart
     // Right now send a mail to check for correct size
-    func collectionView(collectionView: UICollectionView, didPressAddToCartButton button:UIButton, withSnapShotImage snapshot: UIImage, andTemplate template: Template) {
+//    func collectionView(collectionView: UICollectionView, didPressAddToCartButton button:UIButton, withSnapShotImage snapshot: UIImage, andTemplate template: Template) {
+//        
+////        let image = snapshot.renderImageIntoSize(template.productSize)
+////        let mail = MFMailComposeViewController()
+////        mail.addAttachmentData(UIImageJPEGRepresentation(image, 0.5)!, mimeType: "image/jpeg", fileName: "Design")
+////        mail.mailComposeDelegate = self
+////        presentViewController(mail, animated: true, completion: nil)
+//        
+//        // Create a cart Product
+//        UserCart.sharedCart.addProduct(CartProduct(template: template, withImage: snapshot))
+//    }
+    
+    func collectionView(collectionView: UICollectionView, didPressAddToCartButton button: UIButton, withCartImage cartImage: UIImage, generatedImage image: UIImage, andTemplate template: Template) {
         
-        let image = snapshot.renderImageIntoSize(template.productSize)
-        let mail = MFMailComposeViewController()
-        mail.addAttachmentData(UIImageJPEGRepresentation(image, 0.5)!, mimeType: "image/jpeg", fileName: "Design")
-        mail.mailComposeDelegate = self
-        presentViewController(mail, animated: true, completion: nil)
-        
-        // Create a cart Product
-        //UserCart.sharedCart.addProduct(CartProduct(template: template, withImage: snapshot))
+        let product = CartProduct(template: template, withImage: image)
+        product.cartImage = cartImage
+        UserCart.sharedCart.addProduct(product)
     }
     
-    // Dismiss the mail compose view controller
-    func mailComposeController(controller: MFMailComposeViewController, didFinishWithResult result: MFMailComposeResult, error: NSError?) {
-        dismissViewControllerAnimated(true, completion: nil)
-    }
+//    // Dismiss the mail compose view controller
+//    func mailComposeController(controller: MFMailComposeViewController, didFinishWithResult result: MFMailComposeResult, error: NSError?) {
+//        dismissViewControllerAnimated(true, completion: nil)
+//    }
     
     // Restart
     func collectionView(collectionView: UICollectionView, didPressRestartButton button:UIButton) {
@@ -403,7 +406,6 @@ extension SJCollectionViewController: UITextFieldDelegate {
         // Basic
         showingText = true
         colorCollectionVC.collectionView!.hidden = true
-        collectionView.panGestureRecognizer.enabled = false
         
         let midY = CGRectGetMidY(collectionView.bounds)
         let height: CGFloat = 60

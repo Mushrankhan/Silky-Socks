@@ -18,12 +18,15 @@ class CartProduct: NSObject {
     
     // MARK: - Properties
     
-    // Image
+    // Image in small size
     private(set) var productImage: UIImage
     
     // Image sent to Parse when the user checks out
     var checkoutImage: UIImage?
     
+    // Image displayed in app
+    var cartImage: UIImage!
+
     // Name
     private(set) var name: String
     

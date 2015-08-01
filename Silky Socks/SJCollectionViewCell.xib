@@ -48,7 +48,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hNZ-So-bo3">
-                        <rect key="frame" x="198" y="191.5" width="42" height="20.5"/>
+                        <rect key="frame" x="198" y="191" width="42" height="21"/>
                         <animations/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -59,8 +59,10 @@
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             </view>
             <animations/>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstItem="eNn-7y-7NY" firstAttribute="leading" secondItem="CEv-10-1vb" secondAttribute="leading" id="0iO-mY-N0b"/>
+                <constraint firstAttribute="bottom" secondItem="8HJ-dd-euu" secondAttribute="bottom" id="Bfb-2l-uG0"/>
                 <constraint firstAttribute="centerX" secondItem="k9N-Jp-M0o" secondAttribute="centerX" id="CRM-bZ-xRs"/>
                 <constraint firstItem="8HJ-dd-euu" firstAttribute="leading" secondItem="CEv-10-1vb" secondAttribute="leading" id="Fxn-RB-0Yn"/>
                 <constraint firstItem="8HJ-dd-euu" firstAttribute="top" secondItem="eNn-7y-7NY" secondAttribute="bottom" id="InJ-lC-Z9B"/>
@@ -68,15 +70,20 @@
                 <constraint firstItem="k9N-Jp-M0o" firstAttribute="top" secondItem="CEv-10-1vb" secondAttribute="top" id="Tdf-om-5o5"/>
                 <constraint firstAttribute="trailing" secondItem="hNZ-So-bo3" secondAttribute="trailing" id="b0k-Ed-BIa"/>
                 <constraint firstAttribute="bottom" secondItem="hNZ-So-bo3" secondAttribute="bottom" id="bFA-Ne-ehO"/>
+                <constraint firstAttribute="bottom" secondItem="8HJ-dd-euu" secondAttribute="bottom" id="bUA-XV-dnS"/>
                 <constraint firstAttribute="trailing" secondItem="8HJ-dd-euu" secondAttribute="trailing" id="cUO-KZ-u3A"/>
                 <constraint firstItem="eNn-7y-7NY" firstAttribute="top" secondItem="k9N-Jp-M0o" secondAttribute="bottom" id="cz7-Vf-Imh"/>
                 <constraint firstAttribute="bottom" secondItem="8HJ-dd-euu" secondAttribute="bottom" id="evZ-MB-reJ"/>
+                <constraint firstItem="8HJ-dd-euu" firstAttribute="bottom" secondItem="hNZ-So-bo3" secondAttribute="bottom" id="vgc-Kd-4bp"/>
                 <constraint firstItem="k9N-Jp-M0o" firstAttribute="leading" secondItem="CEv-10-1vb" secondAttribute="leading" id="vug-5e-Rz8"/>
                 <constraint firstAttribute="trailing" secondItem="k9N-Jp-M0o" secondAttribute="trailing" id="xOR-7j-w9E"/>
             </constraints>
             <size key="customSize" width="240" height="212"/>
             <variation key="default">
                 <mask key="constraints">
+                    <exclude reference="bUA-XV-dnS"/>
+                    <exclude reference="evZ-MB-reJ"/>
+                    <exclude reference="vgc-Kd-4bp"/>
                     <exclude reference="vug-5e-Rz8"/>
                     <exclude reference="xOR-7j-w9E"/>
                 </mask>

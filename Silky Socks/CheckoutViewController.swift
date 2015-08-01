@@ -28,7 +28,7 @@ class CheckoutViewController: UITableViewController, StatesPickerTableViewCellDe
         
         // Set up the table header view
         let headerView = NSBundle.mainBundle().loadNibNamed("CheckoutTableHeaderView", owner: nil, options: nil).first as! CheckoutTableHeaderView
-        headerView.productImageView.image = product.productImage
+        headerView.productImageView.image = product.cartImage
         tableView.tableHeaderView = headerView
         
         // Next button footer view
@@ -227,17 +227,17 @@ extension CheckoutViewController: CheckoutTableFooterViewDelegate {
         address.countryCode = "US"
         
         // Testing Purposes
-//        let addr = BUYAddress()
-//        addr.firstName = "Saurabh"
-//        addr.lastName = "Jain"
-//        addr.address1 = "7357 Franklin Avenue"
-//        addr.city = "Los Angeles"
-//        addr.province = "CA"
-//        addr.countryCode = "US"
-//        addr.zip = "90046"
-//        address = addr
-//
-//        self.email = "saurabhj80@gmail.com"
+        let addr = BUYAddress()
+        addr.firstName = "Saurabh"
+        addr.lastName = "Jain"
+        addr.address1 = "7357 Franklin Avenue"
+        addr.city = "Los Angeles"
+        addr.province = "CA"
+        addr.countryCode = "US"
+        addr.zip = "90046"
+        address = addr
+
+        self.email = "saurabhj80@gmail.com"
 
         // Invalid address
         if !address.isValid() {
@@ -257,7 +257,9 @@ extension CheckoutViewController: CheckoutTableFooterViewDelegate {
         dispatch_async(dispatch_get_global_queue(QOS_CLASS_USER_INITIATED, 0)) { [unowned self] in
             
             let size = self.product.productSize
-            self.product.checkoutImage = self.product.productImage.renderImageIntoSize(size)
+            if self.product.checkoutImage == nil {
+                self.product.checkoutImage = self.product.productImage.renderImageIntoSize(size)
+            }
             
             dispatch_async(dispatch_get_main_queue()) {
                 

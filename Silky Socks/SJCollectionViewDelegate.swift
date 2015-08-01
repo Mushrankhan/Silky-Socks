@@ -18,7 +18,7 @@ protocol SJCollectionViewDelegate: UICollectionViewDelegate {
     func collectionView(collectionView: UICollectionView, bottomView: UIView , didPressQuestionButton button:UIButton)
 
     // Add To Cart
-    func collectionView(collectionView: UICollectionView, didPressAddToCartButton button:UIButton, withSnapShotImage snapshot: UIImage, andTemplate template: Template)
+    func collectionView(collectionView: UICollectionView, didPressAddToCartButton button:UIButton, withCartImage cartImage: UIImage, generatedImage image: UIImage, andTemplate template: Template)
     
     // Restart
     func collectionView(collectionView: UICollectionView, didPressRestartButton button:UIButton)
