@@ -327,7 +327,8 @@ class FinalTableViewController: UITableViewController, CreditCardTableViewCellDe
     func agreeToTermsAndConditions() {
         let vc = SupportViewController()
         vc.path = NSBundle.mainBundle().pathForResource("Terms_and_conditions", ofType: "pdf")
-        presentViewController(vc, animated: true, completion: nil)
+        let nav = UINavigationController(rootViewController: vc)
+        presentViewController(nav, animated: true, completion: nil)
     }
     
     // MARK: - Checkout

@@ -23,7 +23,7 @@ class SJTextStorage: NSTextStorage {
         let combinedDescriptorWithTrait = descriptorWithTrait.fontDescriptorWithSymbolicTraits(.TraitItalic)
         let attributes = [NSFontAttributeName: UIFont(descriptor: combinedDescriptorWithTrait, size: 24)]
         return attributes
-        }()
+    }()
     
     // MARK: Override
     
@@ -71,7 +71,7 @@ class SJTextStorage: NSTextStorage {
             regex = nil
         }
         
-        regex?.enumerateMatchesInString(storageString.string, options: [], range: extendedRange) { (match, falgs, stop) in
+        regex?.enumerateMatchesInString(storageString.string, options: [], range: extendedRange) { (match, flags, stop) in
             
             // apply the style
             guard let matchRange = match?.range else { return }

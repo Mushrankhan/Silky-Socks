@@ -16,7 +16,6 @@ struct Shopify {
     static let ApplePayMerchantId = "merchant.com.danny-silkysocks"
 }
 
-
 extension BUYCart {
     
     func addProduct(product: CartProduct, withVariant variant: BUYProductVariant) {

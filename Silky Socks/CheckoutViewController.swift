@@ -157,6 +157,7 @@ class CheckoutViewController: UITableViewController, StatesPickerTableViewCellDe
             vc.checkout = self.checkout
             vc.shippingRates = self.shippingRates
             vc.productImage = self.product.checkoutImage
+            self.product.checkoutImage = nil
         }
     }
     
@@ -257,9 +258,7 @@ extension CheckoutViewController: CheckoutTableFooterViewDelegate {
         dispatch_async(dispatch_get_global_queue(QOS_CLASS_USER_INITIATED, 0)) { [unowned self] in
             
             let size = self.product.productSize
-            if self.product.checkoutImage == nil {
-                self.product.checkoutImage = self.product.productImage.renderImageIntoSize(size)
-            }
+            self.product.checkoutImage = self.product.productImage.renderImageIntoSize(size)
             
             dispatch_async(dispatch_get_main_queue()) {
                 

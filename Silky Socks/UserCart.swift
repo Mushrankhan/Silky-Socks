@@ -23,6 +23,10 @@ class UserCart: NSObject {
     // Singleton support
     static let sharedCart = UserCart()
     
+    private override init() {
+        // So that creating an instance is not possible
+    }
+    
     // User Cart
     private var cart = [CartProduct]()
     

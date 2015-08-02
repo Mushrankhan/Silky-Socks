@@ -24,8 +24,6 @@
 		1F293BF91B38631100551A40 /* CartProduct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F293BF81B38631100551A40 /* CartProduct.swift */; };
 		1F39440B1B094EA4008E73E0 /* SJCollectionAddToCartReusableView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1F39440A1B094EA4008E73E0 /* SJCollectionAddToCartReusableView.xib */; };
 		1F470C281B5FA4E400CECC2C /* SJTextStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F470C271B5FA4E400CECC2C /* SJTextStorage.swift */; };
-		1F470C2C1B5FAC6000CECC2C /* FAQ.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 1F470C2B1B5FAC6000CECC2C /* FAQ.pdf */; };
-		1F470C2E1B5FAD4D00CECC2C /* Terms_and_conditions.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 1F470C2D1B5FAD4D00CECC2C /* Terms_and_conditions.pdf */; };
 		1F470C301B5FADDF00CECC2C /* SupportViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F470C2F1B5FADDF00CECC2C /* SupportViewController.swift */; };
 		1F58FE621B340ED6003E2507 /* CartTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F58FE611B340ED6003E2507 /* CartTableViewController.swift */; };
 		1F58FE661B340F27003E2507 /* CartTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F58FE641B340F27003E2507 /* CartTableViewCell.swift */; };
@@ -48,6 +46,8 @@
 		1FD244321B429AD300D9182A /* DiscountTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD244311B429AD300D9182A /* DiscountTableViewCell.swift */; };
 		1FD558001B2086CA003BDE2A /* SJApprovalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD557FE1B2086CA003BDE2A /* SJApprovalViewController.swift */; };
 		1FD558011B2086CA003BDE2A /* SJApprovalViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1FD557FF1B2086CA003BDE2A /* SJApprovalViewController.xib */; };
+		1FEBEDCD1B6E7233000B7393 /* FAQ.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 1FEBEDCC1B6E7233000B7393 /* FAQ.pdf */; };
+		1FEBEDCF1B6E7241000B7393 /* Terms_and_conditions.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 1FEBEDCE1B6E7241000B7393 /* Terms_and_conditions.pdf */; };
 		1FECA5841B3019EB009CC8AF /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1FECA5831B3019EB009CC8AF /* MessageUI.framework */; };
 		1FF543CC1B26259F007B6B19 /* TemplateInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FF543CA1B26259F007B6B19 /* TemplateInfoViewController.swift */; };
 		1FF543CD1B26259F007B6B19 /* TemplateInfoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1FF543CB1B26259F007B6B19 /* TemplateInfoViewController.xib */; };
@@ -102,8 +102,6 @@
 		1F293BF81B38631100551A40 /* CartProduct.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CartProduct.swift; sourceTree = "<group>"; };
 		1F39440A1B094EA4008E73E0 /* SJCollectionAddToCartReusableView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SJCollectionAddToCartReusableView.xib; sourceTree = "<group>"; };
 		1F470C271B5FA4E400CECC2C /* SJTextStorage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SJTextStorage.swift; sourceTree = "<group>"; };
-		1F470C2B1B5FAC6000CECC2C /* FAQ.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = FAQ.pdf; sourceTree = "<group>"; };
-		1F470C2D1B5FAD4D00CECC2C /* Terms_and_conditions.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = Terms_and_conditions.pdf; sourceTree = "<group>"; };
 		1F470C2F1B5FADDF00CECC2C /* SupportViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SupportViewController.swift; sourceTree = "<group>"; };
 		1F4D93811B419D63008EAD74 /* libc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libc++.dylib"; path = "usr/lib/libc++.dylib"; sourceTree = SDKROOT; };
 		1F54AD201B1602D6007E9E48 /* BridgingHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BridgingHeader.h; sourceTree = "<group>"; };
@@ -128,6 +126,8 @@
 		1FD244311B429AD300D9182A /* DiscountTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiscountTableViewCell.swift; sourceTree = "<group>"; };
 		1FD557FE1B2086CA003BDE2A /* SJApprovalViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SJApprovalViewController.swift; sourceTree = "<group>"; };
 		1FD557FF1B2086CA003BDE2A /* SJApprovalViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SJApprovalViewController.xib; sourceTree = "<group>"; };
+		1FEBEDCC1B6E7233000B7393 /* FAQ.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = FAQ.pdf; sourceTree = "<group>"; };
+		1FEBEDCE1B6E7241000B7393 /* Terms_and_conditions.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = Terms_and_conditions.pdf; sourceTree = "<group>"; };
 		1FECA5831B3019EB009CC8AF /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		1FF543CA1B26259F007B6B19 /* TemplateInfoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TemplateInfoViewController.swift; sourceTree = "<group>"; };
 		1FF543CB1B26259F007B6B19 /* TemplateInfoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TemplateInfoViewController.xib; sourceTree = "<group>"; };
@@ -386,8 +386,8 @@
 				1F293BF01B38240000551A40 /* Silky Socks.entitlements */,
 				4F8D38A11AE440DE00F42E23 /* Info.plist */,
 				4F8D38AC1AE440DE00F42E23 /* Images.xcassets */,
-				1F470C2D1B5FAD4D00CECC2C /* Terms_and_conditions.pdf */,
-				1F470C2B1B5FAC6000CECC2C /* FAQ.pdf */,
+				1FEBEDCC1B6E7233000B7393 /* FAQ.pdf */,
+				1FEBEDCE1B6E7241000B7393 /* Terms_and_conditions.pdf */,
 				1FF7940F1B22DE9D000CB14D /* Fonts */,
 			);
 			name = "Supporting Files";
@@ -426,10 +426,10 @@
 			isa = PBXGroup;
 			children = (
 				1F1740581B41308400D1CA33 /* Order.swift */,
-				1F293BF61B384D1300551A40 /* ShopifyUtilities.swift */,
 				4F8D38CB1AE4457800F42E23 /* TemplateModel.swift */,
 				1FC258AA1B14B60700EAEF20 /* UserCart.swift */,
 				1F293BF81B38631100551A40 /* CartProduct.swift */,
+				1F293BF61B384D1300551A40 /* ShopifyUtilities.swift */,
 				4FB6C9C41AE4B394001A6E50 /* Utilities.swift */,
 			);
 			name = Model;
@@ -561,14 +561,13 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1F470C2C1B5FAC6000CECC2C /* FAQ.pdf in Resources */,
 				1FF7940C1B22DD05000CB14D /* Walkway Black.ttf in Resources */,
 				4FB6C9C31AE4AF7A001A6E50 /* SJBottomView.xib in Resources */,
 				1FA0F9BE1B3DABA400480B36 /* FinalTableViewControllerFooterView.xib in Resources */,
 				1F39440B1B094EA4008E73E0 /* SJCollectionAddToCartReusableView.xib in Resources */,
 				1F58FE671B340F27003E2507 /* CartTableViewCell.xib in Resources */,
-				1F470C2E1B5FAD4D00CECC2C /* Terms_and_conditions.pdf in Resources */,
 				1FC72AD51B3D6C6400D54C1E /* CreditCardTableViewCell.xib in Resources */,
+				1FEBEDCF1B6E7241000B7393 /* Terms_and_conditions.pdf in Resources */,
 				1FCF509B1B07ED8A005D8578 /* SJCollectionShareReusableView.xib in Resources */,
 				4F8D38AB1AE440DE00F42E23 /* Main.storyboard in Resources */,
 				1FF7940A1B22DCB2000CB14D /* Maiden.ttf in Resources */,
@@ -577,6 +576,7 @@
 				1FCF50991B07ECA3005D8578 /* SJCollectionRestartReusableView.xib in Resources */,
 				1F17F2911B36BE8A00DBFEBC /* CheckoutInfoTableViewCell.xib in Resources */,
 				1FD558011B2086CA003BDE2A /* SJApprovalViewController.xib in Resources */,
+				1FEBEDCD1B6E7233000B7393 /* FAQ.pdf in Resources */,
 				1FCF509D1B07F0C7005D8578 /* SJCollectionDecorationSilkySocksLogoReusableView.xib in Resources */,
 				4F55B5541AE46E4900679048 /* SJCollectionViewCell.xib in Resources */,
 				4F8D38B01AE440DE00F42E23 /* LaunchScreen.xib in Resources */,
