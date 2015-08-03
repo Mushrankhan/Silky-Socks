@@ -28,6 +28,16 @@
 		1F58FE621B340ED6003E2507 /* CartTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F58FE611B340ED6003E2507 /* CartTableViewController.swift */; };
 		1F58FE661B340F27003E2507 /* CartTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F58FE641B340F27003E2507 /* CartTableViewCell.swift */; };
 		1F58FE671B340F27003E2507 /* CartTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1F58FE651B340F27003E2507 /* CartTableViewCell.xib */; };
+		1F771D161B6F3E21009A93D3 /* OperationCondition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F771D151B6F3E21009A93D3 /* OperationCondition.swift */; };
+		1F771D181B6F3E3A009A93D3 /* NetworkCondition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F771D171B6F3E3A009A93D3 /* NetworkCondition.swift */; };
+		1F771D1A1B6F3EA6009A93D3 /* OperationError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F771D191B6F3EA6009A93D3 /* OperationError.swift */; };
+		1F771D1C1B6F436F009A93D3 /* ShopifyGetProduct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F771D1B1B6F436F009A93D3 /* ShopifyGetProduct.swift */; };
+		1F771D1E1B6F5BAC009A93D3 /* OperationQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F771D1D1B6F5BAC009A93D3 /* OperationQueue.swift */; };
+		1F771D201B6F5E2F009A93D3 /* ShopifyCreateCheckout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F771D1F1B6F5E2F009A93D3 /* ShopifyCreateCheckout.swift */; };
+		1F771D221B6F7A68009A93D3 /* AlertOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F771D211B6F7A68009A93D3 /* AlertOperation.swift */; };
+		1F771D241B6F8258009A93D3 /* OperationObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F771D231B6F8258009A93D3 /* OperationObserver.swift */; };
+		1F771D2C1B6FF18A009A93D3 /* ShopifyGetShippingRate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F771D2B1B6FF18A009A93D3 /* ShopifyGetShippingRate.swift */; };
+		1F771D2E1B6FF965009A93D3 /* BlockObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F771D2D1B6FF965009A93D3 /* BlockObserver.swift */; };
 		1F88389C1B0D731200E3BBB6 /* SJTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F88389B1B0D731200E3BBB6 /* SJTextField.swift */; };
 		1F88389E1B0D875D00E3BBB6 /* SJLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F88389D1B0D875D00E3BBB6 /* SJLabel.swift */; };
 		1FA0F9BC1B3DAB9A00480B36 /* FinalTableViewControllerFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FA0F9BB1B3DAB9A00480B36 /* FinalTableViewControllerFooterView.swift */; };
@@ -51,6 +61,7 @@
 		1FECA5841B3019EB009CC8AF /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1FECA5831B3019EB009CC8AF /* MessageUI.framework */; };
 		1FF543CC1B26259F007B6B19 /* TemplateInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FF543CA1B26259F007B6B19 /* TemplateInfoViewController.swift */; };
 		1FF543CD1B26259F007B6B19 /* TemplateInfoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1FF543CB1B26259F007B6B19 /* TemplateInfoViewController.xib */; };
+		1FF5C6641B6E9D76000D835C /* Operation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FF5C6631B6E9D76000D835C /* Operation.swift */; };
 		1FF794061B21EEFD000CB14D /* SJColorFontCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FF794051B21EEFD000CB14D /* SJColorFontCollectionViewCell.swift */; };
 		1FF794081B22DBBF000CB14D /* DoubleFeature.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1FF794071B22DBBF000CB14D /* DoubleFeature.ttf */; };
 		1FF7940A1B22DCB2000CB14D /* Maiden.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1FF794091B22DCB2000CB14D /* Maiden.ttf */; };
@@ -108,6 +119,16 @@
 		1F58FE611B340ED6003E2507 /* CartTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CartTableViewController.swift; sourceTree = "<group>"; };
 		1F58FE641B340F27003E2507 /* CartTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CartTableViewCell.swift; sourceTree = "<group>"; };
 		1F58FE651B340F27003E2507 /* CartTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CartTableViewCell.xib; sourceTree = "<group>"; };
+		1F771D151B6F3E21009A93D3 /* OperationCondition.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OperationCondition.swift; sourceTree = "<group>"; };
+		1F771D171B6F3E3A009A93D3 /* NetworkCondition.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkCondition.swift; sourceTree = "<group>"; };
+		1F771D191B6F3EA6009A93D3 /* OperationError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OperationError.swift; sourceTree = "<group>"; };
+		1F771D1B1B6F436F009A93D3 /* ShopifyGetProduct.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShopifyGetProduct.swift; sourceTree = "<group>"; };
+		1F771D1D1B6F5BAC009A93D3 /* OperationQueue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OperationQueue.swift; sourceTree = "<group>"; };
+		1F771D1F1B6F5E2F009A93D3 /* ShopifyCreateCheckout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShopifyCreateCheckout.swift; sourceTree = "<group>"; };
+		1F771D211B6F7A68009A93D3 /* AlertOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlertOperation.swift; sourceTree = "<group>"; };
+		1F771D231B6F8258009A93D3 /* OperationObserver.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OperationObserver.swift; sourceTree = "<group>"; };
+		1F771D2B1B6FF18A009A93D3 /* ShopifyGetShippingRate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShopifyGetShippingRate.swift; sourceTree = "<group>"; };
+		1F771D2D1B6FF965009A93D3 /* BlockObserver.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlockObserver.swift; sourceTree = "<group>"; };
 		1F88389B1B0D731200E3BBB6 /* SJTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SJTextField.swift; sourceTree = "<group>"; };
 		1F88389D1B0D875D00E3BBB6 /* SJLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SJLabel.swift; sourceTree = "<group>"; };
 		1FA0F9BB1B3DAB9A00480B36 /* FinalTableViewControllerFooterView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FinalTableViewControllerFooterView.swift; sourceTree = "<group>"; };
@@ -131,6 +152,7 @@
 		1FECA5831B3019EB009CC8AF /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		1FF543CA1B26259F007B6B19 /* TemplateInfoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TemplateInfoViewController.swift; sourceTree = "<group>"; };
 		1FF543CB1B26259F007B6B19 /* TemplateInfoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TemplateInfoViewController.xib; sourceTree = "<group>"; };
+		1FF5C6631B6E9D76000D835C /* Operation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Operation.swift; sourceTree = "<group>"; };
 		1FF794051B21EEFD000CB14D /* SJColorFontCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SJColorFontCollectionViewCell.swift; sourceTree = "<group>"; };
 		1FF794071B22DBBF000CB14D /* DoubleFeature.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = DoubleFeature.ttf; sourceTree = "<group>"; };
 		1FF794091B22DCB2000CB14D /* Maiden.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Maiden.ttf; sourceTree = "<group>"; };
@@ -254,6 +276,64 @@
 			name = "Additional VC";
 			sourceTree = "<group>";
 		};
+		1F771D251B6FF077009A93D3 /* Operation Condition */ = {
+			isa = PBXGroup;
+			children = (
+				1F771D151B6F3E21009A93D3 /* OperationCondition.swift */,
+				1F771D171B6F3E3A009A93D3 /* NetworkCondition.swift */,
+			);
+			name = "Operation Condition";
+			sourceTree = "<group>";
+		};
+		1F771D261B6FF082009A93D3 /* Operation Observer */ = {
+			isa = PBXGroup;
+			children = (
+				1F771D231B6F8258009A93D3 /* OperationObserver.swift */,
+				1F771D2D1B6FF965009A93D3 /* BlockObserver.swift */,
+			);
+			name = "Operation Observer";
+			sourceTree = "<group>";
+		};
+		1F771D271B6FF08E009A93D3 /* Operation */ = {
+			isa = PBXGroup;
+			children = (
+				1FF5C6631B6E9D76000D835C /* Operation.swift */,
+				1F771D211B6F7A68009A93D3 /* AlertOperation.swift */,
+				1F771D1B1B6F436F009A93D3 /* ShopifyGetProduct.swift */,
+				1F771D1F1B6F5E2F009A93D3 /* ShopifyCreateCheckout.swift */,
+				1F771D2B1B6FF18A009A93D3 /* ShopifyGetShippingRate.swift */,
+			);
+			name = Operation;
+			sourceTree = "<group>";
+		};
+		1F771D281B6FF094009A93D3 /* Operation Queue */ = {
+			isa = PBXGroup;
+			children = (
+				1F771D1D1B6F5BAC009A93D3 /* OperationQueue.swift */,
+			);
+			name = "Operation Queue";
+			sourceTree = "<group>";
+		};
+		1F771D291B6FF09C009A93D3 /* Operation Error */ = {
+			isa = PBXGroup;
+			children = (
+				1F771D191B6F3EA6009A93D3 /* OperationError.swift */,
+			);
+			name = "Operation Error";
+			sourceTree = "<group>";
+		};
+		1F771D2A1B6FF0A8009A93D3 /* NSOperations */ = {
+			isa = PBXGroup;
+			children = (
+				1F771D261B6FF082009A93D3 /* Operation Observer */,
+				1F771D281B6FF094009A93D3 /* Operation Queue */,
+				1F771D271B6FF08E009A93D3 /* Operation */,
+				1F771D291B6FF09C009A93D3 /* Operation Error */,
+				1F771D251B6FF077009A93D3 /* Operation Condition */,
+			);
+			name = NSOperations;
+			sourceTree = "<group>";
+		};
 		1FA0F9BF1B3DE5A500480B36 /* Final VC Footer View */ = {
 			isa = PBXGroup;
 			children = (
@@ -365,6 +445,7 @@
 			isa = PBXGroup;
 			children = (
 				1F535DEF1B242164008663DF /* Frameworks */,
+				1F771D2A1B6FF0A8009A93D3 /* NSOperations */,
 				4F8D38D01AE4461C00F42E23 /* Model */,
 				1FCF508D1B070EA6005D8578 /* Data Source & Delegate */,
 				4F8D38CF1AE4461700F42E23 /* View */,
@@ -637,19 +718,28 @@
 			files = (
 				1FF543CC1B26259F007B6B19 /* TemplateInfoViewController.swift in Sources */,
 				4F55B55D1AE480F400679048 /* SJLayout.swift in Sources */,
+				1FF5C6641B6E9D76000D835C /* Operation.swift in Sources */,
 				1F470C281B5FA4E400CECC2C /* SJTextStorage.swift in Sources */,
 				1F1740591B41308400D1CA33 /* Order.swift in Sources */,
 				1FC72AD41B3D6C6400D54C1E /* CreditCardTableViewCell.swift in Sources */,
 				1FCF508F1B070F4C005D8578 /* SJCollectionView.swift in Sources */,
+				1F771D1E1B6F5BAC009A93D3 /* OperationQueue.swift in Sources */,
 				1F88389E1B0D875D00E3BBB6 /* SJLabel.swift in Sources */,
 				1FA0F9C11B3DE98B00480B36 /* SweetAlert.swift in Sources */,
 				1F88389C1B0D731200E3BBB6 /* SJTextField.swift in Sources */,
+				1F771D1A1B6F3EA6009A93D3 /* OperationError.swift in Sources */,
 				1F293BF71B384D1300551A40 /* ShopifyUtilities.swift in Sources */,
+				1F771D1C1B6F436F009A93D3 /* ShopifyGetProduct.swift in Sources */,
 				1F1F77581B3C448700DBD227 /* FinalTableViewController.swift in Sources */,
+				1F771D2E1B6FF965009A93D3 /* BlockObserver.swift in Sources */,
 				4F8D38CC1AE4457800F42E23 /* TemplateModel.swift in Sources */,
 				4F8D38C61AE441F700F42E23 /* SJCollectionViewCell.swift in Sources */,
+				1F771D2C1B6FF18A009A93D3 /* ShopifyGetShippingRate.swift in Sources */,
 				1F58FE661B340F27003E2507 /* CartTableViewCell.swift in Sources */,
+				1F771D201B6F5E2F009A93D3 /* ShopifyCreateCheckout.swift in Sources */,
 				1F17F2901B36BE8A00DBFEBC /* CheckoutInfoTableViewCell.swift in Sources */,
+				1F771D221B6F7A68009A93D3 /* AlertOperation.swift in Sources */,
+				1F771D181B6F3E3A009A93D3 /* NetworkCondition.swift in Sources */,
 				1FA8DC4E1B5CF14B00576175 /* TermsAndConditionsViewController.swift in Sources */,
 				1F232D2F1B196CB200ECD753 /* SJColorCollectionViewController.swift in Sources */,
 				1F293BF21B382AAC00551A40 /* CheckoutTableFooterView.swift in Sources */,
@@ -657,6 +747,7 @@
 				1FF794061B21EEFD000CB14D /* SJColorFontCollectionViewCell.swift in Sources */,
 				1F17F28A1B36B11D00DBFEBC /* CheckoutTableHeaderView.swift in Sources */,
 				4F8D38A61AE440DE00F42E23 /* Silky_Socks.xcdatamodeld in Sources */,
+				1F771D241B6F8258009A93D3 /* OperationObserver.swift in Sources */,
 				1FD558001B2086CA003BDE2A /* SJApprovalViewController.swift in Sources */,
 				1FCF50A11B083D70005D8578 /* SJCollectionViewDelegate.swift in Sources */,
 				1FA0F9BC1B3DAB9A00480B36 /* FinalTableViewControllerFooterView.swift in Sources */,
@@ -667,6 +758,7 @@
 				4FB6C9C11AE4AF70001A6E50 /* SJBottomView.swift in Sources */,
 				1F58FE621B340ED6003E2507 /* CartTableViewController.swift in Sources */,
 				1FCF50951B07EBAB005D8578 /* SJCollectionReusableView.swift in Sources */,
+				1F771D161B6F3E21009A93D3 /* OperationCondition.swift in Sources */,
 				4FB6C9C51AE4B394001A6E50 /* Utilities.swift in Sources */,
 				1FC258AB1B14B60700EAEF20 /* UserCart.swift in Sources */,
 				1F470C301B5FADDF00CECC2C /* SupportViewController.swift in Sources */,

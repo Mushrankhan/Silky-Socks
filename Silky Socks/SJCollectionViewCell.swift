@@ -247,8 +247,10 @@ extension SJCollectionViewCell {
             }
             frame.size = size
         } else if template?.index == 3 { // White tee
-            if device == Device.IPhone6 || device == Device.IPhone6Plus {
+            if device == Device.IPhone6 {
                 point.y += 30
+            } else if device == Device.IPhone6Plus {
+                point.y += 50
             }
             frame.origin = point
         } else if template?.index == 5 { // Black tee

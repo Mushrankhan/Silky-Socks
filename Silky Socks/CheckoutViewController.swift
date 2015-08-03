@@ -266,67 +266,47 @@ extension CheckoutViewController: CheckoutTableFooterViewDelegate {
                 
                 // Get the product
                 let client = BUYClient.sharedClient()
-                client.getProductById(self.product.productID) { [unowned self] (product, _) in
+                let queue = OperationQueue()
+                
+                let op1 = ShopifyGetProduct(client: client, productId: self.product.productID) { (product, _) in
                     
-                    // If product exists
-                    if product != nil {
-                        let variants = product.variants as! [BUYProductVariant]
-                        if variants.count > 0 {
+                    // Get Variant
+                    let variants = product.variants as! [BUYProductVariant]
+                    if variants.count > 0 {
+                        
+                        var variant = variants[0]
+                        if self.product.productType != .Socks {
+                            variant = variants[self.sizesSegmentedControl.selectedSegmentIndex]
+                        }
+
+                        dispatch_async(dispatch_get_main_queue()) {
                             
-                            var variant = variants[0]
-                            if self.product.productType != .Socks {
-                                variant = variants[self.sizesSegmentedControl.selectedSegmentIndex]
-                            }
+                            // Create Cart and add product
+                            let cart = BUYCart()
+                            cart.addProduct(self.product, withVariant: variant)
                             
-                            dispatch_async(dispatch_get_main_queue()) {
+                            // Operation can only be created here because we wait for the cart variable
+                            // And if operation 1 has some error, then this block is never called
+                            let op2 = ShopifyCreateCheckout(client: client, cart: cart, address: self.address, email: self.email!, handler: { (checkout, error) -> Void in
                                 
-                                // Create Cart and add product
-                                let cart = BUYCart()
-                                cart.addProduct(self.product, withVariant: variant)
-                                
-                                // Create Checkout
-                                let checkout = BUYCheckout(cart: cart)
-                                checkout.shippingAddress = self.address
-                                checkout.billingAddress = self.address
-                                checkout.email = self.email
-                                
-                                client.createCheckout(checkout) { (checkout, error) in
-                                    if error == nil {
-                                        client.getShippingRatesForCheckout(checkout) { (rates, status, error) in
-                                            if error == nil {
-                                                dispatch_async(dispatch_get_main_queue()) {
-                                                    SVProgressHUD.dismiss() // Dismiss the loading indicator
-                                                    self.checkout = checkout
-                                                    self.shippingRates = rates as! [BUYShippingRate]
-                                                    self.performSegueWithIdentifier(Storyboard.FinalTVCSegue, sender: nil)
-                                                }
-                                            } else {    // Unable to get shipping rates
-                                                dispatch_async(dispatch_get_main_queue()) {
-                                                    SVProgressHUD.dismiss()
-                                                    SweetAlert().showAlert("Checkout Error", subTitle: "Please Try Again Later", style: .Error)
-                                                }
-                                            }
-                                        }
-                                    } else {    // Unable to create checkout
-                                        dispatch_async(dispatch_get_main_queue()) {
-                                            SVProgressHUD.dismiss()
-                                            SweetAlert().showAlert("Checkout Error", subTitle: "Please Try Again Later", style: .Error)
-                                        }
+                                let op3 = ShopifyGetShippingRate(client: client, checkout: checkout) { rates in
+                                    dispatch_async(dispatch_get_main_queue()) {
+                                        SVProgressHUD.dismiss()
+                                        self.checkout = checkout
+                                        self.shippingRates = rates
+                                        self.performSegueWithIdentifier(Storyboard.FinalTVCSegue, sender: nil)
                                     }
                                 }
-                            }
-                        }
-                    }
-                        
-                    // If not able to find product, then dismiss the loading indicator
-                    else {
-                        dispatch_async(dispatch_get_main_queue()) {
-                            SVProgressHUD.dismiss()
-                            SweetAlert().showAlert("Network Error", subTitle: "Please Try Again Later", style: .Error)
+                                
+                                queue.addOperation(op3)
+                            })
+                            
+                            queue.addOperation(op2)
                         }
                     }
                 }
                 
+                queue.addOperation(op1)
             }
         }
     }
