@@ -25,11 +25,15 @@ class CreditCardTableViewCell: UITableViewCell, UITextFieldDelegate {
     @IBOutlet weak var year: UITextField!               { didSet { setUp(year)  } }
     @IBOutlet weak var cvv: UITextField!                { didSet { setUp(cvv)   } }
     
+    override func awakeFromNib() {
+        selectionStyle = .None
+    }
+    
     final private func setUp(textField: UITextField) {
         textField.delegate = self
         textField.keyboardType = .NumberPad
         NSNotificationCenter.defaultCenter().addObserverForName(UITextFieldTextDidChangeNotification, object: textField, queue: NSOperationQueue.mainQueue()) { [unowned self] notification in
-            if let text = (notification.object as! UITextField).text {
+            if let text = (notification.object as? UITextField)?.text {
                 if textField == self.creditCardNumber {
                     self.delegate?.creditCardTableViewCell(self, didEnterCreditCard: text)
                 } else if textField == self.month {

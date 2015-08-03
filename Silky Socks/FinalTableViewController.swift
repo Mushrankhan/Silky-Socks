@@ -164,9 +164,14 @@ class FinalTableViewController: UITableViewController, CreditCardTableViewCellDe
                         self.tableView.reloadRowsAtIndexPaths([NSIndexPath(forRow: 1, inSection: 2)], withRowAnimation: .Fade)
                     }
                 } else {
-                    dispatch_async(dispatch_get_main_queue()) {
+                    dispatch_async(dispatch_get_main_queue()) { [weak self] in
                         SweetAlert().showAlert("Error Updating", subTitle: "Shipping Method", style: .Error)
-                        checkout.shippingRate = nil
+                        self?.checkout.shippingRate = nil
+                        if let indexPath = self?.selectedShippingIndexPath {
+                            let cell = self?.tableView.cellForRowAtIndexPath(indexPath)
+                            cell?.accessoryType = .None
+                        }
+                        
                     }
                 }
             }
