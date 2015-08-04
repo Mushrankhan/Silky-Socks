@@ -137,7 +137,7 @@ class FinalTableViewController: UITableViewController, CreditCardTableViewCellDe
     
     override func tableView(tableView: UITableView, titleForFooterInSection section: Int) -> String? {
         if section == 1 {
-            return "Please use 'save20' when ordering 12 or more quantities.\nOR use 'save30' when ordering 24 or more quantities."
+            return "Please use 'save12' when ordering 12 or more quantities.\nOR use 'save24' when ordering 24 or more quantities."
         }
         return nil
     }
