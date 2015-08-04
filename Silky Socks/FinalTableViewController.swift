@@ -38,6 +38,7 @@ class FinalTableViewController: UITableViewController, CreditCardTableViewCellDe
         
         // Register Nib
         tableView.registerNib(UINib(nibName: Constants.CreditCardCellNib, bundle: nil), forCellReuseIdentifier: Constants.CreditCardCell)
+        tableView.keyboardDismissMode = .Interactive
         
         // Set up the footer view
         let footerView = NSBundle.mainBundle().loadNibNamed(Constants.FooterViewNibName, owner: nil, options: nil).first as? FinalTableViewControllerFooterView
