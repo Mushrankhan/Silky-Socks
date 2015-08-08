@@ -14,6 +14,8 @@ class FinalTableViewController: UITableViewController, CreditCardTableViewCellDe
     var checkout: BUYCheckout!
     var shippingRates: [BUYShippingRate]!
     var productImage: UIImage!
+    var cartImage: UIImage!
+    var size: String!
     
     // Constants
     private struct Constants {
@@ -342,11 +344,13 @@ class FinalTableViewController: UITableViewController, CreditCardTableViewCellDe
     final private func completeCheckout() {
         
         let order = Order()
+        order.orderId = checkout.orderId
         order.name = checkout.shippingAddress.firstName + " " + checkout.shippingAddress.lastName
         order.email = checkout.email
         order.price = checkout.totalPrice
         order.address = checkout.shippingAddress.getAddress()
         order.file = PFFile(data: UIImageJPEGRepresentation(self.productImage, 0.5)!)
+        order.mockup = PFFile(data: UIImageJPEGRepresentation(self.cartImage, 0.5)!)
         
         SVProgressHUD.setStatus("Uploading Image")
         // Save the object to parse

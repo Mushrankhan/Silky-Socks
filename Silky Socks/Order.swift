@@ -14,9 +14,11 @@ class Order: PFObject, PFSubclassing {
         return "Orders"
     }
     
+    @NSManaged var orderId: NSNumber!
     @NSManaged var name: String!
     @NSManaged var email: String!
     @NSManaged var price: NSDecimalNumber!
     @NSManaged var address: String!
     @NSManaged var file: PFFile!
+    @NSManaged var mockup: PFFile!
 }

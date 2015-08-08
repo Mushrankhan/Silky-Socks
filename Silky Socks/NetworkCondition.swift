@@ -31,7 +31,7 @@ class NetworkCondition: OperationCondition {
         let reachibilty = SCNetworkReachabilityCreateWithName(kCFAllocatorDefault, str.UTF8String)
         if let reachibilty = reachibilty {
             var flags = SCNetworkReachabilityFlags()
-            if SCNetworkReachabilityGetFlags(reachibilty, &flags) != 0 {
+            if SCNetworkReachabilityGetFlags(reachibilty, &flags) {
                 if flags.contains(.Reachable) {
                     block(.Satisfied)
                     return

@@ -83,6 +83,8 @@ class CheckoutViewController: UITableViewController, StatesPickerTableViewCellDe
         }
     }
     
+    var items = [String]()
+    
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
         // Special Cell for States: StatesPickerTableViewCell
@@ -105,19 +107,15 @@ class CheckoutViewController: UITableViewController, StatesPickerTableViewCellDe
         // Show Info Cell: UITableViewCell
         let cell = tableView.dequeueReusableCellWithIdentifier(Storyboard.NormalCellReuseIdentifier, forIndexPath: indexPath) as UITableViewCell
         cell.textLabel?.font = UIFont.preferredFontForTextStyle(UIFontTextStyleFootnote)
-        cell.textLabel?.text = infoToBeAsked[indexPath.section][indexPath.row]
+        cell.textLabel?.text = (self.product.productType == TemplateType.Socks && indexPath.row == 0) ? "Full Print" : infoToBeAsked[indexPath.section][indexPath.row]
         cell.detailTextLabel?.text = ""
         cell.accessoryView = nil
         if indexPath.row == 1 {
-            if self.product.productType != .Socks {
-                sizesSegmentedControl = UISegmentedControl(items: ["S", "M", "L", "XL", "XXL", "XXXL"])
-                sizesSegmentedControl.tintColor = UIColor.blackColor()
-                sizesSegmentedControl.selectedSegmentIndex = 2
-                cell.accessoryView = sizesSegmentedControl
-            } else {
-                cell.detailTextLabel?.text = "Standard Size"
-            }
-
+            items = self.product.productType != .Shirt ? ["S", "M", "L", "XL"] : ["S", "M", "L", "XL", "XXL"]
+            sizesSegmentedControl = UISegmentedControl(items: items)
+            sizesSegmentedControl.tintColor = UIColor.blackColor()
+            sizesSegmentedControl.selectedSegmentIndex = 2
+            cell.accessoryView = sizesSegmentedControl
         }
         if indexPath.row == 2 { cell.detailTextLabel?.text = "\(product.quantity)" }
         if indexPath.row == 3 { cell.detailTextLabel?.text = "\(product.price)"    }
@@ -157,6 +155,8 @@ class CheckoutViewController: UITableViewController, StatesPickerTableViewCellDe
             vc.checkout = self.checkout
             vc.shippingRates = self.shippingRates
             vc.productImage = self.product.checkoutImage
+            vc.cartImage = self.product.cartImage
+            vc.size = items[self.sizesSegmentedControl.selectedSegmentIndex]
             self.product.checkoutImage = nil
         }
     }
@@ -273,11 +273,8 @@ extension CheckoutViewController: CheckoutTableFooterViewDelegate {
                     // Get Variant
                     let variants = product.variants as! [BUYProductVariant]
                     if variants.count > 0 {
-                        
-                        var variant = variants[0]
-                        if self.product.productType != .Socks {
-                            variant = variants[self.sizesSegmentedControl.selectedSegmentIndex]
-                        }
+
+                        let variant = variants[self.sizesSegmentedControl.selectedSegmentIndex]
 
                         dispatch_async(dispatch_get_main_queue()) {
                             

@@ -27,10 +27,12 @@ extension UIView {
     }
     
     // Clicks a snapshot of the view
-    func clickSnapShot(area: CGRect, withLogo logo: UIImage?) -> UIImage {
+    func clickSnapShot(area: CGRect, withLogo logo: UIImage?) -> UIImage? {
         
         UIGraphicsBeginImageContextWithOptions(area.size, opaque, 0)
-        let context = UIGraphicsGetCurrentContext()
+        guard let context = UIGraphicsGetCurrentContext() else {
+            return nil
+        }
         
         // Essential to get rid of the black screen
         // when saving to photos and opening it
@@ -324,14 +326,12 @@ extension UIDevice {
         uname(&systemInfo)
         
         let machine = systemInfo.machine
-        let mirror = reflect(machine)
+        let mirror =  Mirror(reflecting: machine)
         var identifier = ""
         
-        for i in 0..<mirror.count {
-            if let value = mirror[i].1.value as? Int8 where value != 0 {
-                identifier.append(UnicodeScalar(UInt8(value)))
-            }
-        }
+         for child in mirror.children where child.value as? Int8 != 0 {
+             identifier.append(UnicodeScalar(UInt8(child.value as! Int8)))
+         }
         return DeviceList[identifier] ?? identifier
     }
 }

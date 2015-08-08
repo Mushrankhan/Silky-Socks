@@ -180,7 +180,9 @@ extension SJCollectionView: ShareViewCollectionReusableViewDelegate, CartViewCol
         let rect = CGRect(origin: CGPoint(x: 0, y: y), size: size)
         
         dispatch_async(dispatch_get_global_queue(QOS_CLASS_USER_INITIATED, 0)) {
-            let image = cell.clickSnapShot(rect, withLogo: UIImage.SilkySocksLogo())
+            guard let image = cell.clickSnapShot(rect, withLogo: UIImage.SilkySocksLogo()) else {
+                return
+            }
             dispatch_async(dispatch_get_main_queue()) {
                 block(image: image)
             }
