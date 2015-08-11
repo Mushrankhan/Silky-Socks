@@ -15,7 +15,7 @@
 		1F17F2911B36BE8A00DBFEBC /* CheckoutInfoTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1F17F28F1B36BE8A00DBFEBC /* CheckoutInfoTableViewCell.xib */; };
 		1F17F2951B370AB700DBFEBC /* StatesPickerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F17F2931B370AB700DBFEBC /* StatesPickerTableViewCell.swift */; };
 		1F17F2961B370AB700DBFEBC /* StatesPickerTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1F17F2941B370AB700DBFEBC /* StatesPickerTableViewCell.xib */; };
-		1F1B6EA61B41A2960042D1CE /* Buy.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F1B6EA51B41A2960042D1CE /* Buy.framework */; };
+		1F1D15ED1B77B8C7003D61F1 /* Buy.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F1D15EC1B77B8C7003D61F1 /* Buy.framework */; };
 		1F1F77581B3C448700DBD227 /* FinalTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1F77571B3C448700DBD227 /* FinalTableViewController.swift */; };
 		1F232D2F1B196CB200ECD753 /* SJColorCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F232D2E1B196CB200ECD753 /* SJColorCollectionViewController.swift */; };
 		1F293BF21B382AAC00551A40 /* CheckoutTableFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F293BF11B382AAC00551A40 /* CheckoutTableFooterView.swift */; };
@@ -103,7 +103,7 @@
 		1F17F28F1B36BE8A00DBFEBC /* CheckoutInfoTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CheckoutInfoTableViewCell.xib; sourceTree = "<group>"; };
 		1F17F2931B370AB700DBFEBC /* StatesPickerTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatesPickerTableViewCell.swift; sourceTree = "<group>"; };
 		1F17F2941B370AB700DBFEBC /* StatesPickerTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StatesPickerTableViewCell.xib; sourceTree = "<group>"; };
-		1F1B6EA51B41A2960042D1CE /* Buy.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Buy.framework; path = ../Buy.framework; sourceTree = "<group>"; };
+		1F1D15EC1B77B8C7003D61F1 /* Buy.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Buy.framework; sourceTree = "<group>"; };
 		1F1F77571B3C448700DBD227 /* FinalTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FinalTableViewController.swift; sourceTree = "<group>"; };
 		1F232D2E1B196CB200ECD753 /* SJColorCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SJColorCollectionViewController.swift; sourceTree = "<group>"; };
 		1F293BF01B38240000551A40 /* Silky Socks.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "Silky Socks.entitlements"; sourceTree = "<group>"; };
@@ -188,7 +188,7 @@
 			files = (
 				1FECA5841B3019EB009CC8AF /* MessageUI.framework in Frameworks */,
 				DCE5E79073B5F6D74B71392E /* libPods.a in Frameworks */,
-				1F1B6EA61B41A2960042D1CE /* Buy.framework in Frameworks */,
+				1F1D15ED1B77B8C7003D61F1 /* Buy.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -258,7 +258,7 @@
 		1F535DEF1B242164008663DF /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				1F1B6EA51B41A2960042D1CE /* Buy.framework */,
+				1F1D15EC1B77B8C7003D61F1 /* Buy.framework */,
 				1FECA5831B3019EB009CC8AF /* MessageUI.framework */,
 			);
 			name = Frameworks;
@@ -904,7 +904,7 @@
 				GCC_TREAT_INCOMPATIBLE_POINTER_TYPE_WARNINGS_AS_ERRORS = YES;
 				GCC_WARN_NON_VIRTUAL_DESTRUCTOR = YES;
 				INFOPLIST_FILE = "Silky Socks/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = (
 					"-l\"Parse\"",
@@ -963,7 +963,7 @@
 				GCC_TREAT_INCOMPATIBLE_POINTER_TYPE_WARNINGS_AS_ERRORS = YES;
 				GCC_WARN_NON_VIRTUAL_DESTRUCTOR = YES;
 				INFOPLIST_FILE = "Silky Socks/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = (
 					"-l\"Parse\"",

@@ -20,12 +20,16 @@ extension BUYCart {
     
     func addProduct(product: CartProduct, withVariant variant: BUYProductVariant) {
         
-        let buyProduct = BUYLineItem(variant: variant)
-        buyProduct.title = product.name
-        buyProduct.quantity = NSDecimalNumber(integer: product.quantity)
-        buyProduct.price = product.basePrice
-        buyProduct.requiresShipping = variant.requiresShipping
-        addLineItemsObject(buyProduct)
+//        let buyProduct = BUYLineItem(variant: variant)
+//        buyProduct.title = product.name
+//        buyProduct.quantity = NSDecimalNumber(integer: product.quantity)
+//        buyProduct.price = product.basePrice
+//        buyProduct.requiresShipping = variant.requiresShipping
+//        addLineItemsObject(buyProduct)
+        
+        for _ in 0..<product.quantity {
+            addVariant(variant)
+        }
     }
     
     override public var description: String {

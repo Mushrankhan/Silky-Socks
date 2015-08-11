@@ -28,14 +28,28 @@ class CartTableViewCell: UITableViewCell {
     @IBOutlet private weak var quantityLabel: UILabel!
     @IBOutlet private weak var quantityStepper: UIStepper!
     @IBOutlet private weak var priceLabel: UILabel!
-    @IBOutlet weak var basePriceLabel: UILabel! { didSet { basePriceLabel.hidden = true } }
+    @IBOutlet private weak var basePriceLabel: UILabel! { didSet { basePriceLabel.hidden = true } }
+    @IBOutlet weak var sizeSelectionStepper: UISegmentedControl! {
+        didSet {
+            sizeSelectionStepper.removeAllSegments()
+        }
+    }
+    
     
     // Object passed to init self
     var cartProduct: CartProduct? {
         didSet {
+            guard let cartProduct = cartProduct else { return }
+            
             // Set image and product name once
-            cartImgView?.image = cartProduct?.cartImage
-            productNameLabel?.text = cartProduct?.name
+            cartImgView?.image = cartProduct.cartImage
+            productNameLabel?.text = cartProduct.name
+            
+            for (index, size) in cartProduct.sizesAvailable.enumerate() {
+                sizeSelectionStepper.insertSegmentWithTitle(size, atIndex: index, animated: false)
+                sizeSelectionStepper.setWidth(30, forSegmentAtIndex: index)
+            }
+            sizeSelectionStepper.selectedSegmentIndex = 1
             
             // Update UI
             updateUI()
@@ -50,6 +64,7 @@ class CartTableViewCell: UITableViewCell {
         quantityStepper = nil
         priceLabel = nil
         basePriceLabel = nil
+        sizeSelectionStepper = nil
     }
     
     // Stepper IBAction

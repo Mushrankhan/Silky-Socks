@@ -18,7 +18,7 @@ class CartTableViewController: UIViewController, UITableViewDataSource, UITableV
             tableView.delegate = self
             
             // Row height
-            tableView.rowHeight = 150
+            tableView.rowHeight = 160
         }
     }
     

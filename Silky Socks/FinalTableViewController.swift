@@ -400,14 +400,13 @@ class FinalTableViewController: UITableViewController, CreditCardTableViewCellDe
         
         let client = BUYClient.sharedClient()
         var status = BUYStatus.Unknown
-        var completedCheckout = self.checkout
         let semaphore = dispatch_semaphore_create(0)
         
         SVProgressHUD.setStatus("Checking for Completion")
         
         repeat {
-            client.getCompletionStatusOfCheckout(self.checkout, completion: { (checkout, buystatus, error)  in
-                completedCheckout = checkout
+            
+            client.getCompletionStatusOfCheckout(self.checkout, completion: { (buystatus, error) -> Void in
                 status = buystatus
                 dispatch_semaphore_signal(semaphore)
             })
@@ -429,6 +428,6 @@ class FinalTableViewController: UITableViewController, CreditCardTableViewCellDe
                 }
             }
             
-        } while (completedCheckout.token != nil && status != .Failed && status != .Complete)
+        } while (self.checkout.token != nil && status != .Failed && status != .Complete)
     }
 }

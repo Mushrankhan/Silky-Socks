@@ -27,16 +27,12 @@ class CartProduct: NSObject {
     // Image displayed in app
     var cartImage: UIImage!
 
-    // Name
-    private(set) var name: String
+    private(set) var name: String // Name
+    private(set) var productID: String // Shopify product id
+    private(set) var productType: TemplateType! // Product type
     
-    // The product id used to grab the product from Shopify
-    private(set) var productID: String
-    
-    // The Type of the product
-    private(set) var productType: TemplateType!
-    
-    private(set) var productSize: CGSize
+    private(set) var productSize: CGSize // Size in which to be printed
+    private(set) var sizesAvailable: [String]
     
     // The base price changes with the change in quantity
     // Computed property
@@ -53,7 +49,7 @@ class CartProduct: NSObject {
     }
     
     // Storing all the prices
-    // The base price consisit of prices in the array
+    // The base price consists of prices in the array
     private var prices: [NSDecimalNumber]
     
     // The current quantity
@@ -70,7 +66,7 @@ class CartProduct: NSObject {
     
     // MARK: - Init
     
-    init(name: String, productImage: UIImage, prices: [NSDecimalNumber], productID: String, type: TemplateType, size: CGSize){
+    init(name: String, productImage: UIImage, prices: [NSDecimalNumber], productID: String, type: TemplateType, size: CGSize, sizesAvailable: [String]){
         
         self.name = name
         self.productImage = productImage
@@ -80,10 +76,11 @@ class CartProduct: NSObject {
         self.productID = productID
         self.productType = type
         self.productSize = size
+        self.sizesAvailable = sizesAvailable
     }
     
     convenience init(template: Template, withImage image: UIImage) {
-        self.init(name: template.infoCaption, productImage: image, prices: template.prices, productID: template.productId, type: template.type, size: template.productSize)
+        self.init(name: template.infoCaption, productImage: image, prices: template.prices, productID: template.productId, type: template.type, size: template.productSize, sizesAvailable: template.availabilitySizes)
     }
     
     override var description: String {
