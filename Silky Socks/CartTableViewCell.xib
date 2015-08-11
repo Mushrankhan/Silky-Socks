@@ -60,6 +60,9 @@
                             <segment title="Second"/>
                         </segments>
                         <color key="tintColor" red="0.51101219654083252" green="0.54486352205276489" blue="0.54500472545623779" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <connections>
+                            <action selector="sizeSelection:" destination="KGk-i7-Jjw" eventType="valueChanged" id="jrf-bN-8mG"/>
+                        </connections>
                     </segmentedControl>
                     <stepper opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="1" minimumValue="1" maximumValue="100" translatesAutoresizingMaskIntoConstraints="NO" id="VZX-oc-ANl">
                         <rect key="frame" x="159" y="86" width="94" height="29"/>

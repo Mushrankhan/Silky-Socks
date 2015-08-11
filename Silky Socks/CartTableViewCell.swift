@@ -50,6 +50,7 @@ class CartTableViewCell: UITableViewCell {
                 sizeSelectionStepper.setWidth(30, forSegmentAtIndex: index)
             }
             sizeSelectionStepper.selectedSegmentIndex = 1
+            cartProduct.selectedSize = (cartProduct.sizesAvailable[1], 1)
             
             // Update UI
             updateUI()
@@ -80,4 +81,9 @@ class CartTableViewCell: UITableViewCell {
         priceLabel?.text        = "$ \(cartProduct!.price).00"
         basePriceLabel?.text    = "$ \(cartProduct!.basePrice).00/pc"
     }
+    
+    @IBAction func sizeSelection(sender: UISegmentedControl) {
+        cartProduct!.selectedSize = (cartProduct!.sizesAvailable[sender.selectedSegmentIndex], sender.selectedSegmentIndex)
+    }
+    
 }

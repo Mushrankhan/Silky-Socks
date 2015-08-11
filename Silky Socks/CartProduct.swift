@@ -32,7 +32,8 @@ class CartProduct: NSObject {
     private(set) var productType: TemplateType! // Product type
     
     private(set) var productSize: CGSize // Size in which to be printed
-    private(set) var sizesAvailable: [String]
+    private(set) var sizesAvailable: [String] // Different Sizes
+    var selectedSize: (String, Int)?
     
     // The base price changes with the change in quantity
     // Computed property

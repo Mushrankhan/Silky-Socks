@@ -14,6 +14,10 @@ extension UIView {
     // Pin a subview to the edges of the superview
     func pinSubviewToView(subView subView: UIView) {
         
+        if subView.superview == nil {
+            addSubview(subView)
+        }
+        
         addAttributeToView(NSLayoutAttribute.Top, subview: subView)
         addAttributeToView(NSLayoutAttribute.Leading, subview: subView)
         addAttributeToView(NSLayoutAttribute.Bottom, subview: subView)

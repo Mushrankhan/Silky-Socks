@@ -115,11 +115,9 @@ class CartTableViewController: UIViewController, UITableViewDataSource, UITableV
     }
 
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if let identifier = segue.identifier {
-            if identifier == Storyboard.CheckoutSegue {
-                let vc = segue.destinationViewController as! CheckoutViewController
-                vc.product = UserCart.sharedCart[0]
-            }
+        if segue.identifier == Storyboard.CheckoutSegue {
+            let vc = segue.destinationViewController as! CheckoutViewController
+            vc.products = UserCart.sharedCart.cart
         }
     }
 }

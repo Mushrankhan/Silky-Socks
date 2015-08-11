@@ -13,10 +13,10 @@ class ShopifyGetProduct: Operation {
     // MARK: Properties
     
     private var client: BUYClient
-    private var id: String
-    private var handler: (BUYProduct, NSError?) -> Void
+    private var id: [String]
+    private var handler: ([BUYProduct]?, NSError?) -> Void
     
-    init(client: BUYClient, productId: String, handler: (BUYProduct, NSError?) -> Void) {
+    init(client: BUYClient, productId: [String], handler: ([BUYProduct]?, NSError?) -> Void) {
         self.client = client
         self.id = productId
         self.handler = handler
@@ -27,8 +27,9 @@ class ShopifyGetProduct: Operation {
     }
     
     override func execute() {
-        client.getProductById(id) { [weak self] (product, error) in
-            self?.handler(product, error)
+        client.getProductsByIds(id) { [weak self] (products, error) in
+            print(products)
+            self?.handler(products as? [BUYProduct], error)
             self?.finish()
         }
     }

@@ -28,7 +28,7 @@ class UserCart: NSObject {
     }
     
     // User Cart
-    private var cart = [CartProduct]()
+    private(set) var cart = [CartProduct]()
     
     // Override the subscript operator: []
     subscript(index: Int) -> CartProduct? {

@@ -11,10 +11,20 @@ import UIKit
 class CheckoutViewController: UITableViewController, StatesPickerTableViewCellDelegate {
 
     // Product
-    var product: CartProduct!
+    var products: [CartProduct]! {
+        didSet {
+            for product in products {
+                quantity += product.quantity
+                price = price.decimalNumberByAdding(product.price)
+            }
+        }
+    }
+    
+    var quantity = 0
+    var price: NSDecimalNumber = 0
     
     // Placeholders
-    let infoToBeAsked = [["First Name", "Last Name", "Email"], ["Street Address", "Street Address 2", "City", "State", "Zip" ,"Country"], ["Front Only", "Size", "Quantity", "Cost"]]
+    let infoToBeAsked = [["First Name", "Last Name", "Email"], ["Street Address", "Street Address 2", "City", "State", "Zip" ,"Country"], ["Quantity", "Cost"]]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,7 +38,7 @@ class CheckoutViewController: UITableViewController, StatesPickerTableViewCellDe
         
         // Set up the table header view
         let headerView = NSBundle.mainBundle().loadNibNamed("CheckoutTableHeaderView", owner: nil, options: nil).first as! CheckoutTableHeaderView
-        headerView.productImageView.image = product.cartImage
+        headerView.items = products
         tableView.tableHeaderView = headerView
         
         // Next button footer view
@@ -53,14 +63,11 @@ class CheckoutViewController: UITableViewController, StatesPickerTableViewCellDe
         static let NumberOfSections = 3
         static let ContactInfoRows = 3
         static let ShippingInfoRows = 6
-        static let DetialsRows = 4
+        static let DetialsRows = 2
     }
     
     
     // MARK: UITableView Data Source
-
-    // Segmented Control showing the different sizes
-    private var sizesSegmentedControl: UISegmentedControl!
     
     // Index path at which we have the Picker View
     private var indexPathForStatesCell = NSIndexPath(forRow: 3, inSection: 1)
@@ -107,18 +114,18 @@ class CheckoutViewController: UITableViewController, StatesPickerTableViewCellDe
         // Show Info Cell: UITableViewCell
         let cell = tableView.dequeueReusableCellWithIdentifier(Storyboard.NormalCellReuseIdentifier, forIndexPath: indexPath) as UITableViewCell
         cell.textLabel?.font = UIFont.preferredFontForTextStyle(UIFontTextStyleFootnote)
-        cell.textLabel?.text = (self.product.productType == TemplateType.Socks && indexPath.row == 0) ? "Full Print" : infoToBeAsked[indexPath.section][indexPath.row]
-        cell.detailTextLabel?.text = ""
-        cell.accessoryView = nil
-        if indexPath.row == 1 {
-            items = self.product.productType != .Shirt ? ["S", "M", "L", "XL"] : ["S", "M", "L", "XL", "XXL"]
-            sizesSegmentedControl = UISegmentedControl(items: items)
-            sizesSegmentedControl.tintColor = UIColor.blackColor()
-            sizesSegmentedControl.selectedSegmentIndex = 2
-            cell.accessoryView = sizesSegmentedControl
-        }
-        if indexPath.row == 2 { cell.detailTextLabel?.text = "\(product.quantity)" }
-        if indexPath.row == 3 { cell.detailTextLabel?.text = "\(product.price)"    }
+        cell.textLabel?.text = infoToBeAsked[indexPath.section][indexPath.row]
+        //cell.textLabel?.text = (self.product.productType == TemplateType.Socks && indexPath.row == 0) ? "Full Print" : infoToBeAsked[indexPath.section][indexPath.row]
+        //cell.accessoryView = nil
+//        if indexPath.row == 1 {
+//            items = self.product.productType != .Shirt ? ["S", "M", "L", "XL"] : ["S", "M", "L", "XL", "XXL"]
+//            sizesSegmentedControl = UISegmentedControl(items: items)
+//            sizesSegmentedControl.tintColor = UIColor.blackColor()
+//            sizesSegmentedControl.selectedSegmentIndex = 2
+//            cell.accessoryView = sizesSegmentedControl
+//        }
+        if indexPath.row == 0 { cell.detailTextLabel?.text = "\(quantity)" }
+        if indexPath.row == 1 { cell.detailTextLabel?.text = "\(price)"    }
         return cell
     }
     
@@ -154,10 +161,11 @@ class CheckoutViewController: UITableViewController, StatesPickerTableViewCellDe
             let vc = segue.destinationViewController as! FinalTableViewController
             vc.checkout = self.checkout
             vc.shippingRates = self.shippingRates
-            vc.productImage = self.product.checkoutImage
-            vc.cartImage = self.product.cartImage
-            vc.size = items[self.sizesSegmentedControl.selectedSegmentIndex]
-            self.product.checkoutImage = nil
+            vc.products = self.products
+//            vc.productImage = self.products.checkoutImage
+//            vc.cartImage = self.products.cartImage
+            //vc.size = items[self.sizesSegmentedControl.selectedSegmentIndex]
+            //self.product.checkoutImage = nil
         }
     }
     
@@ -175,7 +183,6 @@ class CheckoutViewController: UITableViewController, StatesPickerTableViewCellDe
 // MARK: StatesPickerTableViewCellDelegate
 extension CheckoutViewController {
     func statesPickerTableViewCell(cell: StatesPickerTableViewCell, didSelectState state: String) {
-        print(state)
         selectedState = state
     }
 }
@@ -227,18 +234,18 @@ extension CheckoutViewController: CheckoutTableFooterViewDelegate {
         address.province = selectedState
         address.countryCode = "US"
         
-//        // Testing Purposes
-//        let addr = BUYAddress()
-//        addr.firstName = "Saurabh"
-//        addr.lastName = "Jain"
-//        addr.address1 = "7357 Franklin Avenue"
-//        addr.city = "Los Angeles"
-//        addr.province = "CA"
-//        addr.countryCode = "US"
-//        addr.zip = "90046"
-//        address = addr
-//
-//        self.email = "saurabhj80@gmail.com"
+        // Testing Purposes
+        let addr = BUYAddress()
+        addr.firstName = "Saurabh"
+        addr.lastName = "Jain"
+        addr.address1 = "7357 Franklin Avenue"
+        addr.city = "Los Angeles"
+        addr.province = "CA"
+        addr.countryCode = "US"
+        addr.zip = "90046"
+        address = addr
+
+        self.email = "saurabhj80@gmail.com"
 
         // Invalid address
         if !address.isValid() {
@@ -255,10 +262,10 @@ extension CheckoutViewController: CheckoutTableFooterViewDelegate {
         // Show loading indicator
         SVProgressHUD.showWithStatus("Generating Image")
         
-        dispatch_async(dispatch_get_global_queue(QOS_CLASS_USER_INITIATED, 0)) { [unowned self] in
+//        dispatch_async(dispatch_get_global_queue(QOS_CLASS_USER_INITIATED, 0)) { [unowned self] in
             
-            let size = self.product.productSize
-            self.product.checkoutImage = self.product.productImage.renderImageIntoSize(size)
+//            let size = self.product.productSize
+//            self.product.checkoutImage = self.product.productImage.renderImageIntoSize(size)
             
             dispatch_async(dispatch_get_main_queue()) {
                 
@@ -268,19 +275,52 @@ extension CheckoutViewController: CheckoutTableFooterViewDelegate {
                 let client = BUYClient.sharedClient()
                 let queue = OperationQueue()
                 
-                let op1 = ShopifyGetProduct(client: client, productId: self.product.productID) { (product, _) in
+                let op1 = ShopifyGetProduct(client: client, productId: self.products.map {$0.productID}) { (products, _) in
+                    
+                    guard let products = products else {
+                        let operation = AlertOperation(title: "Something Went Wrong", message: "Please try again later")
+                        operation.showSweetAlert = true
+                        queue.addOperation(operation)
+                        return
+                    }
                     
                     // Get Variant
-                    let variants = product.variants as! [BUYProductVariant]
+                    let variants = (products.map {$0.variants as! [BUYProductVariant]} as [[BUYProductVariant]]).reverse()
+                    
                     if variants.count > 0 {
-
-                        let variant = variants[self.sizesSegmentedControl.selectedSegmentIndex]
-
+                        
+                        var variant = [BUYProductVariant]()
+                        
+                        for (index, v) in variants.enumerate() {
+                            variant.append(v[(self.products[index].selectedSize!).1])
+                        }
+                        
+                        print(variant)
+                        
                         dispatch_async(dispatch_get_main_queue()) {
                             
                             // Create Cart and add product
                             let cart = BUYCart()
-                            cart.addProduct(self.product, withVariant: variant)
+                            
+                            if self.products.count > variant.count {
+                                var dic = [String: BUYProductVariant]()
+                                for (index , product) in self.products.enumerate() {
+                                    if let _ = dic[product.productID] {
+                                        
+                                    } else {
+                                        dic[product.productID] = variant[index]
+                                    }
+                                }
+                                
+                                for product in self.products {
+                                    cart.addProduct(product, withVariant: dic[product.productID]!)
+                                }
+                                
+                            } else {
+                                for (index, v) in variant.enumerate() {
+                                    cart.addProduct(self.products[index], withVariant: v)
+                                }
+                            }
                             
                             // Operation can only be created here because we wait for the cart variable
                             // And if operation 1 has some error, then this block is never called
@@ -305,6 +345,6 @@ extension CheckoutViewController: CheckoutTableFooterViewDelegate {
                 
                 queue.addOperation(op1)
             }
-        }
+//        }
     }
 }

@@ -13,9 +13,7 @@ class FinalTableViewController: UITableViewController, CreditCardTableViewCellDe
     // Passed on from previous VC
     var checkout: BUYCheckout!
     var shippingRates: [BUYShippingRate]!
-    var productImage: UIImage!
-    var cartImage: UIImage!
-    var size: String!
+    var products: [CartProduct]!
     
     // Constants
     private struct Constants {
@@ -218,8 +216,8 @@ class FinalTableViewController: UITableViewController, CreditCardTableViewCellDe
         
         if code.lowercaseString == "save24" || code.lowercaseString == "save12" {
             var quantity = 0
-            for item in self.checkout.lineItems as! [BUYLineItem] {
-                quantity += Int(item.quantity)
+            for product in products {
+                quantity += product.quantity
             }
             
             if code.lowercaseString == "save12" && (quantity < 12 || quantity > 23) {
@@ -231,7 +229,6 @@ class FinalTableViewController: UITableViewController, CreditCardTableViewCellDe
                 SweetAlert().showAlert("Quantity", subTitle: "Discount code cannot be applied", style: .Error)
                 return
             }
-            
         }
         
         // Show loading indicator
@@ -349,8 +346,8 @@ class FinalTableViewController: UITableViewController, CreditCardTableViewCellDe
         order.email = checkout.email
         order.price = checkout.totalPrice
         order.address = checkout.shippingAddress.getAddress()
-        order.file = PFFile(data: UIImageJPEGRepresentation(self.productImage, 0.5)!)
-        order.mockup = PFFile(data: UIImageJPEGRepresentation(self.cartImage, 0.5)!)
+//        order.file = PFFile(data: UIImageJPEGRepresentation(self.productImage, 0.5)!)
+//        order.mockup = PFFile(data: UIImageJPEGRepresentation(self.cartImage, 0.5)!)
         
         SVProgressHUD.setStatus("Uploading Image")
         // Save the object to parse
