@@ -20,6 +20,10 @@ internal let kBoughtProductNotification = "BoughtProductNotification"
 */
 class UserCart: NSObject {
     
+    private struct Constant {
+        static let MaximumSize = 3
+    }
+    
     // Singleton support
     static let sharedCart = UserCart()
     
@@ -40,7 +44,10 @@ class UserCart: NSObject {
     }
     
     // Add Product
-    func addProduct(template: CartProduct) {
+    func addProduct(template: CartProduct) throws {
+        if numberOfItems >= Constant.MaximumSize {
+            throw CartError.MaxItemsReached(Constant.MaximumSize)
+        }
         cart.append(template)
         NSNotificationCenter.defaultCenter().postNotificationName(kAddToCartNotification, object: nil)
     }
@@ -56,3 +63,8 @@ class UserCart: NSObject {
         NSNotificationCenter.defaultCenter().postNotificationName(kBoughtProductNotification, object: nil)
     }
 }
+
+enum CartError: ErrorType {
+    case MaxItemsReached(Int)
+}
+

@@ -21,9 +21,9 @@ class CheckoutInfoTableViewCell: UITableViewCell, UITextFieldDelegate {
     @IBOutlet weak var infoTextField: UITextField! {
         didSet {
             infoTextField.delegate = self
-            NSNotificationCenter.defaultCenter().addObserverForName(UITextFieldTextDidChangeNotification, object: infoTextField, queue: NSOperationQueue.mainQueue()) { [unowned self] notification in
-                if let text = (notification.object as! UITextField).text {
-                    self.delegate?.checkoutInfoTableViewCell(self, didEnterInfo: text)
+            NSNotificationCenter.defaultCenter().addObserverForName(UITextFieldTextDidChangeNotification, object: infoTextField, queue: NSOperationQueue.mainQueue()) { [weak self] notification in
+                if let text = (notification.object as! UITextField).text, strong = self {
+                    strong.delegate?.checkoutInfoTableViewCell(strong, didEnterInfo: text)
                 }
             }
         }

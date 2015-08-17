@@ -19,6 +19,17 @@ class Order: PFObject, PFSubclassing {
     @NSManaged var email: String!
     @NSManaged var price: NSDecimalNumber!
     @NSManaged var address: String!
-    @NSManaged var file: PFFile!
-    @NSManaged var mockup: PFFile!
+    
+    // File one
+    @NSManaged var file1: PFFile!
+    @NSManaged var mockup1: PFFile!
+    
+    // File two
+    @NSManaged var file2: PFFile!
+    @NSManaged var mockup2: PFFile!
+
+    // File three
+    @NSManaged var file3: PFFile!
+    @NSManaged var mockup3: PFFile!
+
 }

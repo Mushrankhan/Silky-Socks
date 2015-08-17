@@ -346,8 +346,15 @@ class FinalTableViewController: UITableViewController, CreditCardTableViewCellDe
         order.email = checkout.email
         order.price = checkout.totalPrice
         order.address = checkout.shippingAddress.getAddress()
-//        order.file = PFFile(data: UIImageJPEGRepresentation(self.productImage, 0.5)!)
-//        order.mockup = PFFile(data: UIImageJPEGRepresentation(self.cartImage, 0.5)!)
+        
+        for product in products {
+            product.checkoutImage = product.productImage.renderImageIntoSize(product.productSize)
+        }
+        
+        for (index, product) in products.enumerate() {
+            order["file\(index+1)"] = PFFile(data: UIImageJPEGRepresentation(product.productImage, 0.5)!)
+            order["mockup\(index+1)"] = PFFile(data: UIImageJPEGRepresentation(product.cartImage, 0.5)!)
+        }
         
         SVProgressHUD.setStatus("Uploading Image")
         // Save the object to parse
@@ -371,7 +378,6 @@ class FinalTableViewController: UITableViewController, CreditCardTableViewCellDe
                         } else {
                             dispatch_async(dispatch_get_main_queue()) {
                                 UIApplication.sharedApplication().endIgnoringInteractionEvents()
-                                order.file = nil
                                 SVProgressHUD.dismiss()
                                 SweetAlert().showAlert("Unable to Process", subTitle: "Please try again", style: .Error)
                             }

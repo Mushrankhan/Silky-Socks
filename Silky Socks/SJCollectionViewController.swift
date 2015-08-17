@@ -303,7 +303,19 @@ extension SJCollectionViewController: SJCollectionViewDelegate, MFMailComposeVie
         
         let product = CartProduct(template: template, withImage: image)
         product.cartImage = cartImage
-        UserCart.sharedCart.addProduct(product)
+        
+        do {
+            try UserCart.sharedCart.addProduct(product)
+        } catch CartError.MaxItemsReached(let size) {
+            
+            let alert = UIAlertController(title: "Error", message: "Cart can have a maximum of \(size) items only", preferredStyle: .Alert)
+            let okayAction = UIAlertAction(title: "Dismiss", style: .Cancel, handler: nil)
+            alert.addAction(okayAction)
+            presentViewController(alert, animated: true, completion: nil)
+            
+        } catch _ {
+            // Condition will never reach here
+        }
     }
     
 //    // Dismiss the mail compose view controller
