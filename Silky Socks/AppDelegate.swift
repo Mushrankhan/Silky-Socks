@@ -26,10 +26,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         SVProgressHUD.setBackgroundColor(UIColor.blackColor())
         SVProgressHUD.setForegroundColor(UIColor.whiteColor())
         SVProgressHUD.setRingThickness(5)
-        
-        // Enable Apple Pay
-        //BUYClient.sharedClient().enableApplePayWithMerchantId(Shopify.ApplePayMerchantId)
-        
+                
         return true
     }
 

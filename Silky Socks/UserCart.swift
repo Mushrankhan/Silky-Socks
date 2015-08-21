@@ -59,7 +59,7 @@ class UserCart: NSObject {
     
     // When a product is bought
     func boughtProduct() {
-        cart.removeAtIndex(0)
+        cart.removeAll()
         NSNotificationCenter.defaultCenter().postNotificationName(kBoughtProductNotification, object: nil)
     }
 }

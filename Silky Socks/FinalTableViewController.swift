@@ -425,7 +425,6 @@ class FinalTableViewController: UITableViewController, CreditCardTableViewCellDe
                     SweetAlert().showAlert("Failed", subTitle: "Try Again", style: .Error)
                 } else if status == .Complete {
                     SweetAlert().showAlert("Success", subTitle: "Congratulations", style: .Success)
-                    // Remove the first item from the cart
                     UserCart.sharedCart.boughtProduct()
                     self.navigationController?.popToViewController(self.navigationController!.viewControllers[1] as UIViewController, animated: true)
                 }

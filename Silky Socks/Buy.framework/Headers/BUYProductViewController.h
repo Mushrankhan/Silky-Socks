@@ -9,9 +9,20 @@
 #import <Buy/Buy.h>
 #import "BUYTheme.h"
 
-@protocol BUYProductViewControllerDelegate;
-
 @interface BUYProductViewController : BUYViewController <BUYThemeable>
+
+/**
+ *  Creates a BUYProductViewController with a BUYClient and a theme
+ *  Note: Use this initializer to instatiate a BUYProdctViewController
+ *  with a custom theme. If you don't need to customize the theme
+ *  use `initWithClient:`
+ *
+ *  @param client A BUYClient configured to your shop
+ *  @param theme  A BUYTheme
+ *
+ *  @return		  A BUYViewController
+ */
+- (instancetype)initWithClient:(BUYClient *)client theme:(BUYTheme *)theme;
 
 /**
  *  Loads the product details
@@ -44,6 +55,14 @@
  *  Returns YES when the view controller is loading data.  loadProduct: or loadWithProduct: should not be called when data is already loading
  */
 @property (nonatomic, assign, readonly) BOOL isLoading;
+
+/**
+ *  This is a convenience method as an alternative to presentViewController: which will force portrait orientation.  This method is only 
+ *  required when presenting from a landscape view controller.
+ *
+ *  @param controller The view controller where the BUYProductViewController is to be presented on
+ */
+- (void)presentPortraitInViewController:(UIViewController *)controller;
 
 @end
 

@@ -10,7 +10,7 @@
 		</data>
 		<key>Headers/BUYApplePayAdditions.h</key>
 		<data>
-		O7xOYpqyI1Q3aZ27adU2K5blGvs=
+		CZGzPB/0T00j5S2caM4uqSvss0U=
 		</data>
 		<key>Headers/BUYApplePayHelpers.h</key>
 		<data>
@@ -26,7 +26,7 @@
 		</data>
 		<key>Headers/BUYCheckout.h</key>
 		<data>
-		FFXMASLanCwuf0R1Z+X9n0l/5jo=
+		De1HdmhZnz/HRuOsfMPvaz0ph+0=
 		</data>
 		<key>Headers/BUYClient+Test.h</key>
 		<data>
@@ -34,7 +34,7 @@
 		</data>
 		<key>Headers/BUYClient.h</key>
 		<data>
-		Uqq5mogA+CcQKrtj9tRBveKVwwo=
+		sxNEOr2fBMxUxi54wQyDs0Zh9nM=
 		</data>
 		<key>Headers/BUYCollection.h</key>
 		<data>
@@ -46,7 +46,7 @@
 		</data>
 		<key>Headers/BUYDiscount.h</key>
 		<data>
-		VPXTmdqGqE+Zn5CpJwKMm7xysDc=
+		aU/DEc3N8FFMmwogVAc5oiXFmhI=
 		</data>
 		<key>Headers/BUYError.h</key>
 		<data>
@@ -54,7 +54,7 @@
 		</data>
 		<key>Headers/BUYGiftCard.h</key>
 		<data>
-		UU78i8ACo9e4t0jKuLGFHLj1rzY=
+		bmP0SHhK3ricQOQVgOmqMVNbue8=
 		</data>
 		<key>Headers/BUYImage.h</key>
 		<data>
@@ -62,11 +62,11 @@
 		</data>
 		<key>Headers/BUYLineItem.h</key>
 		<data>
-		GePlAPlxtPs4rcm0SpQT5Kk1HW8=
+		ed6aniJMKJk8UuteMCVgM0GkRT8=
 		</data>
 		<key>Headers/BUYMaskedCreditCard.h</key>
 		<data>
-		vvbwIhOymvV4jxaVKXy/ieOkCeI=
+		dH2kxUF1GXh6PYw1B211sOhHlM8=
 		</data>
 		<key>Headers/BUYObject.h</key>
 		<data>
@@ -94,7 +94,7 @@
 		</data>
 		<key>Headers/BUYProductViewController.h</key>
 		<data>
-		f4mRy1Msr1Xar+jAnrGrYpwZlik=
+		ENaKN1kNV4F85n2FDYvUvwPo8Jk=
 		</data>
 		<key>Headers/BUYSerializable.h</key>
 		<data>
@@ -102,7 +102,7 @@
 		</data>
 		<key>Headers/BUYShippingRate.h</key>
 		<data>
-		e6s17JYNuGcoMZt4euu4wLi5OoI=
+		liiLExABoKqBe0KfP41zDTqKHso=
 		</data>
 		<key>Headers/BUYShop.h</key>
 		<data>
@@ -114,15 +114,15 @@
 		</data>
 		<key>Headers/BUYTaxLine.h</key>
 		<data>
-		8bhMc7ATMD+PexlRsHC+waITjbk=
+		NAXAtQXs15ANEhFKGpBpB6J8750=
 		</data>
 		<key>Headers/BUYTheme.h</key>
 		<data>
-		fIHyLRzSRRmWhaDqyIV6hNO74xQ=
+		YcN3503YJG+WE94WQ1pqUKl0I0k=
 		</data>
 		<key>Headers/BUYViewController.h</key>
 		<data>
-		A72P/+JHJdvTp2bN5DM6pcN9lpU=
+		7AxesJ1a0OWWv7vczLxJj7y+A9w=
 		</data>
 		<key>Headers/Buy-Bridging-Header.h</key>
 		<data>
@@ -134,7 +134,7 @@
 		</data>
 		<key>Info.plist</key>
 		<data>
-		DKRO8kkujrLAM/Fv859lkVQGPhc=
+		FIGwldiH0yNhobCzpwWAMpWXurk=
 		</data>
 		<key>Modules/module.modulemap</key>
 		<data>
@@ -149,7 +149,7 @@
 		</data>
 		<key>Headers/BUYApplePayAdditions.h</key>
 		<data>
-		O7xOYpqyI1Q3aZ27adU2K5blGvs=
+		CZGzPB/0T00j5S2caM4uqSvss0U=
 		</data>
 		<key>Headers/BUYApplePayHelpers.h</key>
 		<data>
@@ -165,7 +165,7 @@
 		</data>
 		<key>Headers/BUYCheckout.h</key>
 		<data>
-		FFXMASLanCwuf0R1Z+X9n0l/5jo=
+		De1HdmhZnz/HRuOsfMPvaz0ph+0=
 		</data>
 		<key>Headers/BUYClient+Test.h</key>
 		<data>
@@ -173,7 +173,7 @@
 		</data>
 		<key>Headers/BUYClient.h</key>
 		<data>
-		Uqq5mogA+CcQKrtj9tRBveKVwwo=
+		sxNEOr2fBMxUxi54wQyDs0Zh9nM=
 		</data>
 		<key>Headers/BUYCollection.h</key>
 		<data>
@@ -185,7 +185,7 @@
 		</data>
 		<key>Headers/BUYDiscount.h</key>
 		<data>
-		VPXTmdqGqE+Zn5CpJwKMm7xysDc=
+		aU/DEc3N8FFMmwogVAc5oiXFmhI=
 		</data>
 		<key>Headers/BUYError.h</key>
 		<data>
@@ -193,7 +193,7 @@
 		</data>
 		<key>Headers/BUYGiftCard.h</key>
 		<data>
-		UU78i8ACo9e4t0jKuLGFHLj1rzY=
+		bmP0SHhK3ricQOQVgOmqMVNbue8=
 		</data>
 		<key>Headers/BUYImage.h</key>
 		<data>
@@ -201,11 +201,11 @@
 		</data>
 		<key>Headers/BUYLineItem.h</key>
 		<data>
-		GePlAPlxtPs4rcm0SpQT5Kk1HW8=
+		ed6aniJMKJk8UuteMCVgM0GkRT8=
 		</data>
 		<key>Headers/BUYMaskedCreditCard.h</key>
 		<data>
-		vvbwIhOymvV4jxaVKXy/ieOkCeI=
+		dH2kxUF1GXh6PYw1B211sOhHlM8=
 		</data>
 		<key>Headers/BUYObject.h</key>
 		<data>
@@ -233,7 +233,7 @@
 		</data>
 		<key>Headers/BUYProductViewController.h</key>
 		<data>
-		f4mRy1Msr1Xar+jAnrGrYpwZlik=
+		ENaKN1kNV4F85n2FDYvUvwPo8Jk=
 		</data>
 		<key>Headers/BUYSerializable.h</key>
 		<data>
@@ -241,7 +241,7 @@
 		</data>
 		<key>Headers/BUYShippingRate.h</key>
 		<data>
-		e6s17JYNuGcoMZt4euu4wLi5OoI=
+		liiLExABoKqBe0KfP41zDTqKHso=
 		</data>
 		<key>Headers/BUYShop.h</key>
 		<data>
@@ -253,15 +253,15 @@
 		</data>
 		<key>Headers/BUYTaxLine.h</key>
 		<data>
-		8bhMc7ATMD+PexlRsHC+waITjbk=
+		NAXAtQXs15ANEhFKGpBpB6J8750=
 		</data>
 		<key>Headers/BUYTheme.h</key>
 		<data>
-		fIHyLRzSRRmWhaDqyIV6hNO74xQ=
+		YcN3503YJG+WE94WQ1pqUKl0I0k=
 		</data>
 		<key>Headers/BUYViewController.h</key>
 		<data>
-		A72P/+JHJdvTp2bN5DM6pcN9lpU=
+		7AxesJ1a0OWWv7vczLxJj7y+A9w=
 		</data>
 		<key>Headers/Buy-Bridging-Header.h</key>
 		<data>

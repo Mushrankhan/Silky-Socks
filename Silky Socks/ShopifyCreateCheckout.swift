@@ -12,8 +12,8 @@ class ShopifyCreateCheckout: Operation {
     
     private let client: BUYClient
     private let cart: BUYCart
-    private let address: BUYAddress
-    private let email: String
+    private let address: BUYAddress?
+    private let email: String?
     private let handler: (BUYCheckout, NSError?) -> Void
     
     init(client: BUYClient, cart: BUYCart, address: BUYAddress, email: String, handler: (BUYCheckout, NSError?) -> Void) {
@@ -29,9 +29,12 @@ class ShopifyCreateCheckout: Operation {
         
         // Create Checkout
         let checkout = BUYCheckout(cart: cart)
-        checkout.shippingAddress = address
-        checkout.billingAddress = address
-        checkout.email = email
+        
+        if let address = address, email = email {
+            checkout.shippingAddress = address
+            checkout.billingAddress = address
+            checkout.email = email
+        }
         
         client.createCheckout(checkout) { [weak self] (checkout, error) -> Void in
             if error != nil {

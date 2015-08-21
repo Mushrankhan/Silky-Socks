@@ -83,16 +83,11 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="xjd-2g-5CM">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="536"/>
-                                <animations/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            </tableView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OPW-zv-g09">
-                                <rect key="frame" x="0.0" y="536" width="600" height="64"/>
+                                <rect key="frame" x="0.0" y="510" width="600" height="90"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xHj-nF-9La">
-                                        <rect key="frame" x="0.0" y="0.0" width="600" height="64"/>
+                                        <rect key="frame" x="0.0" y="8" width="600" height="38"/>
                                         <animations/>
                                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="22"/>
@@ -104,17 +99,42 @@
                                             <segue destination="9Ft-3Z-Ady" kind="show" identifier="CheckoutSegue" id="7Ho-7j-JSR"/>
                                         </connections>
                                     </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2cX-so-Wji">
+                                        <rect key="frame" x="230" y="50" width="140" height="36"/>
+                                        <animations/>
+                                        <state key="normal" image="applepay"/>
+                                        <connections>
+                                            <action selector="applePayCheckout:" destination="Cxu-xa-GSE" eventType="touchUpInside" id="uhW-7Z-sf7"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <animations/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" red="0.99989169836044312" green="1" blue="0.99988096952438354" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
-                                    <constraint firstItem="xHj-nF-9La" firstAttribute="leading" secondItem="OPW-zv-g09" secondAttribute="leading" id="4Wh-bd-cwN"/>
-                                    <constraint firstAttribute="height" constant="64" id="C2g-NT-4du"/>
-                                    <constraint firstItem="xHj-nF-9La" firstAttribute="top" secondItem="OPW-zv-g09" secondAttribute="top" id="R2b-sO-a0q"/>
-                                    <constraint firstAttribute="bottom" secondItem="xHj-nF-9La" secondAttribute="bottom" id="UaK-n6-7Zi"/>
-                                    <constraint firstAttribute="trailing" secondItem="xHj-nF-9La" secondAttribute="trailing" id="etg-km-yqk"/>
+                                    <constraint firstAttribute="height" constant="90" id="C2g-NT-4du"/>
+                                    <constraint firstItem="xHj-nF-9La" firstAttribute="leading" secondItem="OPW-zv-g09" secondAttribute="leading" id="EdW-WQ-zKh"/>
+                                    <constraint firstItem="xHj-nF-9La" firstAttribute="centerX" secondItem="OPW-zv-g09" secondAttribute="centerX" id="Ml9-Cy-0vx"/>
+                                    <constraint firstItem="2cX-so-Wji" firstAttribute="centerX" secondItem="OPW-zv-g09" secondAttribute="centerX" id="Oxn-5O-DdR"/>
+                                    <constraint firstItem="2cX-so-Wji" firstAttribute="top" secondItem="xHj-nF-9La" secondAttribute="bottom" constant="4" id="QMd-xN-edW"/>
+                                    <constraint firstItem="xHj-nF-9La" firstAttribute="top" secondItem="OPW-zv-g09" secondAttribute="top" constant="8" id="Tcg-oX-R11"/>
+                                    <constraint firstAttribute="trailing" secondItem="xHj-nF-9La" secondAttribute="trailing" id="aVR-Bp-7Ik"/>
+                                    <constraint firstAttribute="bottom" secondItem="2cX-so-Wji" secondAttribute="bottom" constant="4" id="g2X-SY-jAj"/>
+                                    <constraint firstAttribute="trailing" secondItem="xHj-nF-9La" secondAttribute="trailing" id="qUB-KS-DxW"/>
+                                    <constraint firstItem="xHj-nF-9La" firstAttribute="leading" secondItem="OPW-zv-g09" secondAttribute="leading" id="vrT-sz-wiz"/>
                                 </constraints>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="EdW-WQ-zKh"/>
+                                        <exclude reference="aVR-Bp-7Ik"/>
+                                        <exclude reference="QMd-xN-edW"/>
+                                    </mask>
+                                </variation>
                             </view>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="xjd-2g-5CM">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="510"/>
+                                <animations/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </tableView>
                         </subviews>
                         <animations/>
                         <color key="backgroundColor" red="0.99989169836044312" green="1" blue="0.99988096952438354" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -266,4 +286,7 @@
             <point key="canvasLocation" x="4218" y="412"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="applepay" width="140" height="36"/>
+    </resources>
 </document>
