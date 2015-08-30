@@ -95,7 +95,7 @@ class SJCollectionViewController: UIViewController {
         approvalVC.view.frame = hideRect
         
         // Right Bar Button item
-        let cartView = UIButton(frame: CGRect(origin: .zeroPoint, size: CGSize(width: 30, height: 30)))
+        let cartView = UIButton(frame: CGRect(origin: .zero, size: CGSize(width: 30, height: 30)))
         cartView.setImage(UIImage(named: "cart"), forState: .Normal)
         cartView.addTarget(self, action: "cartButtonPressed:", forControlEvents: .TouchUpInside)
         let cartButton = UIBarButtonItem(customView: cartView)

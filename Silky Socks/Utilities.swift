@@ -167,7 +167,7 @@ extension UIImage {
         var image: UIImage?
         autoreleasepool { () -> () in
             UIGraphicsBeginImageContextWithOptions(size, false, 0)
-            let rect = CGRect(origin: .zeroPoint, size: size)
+            let rect = CGRect(origin: .zero, size: size)
             CGContextClearRect(UIGraphicsGetCurrentContext(), rect)
             drawInRect(rect)
             let img = UIGraphicsGetImageFromCurrentImageContext()
@@ -218,14 +218,14 @@ extension UIImage {
 
         // set the blend mode to color burn, and the original image
         CGContextSetBlendMode(context, CGBlendMode.Multiply)
-        let rect = CGRect(origin: .zeroPoint, size: size)
+        let rect = CGRect(origin: .zero, size: size)
         CGContextDrawImage(context, rect, CGImage)
         
         // set a mask that matches the shape of the image, then draw a colored rectangle
         CGContextClipToMask(context, rect, CGImage)
         
         // Draw normal or tiled image
-        tile ? CGContextDrawTiledImage(context, CGRect(origin: .zeroPoint, size: CGSize(width: 125, height: 125)) ,overlayImage.CGImage) : CGContextDrawImage(context, rect, overlayImage.CGImage)
+        tile ? CGContextDrawTiledImage(context, CGRect(origin: .zero, size: CGSize(width: 125, height: 125)) ,overlayImage.CGImage) : CGContextDrawImage(context, rect, overlayImage.CGImage)
         
         // generate a new UIImage from the graphics context we drew onto
         let image = UIGraphicsGetImageFromCurrentImageContext();
@@ -237,7 +237,7 @@ extension UIImage {
     
     func drawTiledImage() -> UIImage {
         UIGraphicsBeginImageContextWithOptions(size, false, 0)
-        let rect = CGRect(origin: .zeroPoint, size: CGSize(width: 125, height: 125))
+        let rect = CGRect(origin: .zero, size: CGSize(width: 125, height: 125))
         CGContextTranslateCTM(UIGraphicsGetCurrentContext(), 0, rect.size.height)
         CGContextScaleCTM(UIGraphicsGetCurrentContext(), 1, -1)
         CGContextDrawTiledImage(UIGraphicsGetCurrentContext(), rect , CGImage)

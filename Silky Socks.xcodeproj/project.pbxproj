@@ -46,7 +46,6 @@
 		1FB66B6C1B711DA000283A9F /* FAQ.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 1FB66B6B1B711DA000283A9F /* FAQ.pdf */; };
 		1FB66B6E1B711DCD00283A9F /* Terms_and_conditions.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 1FB66B6D1B711DCD00283A9F /* Terms_and_conditions.pdf */; };
 		1FBCAD191B87AA8A00BF8FD0 /* Buy.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1FBCAD181B87AA8A00BF8FD0 /* Buy.framework */; };
-		1FBCAD1B1B87ACD900BF8FD0 /* PassKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1FBCAD1A1B87ACD900BF8FD0 /* PassKit.framework */; };
 		1FC258AB1B14B60700EAEF20 /* UserCart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FC258AA1B14B60700EAEF20 /* UserCart.swift */; };
 		1FC72AD41B3D6C6400D54C1E /* CreditCardTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FC72AD21B3D6C6400D54C1E /* CreditCardTableViewCell.swift */; };
 		1FC72AD51B3D6C6400D54C1E /* CreditCardTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1FC72AD31B3D6C6400D54C1E /* CreditCardTableViewCell.xib */; };
@@ -138,7 +137,6 @@
 		1FB66B6B1B711DA000283A9F /* FAQ.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = FAQ.pdf; sourceTree = "<group>"; };
 		1FB66B6D1B711DCD00283A9F /* Terms_and_conditions.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = Terms_and_conditions.pdf; sourceTree = "<group>"; };
 		1FBCAD181B87AA8A00BF8FD0 /* Buy.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Buy.framework; sourceTree = "<group>"; };
-		1FBCAD1A1B87ACD900BF8FD0 /* PassKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PassKit.framework; path = System/Library/Frameworks/PassKit.framework; sourceTree = SDKROOT; };
 		1FC258AA1B14B60700EAEF20 /* UserCart.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserCart.swift; sourceTree = "<group>"; };
 		1FC72AD21B3D6C6400D54C1E /* CreditCardTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreditCardTableViewCell.swift; sourceTree = "<group>"; };
 		1FC72AD31B3D6C6400D54C1E /* CreditCardTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CreditCardTableViewCell.xib; sourceTree = "<group>"; };
@@ -188,7 +186,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1FBCAD1B1B87ACD900BF8FD0 /* PassKit.framework in Frameworks */,
 				1FECA5841B3019EB009CC8AF /* MessageUI.framework in Frameworks */,
 				DCE5E79073B5F6D74B71392E /* libPods.a in Frameworks */,
 				1FBCAD191B87AA8A00BF8FD0 /* Buy.framework in Frameworks */,
@@ -536,7 +533,6 @@
 		B1D24AED7E9578EEC501D2B4 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				1FBCAD1A1B87ACD900BF8FD0 /* PassKit.framework */,
 				1F4D93811B419D63008EAD74 /* libc++.dylib */,
 				A500CDA46CB30110A9692251 /* libPods.a */,
 			);
@@ -614,7 +610,7 @@
 								enabled = 0;
 							};
 							com.apple.Wallet = {
-								enabled = 1;
+								enabled = 0;
 							};
 						};
 					};
@@ -914,41 +910,10 @@
 				INFOPLIST_FILE = "Silky Socks/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				OTHER_LDFLAGS = (
-					"-l\"Parse\"",
-					"-l\"Pods-Bolts\"",
-					"-l\"Pods-Parse\"",
-					"-l\"Pods-RKNotificationHub\"",
-					"-l\"Pods-SVProgressHUD\"",
-					"-l\"sqlite3\"",
-					"-l\"z\"",
-					"-framework",
-					"\"AudioToolbox\"",
-					"-framework",
-					"\"CFNetwork\"",
-					"-framework",
-					"\"CoreGraphics\"",
-					"-framework",
-					"\"CoreLocation\"",
-					"-framework",
-					"\"QuartzCore\"",
-					"-framework",
-					"\"Security\"",
-					"-framework",
-					"\"StoreKit\"",
-					"-framework",
-					"\"SystemConfiguration\"",
-					"-weak_framework",
-					"\"Accounts\"",
-					"-weak_framework",
-					"\"Social\"",
-					"-all_load",
-					"$(inherited)",
-					"-lstdc++",
-				);
+				OTHER_LDFLAGS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.fullstak.www.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "ef683a31-3341-4bea-ada6-6f703de239e6";
+				PROVISIONING_PROFILE = "15b90164-f0d5-4c63-8e33-72600167c824";
 				SWIFT_OBJC_BRIDGING_HEADER = "$(PROJECT_DIR)/Silky Socks/BridgingHeader.h";
 				TARGETED_DEVICE_FAMILY = 1;
 				WARNING_CFLAGS = "-Wundeclared-selector";
@@ -974,41 +939,10 @@
 				INFOPLIST_FILE = "Silky Socks/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				OTHER_LDFLAGS = (
-					"-l\"Parse\"",
-					"-l\"Pods-Bolts\"",
-					"-l\"Pods-Parse\"",
-					"-l\"Pods-RKNotificationHub\"",
-					"-l\"Pods-SVProgressHUD\"",
-					"-l\"sqlite3\"",
-					"-l\"z\"",
-					"-framework",
-					"\"AudioToolbox\"",
-					"-framework",
-					"\"CFNetwork\"",
-					"-framework",
-					"\"CoreGraphics\"",
-					"-framework",
-					"\"CoreLocation\"",
-					"-framework",
-					"\"QuartzCore\"",
-					"-framework",
-					"\"Security\"",
-					"-framework",
-					"\"StoreKit\"",
-					"-framework",
-					"\"SystemConfiguration\"",
-					"-weak_framework",
-					"\"Accounts\"",
-					"-weak_framework",
-					"\"Social\"",
-					"-all_load",
-					"$(inherited)",
-					"-lstdc++",
-				);
+				OTHER_LDFLAGS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.fullstak.www.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "ef683a31-3341-4bea-ada6-6f703de239e6";
+				PROVISIONING_PROFILE = "15b90164-f0d5-4c63-8e33-72600167c824";
 				SWIFT_OBJC_BRIDGING_HEADER = "$(PROJECT_DIR)/Silky Socks/BridgingHeader.h";
 				TARGETED_DEVICE_FAMILY = 1;
 				WARNING_CFLAGS = "-Wundeclared-selector";

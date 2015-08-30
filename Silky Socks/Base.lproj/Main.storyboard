@@ -1,14 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="8173.3" systemVersion="15A244d" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="k7O-Bn-r5J">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="8187.4" systemVersion="15A263e" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="k7O-Bn-r5J">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8142"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8151.3"/>
     </dependencies>
-    <customFonts key="customFonts">
-        <mutableArray key="HelveticaNeue.ttc">
-            <string>HelveticaNeue</string>
-        </mutableArray>
-    </customFonts>
     <scenes>
         <!--Navigation Controller-->
         <scene sceneID="dtO-rj-CIP">
@@ -84,54 +79,65 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OPW-zv-g09">
-                                <rect key="frame" x="0.0" y="510" width="600" height="90"/>
+                                <rect key="frame" x="0.0" y="492" width="600" height="108"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xHj-nF-9La">
-                                        <rect key="frame" x="0.0" y="8" width="600" height="38"/>
-                                        <animations/>
-                                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="22"/>
-                                        <state key="normal" title="CheckOut">
-                                            <color key="titleColor" red="0.99989169836044312" green="1" blue="0.99988096952438354" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <connections>
-                                            <segue destination="9Ft-3Z-Ady" kind="show" identifier="CheckoutSegue" id="7Ho-7j-JSR"/>
-                                        </connections>
-                                    </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2cX-so-Wji">
-                                        <rect key="frame" x="230" y="50" width="140" height="36"/>
+                                        <rect key="frame" x="230" y="8" width="140" height="42"/>
                                         <animations/>
                                         <state key="normal" image="applepay"/>
                                         <connections>
                                             <action selector="applePayCheckout:" destination="Cxu-xa-GSE" eventType="touchUpInside" id="uhW-7Z-sf7"/>
                                         </connections>
                                     </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xHj-nF-9La">
+                                        <rect key="frame" x="230" y="58" width="140" height="42"/>
+                                        <animations/>
+                                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                        <state key="normal" title="CheckOut">
+                                            <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                <integer key="value" value="5"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <segue destination="9Ft-3Z-Ady" kind="show" identifier="CheckoutSegue" id="7Ho-7j-JSR"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <animations/>
                                 <color key="backgroundColor" red="0.99989169836044312" green="1" blue="0.99988096952438354" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="90" id="C2g-NT-4du"/>
+                                    <constraint firstAttribute="bottom" secondItem="xHj-nF-9La" secondAttribute="bottom" constant="8" id="0i1-ya-6Wy"/>
+                                    <constraint firstItem="2cX-so-Wji" firstAttribute="top" secondItem="OPW-zv-g09" secondAttribute="top" constant="8" id="7sd-VU-tEt"/>
+                                    <constraint firstItem="xHj-nF-9La" firstAttribute="width" secondItem="2cX-so-Wji" secondAttribute="width" id="Ajs-Db-fhM"/>
+                                    <constraint firstAttribute="height" constant="108" id="C2g-NT-4du"/>
                                     <constraint firstItem="xHj-nF-9La" firstAttribute="leading" secondItem="OPW-zv-g09" secondAttribute="leading" id="EdW-WQ-zKh"/>
-                                    <constraint firstItem="xHj-nF-9La" firstAttribute="centerX" secondItem="OPW-zv-g09" secondAttribute="centerX" id="Ml9-Cy-0vx"/>
+                                    <constraint firstItem="xHj-nF-9La" firstAttribute="leading" secondItem="2cX-so-Wji" secondAttribute="leading" id="IQX-bU-3mE"/>
                                     <constraint firstItem="2cX-so-Wji" firstAttribute="centerX" secondItem="OPW-zv-g09" secondAttribute="centerX" id="Oxn-5O-DdR"/>
                                     <constraint firstItem="2cX-so-Wji" firstAttribute="top" secondItem="xHj-nF-9La" secondAttribute="bottom" constant="4" id="QMd-xN-edW"/>
-                                    <constraint firstItem="xHj-nF-9La" firstAttribute="top" secondItem="OPW-zv-g09" secondAttribute="top" constant="8" id="Tcg-oX-R11"/>
+                                    <constraint firstItem="xHj-nF-9La" firstAttribute="centerX" secondItem="OPW-zv-g09" secondAttribute="centerX" id="SA8-gy-aQb"/>
+                                    <constraint firstItem="xHj-nF-9La" firstAttribute="height" secondItem="2cX-so-Wji" secondAttribute="height" id="UfE-1i-uXF"/>
+                                    <constraint firstItem="xHj-nF-9La" firstAttribute="trailing" secondItem="2cX-so-Wji" secondAttribute="trailing" id="Zce-dZ-qIa"/>
                                     <constraint firstAttribute="trailing" secondItem="xHj-nF-9La" secondAttribute="trailing" id="aVR-Bp-7Ik"/>
-                                    <constraint firstAttribute="bottom" secondItem="2cX-so-Wji" secondAttribute="bottom" constant="4" id="g2X-SY-jAj"/>
-                                    <constraint firstAttribute="trailing" secondItem="xHj-nF-9La" secondAttribute="trailing" id="qUB-KS-DxW"/>
-                                    <constraint firstItem="xHj-nF-9La" firstAttribute="leading" secondItem="OPW-zv-g09" secondAttribute="leading" id="vrT-sz-wiz"/>
+                                    <constraint firstAttribute="bottom" secondItem="2cX-so-Wji" secondAttribute="bottom" constant="46" id="g2X-SY-jAj"/>
                                 </constraints>
                                 <variation key="default">
                                     <mask key="constraints">
-                                        <exclude reference="EdW-WQ-zKh"/>
-                                        <exclude reference="aVR-Bp-7Ik"/>
                                         <exclude reference="QMd-xN-edW"/>
+                                        <exclude reference="g2X-SY-jAj"/>
+                                        <exclude reference="EdW-WQ-zKh"/>
+                                        <exclude reference="IQX-bU-3mE"/>
+                                        <exclude reference="Zce-dZ-qIa"/>
+                                        <exclude reference="aVR-Bp-7Ik"/>
                                     </mask>
                                 </variation>
                             </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="xjd-2g-5CM">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="510"/>
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="492"/>
                                 <animations/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </tableView>
@@ -149,7 +155,7 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="checkOutButton" destination="xHj-nF-9La" id="rSP-Qj-Eh7"/>
+                        <outlet property="paymentOptionsView" destination="OPW-zv-g09" id="uss-X3-zQa"/>
                         <outlet property="tableView" destination="xjd-2g-5CM" id="0Oz-GS-JNi"/>
                     </connections>
                 </viewController>
@@ -287,6 +293,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="applepay" width="140" height="36"/>
+        <image name="applepay" width="140" height="42"/>
     </resources>
 </document>

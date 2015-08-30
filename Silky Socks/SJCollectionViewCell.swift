@@ -285,7 +285,7 @@ extension SJCollectionViewCell {
         }
         
         // Create the text label
-        let sj_label = SJLabel(frame: .zeroRect, text: text, font: font)
+        let sj_label = SJLabel(frame: .zero, text: text, font: font)
         sj_label.frame.size.width = CGRectGetWidth(boundingRectView!.frame)
         sj_label.textColor = color
         sj_label.backgroundColor = UIColor.clearColor()

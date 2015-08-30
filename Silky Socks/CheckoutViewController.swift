@@ -162,10 +162,6 @@ class CheckoutViewController: UITableViewController, StatesPickerTableViewCellDe
             vc.checkout = self.checkout
             vc.shippingRates = self.shippingRates
             vc.products = self.products
-//            vc.productImage = self.products.checkoutImage
-//            vc.cartImage = self.products.cartImage
-            //vc.size = items[self.sizesSegmentedControl.selectedSegmentIndex]
-            //self.product.checkoutImage = nil
         }
     }
     
@@ -234,18 +230,18 @@ extension CheckoutViewController: CheckoutTableFooterViewDelegate {
         address.province = selectedState
         address.countryCode = "US"
         
-        // Testing Purposes
-        let addr = BUYAddress()
-        addr.firstName = "Saurabh"
-        addr.lastName = "Jain"
-        addr.address1 = "7357 Franklin Avenue"
-        addr.city = "Los Angeles"
-        addr.province = "CA"
-        addr.countryCode = "US"
-        addr.zip = "90046"
-        address = addr
-
-        self.email = "saurabhj80@gmail.com"
+//        // Testing Purposes
+//        let addr = BUYAddress()
+//        addr.firstName = "Saurabh"
+//        addr.lastName = "Jain"
+//        addr.address1 = "7357 Franklin Avenue"
+//        addr.city = "Los Angeles"
+//        addr.province = "CA"
+//        addr.countryCode = "US"
+//        addr.zip = "90046"
+//        address = addr
+//
+//        self.email = "saurabhj80@gmail.com"
 
         // Invalid address
         if !address.isValid() {
@@ -260,91 +256,78 @@ extension CheckoutViewController: CheckoutTableFooterViewDelegate {
         }
         
         // Show loading indicator
-        SVProgressHUD.showWithStatus("Generating Image")
+        SVProgressHUD.showWithStatus("Loading")
         
-//        dispatch_async(dispatch_get_global_queue(QOS_CLASS_USER_INITIATED, 0)) { [unowned self] in
+        // Get the product
+        let client = BUYClient.sharedClient()
+        let queue = OperationQueue()
+        
+        let op1 = ShopifyGetProduct(client: client, productId: self.products.map {$0.productID}) { (products, _) in
             
-//            let size = self.product.productSize
-//            self.product.checkoutImage = self.product.productImage.renderImageIntoSize(size)
+            guard let products = products else {
+                let operation = AlertOperation(title: "Something Went Wrong", message: "Please try again later")
+                operation.showSweetAlert = true
+                queue.addOperation(operation)
+                return
+            }
             
-            dispatch_async(dispatch_get_main_queue()) {
+            // Get Variant
+            let variants = (products.map {$0.variants as! [BUYProductVariant]} as [[BUYProductVariant]]).reverse()
+            
+            if variants.count > 0 {
                 
-                SVProgressHUD.setStatus("Loading")
-                
-                // Get the product
-                let client = BUYClient.sharedClient()
-                let queue = OperationQueue()
-                
-                let op1 = ShopifyGetProduct(client: client, productId: self.products.map {$0.productID}) { (products, _) in
-                    
-                    guard let products = products else {
-                        let operation = AlertOperation(title: "Something Went Wrong", message: "Please try again later")
-                        operation.showSweetAlert = true
-                        queue.addOperation(operation)
-                        return
-                    }
-                    
-                    // Get Variant
-                    let variants = (products.map {$0.variants as! [BUYProductVariant]} as [[BUYProductVariant]]).reverse()
-                    
-                    if variants.count > 0 {
-                        
-                        var variant = [BUYProductVariant]()
-                        
-                        for (index, v) in variants.enumerate() {
-                            variant.append(v[(self.products[index].selectedSize!).1])
-                        }
-                        
-                        print(variant)
-                        
-                        dispatch_async(dispatch_get_main_queue()) {
-                            
-                            // Create Cart and add product
-                            let cart = BUYCart()
-                            
-                            if self.products.count > variant.count {
-                                var dic = [String: BUYProductVariant]()
-                                for (index , product) in self.products.enumerate() {
-                                    if let _ = dic[product.productID] {
-                                        
-                                    } else {
-                                        dic[product.productID] = variant[index]
-                                    }
-                                }
-                                
-                                for product in self.products {
-                                    cart.addProduct(product, withVariant: dic[product.productID]!)
-                                }
-                                
-                            } else {
-                                for (index, v) in variant.enumerate() {
-                                    cart.addProduct(self.products[index], withVariant: v)
-                                }
-                            }
-                            
-                            // Operation can only be created here because we wait for the cart variable
-                            // And if operation 1 has some error, then this block is never called
-                            let op2 = ShopifyCreateCheckout(client: client, cart: cart, address: self.address, email: self.email!, handler: { (checkout, error) -> Void in
-                                
-                                let op3 = ShopifyGetShippingRate(client: client, checkout: checkout) { rates in
-                                    dispatch_async(dispatch_get_main_queue()) {
-                                        SVProgressHUD.dismiss()
-                                        self.checkout = checkout
-                                        self.shippingRates = rates
-                                        self.performSegueWithIdentifier(Storyboard.FinalTVCSegue, sender: nil)
-                                    }
-                                }
-                                
-                                queue.addOperation(op3)
-                            })
-                            
-                            queue.addOperation(op2)
-                        }
-                    }
+                var variant = [BUYProductVariant]()
+                for (index, v) in variants.enumerate() {
+                    variant.append(v[(self.products[index].selectedSize!).1])
                 }
                 
-                queue.addOperation(op1)
+                dispatch_async(dispatch_get_main_queue()) {
+                    
+                    // Create Cart and add product
+                    let cart = BUYCart()
+                    
+                    if self.products.count > variant.count {
+                        var dic = [String: BUYProductVariant]()
+                        for (index , product) in self.products.enumerate() {
+                            if let _ = dic[product.productID] {
+                                
+                            } else {
+                                dic[product.productID] = variant[index]
+                            }
+                        }
+                        
+                        for product in self.products {
+                            cart.addProduct(product, withVariant: dic[product.productID]!)
+                        }
+                        
+                    } else {
+                        for (index, v) in variant.enumerate() {
+                            cart.addProduct(self.products[index], withVariant: v)
+                        }
+                    }
+                    
+                    // Operation can only be created here because we wait for the cart variable
+                    // And if operation 1 has some error, then this block is never called
+                    let op2 = ShopifyCreateCheckout(client: client, cart: cart, address: self.address, email: self.email!) { (checkout, error) in
+                        
+                        let op3 = ShopifyGetShippingRate(client: client, checkout: checkout) { rates in
+                            dispatch_async(dispatch_get_main_queue()) {
+                                SVProgressHUD.dismiss()
+                                self.checkout = checkout
+                                self.shippingRates = rates
+                                self.performSegueWithIdentifier(Storyboard.FinalTVCSegue, sender: nil)
+                            }
+                        }
+                        
+                        queue.addOperation(op3)
+                    }
+                    
+                    queue.addOperation(op2)
+                }
             }
-//        }
+        }
+        
+        queue.addOperation(op1)
     }
+    
 }

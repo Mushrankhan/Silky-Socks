@@ -28,8 +28,7 @@ class CartTableViewController: UIViewController, UITableViewDataSource, UITableV
         }
     }
     
-    // Cart Check Out Button
-    @IBOutlet weak var checkOutButton: UIButton!
+    @IBOutlet weak var paymentOptionsView: UIView!
     
     // Cart Empty Label
     private var cartEmptyLabel: UILabel!
@@ -55,8 +54,8 @@ class CartTableViewController: UIViewController, UITableViewDataSource, UITableV
         NSNotificationCenter.defaultCenter().addObserverForName(kBoughtProductNotification, object: nil, queue: NSOperationQueue.mainQueue()) { [weak self] _ in
             self?.tableView.reloadData()
             self?.tableView.tableHeaderView = self?.numberOfItemsInCart == 0 ? self?.cartEmptyLabel : nil
-            UIView.animateWithDuration(0.5) {
-                self?.checkOutButton.alpha = 0
+            UIView.animateWithDuration(0.3) {
+                self?.paymentOptionsView.alpha = 0
             }
         }
         
@@ -64,13 +63,19 @@ class CartTableViewController: UIViewController, UITableViewDataSource, UITableV
         cartEmptyLabel = UILabel(frame: tableView.bounds)
         cartEmptyLabel.text = "Cart is Empty"
         cartEmptyLabel.textAlignment = .Center
-        cartEmptyLabel.font = UIFont(name: "HelveticaNeue-Light", size: 48)
+        cartEmptyLabel.textColor = UIColor.getColor(red: 20, green: 20, blue: 20, alpha: 1)
+        if #available(iOS 9.0, *) {
+            cartEmptyLabel.font = UIFont.preferredFontForTextStyle(UIFontTextStyleTitle1)
+        } else {
+            // Fallback on earlier versions
+            cartEmptyLabel.font = UIFont.preferredFontForTextStyle(UIFontTextStyleHeadline)
+        }
         
         // Header view
         tableView.tableHeaderView = numberOfItemsInCart == 0 ? cartEmptyLabel : nil
         
         // Show the alpha button
-        checkOutButton.alpha = 1
+        paymentOptionsView.alpha = 1
         
         // Edit Button
         navigationItem.rightBarButtonItem = self.editButtonItem()
@@ -106,9 +111,8 @@ class CartTableViewController: UIViewController, UITableViewDataSource, UITableV
             // then show the label
             if numberOfItemsInCart == 0 {
                 tableView.tableHeaderView = cartEmptyLabel
-                // Hide the check out button
-                UIView.animateWithDuration(0.5) { [unowned self] in
-                    self.checkOutButton.alpha = 0
+                UIView.animateWithDuration(0.3) { [unowned self] in
+                    self.paymentOptionsView.alpha = 0
                 }
             }
         }
@@ -129,22 +133,39 @@ class CartTableViewController: UIViewController, UITableViewDataSource, UITableV
     
     // MARK: - Apple Pay
     
-    var applePayhelper: BUYApplePayHelpers?
+    private struct ApplePay {
+        static let Identifier = "merchant.com.danny-silkysocks"
+    }
+    
+    private var applePayhelper: BUYApplePayHelpers?
+    private var checkout: BUYCheckout?
+    
+    private lazy var request: PKPaymentRequest = {
+        let request = PKPaymentRequest()
+        request.supportedNetworks = [PKPaymentNetworkAmex, PKPaymentNetworkMasterCard, PKPaymentNetworkVisa]
+        request.countryCode = "US"
+        request.currencyCode = "USD"
+        request.merchantIdentifier = ApplePay.Identifier
+        request.merchantCapabilities = .Capability3DS
+        request.requiredShippingAddressFields = .All
+        return request
+    }()
     
     @IBAction func applePayCheckout(sender: UIButton) {
         
         let paymentNetworks = [PKPaymentNetworkAmex, PKPaymentNetworkMasterCard, PKPaymentNetworkVisa]
-        if PKPaymentAuthorizationViewController.canMakePaymentsUsingNetworks(paymentNetworks) {
+        if PKPaymentAuthorizationViewController.canMakePayments() && PKPaymentAuthorizationViewController.canMakePaymentsUsingNetworks(paymentNetworks) {
             
             // Create Checkout
-            
             let client = BUYClient.sharedClient()
             let queue = OperationQueue()
+            SVProgressHUD.showWithStatus("Creating Order")
             
-            SVProgressHUD.showWithStatus("Creating Order");
+            // Fetch Products
             let products = ShopifyGetProduct(client: client, productId: UserCart.sharedCart.cart.map {$0.productID}, handler: { (products, error) in
                 
                 guard let products = products else {
+                    SVProgressHUD.dismiss()
                     let operation = AlertOperation(title: "Something Went Wrong", message: "Please try again later")
                     operation.showSweetAlert = true
                     queue.addOperation(operation)
@@ -153,7 +174,6 @@ class CartTableViewController: UIViewController, UITableViewDataSource, UITableV
                 
                 // Get Variant
                 let variants = (products.map {$0.variants as! [BUYProductVariant]} as [[BUYProductVariant]]).reverse()
-
                 
                 if variants.count > 0 {
                     
@@ -188,75 +208,93 @@ class CartTableViewController: UIViewController, UITableViewDataSource, UITableV
                             }
                         }
                         
-                        var checkout = BUYCheckout(cart: cart)
-                        
-                        client.createCheckout(checkout, completion: { (acheckout, error) -> Void in
+                        // Create checkout
+                        self.checkout = BUYCheckout(cart: cart)
+                        client.createCheckout(self.checkout, completion: { (acheckout, error) -> Void in
                             
-                            checkout = acheckout
-                            
-                            self.applePayhelper = BUYApplePayHelpers(client: client, checkout: checkout)
-                            
-                            let request = PKPaymentRequest()
-                            request.supportedNetworks = [PKPaymentNetworkAmex, PKPaymentNetworkMasterCard, PKPaymentNetworkVisa]
-                            request.countryCode = "US"
-                            request.currencyCode = "USD"
-                            request.merchantIdentifier = "merchant.com.danny-silkysocks"
-                            request.merchantCapabilities = .Capability3DS
-                            request.requiredShippingAddressFields = .All
-                            
-                            for product in self.products {
-                                let item = PKPaymentSummaryItem(label: product.name, amount: product.price)
-                                request.paymentSummaryItems.append(item)
+                            if error != nil {
+                                SVProgressHUD.dismiss()
+                                let operation = AlertOperation(title: "Error Checking Out", message: "Please try again later")
+                                operation.showSweetAlert = true
+                                queue.addOperation(operation)
+                                return
                             }
                             
-                            let total = PKPaymentSummaryItem(label: "Silky Socks", amount: checkout.totalPrice)
-                            request.paymentSummaryItems.append(total)
+                            self.checkout = acheckout
+                            self.applePayhelper = BUYApplePayHelpers(client: client, checkout: self.checkout)
+                            self.request.paymentSummaryItems = self.checkout?.buy_summaryItems() as! [PKPaymentSummaryItem]
                             
-                            let viewController = PKPaymentAuthorizationViewController(paymentRequest: request)
+                            // Create and present the Apple Pay view controller
+                            let viewController = PKPaymentAuthorizationViewController(paymentRequest: self.request)
                             viewController.delegate = self
                             self.presentViewController(viewController, animated: true, completion: nil)
                             
                             SVProgressHUD.dismiss()
-
                         })
-                        
                     }
-                    
                 }
-
             })
             
             queue.addOperation(products)
             
+        } else {
+            // Apple pay not supported
+            let action = UIAlertAction(title: "Dismiss", style: .Cancel, handler: nil)
+            let sheet = UIAlertController(title: "Apple Pay Not Supported", message: nil, preferredStyle: .Alert)
+            sheet.addAction(action)
+            presentViewController(sheet, animated: true, completion: nil)
         }
     }
     
-    
+    // Complete transaction
     func paymentAuthorizationViewController(controller: PKPaymentAuthorizationViewController, didAuthorizePayment payment: PKPayment, completion: (PKPaymentAuthorizationStatus) -> Void) {
         
+        let order = Order()
+        order.orderId = checkout!.orderId
+        order.name = checkout!.shippingAddress.firstName + " " + checkout!.shippingAddress.lastName
+        order.email = checkout!.email
+        order.price = checkout!.totalPrice
+        order.address = checkout!.shippingAddress.getAddress()
+        
+        for product in products {
+            product.checkoutImage = product.productImage.renderImageIntoSize(product.productSize)
+        }
+        
+        for (index, product) in products.enumerate() {
+            order["file\(index+1)"] = PFFile(data: UIImageJPEGRepresentation(product.productImage, 0.5)!)
+            order["mockup\(index+1)"] = PFFile(data: UIImageJPEGRepresentation(product.cartImage, 0.5)!)
+        }
+        
+        order.saveInBackgroundWithBlock { (success, error) -> Void in
+            if success {
+                self.applePayhelper?.updateAndCompleteCheckoutWithPayment(payment) { status in
+                    completion(status)
+                    if status == .Success {
+                        UserCart.sharedCart.boughtProduct()
+                    }
+                }
+            } else {
+                print("Error uploading designs")
+                completion(.Failure)
+            }
+        }
     }
     
+    // When apple pay done/cancel
     func paymentAuthorizationViewControllerDidFinish(controller: PKPaymentAuthorizationViewController) {
         dismissViewControllerAnimated(true, completion: nil)
     }
-    
-    func paymentAuthorizationViewControllerWillAuthorizePayment(controller: PKPaymentAuthorizationViewController) {
-        
-    }
 
+    // Shipping Method
     func paymentAuthorizationViewController(controller: PKPaymentAuthorizationViewController, didSelectShippingMethod shippingMethod: PKShippingMethod, completion: (PKPaymentAuthorizationStatus, [PKPaymentSummaryItem]) -> Void) {
         self.applePayhelper?.updateCheckoutWithShippingMethod(shippingMethod, completion: { (status, items) -> Void in
             completion(status, items as! [PKPaymentSummaryItem])
         })
     }
     
+    // Shipping Address
     func paymentAuthorizationViewController(controller: PKPaymentAuthorizationViewController, didSelectShippingAddress address: ABRecord, completion: (PKPaymentAuthorizationStatus, [PKShippingMethod], [PKPaymentSummaryItem]) -> Void) {
-        self.applePayhelper?.updateCheckoutWithAddress(address, completion: { (status, shipping, summary) -> Void in
-            print(shipping)
-            print(summary)
-            completion(status, shipping as! [PKShippingMethod], summary as! [PKPaymentSummaryItem])
+        self.applePayhelper?.updateCheckoutWithAddress(address, completion: { (status, shipping, summary) in             completion(status, shipping as! [PKShippingMethod], summary as! [PKPaymentSummaryItem])
         })
     }
-
-    
 }
