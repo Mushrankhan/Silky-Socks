@@ -28,7 +28,6 @@ class ShopifyGetProduct: Operation {
     
     override func execute() {
         client.getProductsByIds(id) { [weak self] (products, error) in
-            print(products)
             self?.handler(products as? [BUYProduct], error)
             self?.finish()
         }

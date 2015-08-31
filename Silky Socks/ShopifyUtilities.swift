@@ -52,7 +52,26 @@ extension BUYAddress {
     }
     
     func getAddress() -> String {
-        return address1 + " " + address2 + " " + city + " " + province + " " + zip + " " + countryCode
+        var address = ""
+        if let address1 = address1 {
+            address += address1 + " "
+        }
+        if let address2 = address2 {
+            address += address2 + " "
+        }
+        if let city = city {
+            address += city + " "
+        }
+        if let province = province {
+            address += province + " "
+        }
+        if let zip = zip {
+            address += zip + " "
+        }
+        if let countryCode = countryCode {
+            address += countryCode + " "
+        }
+        return address
     }
 }
 

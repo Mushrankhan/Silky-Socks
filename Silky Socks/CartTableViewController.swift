@@ -11,9 +11,9 @@ import PassKit
 
 class CartTableViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, PKPaymentAuthorizationViewControllerDelegate {
 
-    lazy private var products: [CartProduct] = {
+    private var products: [CartProduct] {
         return UserCart.sharedCart.cart
-    }()
+    }
     
     // Table View outlet
     @IBOutlet private weak var tableView: UITableView! {
@@ -245,7 +245,7 @@ class CartTableViewController: UIViewController, UITableViewDataSource, UITableV
             presentViewController(sheet, animated: true, completion: nil)
         }
     }
-    
+     
     // Complete transaction
     func paymentAuthorizationViewController(controller: PKPaymentAuthorizationViewController, didAuthorizePayment payment: PKPayment, completion: (PKPaymentAuthorizationStatus) -> Void) {
         
@@ -268,6 +268,12 @@ class CartTableViewController: UIViewController, UITableViewDataSource, UITableV
         order.saveInBackgroundWithBlock { (success, error) -> Void in
             if success {
                 self.applePayhelper?.updateAndCompleteCheckoutWithPayment(payment) { status in
+                    print(status == .Success)
+                    print(status == .Failure)
+                    print(status == .InvalidBillingPostalAddress)
+                    print(status == .InvalidShippingContact)
+                    print(status == .InvalidShippingPostalAddress)
+
                     completion(status)
                     if status == .Success {
                         UserCart.sharedCart.boughtProduct()
@@ -294,7 +300,13 @@ class CartTableViewController: UIViewController, UITableViewDataSource, UITableV
     
     // Shipping Address
     func paymentAuthorizationViewController(controller: PKPaymentAuthorizationViewController, didSelectShippingAddress address: ABRecord, completion: (PKPaymentAuthorizationStatus, [PKShippingMethod], [PKPaymentSummaryItem]) -> Void) {
-        self.applePayhelper?.updateCheckoutWithAddress(address, completion: { (status, shipping, summary) in             completion(status, shipping as! [PKShippingMethod], summary as! [PKPaymentSummaryItem])
+        self.applePayhelper?.updateCheckoutWithAddress(address, completion: { (status, shipping, summary) in
+            
+            print(status)
+            print(summary)
+            print(shipping)
+            
+            completion(status, shipping as! [PKShippingMethod], summary as! [PKPaymentSummaryItem])
         })
     }
 }
