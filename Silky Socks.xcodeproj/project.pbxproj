@@ -22,6 +22,7 @@
 		1F293BF71B384D1300551A40 /* ShopifyUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F293BF61B384D1300551A40 /* ShopifyUtilities.swift */; };
 		1F293BF91B38631100551A40 /* CartProduct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F293BF81B38631100551A40 /* CartProduct.swift */; };
 		1F39440B1B094EA4008E73E0 /* SJCollectionAddToCartReusableView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1F39440A1B094EA4008E73E0 /* SJCollectionAddToCartReusableView.xib */; };
+		1F418CAA1B989B6C00EA5BD3 /* Buy.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F418CA91B989B6C00EA5BD3 /* Buy.framework */; settings = {ASSET_TAGS = (); }; };
 		1F470C281B5FA4E400CECC2C /* SJTextStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F470C271B5FA4E400CECC2C /* SJTextStorage.swift */; };
 		1F470C301B5FADDF00CECC2C /* SupportViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F470C2F1B5FADDF00CECC2C /* SupportViewController.swift */; };
 		1F58FE621B340ED6003E2507 /* CartTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F58FE611B340ED6003E2507 /* CartTableViewController.swift */; };
@@ -66,7 +67,6 @@
 		1FF7940A1B22DCB2000CB14D /* Maiden.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1FF794091B22DCB2000CB14D /* Maiden.ttf */; };
 		1FF7940C1B22DD05000CB14D /* Walkway Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1FF7940B1B22DD05000CB14D /* Walkway Black.ttf */; };
 		1FF7940E1B22DD69000CB14D /* College.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1FF7940D1B22DD69000CB14D /* College.ttf */; };
-		1FFC7C0A1B93E96200310D42 /* Buy.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1FFC7C091B93E96200310D42 /* Buy.framework */; settings = {ASSET_TAGS = (); }; };
 		4F55B5541AE46E4900679048 /* SJCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4F55B5531AE46E4900679048 /* SJCollectionViewCell.xib */; };
 		4F55B55D1AE480F400679048 /* SJLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F55B55C1AE480F400679048 /* SJLayout.swift */; };
 		4F8D38A31AE440DE00F42E23 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F8D38A21AE440DE00F42E23 /* AppDelegate.swift */; };
@@ -111,6 +111,7 @@
 		1F293BF61B384D1300551A40 /* ShopifyUtilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShopifyUtilities.swift; sourceTree = "<group>"; };
 		1F293BF81B38631100551A40 /* CartProduct.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CartProduct.swift; sourceTree = "<group>"; };
 		1F39440A1B094EA4008E73E0 /* SJCollectionAddToCartReusableView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SJCollectionAddToCartReusableView.xib; sourceTree = "<group>"; };
+		1F418CA91B989B6C00EA5BD3 /* Buy.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Buy.framework; sourceTree = "<group>"; };
 		1F470C271B5FA4E400CECC2C /* SJTextStorage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SJTextStorage.swift; sourceTree = "<group>"; };
 		1F470C2F1B5FADDF00CECC2C /* SupportViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SupportViewController.swift; sourceTree = "<group>"; };
 		1F4D93811B419D63008EAD74 /* libc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libc++.dylib"; path = "usr/lib/libc++.dylib"; sourceTree = SDKROOT; };
@@ -157,7 +158,6 @@
 		1FF794091B22DCB2000CB14D /* Maiden.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Maiden.ttf; sourceTree = "<group>"; };
 		1FF7940B1B22DD05000CB14D /* Walkway Black.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Walkway Black.ttf"; sourceTree = "<group>"; };
 		1FF7940D1B22DD69000CB14D /* College.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = College.ttf; sourceTree = "<group>"; };
-		1FFC7C091B93E96200310D42 /* Buy.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Buy.framework; sourceTree = "<group>"; };
 		4F55B5531AE46E4900679048 /* SJCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SJCollectionViewCell.xib; sourceTree = "<group>"; };
 		4F55B55C1AE480F400679048 /* SJLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SJLayout.swift; sourceTree = "<group>"; };
 		4F8D389D1AE440DE00F42E23 /* Silky Socks.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Silky Socks.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -188,7 +188,7 @@
 			files = (
 				1FECA5841B3019EB009CC8AF /* MessageUI.framework in Frameworks */,
 				DCE5E79073B5F6D74B71392E /* libPods.a in Frameworks */,
-				1FFC7C0A1B93E96200310D42 /* Buy.framework in Frameworks */,
+				1F418CAA1B989B6C00EA5BD3 /* Buy.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -258,7 +258,7 @@
 		1F535DEF1B242164008663DF /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				1FFC7C091B93E96200310D42 /* Buy.framework */,
+				1F418CA91B989B6C00EA5BD3 /* Buy.framework */,
 				1FECA5831B3019EB009CC8AF /* MessageUI.framework */,
 			);
 			name = Frameworks;
@@ -913,7 +913,7 @@
 				OTHER_LDFLAGS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.fullstak.www.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "ef683a31-3341-4bea-ada6-6f703de239e6";
+				PROVISIONING_PROFILE = "15b90164-f0d5-4c63-8e33-72600167c824";
 				SWIFT_OBJC_BRIDGING_HEADER = "$(PROJECT_DIR)/Silky Socks/BridgingHeader.h";
 				TARGETED_DEVICE_FAMILY = 1;
 				WARNING_CFLAGS = "-Wundeclared-selector";
@@ -942,7 +942,7 @@
 				OTHER_LDFLAGS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.fullstak.www.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "ef683a31-3341-4bea-ada6-6f703de239e6";
+				PROVISIONING_PROFILE = "15b90164-f0d5-4c63-8e33-72600167c824";
 				SWIFT_OBJC_BRIDGING_HEADER = "$(PROJECT_DIR)/Silky Socks/BridgingHeader.h";
 				TARGETED_DEVICE_FAMILY = 1;
 				WARNING_CFLAGS = "-Wundeclared-selector";

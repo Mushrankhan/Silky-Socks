@@ -148,6 +148,7 @@ class CartTableViewController: UIViewController, UITableViewDataSource, UITableV
         request.merchantIdentifier = ApplePay.Identifier
         request.merchantCapabilities = .Capability3DS
         request.requiredShippingAddressFields = .All
+        request.requiredBillingAddressFields = .All
         return request
     }()
     
@@ -249,12 +250,14 @@ class CartTableViewController: UIViewController, UITableViewDataSource, UITableV
     // Complete transaction
     func paymentAuthorizationViewController(controller: PKPaymentAuthorizationViewController, didAuthorizePayment payment: PKPayment, completion: (PKPaymentAuthorizationStatus) -> Void) {
         
+        let shippingAddress = BUYAddress.buy_addressFromRecord(payment.shippingAddress)
+        
         let order = Order()
         order.orderId = checkout!.orderId
-        order.name = checkout!.shippingAddress.firstName + " " + checkout!.shippingAddress.lastName
-        order.email = checkout!.email
+        order.name = shippingAddress.firstName + " " + shippingAddress.lastName
+        order.email = BUYAddress.buy_emailFromRecord(payment.shippingAddress)
         order.price = checkout!.totalPrice
-        order.address = checkout!.shippingAddress.getAddress()
+        order.address = shippingAddress.getAddress()
         
         for product in products {
             product.checkoutImage = product.productImage.renderImageIntoSize(product.productSize)
@@ -268,12 +271,6 @@ class CartTableViewController: UIViewController, UITableViewDataSource, UITableV
         order.saveInBackgroundWithBlock { (success, error) -> Void in
             if success {
                 self.applePayhelper?.updateAndCompleteCheckoutWithPayment(payment) { status in
-                    print(status == .Success)
-                    print(status == .Failure)
-                    print(status == .InvalidBillingPostalAddress)
-                    print(status == .InvalidShippingContact)
-                    print(status == .InvalidShippingPostalAddress)
-
                     completion(status)
                     if status == .Success {
                         UserCart.sharedCart.boughtProduct()
@@ -283,6 +280,12 @@ class CartTableViewController: UIViewController, UITableViewDataSource, UITableV
                 print("Error uploading designs")
                 completion(.Failure)
             }
+            
+            // Nil the checkout images, primarily because they are huge
+            for product in self.products {
+                product.checkoutImage = nil
+            }
+            
         }
     }
     
@@ -301,11 +304,6 @@ class CartTableViewController: UIViewController, UITableViewDataSource, UITableV
     // Shipping Address
     func paymentAuthorizationViewController(controller: PKPaymentAuthorizationViewController, didSelectShippingAddress address: ABRecord, completion: (PKPaymentAuthorizationStatus, [PKShippingMethod], [PKPaymentSummaryItem]) -> Void) {
         self.applePayhelper?.updateCheckoutWithAddress(address, completion: { (status, shipping, summary) in
-            
-            print(status)
-            print(summary)
-            print(shipping)
-            
             completion(status, shipping as! [PKShippingMethod], summary as! [PKPaymentSummaryItem])
         })
     }
