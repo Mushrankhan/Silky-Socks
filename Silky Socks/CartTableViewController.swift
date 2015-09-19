@@ -9,11 +9,14 @@
 import UIKit
 import PassKit
 
-class CartTableViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, PKPaymentAuthorizationViewControllerDelegate {
+class CartTableViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, PKPaymentAuthorizationViewControllerDelegate, CheckoutButtonViewDelegate {
 
     private var products: [CartProduct] {
         return UserCart.sharedCart.cart
     }
+    
+    // The two payment options
+    @IBOutlet weak var checkoutButtonView: CheckoutButtonView! { didSet { checkoutButtonView.delegate = self } }
     
     // Table View outlet
     @IBOutlet private weak var tableView: UITableView! {
@@ -27,8 +30,6 @@ class CartTableViewController: UIViewController, UITableViewDataSource, UITableV
             tableView.contentInset.top = 64;
         }
     }
-    
-    @IBOutlet weak var paymentOptionsView: UIView!
     
     // Cart Empty Label
     private var cartEmptyLabel: UILabel!
@@ -55,7 +56,7 @@ class CartTableViewController: UIViewController, UITableViewDataSource, UITableV
             self?.tableView.reloadData()
             self?.tableView.tableHeaderView = self?.numberOfItemsInCart == 0 ? self?.cartEmptyLabel : nil
             UIView.animateWithDuration(0.3) {
-                self?.paymentOptionsView.alpha = 0
+                self?.checkoutButtonView.alpha = 0
             }
         }
         
@@ -75,7 +76,7 @@ class CartTableViewController: UIViewController, UITableViewDataSource, UITableV
         tableView.tableHeaderView = numberOfItemsInCart == 0 ? cartEmptyLabel : nil
         
         // Show the alpha button
-        paymentOptionsView.alpha = 1
+        checkoutButtonView.alpha = 1
         
         // Edit Button
         navigationItem.rightBarButtonItem = self.editButtonItem()
@@ -112,23 +113,24 @@ class CartTableViewController: UIViewController, UITableViewDataSource, UITableV
             if numberOfItemsInCart == 0 {
                 tableView.tableHeaderView = cartEmptyLabel
                 UIView.animateWithDuration(0.3) { [unowned self] in
-                    self.paymentOptionsView.alpha = 0
+                    self.checkoutButtonView.alpha = 0
                 }
             }
         }
     }
     
-    // MARK: - Navigation
+    // MARK: CheckoutButtonView Delegate
     
-    private struct Storyboard {
-        static let CheckoutSegue = "CheckoutSegue"
+    func didClickApplePay() {
+        applePayCheckout()
     }
-
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if segue.identifier == Storyboard.CheckoutSegue {
-            let vc = segue.destinationViewController as! CheckoutViewController
-            vc.products = UserCart.sharedCart.cart
-        }
+    
+    func didClickCheckoutButton() {
+        
+        let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("CheckoutViewController") as! CheckoutViewController
+        vc.products = UserCart.sharedCart.cart
+        self.navigationController?.pushViewController(vc, animated: true)
+        
     }
     
     // MARK: - Apple Pay
@@ -152,7 +154,7 @@ class CartTableViewController: UIViewController, UITableViewDataSource, UITableV
         return request
     }()
     
-    @IBAction func applePayCheckout(sender: UIButton) {
+    func applePayCheckout() {
         
         let paymentNetworks = [PKPaymentNetworkAmex, PKPaymentNetworkMasterCard, PKPaymentNetworkVisa]
         if PKPaymentAuthorizationViewController.canMakePayments() && PKPaymentAuthorizationViewController.canMakePaymentsUsingNetworks(paymentNetworks) {
@@ -307,4 +309,63 @@ class CartTableViewController: UIViewController, UITableViewDataSource, UITableV
             completion(status, shipping as! [PKShippingMethod], summary as! [PKPaymentSummaryItem])
         })
     }
+}
+
+protocol CheckoutButtonViewDelegate: NSObjectProtocol {
+    func didClickApplePay()
+    func didClickCheckoutButton()
+}
+
+class CheckoutButtonView: UIView {
+    
+    // Delegate
+    weak var delegate: CheckoutButtonViewDelegate?
+    
+    // Buttons
+    private var applePayButton: PKPaymentButton?
+    private var checkoutButton: UIButton!
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        setUp()
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        setUp()
+    }
+    
+    private func setUp() {
+        
+        checkoutButton = UIButton(type: UIButtonType.Custom)
+        checkoutButton.backgroundColor = UIColor.blackColor()
+        checkoutButton.setTitle("Checkout", forState: UIControlState.Normal)
+        checkoutButton.addTarget(self, action: "checkoutButtonPressed:", forControlEvents: .TouchUpInside)
+
+        let centerX = CGRectGetMidX(UIScreen.mainScreen().bounds)
+        
+        if PKPaymentAuthorizationViewController.canMakePayments() {
+            applePayButton = PKPaymentButton(type: .Buy, style: .Black)
+            applePayButton?.addTarget(self, action: "applePayButtonPressed:", forControlEvents: .TouchUpInside)
+            applePayButton?.frame = CGRect(x: centerX - 50 , y: 16, width: 100, height: 34)
+            
+            checkoutButton.layer.cornerRadius = 5
+            checkoutButton.frame = CGRect(x: centerX - 50, y: 58, width: 100, height:34)
+            addSubview(applePayButton!)
+        } else {
+            checkoutButton.frame.size = CGSize(width: CGRectGetWidth(UIScreen.mainScreen().bounds), height: 42)
+            checkoutButton.center = CGPoint(x: centerX, y: CGRectGetMaxY(self.bounds) - 42)
+        }
+        
+        addSubview(checkoutButton)
+    }
+    
+    @objc private func checkoutButtonPressed(button: UIButton) {
+        delegate?.didClickCheckoutButton()
+    }
+    
+    @objc private func applePayButtonPressed(button: PKPaymentButton) {
+        delegate?.didClickApplePay()
+    }
+    
 }

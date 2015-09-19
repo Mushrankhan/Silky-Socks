@@ -43,11 +43,14 @@ class SJCollectionViewCell: UICollectionViewCell {
     
     // Different Devices
     private struct Device {
+        static let IPhone6s     = "iPhone 6s"
+        static let IPhone6sPlus = "iPhone 6s Plus"
         static let IPhone6      = "iPhone 6"
         static let IPhone6Plus  = "iPhone 6 Plus"
         static let IPhone5      = "iPhone 5"
         static let IPhone5C     = "iPhone 5C"
         static let IPhone5S     = "iPhone 5S"
+        static let IPod5        = "iPod Touch 5"
     }
     
     /* Gestures */
@@ -229,39 +232,39 @@ extension SJCollectionViewCell {
         
         // Black Normal
         if template?.index == 1 {
-            if device == Device.IPhone6 {
+            if device == Device.IPhone6 || device == Device.IPhone6s {
                 size.height -= 110
-            } else if device == Device.IPhone6Plus {
+            } else if device == Device.IPhone6Plus || device == Device.IPhone6sPlus {
                 size.height -= 120
-            } else if device == Device.IPhone5 || device == Device.IPhone5C || device == Device.IPhone5S {
+            } else if device == Device.IPhone5 || device == Device.IPhone5C || device == Device.IPhone5S || device == Device.IPod5 {
                 size.height -= 60
             }
             frame.size = size
         } else if template?.index == 2 { // Knee high
-            if device == Device.IPhone6 {
+            if device == Device.IPhone6 || device == Device.IPhone6s {
                 size.height -= 40
-            } else if device == Device.IPhone6Plus {
+            } else if device == Device.IPhone6Plus || device == Device.IPhone6sPlus {
                 size.height -= 40
-            } else if device == Device.IPhone5 || device == Device.IPhone5C || device == Device.IPhone5S {
+            } else if device == Device.IPhone5 || device == Device.IPhone5C || device == Device.IPhone5S || device == Device.IPod5 {
                 size.height -= 20
             }
             frame.size = size
         } else if template?.index == 3 { // White tee
-            if device == Device.IPhone6 {
+            if device == Device.IPhone6 || device == Device.IPhone6s {
                 point.y += 30
-            } else if device == Device.IPhone6Plus {
+            } else if device == Device.IPhone6Plus || device == Device.IPhone6sPlus {
                 point.y += 50
             }
             frame.origin = point
         } else if template?.index == 5 { // Black tee
             size.height += 15
-            if device == Device.IPhone6 {
+            if device == Device.IPhone6 || device == Device.IPhone6s {
                 size.width -= 100
                 point.x += 50
-            } else if device == Device.IPhone6Plus {
-                size.width -= 100
+            } else if device == Device.IPhone6Plus || device == Device.IPhone6sPlus {
+                size.width -= 120
                 point.x += 50
-            } else if device == Device.IPhone5 || device == Device.IPhone5C || device == Device.IPhone5S {
+            } else if device == Device.IPhone5 || device == Device.IPhone5C || device == Device.IPhone5S || device == Device.IPod5 {
                 size.width -= 80
                 point.x += 40
             }
