@@ -9,27 +9,36 @@
 import UIKit
 import PassKit
 
-class CartTableViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, PKPaymentAuthorizationViewControllerDelegate, CheckoutButtonViewDelegate {
+class CartTableViewController: BUYViewController, UITableViewDataSource, UITableViewDelegate, CheckoutButtonViewDelegate, BUYViewControllerDelegate {
 
+    // The Cart
     private var products: [CartProduct] {
         return UserCart.sharedCart.cart
     }
     
-    // The two payment options
-    @IBOutlet weak var checkoutButtonView: CheckoutButtonView! { didSet { checkoutButtonView.delegate = self } }
+    // Table View
+    private lazy var tableView : UITableView = {
+        let width = CGRectGetWidth(UIScreen.mainScreen().bounds)
+        let height = CGRectGetHeight(UIScreen.mainScreen().bounds)
+        let frame = CGRect(origin: CGPointZero, size: CGSize(width: width, height: height-100))
+        let view = UITableView(frame: frame)
+        view.dataSource = self
+        view.delegate = self
+        view.rowHeight = 160
+        return view
+    }()
     
-    // Table View outlet
-    @IBOutlet private weak var tableView: UITableView! {
-        didSet {
-            // Essential
-            tableView.dataSource = self
-            tableView.delegate = self
-            
-            // Row height
-            tableView.rowHeight = 160
-            tableView.contentInset.top = 64;
-        }
-    }
+    // Checkout Payment Options
+    private lazy var checkoutButtonView: CheckoutButtonView = {
+        let height = CGRectGetHeight(UIScreen.mainScreen().bounds)
+        let width = CGRectGetWidth(UIScreen.mainScreen().bounds)
+        let frame = CGRect(x: 0, y: height-100, width: width, height: 100)
+        let view = CheckoutButtonView(frame: frame)
+        view.backgroundColor = UIColor.whiteColor()
+        view.delegate = self
+        view.setUp(self.isApplePayAvailable)
+        return view
+    }()
     
     // Cart Empty Label
     private var cartEmptyLabel: UILabel!
@@ -39,11 +48,22 @@ class CartTableViewController: UIViewController, UITableViewDataSource, UITableV
         return UserCart.sharedCart.numberOfItems
     }
     
+    // MARK: View Lifecycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // Set the delegate to BUYViewControllerDelegate
+        self.delegate = self
+        self.merchantId = ApplePay.Identifier
+        
         // Title
         navigationItem.title = "Cart"
+        
+        // Add the lazily instantiated views
+        view.backgroundColor = UIColor.whiteColor()
+        view.addSubview(tableView)
+        view.addSubview(checkoutButtonView)
         
         // Register Cell
         tableView.registerNib(CartTableViewCell.nib(), forCellReuseIdentifier: cartCellReuseIdentifier)
@@ -139,175 +159,180 @@ class CartTableViewController: UIViewController, UITableViewDataSource, UITableV
         static let Identifier = "merchant.com.danny-silkysocks"
     }
     
-    private var applePayhelper: BUYApplePayHelpers?
-    private var checkout: BUYCheckout?
-    
-    private lazy var request: PKPaymentRequest = {
-        let request = PKPaymentRequest()
-        request.supportedNetworks = [PKPaymentNetworkAmex, PKPaymentNetworkMasterCard, PKPaymentNetworkVisa]
-        request.countryCode = "US"
-        request.currencyCode = "USD"
-        request.merchantIdentifier = ApplePay.Identifier
-        request.merchantCapabilities = .Capability3DS
-        request.requiredShippingAddressFields = .All
-        request.requiredBillingAddressFields = .All
-        return request
-    }()
-    
     func applePayCheckout() {
         
-        let paymentNetworks = [PKPaymentNetworkAmex, PKPaymentNetworkMasterCard, PKPaymentNetworkVisa]
-        if PKPaymentAuthorizationViewController.canMakePayments() && PKPaymentAuthorizationViewController.canMakePaymentsUsingNetworks(paymentNetworks) {
+        // Create Checkout
+        let client = BUYClient.sharedClient()
+        let queue = OperationQueue()
+        SVProgressHUD.showWithStatus("Creating Order")
+        
+        // Fetch Products
+        let products = ShopifyGetProduct(client: client, productId: UserCart.sharedCart.cart.map {$0.productID}, handler: { (products, error) in
             
-            // Create Checkout
-            let client = BUYClient.sharedClient()
-            let queue = OperationQueue()
-            SVProgressHUD.showWithStatus("Creating Order")
+            guard let products = products else {
+                SVProgressHUD.dismiss()
+                let operation = AlertOperation(title: "Something Went Wrong", message: "Please try again later")
+                operation.showSweetAlert = true
+                queue.addOperation(operation)
+                return
+            }
             
-            // Fetch Products
-            let products = ShopifyGetProduct(client: client, productId: UserCart.sharedCart.cart.map {$0.productID}, handler: { (products, error) in
+            // Get Variant
+            let variants = (products.map {$0.variants as! [BUYProductVariant]} as [[BUYProductVariant]]).reverse()
+            
+            if variants.count > 0 {
                 
-                guard let products = products else {
-                    SVProgressHUD.dismiss()
-                    let operation = AlertOperation(title: "Something Went Wrong", message: "Please try again later")
-                    operation.showSweetAlert = true
-                    queue.addOperation(operation)
-                    return
+                var variant = [BUYProductVariant]()
+                
+                for (index, v) in variants.enumerate() {
+                    variant.append(v[(self.products[index].selectedSize!).1])
                 }
                 
-                // Get Variant
-                let variants = (products.map {$0.variants as! [BUYProductVariant]} as [[BUYProductVariant]]).reverse()
-                
-                if variants.count > 0 {
+                dispatch_async(dispatch_get_main_queue()) {
                     
-                    var variant = [BUYProductVariant]()
+                    // Create Cart and add product
+                    let cart = BUYCart()
                     
-                    for (index, v) in variants.enumerate() {
-                        variant.append(v[(self.products[index].selectedSize!).1])
-                    }
-                    
-                    dispatch_async(dispatch_get_main_queue()) {
-                        
-                        // Create Cart and add product
-                        let cart = BUYCart()
-                        
-                        if self.products.count > variant.count {
-                            var dic = [String: BUYProductVariant]()
-                            for (index , product) in self.products.enumerate() {
-                                if let _ = dic[product.productID] {
-                                    
-                                } else {
-                                    dic[product.productID] = variant[index]
-                                }
-                            }
-                            
-                            for product in self.products {
-                                cart.addProduct(product, withVariant: dic[product.productID]!)
-                            }
-                            
-                        } else {
-                            for (index, v) in variant.enumerate() {
-                                cart.addProduct(self.products[index], withVariant: v)
+                    if self.products.count > variant.count {
+                        var dic = [String: BUYProductVariant]()
+                        for (index , product) in self.products.enumerate() {
+                            if let _ = dic[product.productID] {
+                                
+                            } else {
+                                dic[product.productID] = variant[index]
                             }
                         }
                         
-                        // Create checkout
-                        self.checkout = BUYCheckout(cart: cart)
-                        client.createCheckout(self.checkout, completion: { (acheckout, error) -> Void in
-                            
-                            if error != nil {
-                                SVProgressHUD.dismiss()
-                                let operation = AlertOperation(title: "Error Checking Out", message: "Please try again later")
-                                operation.showSweetAlert = true
-                                queue.addOperation(operation)
-                                return
-                            }
-                            
-                            self.checkout = acheckout
-                            self.applePayhelper = BUYApplePayHelpers(client: client, checkout: self.checkout)
-                            self.request.paymentSummaryItems = self.checkout?.buy_summaryItems() as! [PKPaymentSummaryItem]
-                            
-                            // Create and present the Apple Pay view controller
-                            let viewController = PKPaymentAuthorizationViewController(paymentRequest: self.request)
-                            viewController.delegate = self
-                            self.presentViewController(viewController, animated: true, completion: nil)
-                            
+                        for product in self.products {
+                            cart.addProduct(product, withVariant: dic[product.productID]!)
+                        }
+                        
+                    } else {
+                        for (index, v) in variant.enumerate() {
+                            cart.addProduct(self.products[index], withVariant: v)
+                        }
+                    }
+                    
+                    self.loadShopWithCallback { (success, error) in
+                        dispatch_async(dispatch_get_main_queue(), { () -> Void in
                             SVProgressHUD.dismiss()
+                            if success {
+                                self.startApplePayCheckout(BUYCheckout(cart: cart))
+                            } else {
+                                print(error)
+                            }
                         })
                     }
                 }
-            })
+            }
+        })
+        
+        queue.addOperation(products)
+    }
+    
+    // MARK: BUYViewController Delegate
+    
+    func controller(controller: BUYViewController!, didCompleteCheckout checkout: BUYCheckout!, status: BUYStatus) {
+        
+        if status == BUYStatus.Complete {
             
-            queue.addOperation(products)
+            var task: UIBackgroundTaskIdentifier!
+            task = UIApplication.sharedApplication().beginBackgroundTaskWithExpirationHandler {
+                UIApplication.sharedApplication().endBackgroundTask(task)
+                task = UIBackgroundTaskInvalid
+            }
             
-        } else {
-            // Apple pay not supported
-            let action = UIAlertAction(title: "Dismiss", style: .Cancel, handler: nil)
-            let sheet = UIAlertController(title: "Apple Pay Not Supported", message: nil, preferredStyle: .Alert)
-            sheet.addAction(action)
-            presentViewController(sheet, animated: true, completion: nil)
+            // Upload
+            upload {
+                UIApplication.sharedApplication().endBackgroundTask(task)
+                task = UIBackgroundTaskInvalid
+            }
         }
     }
-     
-    // Complete transaction
-    func paymentAuthorizationViewController(controller: PKPaymentAuthorizationViewController, didAuthorizePayment payment: PKPayment, completion: (PKPaymentAuthorizationStatus) -> Void) {
-        
-        let shippingAddress = BUYAddress.buy_addressFromRecord(payment.shippingAddress)
-        
-        let order = Order()
-        order.orderId = checkout!.orderId
-        order.name = shippingAddress.firstName + " " + shippingAddress.lastName
-        order.email = BUYAddress.buy_emailFromRecord(payment.shippingAddress)
-        order.price = checkout!.totalPrice
-        order.address = shippingAddress.getAddress()
+    
+    private func upload(block: () -> ()) {
+        uploadDesigns(checkout, block: { (success, error) in
+            if success {
+                for product in self.products {
+                    product.checkoutImage = nil
+                }
+                UserCart.sharedCart.boughtProduct()
+            } else {
+                // Error Uploading designs
+                // Try again
+                self.order?.saveEventually(nil)
+            }
+            block()
+        })
+    }
+    
+    private var order: Order?
+    
+    private func uploadDesigns(checkout: BUYCheckout, block: (Bool, NSError?) -> ()) {
+        order = Order()
+        order?.orderId = checkout.orderId
+        order?.name = checkout.shippingAddress.firstName + " " + checkout.shippingAddress.lastName
+        order?.email = checkout.email
+        order?.price = checkout.totalPrice
+        order?.address = checkout.shippingAddress.getAddress()
         
         for product in products {
             product.checkoutImage = product.productImage.renderImageIntoSize(product.productSize)
         }
         
         for (index, product) in products.enumerate() {
-            order["file\(index+1)"] = PFFile(data: UIImageJPEGRepresentation(product.productImage, 0.5)!)
-            order["mockup\(index+1)"] = PFFile(data: UIImageJPEGRepresentation(product.cartImage, 0.5)!)
+            order?["file\(index+1)"] = PFFile(data: UIImageJPEGRepresentation(product.productImage, 0.5)!)
+            order?["mockup\(index+1)"] = PFFile(data: UIImageJPEGRepresentation(product.cartImage, 0.5)!)
         }
         
-        order.saveInBackgroundWithBlock { (success, error) -> Void in
-            if success {
-                self.applePayhelper?.updateAndCompleteCheckoutWithPayment(payment) { status in
-                    completion(status)
-                    if status == .Success {
-                        UserCart.sharedCart.boughtProduct()
-                    }
-                }
-            } else {
-                print("Error uploading designs")
-                completion(.Failure)
+        order?.saveInBackgroundWithBlock({ (success, error) -> Void in
+            dispatch_async(dispatch_get_main_queue()) {
+                block(success, error)
             }
-            
-            // Nil the checkout images, primarily because they are huge
-            for product in self.products {
-                product.checkoutImage = nil
-            }
-            
-        }
-    }
-    
-    // When apple pay done/cancel
-    func paymentAuthorizationViewControllerDidFinish(controller: PKPaymentAuthorizationViewController) {
-        dismissViewControllerAnimated(true, completion: nil)
-    }
-
-    // Shipping Method
-    func paymentAuthorizationViewController(controller: PKPaymentAuthorizationViewController, didSelectShippingMethod shippingMethod: PKShippingMethod, completion: (PKPaymentAuthorizationStatus, [PKPaymentSummaryItem]) -> Void) {
-        self.applePayhelper?.updateCheckoutWithShippingMethod(shippingMethod, completion: { (status, items) -> Void in
-            completion(status, items as! [PKPaymentSummaryItem])
         })
     }
     
-    // Shipping Address
-    func paymentAuthorizationViewController(controller: PKPaymentAuthorizationViewController, didSelectShippingAddress address: ABRecord, completion: (PKPaymentAuthorizationStatus, [PKShippingMethod], [PKPaymentSummaryItem]) -> Void) {
-        self.applePayhelper?.updateCheckoutWithAddress(address, completion: { (status, shipping, summary) in
-            completion(status, shipping as! [PKShippingMethod], summary as! [PKPaymentSummaryItem])
-        })
+    func controller(controller: BUYViewController!, failedToCompleteCheckout checkout: BUYCheckout!, withError error: NSError!) {
+        print(error)
+        SweetAlert().showAlert("Error", subTitle: "Failed to complete checkout", style: .Error)
+    }
+    
+    func controller(controller: BUYViewController!, failedToCreateCheckout error: NSError!) {
+        SweetAlert().showAlert("Error", subTitle: "Failed to create checkout", style: .Error)
+    }
+    
+    func controllerFailedToStartApplePayProcess(controller: BUYViewController!) {
+        SweetAlert().showAlert("Error", subTitle: "Failed to start Apple Pay", style: .Error)
+    }
+    
+    func controllerWillCheckoutViaApplePay(viewController: BUYViewController!) {
+        
+//        var task: UIBackgroundTaskIdentifier!
+//        task = UIApplication.sharedApplication().beginBackgroundTaskWithExpirationHandler {
+//            UIApplication.sharedApplication().endBackgroundTask(task)
+//            task = UIBackgroundTaskInvalid
+//        }
+//        
+//        let semaphore = dispatch_semaphore_create(0)
+//        
+//        SVProgressHUD.showInfoWithStatus("Uploading Designs")
+//        uploadDesigns(checkout, block: { (success, error) -> () in
+//            if success {
+//                for product in self.products {
+//                    product.checkoutImage = nil
+//                }
+//                UserCart.sharedCart.boughtProduct()
+//                SVProgressHUD.dismiss()
+//            } else {
+//                // Error Uploading designs
+//            }
+//            SVProgressHUD.dismiss()
+//            UIApplication.sharedApplication().endBackgroundTask(task)
+//            task = UIBackgroundTaskInvalid
+//            dispatch_semaphore_signal(semaphore)
+//        })
+//        
+//        dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER)
     }
 }
 
@@ -323,41 +348,31 @@ class CheckoutButtonView: UIView {
     
     // Buttons
     private var applePayButton: PKPaymentButton?
-    private var checkoutButton: UIButton!
+    private var checkoutButton: UIButton?
     
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        setUp()
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-        setUp()
-    }
-    
-    private func setUp() {
+    private func setUp(applePayAvailable: Bool) {
         
         checkoutButton = UIButton(type: UIButtonType.Custom)
-        checkoutButton.backgroundColor = UIColor.blackColor()
-        checkoutButton.setTitle("Checkout", forState: UIControlState.Normal)
-        checkoutButton.addTarget(self, action: "checkoutButtonPressed:", forControlEvents: .TouchUpInside)
+        checkoutButton?.backgroundColor = UIColor.blackColor()
+        checkoutButton?.setTitle("Checkout", forState: UIControlState.Normal)
+        checkoutButton?.addTarget(self, action: "checkoutButtonPressed:", forControlEvents: .TouchUpInside)
 
         let centerX = CGRectGetMidX(UIScreen.mainScreen().bounds)
         
-        if PKPaymentAuthorizationViewController.canMakePayments() {
+        if applePayAvailable {
             applePayButton = PKPaymentButton(type: .Buy, style: .Black)
             applePayButton?.addTarget(self, action: "applePayButtonPressed:", forControlEvents: .TouchUpInside)
             applePayButton?.frame = CGRect(x: centerX - 50 , y: 16, width: 100, height: 34)
             
-            checkoutButton.layer.cornerRadius = 5
-            checkoutButton.frame = CGRect(x: centerX - 50, y: 58, width: 100, height:34)
+            checkoutButton?.layer.cornerRadius = 5
+            checkoutButton?.frame = CGRect(x: centerX - 50, y: 58, width: 100, height:34)
             addSubview(applePayButton!)
         } else {
-            checkoutButton.frame.size = CGSize(width: CGRectGetWidth(UIScreen.mainScreen().bounds), height: 42)
-            checkoutButton.center = CGPoint(x: centerX, y: CGRectGetMaxY(self.bounds) - 42)
+            checkoutButton?.frame.size = CGSize(width: CGRectGetWidth(UIScreen.mainScreen().bounds), height: 42)
+            checkoutButton?.center = CGPoint(x: centerX, y: CGRectGetMaxY(self.bounds) - 42)
         }
         
-        addSubview(checkoutButton)
+        addSubview(checkoutButton!)
     }
     
     @objc private func checkoutButtonPressed(button: UIButton) {

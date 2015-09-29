@@ -104,6 +104,14 @@
 - (void)controller:(BUYViewController *)controller didDismissApplePayControllerWithStatus:(PKPaymentAuthorizationStatus)status forCheckout:(BUYCheckout *)checkout;
 
 /**
+ *  This is called when the SFSafariViewController has been dismissed before checkout completion.
+ *
+ *  @param controller The BUYViewController
+ *  @param checkout   The BUYCheckout
+ */
+- (void)controller:(BUYViewController *)controller didDismissWebCheckout:(BUYCheckout *)checkout;
+
+/**
  *  The view controller has been dismissed
  *
  *  @param controller The BUYViewController

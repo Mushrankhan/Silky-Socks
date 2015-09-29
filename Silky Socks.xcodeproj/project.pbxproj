@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1F0F322B1BBA23E400261EDB /* Buy.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F0F322A1BBA23E400261EDB /* Buy.framework */; settings = {ASSET_TAGS = (); }; };
 		1F1740591B41308400D1CA33 /* Order.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1740581B41308400D1CA33 /* Order.swift */; };
 		1F17F2881B36AA7200DBFEBC /* CheckoutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F17F2871B36AA7200DBFEBC /* CheckoutViewController.swift */; };
 		1F17F28A1B36B11D00DBFEBC /* CheckoutTableHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F17F2891B36B11D00DBFEBC /* CheckoutTableHeaderView.swift */; };
@@ -22,7 +23,6 @@
 		1F293BF71B384D1300551A40 /* ShopifyUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F293BF61B384D1300551A40 /* ShopifyUtilities.swift */; };
 		1F293BF91B38631100551A40 /* CartProduct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F293BF81B38631100551A40 /* CartProduct.swift */; };
 		1F39440B1B094EA4008E73E0 /* SJCollectionAddToCartReusableView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1F39440A1B094EA4008E73E0 /* SJCollectionAddToCartReusableView.xib */; };
-		1F418CAA1B989B6C00EA5BD3 /* Buy.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F418CA91B989B6C00EA5BD3 /* Buy.framework */; settings = {ASSET_TAGS = (); }; };
 		1F470C281B5FA4E400CECC2C /* SJTextStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F470C271B5FA4E400CECC2C /* SJTextStorage.swift */; };
 		1F470C301B5FADDF00CECC2C /* SupportViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F470C2F1B5FADDF00CECC2C /* SupportViewController.swift */; };
 		1F58FE621B340ED6003E2507 /* CartTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F58FE611B340ED6003E2507 /* CartTableViewController.swift */; };
@@ -95,6 +95,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1F0F322A1BBA23E400261EDB /* Buy.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Buy.framework; sourceTree = "<group>"; };
 		1F1740581B41308400D1CA33 /* Order.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Order.swift; sourceTree = "<group>"; };
 		1F17F2871B36AA7200DBFEBC /* CheckoutViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckoutViewController.swift; sourceTree = "<group>"; };
 		1F17F2891B36B11D00DBFEBC /* CheckoutTableHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckoutTableHeaderView.swift; sourceTree = "<group>"; };
@@ -111,7 +112,6 @@
 		1F293BF61B384D1300551A40 /* ShopifyUtilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShopifyUtilities.swift; sourceTree = "<group>"; };
 		1F293BF81B38631100551A40 /* CartProduct.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CartProduct.swift; sourceTree = "<group>"; };
 		1F39440A1B094EA4008E73E0 /* SJCollectionAddToCartReusableView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SJCollectionAddToCartReusableView.xib; sourceTree = "<group>"; };
-		1F418CA91B989B6C00EA5BD3 /* Buy.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Buy.framework; sourceTree = "<group>"; };
 		1F470C271B5FA4E400CECC2C /* SJTextStorage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SJTextStorage.swift; sourceTree = "<group>"; };
 		1F470C2F1B5FADDF00CECC2C /* SupportViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SupportViewController.swift; sourceTree = "<group>"; };
 		1F4D93811B419D63008EAD74 /* libc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libc++.dylib"; path = "usr/lib/libc++.dylib"; sourceTree = SDKROOT; };
@@ -188,7 +188,7 @@
 			files = (
 				1FECA5841B3019EB009CC8AF /* MessageUI.framework in Frameworks */,
 				DCE5E79073B5F6D74B71392E /* libPods.a in Frameworks */,
-				1F418CAA1B989B6C00EA5BD3 /* Buy.framework in Frameworks */,
+				1F0F322B1BBA23E400261EDB /* Buy.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -258,7 +258,7 @@
 		1F535DEF1B242164008663DF /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				1F418CA91B989B6C00EA5BD3 /* Buy.framework */,
+				1F0F322A1BBA23E400261EDB /* Buy.framework */,
 				1FECA5831B3019EB009CC8AF /* MessageUI.framework */,
 			);
 			name = Frameworks;
@@ -903,17 +903,25 @@
 				CODE_SIGN_ENTITLEMENTS = "Silky Socks/Silky Socks.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Distribution: KAUSAR INDUSTRIES INC (DYNDWV74W5)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: KAUSAR INDUSTRIES INC (DYNDWV74W5)";
+				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_BITCODE = NO;
-				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/\"Silky Socks\"";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(PROJECT_DIR)/\"Silky Socks\"",
+					"$(PROJECT_DIR)/Silky",
+					Socks,
+				);
 				GCC_TREAT_INCOMPATIBLE_POINTER_TYPE_WARNINGS_AS_ERRORS = YES;
 				GCC_WARN_NON_VIRTUAL_DESTRUCTOR = YES;
 				INFOPLIST_FILE = "Silky Socks/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				OTHER_LDFLAGS = "$(inherited)";
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-all_load",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.fullstak.www.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "15b90164-f0d5-4c63-8e33-72600167c824";
+				PROVISIONING_PROFILE = "ef683a31-3341-4bea-ada6-6f703de239e6";
 				SWIFT_OBJC_BRIDGING_HEADER = "$(PROJECT_DIR)/Silky Socks/BridgingHeader.h";
 				TARGETED_DEVICE_FAMILY = 1;
 				WARNING_CFLAGS = "-Wundeclared-selector";
@@ -932,17 +940,25 @@
 				CODE_SIGN_ENTITLEMENTS = "Silky Socks/Silky Socks.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Distribution: KAUSAR INDUSTRIES INC (DYNDWV74W5)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: KAUSAR INDUSTRIES INC (DYNDWV74W5)";
+				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_BITCODE = NO;
-				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/\"Silky Socks\"";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(PROJECT_DIR)/\"Silky Socks\"",
+					"$(PROJECT_DIR)/Silky",
+					Socks,
+				);
 				GCC_TREAT_INCOMPATIBLE_POINTER_TYPE_WARNINGS_AS_ERRORS = YES;
 				GCC_WARN_NON_VIRTUAL_DESTRUCTOR = YES;
 				INFOPLIST_FILE = "Silky Socks/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				OTHER_LDFLAGS = "$(inherited)";
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-all_load",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.fullstak.www.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "15b90164-f0d5-4c63-8e33-72600167c824";
+				PROVISIONING_PROFILE = "ef683a31-3341-4bea-ada6-6f703de239e6";
 				SWIFT_OBJC_BRIDGING_HEADER = "$(PROJECT_DIR)/Silky Socks/BridgingHeader.h";
 				TARGETED_DEVICE_FAMILY = 1;
 				WARNING_CFLAGS = "-Wundeclared-selector";

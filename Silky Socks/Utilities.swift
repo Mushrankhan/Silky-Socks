@@ -164,8 +164,8 @@ extension UIImage {
     }
     
     func renderImageIntoSize(size: CGSize) -> UIImage {
-        var image: UIImage?
-        autoreleasepool { () -> () in
+        var image: UIImage!
+        autoreleasepool {
             UIGraphicsBeginImageContextWithOptions(size, false, 0)
             let rect = CGRect(origin: .zero, size: size)
             CGContextClearRect(UIGraphicsGetCurrentContext(), rect)
@@ -174,7 +174,7 @@ extension UIImage {
             UIGraphicsEndImageContext()
             image = img
         }
-        return image!
+        return image
     }
     
     // Tint the image

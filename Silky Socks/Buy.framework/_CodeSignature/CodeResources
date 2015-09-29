@@ -10,11 +10,11 @@
 		</data>
 		<key>Headers/BUYApplePayAdditions.h</key>
 		<data>
-		++Dc+KmJJmoqru6pS3hcPN1eOUA=
+		Ee7kjhDFxIHJ4O58qNDEcGgqyQU=
 		</data>
 		<key>Headers/BUYApplePayHelpers.h</key>
 		<data>
-		ZOUBEF6hR2SfopyxO2ju2uiBtvI=
+		PKJeG+c2It5CGkcUkL9A7254hzE=
 		</data>
 		<key>Headers/BUYCart.h</key>
 		<data>
@@ -34,7 +34,7 @@
 		</data>
 		<key>Headers/BUYClient.h</key>
 		<data>
-		DnZkCeX2VqU6lCsfAkxQmAnsNBc=
+		WWOwkFy3ae83m/InRUhs0gxNnFw=
 		</data>
 		<key>Headers/BUYCollection.h</key>
 		<data>
@@ -122,7 +122,7 @@
 		</data>
 		<key>Headers/BUYViewController.h</key>
 		<data>
-		0bCierm0wDd8Y8L3Kt6CpPK20S4=
+		tLLFVnD8IQEYxgxMsIpNSpcA/5I=
 		</data>
 		<key>Headers/Buy-Bridging-Header.h</key>
 		<data>
@@ -134,7 +134,7 @@
 		</data>
 		<key>Info.plist</key>
 		<data>
-		WBnmIeaoIQQUiuJk6/KYNr1JyI8=
+		dievkzfuSLxZJHOmOkMe0AxkNKc=
 		</data>
 		<key>Modules/module.modulemap</key>
 		<data>
@@ -149,11 +149,11 @@
 		</data>
 		<key>Headers/BUYApplePayAdditions.h</key>
 		<data>
-		++Dc+KmJJmoqru6pS3hcPN1eOUA=
+		Ee7kjhDFxIHJ4O58qNDEcGgqyQU=
 		</data>
 		<key>Headers/BUYApplePayHelpers.h</key>
 		<data>
-		ZOUBEF6hR2SfopyxO2ju2uiBtvI=
+		PKJeG+c2It5CGkcUkL9A7254hzE=
 		</data>
 		<key>Headers/BUYCart.h</key>
 		<data>
@@ -173,7 +173,7 @@
 		</data>
 		<key>Headers/BUYClient.h</key>
 		<data>
-		DnZkCeX2VqU6lCsfAkxQmAnsNBc=
+		WWOwkFy3ae83m/InRUhs0gxNnFw=
 		</data>
 		<key>Headers/BUYCollection.h</key>
 		<data>
@@ -261,7 +261,7 @@
 		</data>
 		<key>Headers/BUYViewController.h</key>
 		<data>
-		0bCierm0wDd8Y8L3Kt6CpPK20S4=
+		tLLFVnD8IQEYxgxMsIpNSpcA/5I=
 		</data>
 		<key>Headers/Buy-Bridging-Header.h</key>
 		<data>

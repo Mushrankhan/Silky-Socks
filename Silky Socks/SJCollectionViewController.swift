@@ -171,7 +171,8 @@ class SJCollectionViewController: UIViewController {
     @objc private func cartButtonPressed(button: UIBarButtonItem) {
         // Do Something
         if notificationHub.count > 0 {
-            performSegueWithIdentifier(Storyboard.CartSegue, sender: nil)
+            let vc = CartTableViewController(client: BUYClient.sharedClient())
+            self.navigationController?.pushViewController(vc, animated: true)
         }
     }
 }
