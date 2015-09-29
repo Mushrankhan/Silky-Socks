@@ -251,49 +251,52 @@ class CartTableViewController: BUYViewController, UITableViewDataSource, UITable
     }
     
     private func upload(block: () -> ()) {
-        uploadDesigns(checkout, block: { (success, error) in
+        uploadDesigns(checkout) { (success, error) in
             if success {
                 for product in self.products {
                     product.checkoutImage = nil
                 }
                 UserCart.sharedCart.boughtProduct()
+                self.order = nil
             } else {
                 // Error Uploading designs
                 // Try again
                 self.order?.saveEventually(nil)
             }
             block()
-        })
+        }
     }
     
     private var order: Order?
     
     private func uploadDesigns(checkout: BUYCheckout, block: (Bool, NSError?) -> ()) {
-        order = Order()
-        order?.orderId = checkout.orderId
-        order?.name = checkout.shippingAddress.firstName + " " + checkout.shippingAddress.lastName
-        order?.email = checkout.email
-        order?.price = checkout.totalPrice
-        order?.address = checkout.shippingAddress.getAddress()
         
-        for product in products {
-            product.checkoutImage = product.productImage.renderImageIntoSize(product.productSize)
-        }
-        
-        for (index, product) in products.enumerate() {
-            order?["file\(index+1)"] = PFFile(data: UIImageJPEGRepresentation(product.productImage, 0.5)!)
-            order?["mockup\(index+1)"] = PFFile(data: UIImageJPEGRepresentation(product.cartImage, 0.5)!)
-        }
-        
-        order?.saveInBackgroundWithBlock({ (success, error) -> Void in
-            dispatch_async(dispatch_get_main_queue()) {
-                block(success, error)
+        BUYClient.sharedClient().getCheckout(checkout) { (checkout, error) -> Void in
+            self.order = Order()
+            self.order?.orderId = checkout.orderId
+            self.order?.name = checkout.shippingAddress.firstName + " " + checkout.shippingAddress.lastName
+            self.order?.email = checkout.email
+            self.order?.price = checkout.totalPrice
+            self.order?.address = checkout.shippingAddress.getAddress()
+            
+            for product in self.products {
+                product.checkoutImage = product.productImage.renderImageIntoSize(product.productSize)
             }
-        })
+            
+            for (index, product) in self.products.enumerate() {
+                self.order?["file\(index+1)"] = PFFile(data: UIImageJPEGRepresentation(product.productImage, 0.5)!)
+                self.order?["mockup\(index+1)"] = PFFile(data: UIImageJPEGRepresentation(product.cartImage, 0.5)!)
+            }
+            
+            self.order?.saveInBackgroundWithBlock({ (success, error) -> Void in
+                dispatch_async(dispatch_get_main_queue()) {
+                    block(success, error)
+                }
+            })
+        }
     }
     
     func controller(controller: BUYViewController!, failedToCompleteCheckout checkout: BUYCheckout!, withError error: NSError!) {
-        print(error)
         SweetAlert().showAlert("Error", subTitle: "Failed to complete checkout", style: .Error)
     }
     
@@ -305,35 +308,6 @@ class CartTableViewController: BUYViewController, UITableViewDataSource, UITable
         SweetAlert().showAlert("Error", subTitle: "Failed to start Apple Pay", style: .Error)
     }
     
-    func controllerWillCheckoutViaApplePay(viewController: BUYViewController!) {
-        
-//        var task: UIBackgroundTaskIdentifier!
-//        task = UIApplication.sharedApplication().beginBackgroundTaskWithExpirationHandler {
-//            UIApplication.sharedApplication().endBackgroundTask(task)
-//            task = UIBackgroundTaskInvalid
-//        }
-//        
-//        let semaphore = dispatch_semaphore_create(0)
-//        
-//        SVProgressHUD.showInfoWithStatus("Uploading Designs")
-//        uploadDesigns(checkout, block: { (success, error) -> () in
-//            if success {
-//                for product in self.products {
-//                    product.checkoutImage = nil
-//                }
-//                UserCart.sharedCart.boughtProduct()
-//                SVProgressHUD.dismiss()
-//            } else {
-//                // Error Uploading designs
-//            }
-//            SVProgressHUD.dismiss()
-//            UIApplication.sharedApplication().endBackgroundTask(task)
-//            task = UIBackgroundTaskInvalid
-//            dispatch_semaphore_signal(semaphore)
-//        })
-//        
-//        dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER)
-    }
 }
 
 protocol CheckoutButtonViewDelegate: NSObjectProtocol {
