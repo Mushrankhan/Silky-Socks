@@ -352,7 +352,7 @@ class FinalTableViewController: UITableViewController, CreditCardTableViewCellDe
         }
         
         for (index, product) in products.enumerate() {
-            order["file\(index+1)"] = PFFile(data: UIImageJPEGRepresentation(product.productImage, 0.5)!)
+            order["file\(index+1)"] = PFFile(data: UIImageJPEGRepresentation(product.checkoutImage!, 0.5)!)
             order["mockup\(index+1)"] = PFFile(data: UIImageJPEGRepresentation(product.cartImage, 0.5)!)
         }
         

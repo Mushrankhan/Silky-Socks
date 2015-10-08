@@ -284,7 +284,7 @@ class CartTableViewController: BUYViewController, UITableViewDataSource, UITable
             }
             
             for (index, product) in self.products.enumerate() {
-                self.order?["file\(index+1)"] = PFFile(data: UIImageJPEGRepresentation(product.productImage, 0.5)!)
+                self.order?["file\(index+1)"] = PFFile(data: UIImageJPEGRepresentation(product.checkoutImage!, 0.5)!)
                 self.order?["mockup\(index+1)"] = PFFile(data: UIImageJPEGRepresentation(product.cartImage, 0.5)!)
             }
             
