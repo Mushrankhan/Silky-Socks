@@ -274,7 +274,7 @@ extension SJCollectionViewCell {
         
         // Alloc snapshot view
         snapshotview = SJView(frame: CGRectIntegral(frame))
-        snapshotview?.alpha = 0.80
+        snapshotview?.alpha = 0.95
         snapshotview?.clipsToBounds = true
         boundingRectView?.addSubview(snapshotview!)
     }

@@ -14,7 +14,7 @@ import UIKit
     @constant   Shirt
     @constant   Tank
 */
-enum TemplateType {
+public enum TemplateType {
     case Socks
     case Shirt
     case Tank
@@ -24,25 +24,25 @@ enum TemplateType {
     @class      Template
     @abstract   Represnt a way to encapsulate the image templates used in the app
 */
-class Template: NSObject {
+public class Template: NSObject {
     
     // MARK: - Properties
     
-    var image: UIImage          // Product Image
-    var maskImage: UIImage?     // Mask Image
-    var type: TemplateType      // Type
-    var index: Int              // Order of products
+    public final var image: UIImage          // Product Image
+    public final var maskImage: UIImage?     // Mask Image
+    public final var type: TemplateType      // Type
+    public final var index: Int              // Order of products
     
-    var prices: [NSDecimalNumber]   // Price of product
-    var productId: String           // Product Id: The Id as on Shopify
+    public final var prices: [NSDecimalNumber]   // Price of product
+    public final var productId: String           // Product Id: The Id as on Shopify
 
-    var productSize: CGSize         // Size in which to be printed
-    var availabilitySizes: [String] // Sizes in which printing can happen
+    public final var productSize: CGSize         // Size in which to be printed
+    public final var availabilitySizes: [String] // Sizes in which printing can happen
     
     // For the Info Page
-    var infoCaption: String
-    var info: String
-    var infoImage: UIImage?
+    public final var infoCaption: String
+    public final var info: String
+    public final var infoImage: UIImage?
     
     
     // MARK: - Init
@@ -62,7 +62,7 @@ class Template: NSObject {
         self.index = index
     }
     
-    override var description: String {
+    override public var description: String {
         return "Caption: \(infoCaption)\n" + "Info : \(info)\n"
     }
     
@@ -81,7 +81,31 @@ class Template: NSObject {
         let inch: CGFloat = IS_IPHONE_6P ? 401 : 326
         let calculations = floor(inch / scale)
         
-        let sock = Template(image: Img(named: "socks")!, type: .Socks, maskImage: nil, infoCaption: "Streetwear Fullprint Socks", info: "This style has soft Polyester, Rubber and Spandex Blend with breathability and superb all over print.  Along with a thick ribbing for a secure, comfort fit. Quality Guaranteed!", infoImage: Img(named: "WhiteSocksProduct")!, price: [17, 14, 12], productId: "1334414273", productSize: CGSize(width: 10 * calculations, height: 20 * calculations), index: 0, availabilitySizes: ["S", "M", "L", "XL"])
+        // Create a plist parse for reading in Template.plist
+        // will improve code and get rid of following lines of verbose code
+        
+        
+//        let templates = NSBundle.mainBundle().pathForResource("Template", ofType: "plist")
+//        
+//        guard let info = templates else {
+//            return []
+//        }
+//        
+//        let dic = NSDictionary(contentsOfFile: info) as? [String: [String: NSObject]]
+//        
+//        guard let dictionary = dic else {
+//            return []
+//        }
+//        
+//        for product in dictionary {
+//            let p = product.1
+//            
+//            let image = UIImage(named: p[Constants.Image] as! String)
+//            let type =
+//            
+//        }
+        
+        let sock = Template(image: Img(named: "socks")!, type: .Socks, maskImage: nil, infoCaption: "Streetwear Fullprint Socks", info: "This style has soft Polyester, Rubber and Spandex Blend with breathability and superb all over print. Along with a thick ribbing for a secure, comfort fit. Quality Guaranteed!", infoImage: Img(named: "WhiteSocksProduct")!, price: [17, 14, 12], productId: "1334414273", productSize: CGSize(width: 10 * calculations, height: 20 * calculations), index: 0, availabilitySizes: ["S", "M", "L", "XL"])
         
         let blackSock = Template(image: Img(named: "blackfootnew")!, type: .Socks, maskImage: Img(named: "blackfootnew_noblack"), infoCaption: "Athletic Black Foot Socks", info: "This style has a Solid Cotton foot for ultimate comfort + a Polyester, Rubber and Spandex Blend.  The Leg holds the incredibly vibrant print. The foot carries extra padding and CUSHION for increased support along with thick ribbing for a secure, tight fit. Quality Guaranteed!", infoImage: Img(named: "BlackFootProduct")!, price: [15, 14, 12], productId: "1359200001", productSize: CGSize(width: 10 * calculations, height: 9 * calculations), index: 1, availabilitySizes: ["S", "M", "L", "XL"])
         
@@ -96,4 +120,18 @@ class Template: NSObject {
         return [sock, blackSock, kneeHigh, white_tee, tank, black_tee]
         
     }
+}
+
+private struct Constants {
+    static let InfoCaption = "Info Caption"
+    static let InfoDescription = "Info Description"
+    static let InfoImage = "Info Image"
+    static let Image = "Image"
+    static let MaskImage = "Mask Image"
+    static let Type = "Type"
+    static let Price = "Price"
+    static let ProductID = "Product Id"
+    static let Sizes = "Available Sizes"
+    static let Width = "Width"
+    static let Height = "Height"
 }

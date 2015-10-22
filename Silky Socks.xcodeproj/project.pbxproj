@@ -43,6 +43,7 @@
 		1FA0F9BC1B3DAB9A00480B36 /* FinalTableViewControllerFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FA0F9BB1B3DAB9A00480B36 /* FinalTableViewControllerFooterView.swift */; };
 		1FA0F9BE1B3DABA400480B36 /* FinalTableViewControllerFooterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1FA0F9BD1B3DABA400480B36 /* FinalTableViewControllerFooterView.xib */; };
 		1FA0F9C11B3DE98B00480B36 /* SweetAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FA0F9C01B3DE98B00480B36 /* SweetAlert.swift */; };
+		1FA5E9391BD8639100BFFB0C /* Template.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1FA5E9381BD8639100BFFB0C /* Template.plist */; settings = {ASSET_TAGS = (); }; };
 		1FA8DC4E1B5CF14B00576175 /* TermsAndConditionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FA8DC4D1B5CF14B00576175 /* TermsAndConditionsViewController.swift */; };
 		1FB66B6C1B711DA000283A9F /* FAQ.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 1FB66B6B1B711DA000283A9F /* FAQ.pdf */; };
 		1FB66B6E1B711DCD00283A9F /* Terms_and_conditions.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 1FB66B6D1B711DCD00283A9F /* Terms_and_conditions.pdf */; };
@@ -134,6 +135,7 @@
 		1FA0F9BB1B3DAB9A00480B36 /* FinalTableViewControllerFooterView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FinalTableViewControllerFooterView.swift; sourceTree = "<group>"; };
 		1FA0F9BD1B3DABA400480B36 /* FinalTableViewControllerFooterView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FinalTableViewControllerFooterView.xib; sourceTree = "<group>"; };
 		1FA0F9C01B3DE98B00480B36 /* SweetAlert.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SweetAlert.swift; sourceTree = "<group>"; };
+		1FA5E9381BD8639100BFFB0C /* Template.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Template.plist; sourceTree = "<group>"; };
 		1FA8DC4D1B5CF14B00576175 /* TermsAndConditionsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TermsAndConditionsViewController.swift; sourceTree = "<group>"; };
 		1FB66B6B1B711DA000283A9F /* FAQ.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = FAQ.pdf; sourceTree = "<group>"; };
 		1FB66B6D1B711DCD00283A9F /* Terms_and_conditions.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = Terms_and_conditions.pdf; sourceTree = "<group>"; };
@@ -444,6 +446,7 @@
 		4F8D389F1AE440DE00F42E23 /* Silky Socks */ = {
 			isa = PBXGroup;
 			children = (
+				1FA5E9381BD8639100BFFB0C /* Template.plist */,
 				1F535DEF1B242164008663DF /* Frameworks */,
 				1F771D2A1B6FF0A8009A93D3 /* NSOperations */,
 				4F8D38D01AE4461C00F42E23 /* Model */,
@@ -660,6 +663,7 @@
 				1FCF50991B07ECA3005D8578 /* SJCollectionRestartReusableView.xib in Resources */,
 				1F17F2911B36BE8A00DBFEBC /* CheckoutInfoTableViewCell.xib in Resources */,
 				1FD558011B2086CA003BDE2A /* SJApprovalViewController.xib in Resources */,
+				1FA5E9391BD8639100BFFB0C /* Template.plist in Resources */,
 				1FB66B6C1B711DA000283A9F /* FAQ.pdf in Resources */,
 				1FCF509D1B07F0C7005D8578 /* SJCollectionDecorationSilkySocksLogoReusableView.xib in Resources */,
 				4F55B5541AE46E4900679048 /* SJCollectionViewCell.xib in Resources */,

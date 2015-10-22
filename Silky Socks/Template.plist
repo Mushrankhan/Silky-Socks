@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>White Sock</key>
+	<dict>
+		<key>Width</key>
+		<integer>10</integer>
+		<key>Height</key>
+		<integer>20</integer>
+		<key>Available Sizes</key>
+		<integer>4</integer>
+		<key>Product Id</key>
+		<string>1334414273</string>
+		<key>Price</key>
+		<integer>17</integer>
+		<key>Type</key>
+		<string>Socks</string>
+		<key>Mask Image</key>
+		<string></string>
+		<key>Image</key>
+		<string>socks</string>
+		<key>Info Image</key>
+		<string>WhiteSocksProduct</string>
+		<key>Info Description</key>
+		<string>This style has soft Polyester, Rubber and Spandex Blend with breathability and superb all over print. Along with a thick ribbing for a secure, comfort fit. Quality Guaranteed!&quot;, infoImage: Img(named: &quot;WhiteSocksProduct</string>
+		<key>Info Caption</key>
+		<string>Streetwear Fullprint Socks</string>
+	</dict>
+</dict>
+</plist>
