@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		1F0F322B1BBA23E400261EDB /* Buy.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F0F322A1BBA23E400261EDB /* Buy.framework */; settings = {ASSET_TAGS = (); }; };
+		1F0F322B1BBA23E400261EDB /* Buy.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F0F322A1BBA23E400261EDB /* Buy.framework */; };
 		1F1740591B41308400D1CA33 /* Order.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1740581B41308400D1CA33 /* Order.swift */; };
 		1F17F2881B36AA7200DBFEBC /* CheckoutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F17F2871B36AA7200DBFEBC /* CheckoutViewController.swift */; };
 		1F17F28A1B36B11D00DBFEBC /* CheckoutTableHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F17F2891B36B11D00DBFEBC /* CheckoutTableHeaderView.swift */; };
@@ -43,7 +43,7 @@
 		1FA0F9BC1B3DAB9A00480B36 /* FinalTableViewControllerFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FA0F9BB1B3DAB9A00480B36 /* FinalTableViewControllerFooterView.swift */; };
 		1FA0F9BE1B3DABA400480B36 /* FinalTableViewControllerFooterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1FA0F9BD1B3DABA400480B36 /* FinalTableViewControllerFooterView.xib */; };
 		1FA0F9C11B3DE98B00480B36 /* SweetAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FA0F9C01B3DE98B00480B36 /* SweetAlert.swift */; };
-		1FA5E9391BD8639100BFFB0C /* Template.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1FA5E9381BD8639100BFFB0C /* Template.plist */; settings = {ASSET_TAGS = (); }; };
+		1FA5E9391BD8639100BFFB0C /* Template.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1FA5E9381BD8639100BFFB0C /* Template.plist */; };
 		1FA8DC4E1B5CF14B00576175 /* TermsAndConditionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FA8DC4D1B5CF14B00576175 /* TermsAndConditionsViewController.swift */; };
 		1FB66B6C1B711DA000283A9F /* FAQ.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 1FB66B6B1B711DA000283A9F /* FAQ.pdf */; };
 		1FB66B6E1B711DCD00283A9F /* Terms_and_conditions.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 1FB66B6D1B711DCD00283A9F /* Terms_and_conditions.pdf */; };

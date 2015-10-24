@@ -338,27 +338,30 @@ class FinalTableViewController: UITableViewController, CreditCardTableViewCellDe
     
     // MARK: - Checkout
     
+    private var order: Order?
+    
     final private func completeCheckout() {
         
-        let order = Order()
-        order.orderId = checkout.orderId
-        order.name = checkout.shippingAddress.firstName + " " + checkout.shippingAddress.lastName
-        order.email = checkout.email
-        order.price = checkout.totalPrice
-        order.address = checkout.shippingAddress.getAddress()
+        order = Order()
+        
+        order?.orderId = checkout.orderId
+        order?.name = checkout.shippingAddress.firstName + " " + checkout.shippingAddress.lastName
+        order?.email = checkout.email
+        order?.price = checkout.totalPrice
+        order?.address = checkout.shippingAddress.getAddress()
         
         for product in products {
             product.checkoutImage = product.productImage.renderImageIntoSize(product.productSize)
         }
         
         for (index, product) in products.enumerate() {
-            order["file\(index+1)"] = PFFile(data: UIImageJPEGRepresentation(product.checkoutImage!, 0.5)!)
-            order["mockup\(index+1)"] = PFFile(data: UIImageJPEGRepresentation(product.cartImage, 0.5)!)
+            order?["file\(index+1)"] = PFFile(data: UIImageJPEGRepresentation(product.checkoutImage!, 0.5)!)
+            order?["mockup\(index+1)"] = PFFile(data: UIImageJPEGRepresentation(product.cartImage, 0.5)!)
         }
         
         SVProgressHUD.setStatus("Uploading Image")
         // Save the object to parse
-        order.saveInBackgroundWithBlock { [unowned self] (success, error) -> Void in
+        order?.saveInBackgroundWithBlock { [unowned self] (success, error) -> Void in
             
             if success {
                 dispatch_async(dispatch_get_main_queue()) {
@@ -372,11 +375,16 @@ class FinalTableViewController: UITableViewController, CreditCardTableViewCellDe
                         if error == nil {
                             self.checkout = checkout
                             dispatch_async(dispatch_get_main_queue()) {
+                                for (index, _) in self.products.enumerate() {
+                                    self.order?["file\(index+1)"] = nil
+                                    self.order?["mockup\(index+1)"] = nil
+                                }
                                 self.getCompletionStatusOfCheckout()
                             }
                             
                         } else {
                             dispatch_async(dispatch_get_main_queue()) {
+                                self.order = nil
                                 UIApplication.sharedApplication().endIgnoringInteractionEvents()
                                 SVProgressHUD.dismiss()
                                 SweetAlert().showAlert("Unable to Process", subTitle: "Please try again", style: .Error)
@@ -390,6 +398,7 @@ class FinalTableViewController: UITableViewController, CreditCardTableViewCellDe
             // Not able to save to Parse
             else {
                 dispatch_async(dispatch_get_main_queue()) {
+                    self.order = nil
                     UIApplication.sharedApplication().endIgnoringInteractionEvents()
                     SVProgressHUD.dismiss()
                     SweetAlert().showAlert("Error Uploading Image", subTitle: "Check Internet Connection", style: .Error)
@@ -424,12 +433,22 @@ class FinalTableViewController: UITableViewController, CreditCardTableViewCellDe
                 if status == .Failed {
                     SweetAlert().showAlert("Failed", subTitle: "Try Again", style: .Error)
                 } else if status == .Complete {
+                    
+                    // Fetch the completed checkout
+                    // and save the orde id to parse
+                    client.getCheckout(self.checkout, completion: { (checkout, error) -> Void in
+                        if checkout != nil {
+                            self.order?.orderId = checkout.orderId
+                            self.order?.saveInBackgroundWithBlock(nil)
+                        }
+                    })
+                    
                     SweetAlert().showAlert("Success", subTitle: "Congratulations", style: .Success)
                     UserCart.sharedCart.boughtProduct()
                     self.navigationController?.popToViewController(self.navigationController!.viewControllers[1] as UIViewController, animated: true)
                 }
             }
             
-        } while (self.checkout.token != nil && status != .Failed && status != .Complete)
+        } while (status != .Failed && status != .Complete)
     }
 }

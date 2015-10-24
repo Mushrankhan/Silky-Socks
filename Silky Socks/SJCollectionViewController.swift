@@ -366,7 +366,7 @@ extension SJCollectionViewController: SJCollectionViewDelegate, MFMailComposeVie
     // Share
     func collectionView(collectionView: UICollectionView, didPressShareButton button: UIButton, withSnapShotImage snapshot: UIImage){
         // Create Activity Controller on Demand
-        let items = ["Check out the design I created on the silky socks app. http://www.silkysocks.com/app", snapshot]
+        let items = ["Check out the design I created on the silky socks app. https://appsto.re/us/6hGA7.i", snapshot]
         let activity = UIActivityViewController(activityItems: items, applicationActivities: nil)
         activity.excludedActivityTypes = [UIActivityTypeAddToReadingList, UIActivityTypeAssignToContact, UIActivityTypePrint, UIActivityTypeSaveToCameraRoll]
         presentViewController(activity, animated: true, completion: nil)

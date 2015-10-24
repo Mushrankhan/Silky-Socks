@@ -146,11 +146,9 @@ class CartTableViewController: BUYViewController, UITableViewDataSource, UITable
     }
     
     func didClickCheckoutButton() {
-        
         let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("CheckoutViewController") as! CheckoutViewController
         vc.products = UserCart.sharedCart.cart
         self.navigationController?.pushViewController(vc, animated: true)
-        
     }
     
     // MARK: - Apple Pay

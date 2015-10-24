@@ -127,7 +127,7 @@ extension SJCollectionView: ShareViewCollectionReusableViewDelegate, CartViewCol
         }
         
         clickSnapShot(cell) { image in
-            myDelegate?.collectionView(self, didPressShareButton: sender, withSnapShotImage: image)
+            self.myDelegate?.collectionView(self, didPressShareButton: sender, withSnapShotImage: image)
         }
 
     }
