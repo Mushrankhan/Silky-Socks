@@ -340,6 +340,7 @@ class FinalTableViewController: UITableViewController, CreditCardTableViewCellDe
     
     private var order: Order?
     
+    // called on the main thread
     final private func completeCheckout() {
         
         order = Order()
@@ -373,12 +374,12 @@ class FinalTableViewController: UITableViewController, CreditCardTableViewCellDe
                     client.completeCheckout(self.checkout) { (checkout, error) in
                         
                         if error == nil {
-                            self.checkout = checkout
                             dispatch_async(dispatch_get_main_queue()) {
-                                for (index, _) in self.products.enumerate() {
-                                    self.order?["file\(index+1)"] = nil
-                                    self.order?["mockup\(index+1)"] = nil
-                                }
+                                self.checkout = checkout
+//                                for (index, _) in self.products.enumerate() {
+//                                    self.order?["file\(index+1)"] = nil
+//                                    self.order?["mockup\(index+1)"] = nil
+//                                }
                                 self.getCompletionStatusOfCheckout()
                             }
                             
@@ -411,44 +412,50 @@ class FinalTableViewController: UITableViewController, CreditCardTableViewCellDe
     final private func getCompletionStatusOfCheckout() {
         
         let client = BUYClient.sharedClient()
-        var status = BUYStatus.Unknown
-        let semaphore = dispatch_semaphore_create(0)
         
         SVProgressHUD.setStatus("Checking for Completion")
         
-        repeat {
-            
-            client.getCompletionStatusOfCheckout(self.checkout, completion: { (buystatus, error) -> Void in
-                status = buystatus
-                dispatch_semaphore_signal(semaphore)
-            })
-            
-            dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER)
-            
-            if (status == .Processing) {
-                NSThread.sleepForTimeInterval(0.5)
-            } else {
-                SVProgressHUD.dismiss()
-                UIApplication.sharedApplication().endIgnoringInteractionEvents()
-                if status == .Failed {
-                    SweetAlert().showAlert("Failed", subTitle: "Try Again", style: .Error)
-                } else if status == .Complete {
-                    
-                    // Fetch the completed checkout
-                    // and save the orde id to parse
-                    client.getCheckout(self.checkout, completion: { (checkout, error) -> Void in
-                        if checkout != nil {
-                            self.order?.orderId = checkout.orderId
-                            self.order?.saveInBackgroundWithBlock(nil)
+        dispatch_async(dispatch_get_global_queue(QOS_CLASS_USER_INITIATED, 0)) {
+            var status = BUYStatus.Unknown
+            let semaphore = dispatch_semaphore_create(0)
+
+            repeat {
+                
+                client.getCompletionStatusOfCheckout(self.checkout, completion: { (buystatus, error) -> Void in
+                    status = buystatus
+                    dispatch_semaphore_signal(semaphore)
+                })
+                
+                dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER)
+                
+                if (status == .Processing) {
+                    NSThread.sleepForTimeInterval(0.5)
+                } else {
+                    SVProgressHUD.dismiss()
+                    UIApplication.sharedApplication().endIgnoringInteractionEvents()
+                    if status == .Failed {
+                        SweetAlert().showAlert("Failed", subTitle: "Try Again", style: .Error)
+                    } else if status == .Complete {
+                        
+                        // Fetch the completed checkout
+                        // and save the order id to parse
+                        client.getCheckout(self.checkout) { (checkout, error) in
+                            if checkout != nil {
+                                self.order?.orderId = checkout.orderId
+                                self.order?.saveInBackgroundWithBlock(nil)
+                            }
                         }
-                    })
-                    
-                    SweetAlert().showAlert("Success", subTitle: "Congratulations", style: .Success)
-                    UserCart.sharedCart.boughtProduct()
-                    self.navigationController?.popToViewController(self.navigationController!.viewControllers[1] as UIViewController, animated: true)
+                        
+                        dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                            SweetAlert().showAlert("Success", subTitle: "Congratulations", style: .Success)
+                            UserCart.sharedCart.boughtProduct()
+                            self.navigationController?.popToViewController(self.navigationController!.viewControllers[1] as UIViewController, animated: true)
+                        })
+                        
+                    }
                 }
-            }
-            
-        } while (status != .Failed && status != .Complete)
+                
+            } while (status != .Failed && status != .Complete)
+        }
     }
 }
