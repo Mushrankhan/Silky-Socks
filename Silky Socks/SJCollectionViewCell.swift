@@ -216,13 +216,16 @@ extension SJCollectionViewCell {
             boundingRectView = nil
         }
         
+        // force the auto layout to take place
+        layoutIfNeeded()
+
         // Alloc the bounding View
         boundingRectView = UIView(frame: CGRectIntegral(ss_imgView.frame))
         maskImageView = UIImageView(frame: boundingRectView!.bounds)
         maskImageView!.contentMode = .ScaleAspectFit
         maskImageView!.image = template?.maskImage ?? template?.image
         boundingRectView!.maskView = maskImageView
-        addSubview(boundingRectView!)
+        contentView.addSubview(boundingRectView!)
 
         var size  = UIImage.getBoundingSizeForAspectFit(template!.image.size, imageViewSize: ss_imgView.bounds.size)
         size.width = floor(size.width) + 20; size.height = floor(size.height) + 10
