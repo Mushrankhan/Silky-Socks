@@ -81,9 +81,8 @@ public class Template: NSObject {
         let inch: CGFloat = IS_IPHONE_6P ? 401 : 326
         let calculations = floor(inch / scale)
         
-        // Create a plist parse for reading in Template.plist
+        // TODO: Create a plist parse for reading in Template.plist
         // will improve code and get rid of following lines of verbose code
-        
         
 //        let templates = NSBundle.mainBundle().pathForResource("Template", ofType: "plist")
 //        
@@ -97,13 +96,6 @@ public class Template: NSObject {
 //            return []
 //        }
 //        
-//        for product in dictionary {
-//            let p = product.1
-//            
-//            let image = UIImage(named: p[Constants.Image] as! String)
-//            let type =
-//            
-//        }
         
         let sock = Template(image: Img(named: "socks")!, type: .Socks, maskImage: nil, infoCaption: "Streetwear Fullprint Socks", info: "This style has soft Polyester, Rubber and Spandex Blend with breathability and superb all over print. Along with a thick ribbing for a secure, comfort fit. Quality Guaranteed!", infoImage: Img(named: "WhiteSocksProduct")!, price: [17, 14, 12], productId: "1334414273", productSize: CGSize(width: 10 * calculations, height: 20 * calculations), index: 0, availabilitySizes: ["S", "M", "L", "XL"])
         
