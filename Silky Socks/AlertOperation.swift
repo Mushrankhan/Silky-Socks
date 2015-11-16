@@ -6,6 +6,8 @@
 //  Copyright © 2015 Full Stak. All rights reserved.
 //
 
+// Adopted from the code from WWDC 2015 - Advance NSOperations
+
 import UIKit
 
 class AlertOperation: Operation {
