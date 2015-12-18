@@ -141,14 +141,41 @@ class CartTableViewController: BUYViewController, UITableViewDataSource, UITable
     
     // MARK: CheckoutButtonView Delegate
     
+    private var agreedToTermsAndConditions = false
+    
     func didClickApplePay() {
+        
+        // if not agreed to terms and conditions
+        if agreedToTermsAndConditions == false {
+            SweetAlert().showAlert("Error", subTitle: "Please agree to the terms", style: .Error)
+            return
+        }
+        
         applePayCheckout()
     }
     
     func didClickCheckoutButton() {
+        
+        // if not agreed to terms and conditions
+        if agreedToTermsAndConditions == false {
+            SweetAlert().showAlert("Error", subTitle: "Please agree to the terms", style: .Error)
+            return
+        }
+        
         let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("CheckoutViewController") as! CheckoutViewController
         vc.products = UserCart.sharedCart.cart
         self.navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    func didAgreeToTermsAndConditions(agree: Bool) {
+        agreedToTermsAndConditions = agree
+    }
+    
+    func didPressTermsAndConditionsButton() {
+        let vc = SupportViewController()
+        vc.path = NSBundle.mainBundle().pathForResource("Terms_and_conditions", ofType: "pdf")
+        let nav = UINavigationController(rootViewController: vc)
+        self.presentViewController(nav, animated: true, completion: nil)
     }
     
     // MARK: - Apple Pay
@@ -314,40 +341,85 @@ class CartTableViewController: BUYViewController, UITableViewDataSource, UITable
 protocol CheckoutButtonViewDelegate: NSObjectProtocol {
     func didClickApplePay()
     func didClickCheckoutButton()
+    func didAgreeToTermsAndConditions(agree: Bool)
+    func didPressTermsAndConditionsButton()
 }
 
-class CheckoutButtonView: UIView {
+class CheckoutButtonView: UIView, BEMCheckBoxDelegate {
     
     // Delegate
     weak var delegate: CheckoutButtonViewDelegate?
     
     // Buttons
     private var applePayButton: PKPaymentButton?
-    private var checkoutButton: UIButton?
+    private var checkoutButton: UIButton!
+    
+    // Terms and Conditions Button
+    private var termsButton: UIButton = {
+        let button = UIButton()
+        
+        // Attributed title
+        let attributedString = NSMutableAttributedString(string: "I agree to Terms and Conditions")
+        let attrs = [NSForegroundColorAttributeName: UIColor.blueColor(), NSUnderlineStyleAttributeName: 1]
+        attributedString.addAttributes(attrs, range: NSMakeRange(11, 20))
+        let fontDescriptor = UIFontDescriptor.preferredFontDescriptorWithTextStyle(UIFontTextStyleBody)
+        let font = UIFont(descriptor: fontDescriptor, size: 12)
+        attributedString.addAttributes([NSFontAttributeName: font], range: NSMakeRange(0, 31))
+        button.setAttributedTitle(attributedString, forState: .Normal)
+        button.sizeToFit()
+        return button
+    }()
+    
+    // Check box
+    private var checkBox: BEMCheckBox = {
+        let checkBox = BEMCheckBox()
+        checkBox.boxType = .Square
+        checkBox.onCheckColor = UIColor.whiteColor()
+        checkBox.onFillColor = UIColor.blackColor()
+        checkBox.onTintColor = UIColor.whiteColor()
+        return checkBox
+    }()
     
     private func setUp(applePayAvailable: Bool) {
         
+        let centerX = CGRectGetMidX(UIScreen.mainScreen().bounds)
+
+        // Checkout button
         checkoutButton = UIButton(type: UIButtonType.Custom)
         checkoutButton?.backgroundColor = UIColor.blackColor()
         checkoutButton?.setTitle("Checkout", forState: UIControlState.Normal)
         checkoutButton?.addTarget(self, action: "checkoutButtonPressed:", forControlEvents: .TouchUpInside)
 
-        let centerX = CGRectGetMidX(UIScreen.mainScreen().bounds)
+        // Conform to the check box delegate
+        checkBox.delegate = self
+        
+        // Target for button
+        termsButton.addTarget(self, action: "termsButtonPressed", forControlEvents: .TouchUpInside)
         
         if applePayAvailable {
+            
+            termsButton.center = CGPoint(x: centerX + 10, y: 8)
+            checkBox.frame = CGRect(x: termsButton.frame.origin.x - 25, y: 0, width: 15, height: 15)
+            
             applePayButton = PKPaymentButton(type: .Buy, style: .Black)
             applePayButton?.addTarget(self, action: "applePayButtonPressed:", forControlEvents: .TouchUpInside)
-            applePayButton?.frame = CGRect(x: centerX - 50 , y: 16, width: 100, height: 34)
+            applePayButton?.frame = CGRect(x: centerX - 60 , y: 24, width: 120, height: 30)
             
             checkoutButton?.layer.cornerRadius = 5
-            checkoutButton?.frame = CGRect(x: centerX - 50, y: 58, width: 100, height:34)
+            checkoutButton?.frame = CGRect(x: centerX - 60, y: 60, width: 120, height:30)
             addSubview(applePayButton!)
         } else {
+            
+            termsButton.center = CGPoint(x: centerX + 10, y: 16)
+            checkBox.frame = CGRect(x: termsButton.frame.origin.x - 25, y: 6, width: 20, height: 20)
+
             checkoutButton?.frame.size = CGSize(width: CGRectGetWidth(UIScreen.mainScreen().bounds), height: 42)
             checkoutButton?.center = CGPoint(x: centerX, y: CGRectGetMaxY(self.bounds) - 42)
         }
         
         addSubview(checkoutButton!)
+        addSubview(checkBox)
+        addSubview(termsButton)
     }
     
     @objc private func checkoutButtonPressed(button: UIButton) {
@@ -356,6 +428,16 @@ class CheckoutButtonView: UIView {
     
     @objc private func applePayButtonPressed(button: PKPaymentButton) {
         delegate?.didClickApplePay()
+    }
+    
+    @objc private func termsButtonPressed() {
+        delegate?.didPressTermsAndConditionsButton()
+    }
+    
+    // MARK: BEMCheckBox Delegate
+    
+    func didTapCheckBox(checkBox: BEMCheckBox) {
+        delegate?.didAgreeToTermsAndConditions(checkBox.on)
     }
     
 }

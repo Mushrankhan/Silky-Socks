@@ -13,5 +13,6 @@
 #import "RKNotificationHub.h"
 #import "SVProgressHUD.h"
 #import "Parse.h"
+#import "BEMCheckBox.h"
 
 #endif
