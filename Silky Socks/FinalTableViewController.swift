@@ -220,12 +220,14 @@ class FinalTableViewController: UITableViewController, CreditCardTableViewCellDe
                 quantity += product.quantity
             }
             
-            if code.lowercaseString == "save12" && (quantity < 12 || quantity > 23) {
+            // if quantity is less than 12
+            if quantity < 12 {
                 SweetAlert().showAlert("Quantity", subTitle: "Discount code cannot be applied", style: .Error)
                 return
-            }
-            
-            if quantity < 24 {
+            } else if (quantity >= 12 && quantity <= 23) && code.lowercaseString != "save12" {
+                SweetAlert().showAlert("Quantity", subTitle: "Discount code cannot be applied", style: .Error)
+                return
+            } else if (quantity >= 24) && code.lowercaseString != "save24" {
                 SweetAlert().showAlert("Quantity", subTitle: "Discount code cannot be applied", style: .Error)
                 return
             }
@@ -356,8 +358,11 @@ class FinalTableViewController: UITableViewController, CreditCardTableViewCellDe
         }
         
         for (index, product) in products.enumerate() {
-            order["file\(index+1)"] = PFFile(data: UIImageJPEGRepresentation(product.checkoutImage!, 0.5)!)
-            order["mockup\(index+1)"] = PFFile(data: UIImageJPEGRepresentation(product.cartImage, 0.5)!)
+            let file = PFFile(name: "file\(index+1)", data: UIImageJPEGRepresentation(product.checkoutImage!, 0.5)!)
+            order["file\(index+1)"] = file
+            
+            let mock = PFFile(name: "mockup\(index+1)", data: UIImageJPEGRepresentation(product.cartImage, 0.5)!)
+            order["mockup\(index+1)"] = mock
         }
         
         SVProgressHUD.setStatus("Uploading Image")
