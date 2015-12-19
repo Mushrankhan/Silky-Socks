@@ -85,12 +85,12 @@ class CartTableViewController: BUYViewController, UITableViewDataSource, UITable
         cartEmptyLabel.text = "Cart is Empty"
         cartEmptyLabel.textAlignment = .Center
         cartEmptyLabel.textColor = UIColor.getColor(red: 20, green: 20, blue: 20, alpha: 1)
-        if #available(iOS 9.0, *) {
+        //if #available(iOS 9.0, *) {
             cartEmptyLabel.font = UIFont.preferredFontForTextStyle(UIFontTextStyleTitle1)
-        } else {
-            // Fallback on earlier versions
-            cartEmptyLabel.font = UIFont.preferredFontForTextStyle(UIFontTextStyleHeadline)
-        }
+//        } else {
+//            // Fallback on earlier versions
+//            cartEmptyLabel.font = UIFont.preferredFontForTextStyle(UIFontTextStyleHeadline)
+//        }
         
         // Header view
         tableView.tableHeaderView = numberOfItemsInCart == 0 ? cartEmptyLabel : nil
