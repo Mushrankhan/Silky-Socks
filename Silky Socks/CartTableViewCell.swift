@@ -8,10 +8,16 @@
 
 import UIKit
 
+protocol CartTableViewCellDelegate: class {
+    func didTapSizeChartButton()
+}
+
 internal let cartCellReuseIdentifier = "Cart Cell"
 
 class CartTableViewCell: UITableViewCell {
 
+    weak var delegate: CartTableViewCellDelegate?
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         selectionStyle = .None
@@ -28,7 +34,6 @@ class CartTableViewCell: UITableViewCell {
     @IBOutlet private weak var quantityLabel: UILabel!
     @IBOutlet private weak var quantityStepper: UIStepper!
     @IBOutlet private weak var priceLabel: UILabel!
-    @IBOutlet private weak var basePriceLabel: UILabel! { didSet { basePriceLabel.hidden = true } }
     @IBOutlet weak var sizeSelectionStepper: UISegmentedControl! {
         didSet {
             sizeSelectionStepper.removeAllSegments()
@@ -64,7 +69,6 @@ class CartTableViewCell: UITableViewCell {
         quantityLabel = nil
         quantityStepper = nil
         priceLabel = nil
-        basePriceLabel = nil
         sizeSelectionStepper = nil
     }
     
@@ -74,12 +78,16 @@ class CartTableViewCell: UITableViewCell {
         updateUI()
     }
     
+    @IBAction func sizeChartButtonPressed(sender: UIButton) {
+        delegate?.didTapSizeChartButton()
+    }
+    
+    
     /* Updates the UI based on the model */
     private func updateUI() {
         quantityLabel?.text     = "\(cartProduct!.quantity)"
         quantityStepper?.value  = Double(cartProduct!.quantity)
         priceLabel?.text        = "$ \(cartProduct!.price).00"
-        basePriceLabel?.text    = "$ \(cartProduct!.basePrice).00/pc"
     }
     
     @IBAction func sizeSelection(sender: UISegmentedControl) {

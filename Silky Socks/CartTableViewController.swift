@@ -9,7 +9,7 @@
 import UIKit
 import PassKit
 
-class CartTableViewController: BUYViewController, UITableViewDataSource, UITableViewDelegate, CheckoutButtonViewDelegate, BUYViewControllerDelegate {
+class CartTableViewController: BUYViewController, UITableViewDataSource, UITableViewDelegate, CheckoutButtonViewDelegate, BUYViewControllerDelegate, CartTableViewCellDelegate {
 
     // The Cart
     private var products: [CartProduct] {
@@ -117,6 +117,7 @@ class CartTableViewController: BUYViewController, UITableViewDataSource, UITable
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier(cartCellReuseIdentifier, forIndexPath: indexPath) as! CartTableViewCell
         cell.cartProduct = products[indexPath.row]
+        cell.delegate = self
         return cell
     }
 
@@ -137,6 +138,15 @@ class CartTableViewController: BUYViewController, UITableViewDataSource, UITable
                 }
             }
         }
+    }
+    
+    // MARK: CartTableViewCell Delegate
+    
+    func didTapSizeChartButton() {
+        let vc = SupportViewController()
+        vc.path = NSBundle.mainBundle().pathForResource("Size_Charts", ofType: "pdf")
+        let nav = UINavigationController(rootViewController: vc)
+        self.presentViewController(nav, animated: true, completion: nil)
     }
     
     // MARK: CheckoutButtonView Delegate

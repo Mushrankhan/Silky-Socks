@@ -59,6 +59,7 @@
 		1FD244321B429AD300D9182A /* DiscountTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD244311B429AD300D9182A /* DiscountTableViewCell.swift */; };
 		1FD558001B2086CA003BDE2A /* SJApprovalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD557FE1B2086CA003BDE2A /* SJApprovalViewController.swift */; };
 		1FD558011B2086CA003BDE2A /* SJApprovalViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1FD557FF1B2086CA003BDE2A /* SJApprovalViewController.xib */; };
+		1FDDBA2B1C2508B80016DAD3 /* Size_Charts.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 1FDDBA2A1C2508B80016DAD3 /* Size_Charts.pdf */; };
 		1FECA5841B3019EB009CC8AF /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1FECA5831B3019EB009CC8AF /* MessageUI.framework */; };
 		1FF543CC1B26259F007B6B19 /* TemplateInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FF543CA1B26259F007B6B19 /* TemplateInfoViewController.swift */; };
 		1FF543CD1B26259F007B6B19 /* TemplateInfoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1FF543CB1B26259F007B6B19 /* TemplateInfoViewController.xib */; };
@@ -151,6 +152,7 @@
 		1FD244311B429AD300D9182A /* DiscountTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiscountTableViewCell.swift; sourceTree = "<group>"; };
 		1FD557FE1B2086CA003BDE2A /* SJApprovalViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SJApprovalViewController.swift; sourceTree = "<group>"; };
 		1FD557FF1B2086CA003BDE2A /* SJApprovalViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SJApprovalViewController.xib; sourceTree = "<group>"; };
+		1FDDBA2A1C2508B80016DAD3 /* Size_Charts.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = Size_Charts.pdf; sourceTree = "<group>"; };
 		1FECA5831B3019EB009CC8AF /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		1FF543CA1B26259F007B6B19 /* TemplateInfoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TemplateInfoViewController.swift; sourceTree = "<group>"; };
 		1FF543CB1B26259F007B6B19 /* TemplateInfoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TemplateInfoViewController.xib; sourceTree = "<group>"; };
@@ -471,6 +473,7 @@
 				4F8D38A11AE440DE00F42E23 /* Info.plist */,
 				4F8D38AC1AE440DE00F42E23 /* Images.xcassets */,
 				1F58C0661BFB145700856BC4 /* FAQ.pdf */,
+				1FDDBA2A1C2508B80016DAD3 /* Size_Charts.pdf */,
 				1FB66B6D1B711DCD00283A9F /* Terms_and_conditions.pdf */,
 				1FF7940F1B22DE9D000CB14D /* Fonts */,
 			);
@@ -667,6 +670,7 @@
 				1FD558011B2086CA003BDE2A /* SJApprovalViewController.xib in Resources */,
 				1FA5E9391BD8639100BFFB0C /* Template.plist in Resources */,
 				1FCF509D1B07F0C7005D8578 /* SJCollectionDecorationSilkySocksLogoReusableView.xib in Resources */,
+				1FDDBA2B1C2508B80016DAD3 /* Size_Charts.pdf in Resources */,
 				4F55B5541AE46E4900679048 /* SJCollectionViewCell.xib in Resources */,
 				4F8D38B01AE440DE00F42E23 /* LaunchScreen.xib in Resources */,
 				1FF7940E1B22DD69000CB14D /* College.ttf in Resources */,
