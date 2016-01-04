@@ -213,7 +213,7 @@ class CartTableViewController: BUYViewController, UITableViewDataSource, UITable
             }
             
             // Get Variant
-            let variants = (products.map {$0.variants as! [BUYProductVariant]} as [[BUYProductVariant]]).reverse()
+            let variants = (products.map {$0.variants as [BUYProductVariant]} as [[BUYProductVariant]]).reverse()
             
             if variants.count > 0 {
                 
@@ -308,7 +308,7 @@ class CartTableViewController: BUYViewController, UITableViewDataSource, UITable
         
         BUYClient.sharedClient().getCheckout(checkout) { (checkout, error) -> Void in
             self.order = Order()
-            self.order?.orderId = checkout.orderId
+            //self.order?.orderId = checkout.orderId
             self.order?.name = checkout.shippingAddress.firstName + " " + checkout.shippingAddress.lastName
             self.order?.email = checkout.email
             self.order?.price = checkout.totalPrice

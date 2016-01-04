@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		1F0F322B1BBA23E400261EDB /* Buy.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F0F322A1BBA23E400261EDB /* Buy.framework */; };
 		1F1740591B41308400D1CA33 /* Order.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1740581B41308400D1CA33 /* Order.swift */; };
 		1F17F2881B36AA7200DBFEBC /* CheckoutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F17F2871B36AA7200DBFEBC /* CheckoutViewController.swift */; };
 		1F17F28A1B36B11D00DBFEBC /* CheckoutTableHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F17F2891B36B11D00DBFEBC /* CheckoutTableHeaderView.swift */; };
@@ -46,7 +45,7 @@
 		1FA0F9C11B3DE98B00480B36 /* SweetAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FA0F9C01B3DE98B00480B36 /* SweetAlert.swift */; };
 		1FA5E9391BD8639100BFFB0C /* Template.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1FA5E9381BD8639100BFFB0C /* Template.plist */; };
 		1FA8DC4E1B5CF14B00576175 /* TermsAndConditionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FA8DC4D1B5CF14B00576175 /* TermsAndConditionsViewController.swift */; };
-		1FB66B6E1B711DCD00283A9F /* Terms_and_conditions.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 1FB66B6D1B711DCD00283A9F /* Terms_and_conditions.pdf */; };
+		1FB736841C3A6AFD00A8A9A9 /* Terms_and_conditions.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 1FB736831C3A6AFD00A8A9A9 /* Terms_and_conditions.pdf */; };
 		1FC258AB1B14B60700EAEF20 /* UserCart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FC258AA1B14B60700EAEF20 /* UserCart.swift */; };
 		1FC72AD41B3D6C6400D54C1E /* CreditCardTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FC72AD21B3D6C6400D54C1E /* CreditCardTableViewCell.swift */; };
 		1FC72AD51B3D6C6400D54C1E /* CreditCardTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1FC72AD31B3D6C6400D54C1E /* CreditCardTableViewCell.xib */; };
@@ -60,7 +59,6 @@
 		1FD558001B2086CA003BDE2A /* SJApprovalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD557FE1B2086CA003BDE2A /* SJApprovalViewController.swift */; };
 		1FD558011B2086CA003BDE2A /* SJApprovalViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1FD557FF1B2086CA003BDE2A /* SJApprovalViewController.xib */; };
 		1FDDBA2B1C2508B80016DAD3 /* Size_Charts.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 1FDDBA2A1C2508B80016DAD3 /* Size_Charts.pdf */; };
-		1FECA5841B3019EB009CC8AF /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1FECA5831B3019EB009CC8AF /* MessageUI.framework */; };
 		1FF543CC1B26259F007B6B19 /* TemplateInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FF543CA1B26259F007B6B19 /* TemplateInfoViewController.swift */; };
 		1FF543CD1B26259F007B6B19 /* TemplateInfoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1FF543CB1B26259F007B6B19 /* TemplateInfoViewController.xib */; };
 		1FF5C6641B6E9D76000D835C /* Operation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FF5C6631B6E9D76000D835C /* Operation.swift */; };
@@ -97,7 +95,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		1F0F322A1BBA23E400261EDB /* Buy.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Buy.framework; sourceTree = "<group>"; };
 		1F1740581B41308400D1CA33 /* Order.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Order.swift; sourceTree = "<group>"; };
 		1F17F2871B36AA7200DBFEBC /* CheckoutViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckoutViewController.swift; sourceTree = "<group>"; };
 		1F17F2891B36B11D00DBFEBC /* CheckoutTableHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckoutTableHeaderView.swift; sourceTree = "<group>"; };
@@ -139,7 +136,7 @@
 		1FA0F9C01B3DE98B00480B36 /* SweetAlert.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SweetAlert.swift; sourceTree = "<group>"; };
 		1FA5E9381BD8639100BFFB0C /* Template.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Template.plist; sourceTree = "<group>"; };
 		1FA8DC4D1B5CF14B00576175 /* TermsAndConditionsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TermsAndConditionsViewController.swift; sourceTree = "<group>"; };
-		1FB66B6D1B711DCD00283A9F /* Terms_and_conditions.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = Terms_and_conditions.pdf; sourceTree = "<group>"; };
+		1FB736831C3A6AFD00A8A9A9 /* Terms_and_conditions.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = Terms_and_conditions.pdf; sourceTree = "<group>"; };
 		1FC258AA1B14B60700EAEF20 /* UserCart.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserCart.swift; sourceTree = "<group>"; };
 		1FC72AD21B3D6C6400D54C1E /* CreditCardTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreditCardTableViewCell.swift; sourceTree = "<group>"; };
 		1FC72AD31B3D6C6400D54C1E /* CreditCardTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CreditCardTableViewCell.xib; sourceTree = "<group>"; };
@@ -153,7 +150,6 @@
 		1FD557FE1B2086CA003BDE2A /* SJApprovalViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SJApprovalViewController.swift; sourceTree = "<group>"; };
 		1FD557FF1B2086CA003BDE2A /* SJApprovalViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SJApprovalViewController.xib; sourceTree = "<group>"; };
 		1FDDBA2A1C2508B80016DAD3 /* Size_Charts.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = Size_Charts.pdf; sourceTree = "<group>"; };
-		1FECA5831B3019EB009CC8AF /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		1FF543CA1B26259F007B6B19 /* TemplateInfoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TemplateInfoViewController.swift; sourceTree = "<group>"; };
 		1FF543CB1B26259F007B6B19 /* TemplateInfoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TemplateInfoViewController.xib; sourceTree = "<group>"; };
 		1FF5C6631B6E9D76000D835C /* Operation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Operation.swift; sourceTree = "<group>"; };
@@ -190,9 +186,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1FECA5841B3019EB009CC8AF /* MessageUI.framework in Frameworks */,
 				DCE5E79073B5F6D74B71392E /* libPods.a in Frameworks */,
-				1F0F322B1BBA23E400261EDB /* Buy.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -257,15 +251,6 @@
 				1F293BF31B382AC000551A40 /* CheckoutTableFooterView.xib */,
 			);
 			name = "Checkout Table Footer View";
-			sourceTree = "<group>";
-		};
-		1F535DEF1B242164008663DF /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				1F0F322A1BBA23E400261EDB /* Buy.framework */,
-				1FECA5831B3019EB009CC8AF /* MessageUI.framework */,
-			);
-			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		1F58FE631B340EDE003E2507 /* Additional VC */ = {
@@ -449,7 +434,6 @@
 			isa = PBXGroup;
 			children = (
 				1FA5E9381BD8639100BFFB0C /* Template.plist */,
-				1F535DEF1B242164008663DF /* Frameworks */,
 				1F771D2A1B6FF0A8009A93D3 /* NSOperations */,
 				4F8D38D01AE4461C00F42E23 /* Model */,
 				1FCF508D1B070EA6005D8578 /* Data Source & Delegate */,
@@ -474,7 +458,7 @@
 				4F8D38AC1AE440DE00F42E23 /* Images.xcassets */,
 				1F58C0661BFB145700856BC4 /* FAQ.pdf */,
 				1FDDBA2A1C2508B80016DAD3 /* Size_Charts.pdf */,
-				1FB66B6D1B711DCD00283A9F /* Terms_and_conditions.pdf */,
+				1FB736831C3A6AFD00A8A9A9 /* Terms_and_conditions.pdf */,
 				1FF7940F1B22DE9D000CB14D /* Fonts */,
 			);
 			name = "Supporting Files";
@@ -656,10 +640,10 @@
 				4FB6C9C31AE4AF7A001A6E50 /* SJBottomView.xib in Resources */,
 				1FA0F9BE1B3DABA400480B36 /* FinalTableViewControllerFooterView.xib in Resources */,
 				1F39440B1B094EA4008E73E0 /* SJCollectionAddToCartReusableView.xib in Resources */,
+				1FB736841C3A6AFD00A8A9A9 /* Terms_and_conditions.pdf in Resources */,
 				1F58FE671B340F27003E2507 /* CartTableViewCell.xib in Resources */,
 				1FC72AD51B3D6C6400D54C1E /* CreditCardTableViewCell.xib in Resources */,
 				1F58C0671BFB145700856BC4 /* FAQ.pdf in Resources */,
-				1FB66B6E1B711DCD00283A9F /* Terms_and_conditions.pdf in Resources */,
 				1FCF509B1B07ED8A005D8578 /* SJCollectionShareReusableView.xib in Resources */,
 				4F8D38AB1AE440DE00F42E23 /* Main.storyboard in Resources */,
 				1FF7940A1B22DCB2000CB14D /* Maiden.ttf in Resources */,

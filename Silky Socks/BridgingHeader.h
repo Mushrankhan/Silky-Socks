@@ -9,7 +9,7 @@
 #ifndef Silky_Socks_BridgingHeader_h
 #define Silky_Socks_BridgingHeader_h
 
-#import <Buy/Buy.h>
+#import "Buy.h"
 #import "RKNotificationHub.h"
 #import "SVProgressHUD.h"
 #import "Parse.h"

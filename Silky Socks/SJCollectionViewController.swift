@@ -485,7 +485,7 @@ extension SJCollectionViewController: UIImagePickerControllerDelegate, UINavigat
         
         let picker = UIImagePickerController()
         picker.delegate = self
-        picker.allowsEditing = true
+        //picker.allowsEditing = true
         picker.mediaTypes = [kUTTypeImage as String]
         picker.sourceType = .PhotoLibrary
         

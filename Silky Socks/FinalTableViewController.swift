@@ -347,7 +347,7 @@ class FinalTableViewController: UITableViewController, CreditCardTableViewCellDe
         
         let order = Order()
         
-        order.orderId = checkout.orderId
+        //order.orderId = checkout.orderId
         order.name = checkout.shippingAddress.firstName + " " + checkout.shippingAddress.lastName
         order.email = checkout.email
         order.price = checkout.totalPrice

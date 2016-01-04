@@ -272,7 +272,7 @@ extension CheckoutViewController: CheckoutTableFooterViewDelegate {
             }
             
             // Get Variant
-            let variants = (products.map {$0.variants as! [BUYProductVariant]} as [[BUYProductVariant]]).reverse()
+            let variants = (products.map {$0.variants as [BUYProductVariant]} as [[BUYProductVariant]]).reverse()
             
             if variants.count > 0 {
                 

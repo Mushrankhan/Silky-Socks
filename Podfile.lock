@@ -1,6 +1,7 @@
 PODS:
   - BEMCheckBox (1.1.1)
   - Bolts/Tasks (1.2.0)
+  - Mobile-Buy-SDK (1.2.4)
   - Parse (1.8.1):
     - Bolts/Tasks (>= 1.2.0)
   - RKNotificationHub (2.0.1)
@@ -8,6 +9,7 @@ PODS:
 
 DEPENDENCIES:
   - BEMCheckBox
+  - Mobile-Buy-SDK
   - Parse
   - RKNotificationHub
   - SVProgressHUD
@@ -15,6 +17,7 @@ DEPENDENCIES:
 SPEC CHECKSUMS:
   BEMCheckBox: e1dd80417e0a9f1db4b55d8b8d2f3f477d120795
   Bolts: d176cb1e0012175589e389a9db49b85e27787576
+  Mobile-Buy-SDK: a999a38c934d056ad3a00e0225d47df8365d5480
   Parse: 2155953b1565494095d5fa5c83b3c77f2c677c09
   RKNotificationHub: d80905a948c79c11673345f807133a0bfd17e320
   SVProgressHUD: 748080e4f36e603f6c02aec292664239df5279c1

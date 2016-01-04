@@ -14,6 +14,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>Mobile-Buy-SDK.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>Parse.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -37,6 +42,11 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
+		<key>1DA9A75B541B34A0E96E48DB8029F9B1</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>30FCEFDDB4DB6A8CB5DEE4842D2F40DE</key>
 		<dict>
 			<key>primary</key>
@@ -47,12 +57,7 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>58D7D77A600BFD0BAD44EF61FA2B95E5</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>617A033673CA2644DD2AFCB38D8089EA</key>
+		<key>5B7E9EA58620F518C93EA878614A2CC8</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -62,7 +67,12 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>FF6A85FD3C56371F1F6D93ACB30ED220</key>
+		<key>F3B0475D4447CF0A923071D39C7EE372</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>FF6570319AC2E8CBE195F849FC9CCB27</key>
 		<dict>
 			<key>primary</key>
 			<true/>
